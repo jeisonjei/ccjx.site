@@ -31,24 +31,10 @@ export class AppComponent implements OnInit,OnDestroy{
     this.destroyed.complete();
   }
   ngOnInit(): void {
-    this.getGreeting();
+    
   }
   title = 'client';
   c: Consts = new Consts();
   message: string = '';
   destroyed = new Subject<void>();
-  getGreeting(): void {
-    const scope = this;
-    this.http.get(`http://${location.hostname}:5000/api/hello/`).subscribe({
-      next(value) {
-        scope.message = JSON.stringify(value);
-      },
-      complete() {
-          
-      },
-      error(err) {
-
-      },
-    })
-  }
 }
