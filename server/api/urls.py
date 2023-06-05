@@ -1,6 +1,6 @@
-from django.urls import path,re_path
+from django.urls import path,re_path,include
 from .views import index
 
 urlpatterns = [
-    path('hello/',index)
+    path('accounts/',include('rest_registration.api.urls'))
 ]

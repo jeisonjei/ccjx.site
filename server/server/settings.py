@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from nameof import nameof
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,7 +43,8 @@ INSTALLED_APPS = [
     'api',
     'rest_framework',
     'corsheaders',
-    'rest_framework_simplejwt'
+    'rest_framework_simplejwt',
+    'rest_registration'
 ]
 
 MIDDLEWARE = [
@@ -146,3 +148,21 @@ REST_FRAMEWORK={
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
+
+REST_REGISTRATION = {
+    'REGISTER_VERIFICATION_URL': 'https://frontend-host/verify-user/',
+    'RESET_PASSWORD_VERIFICATION_URL': 'https://frontend-host/reset-password/',
+    'REGISTER_EMAIL_VERIFICATION_URL': 'https://frontend-host/verify-email/',
+
+    'VERIFICATION_FROM_EMAIL': 'ccjx.community@yandex.ru',
+    'PASSWORD':'wwcnxpjspaxmuksg'
+}
+
+if os.environ=='nt':
+    URL_CLIENT_VERIFY_USER='http://localhost:4200/accounts/verify-user/'
+    URL_CLIENT_RESET_PASSWORD='http://localhost:4200/accounts/reset-password/'
+    URL_CLIENT_VERIFY_EMAIL='http://localhost:4200/accounts/verify-email/'
+else:
+    URL_CLIENT_VERIFY_USER=''
+    URL_CLIENT_RESET_PASSWORD=''
+    URL_CLIENT_VERIFY_EMAIL=''
