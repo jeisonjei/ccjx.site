@@ -149,13 +149,20 @@ REST_FRAMEWORK={
     )
 }
 
+EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST='smtp.yandex.ru'
+EMAIL_PORT='465'
+EMAIL_USE_TLS=False
+EMAIL_USE_SSL=True
+EMAIL_HOST_USER='ccjx.community@yandex.ru'
+EMAIL_HOST_PASSWORD='wwcnxpjspaxmuksg'
+
 REST_REGISTRATION = {
     'REGISTER_VERIFICATION_URL': 'https://frontend-host/verify-user/',
     'RESET_PASSWORD_VERIFICATION_URL': 'https://frontend-host/reset-password/',
     'REGISTER_EMAIL_VERIFICATION_URL': 'https://frontend-host/verify-email/',
 
     'VERIFICATION_FROM_EMAIL': 'ccjx.community@yandex.ru',
-    'PASSWORD':'wwcnxpjspaxmuksg'
 }
 
 if os.environ=='nt':
