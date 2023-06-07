@@ -1,1 +1,19 @@
-<p>reset-pass-request works!</p>
+<div class="row justify-content-center">
+    <div class="col-lg-4 col-md-6 col-sm-8">
+        <h1 class="text-center">Сброс пароля</h1>
+        <hr>
+        <form (ngSubmit)="sendEmail(f.value)" #f="ngForm">
+            <div class="d-flex flex-column">
+                <mat-form-field appearance="fill">
+                    <mat-label>Электронная почта</mat-label>
+                    <input name="email" autocomplete="email" type="email" matInput ngModel>
+                </mat-form-field>
+                <app-waiting-button title="Отправить" [waiting]="waiting"></app-waiting-button>
+                <div *ngIf="showWarning" class="alert alert-warning">
+                    {{pubm}}
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

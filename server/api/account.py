@@ -117,7 +117,7 @@ def send_email_new_password(request):
     reset_password_token.user=user
     reset_password_token.token=token
     reset_password_token.save()
-    link=request.scheme+'://'+request.get_host()+'/'+'account/reset-password/'+token
+    link=request.scheme+'://'+request.get_host()+'/'+'account/new-pass/'+token
     link=link_adaptto_client(link)
     subject='Сброс пароля в ccjx.comminity'
     body=f'Для создания нового пароля перейдите по ссылке {link}'

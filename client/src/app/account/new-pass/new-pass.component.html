@@ -1,1 +1,30 @@
-<p>reset-password works!</p>
+<div class="row justify-content-center">
+    <div class="col-lg-4 col-md-6 col-sm-8">
+        <h1 class="text-center">Новый пароль</h1>
+        <hr>
+        <form #f="ngForm" (ngSubmit)="sendForm(f.value)">
+            <div class="d-flex flex-column">
+                <mat-form-field hidden>
+                    <mat-label>Токен</mat-label>
+                    <input name="token" matInput ngModel [(ngModel)]="token">
+                </mat-form-field>
+                <mat-form-field appearance="fill" hidden>
+                    <mat-label>Эл.почта</mat-label>
+                    <input name="email" autocomplete="email" matInput>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Пароль</mat-label>
+                    <input name="new-password" autocomplete="new-password" type="password" matInput ngModel>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Подтверждение пароля</mat-label>
+                    <input name="new-password-confirmation" autocomplete="new-password" type="password" matInput ngModel>
+                </mat-form-field>
+                <app-waiting-button title="Отправить" [waiting]="waiting"></app-waiting-button>
+                <div *ngIf="showWarning" class="alert alert-warning">
+                    {{pubm}}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

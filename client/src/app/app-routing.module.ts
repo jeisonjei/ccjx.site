@@ -15,9 +15,9 @@ const routes: Routes = [
   { path: 'account/register/success/:token', component: RegisterSuccessComponent },
   { path: 'account/login', component: LoginComponent },
   {path:'account/new-pass-request',component:NewPassRequestComponent},
-  { path: 'account/new-pass', component: NewPassComponent },
-  { path: 'account/new-pass/email-sent', component: NewPassEmailSentComponent },
-  {path:'account/new-pass/success',component:NewPassSuccessComponent}
+  { path: 'account/new-pass/:token', component: NewPassComponent },
+  { path: 'account/new-pass-email-sent', component: NewPassEmailSentComponent },
+  {path:'account/new-pass-success/:userEmail',component:NewPassSuccessComponent}
 ];
 
 @NgModule({
