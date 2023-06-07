@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './new-pass-email-sent.component.html',
   styleUrls: ['./new-pass-email-sent.component.scss']
 })
-export class ResetPassEmaillSentComponent {
+export class NewPassEmailSentComponent {
 
 }

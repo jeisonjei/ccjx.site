@@ -11,15 +11,19 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatIconModule } from "@angular/material/icon";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatButtonModule } from "@angular/material/button";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+
 import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
 import { RegisterConfmComponent } from './account/register-confm/register-confm.component';
 import { RegisterSuccessComponent } from './account/register-success/register-success.component';
-import { RegisterVerifyEmailTokenComponent } from './account/register-verify-email-token/register-verify-email-token.component';
-import { ResetPasswordComponent } from './account/new-pass/new-pass.component';
-import { ResetPassEmaillSentComponent } from './account/new-pass-email-sent/new-pass-email-sent.component';
-import { NewPassSetComponent } from './account/new-pass-set/new-pass-set.component';
-import { ResetPassRequestComponent } from './account/new-pass-request/new-pass-request.component';
+import { NewPassComponent } from './account/new-pass/new-pass.component';
+import { NewPassEmailSentComponent } from './account/new-pass-email-sent/new-pass-email-sent.component';
+import { NewPassSuccessComponent } from './account/new-pass-success/new-pass-success.component';
+import { NewPassRequestComponent } from './account/new-pass-request/new-pass-request.component';
+import { WaitingButtonComponent } from './shared/components/waiting-button/waiting-button.component';
 
 @NgModule({
   declarations: [
@@ -28,11 +32,12 @@ import { ResetPassRequestComponent } from './account/new-pass-request/new-pass-r
     RegisterComponent,
     RegisterConfmComponent,
     RegisterSuccessComponent,
-    RegisterVerifyEmailTokenComponent,
-    ResetPasswordComponent,
-    ResetPassEmaillSentComponent,
-    NewPassSetComponent,
-    ResetPassRequestComponent
+    RegisterSuccessComponent,
+    NewPassComponent,
+    NewPassEmailSentComponent,
+    NewPassSuccessComponent,
+    NewPassRequestComponent,
+    WaitingButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +50,10 @@ import { ResetPassRequestComponent } from './account/new-pass-request/new-pass-r
     MatFormFieldModule,
     MatAutocompleteModule,
     MatInputModule,
-    MatIconModule 
+    MatIconModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

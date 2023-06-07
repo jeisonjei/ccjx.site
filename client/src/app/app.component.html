@@ -11,15 +11,31 @@
         <mat-icon matIconPrefix>search</mat-icon>
       </mat-form-field>
       <span ngClass="spacer"></span>
-      <span>Profile</span>
+      <span *ngIf="this.auth.cu?.isLoggedIn; else isLoggedOut">
+        <button mat-button [matMenuTriggerFor]="menu">{{this.auth.cu?.userEmail}}</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>Профиль</button>
+          <button mat-menu-item>Выход</button>
+        </mat-menu>
+      </span>
+      <ng-template #isLoggedOut>
+        <span>
+          <button mat-button routerLink="/account/register">Регистрация</button>
+          <button mat-button routerLink="/account/login">Вход</button>
+        </span>
+      </ng-template>
     </mat-toolbar-row>
   </mat-toolbar>
 </header>
 <main ngClass="container">
-  <div ngClass="grid">
-    <div ngClass="profile">profile</div>
-    <div ngClass="questions">Задайте вопрос</div>
-    <div ngClass="additions">additions</div>
+  <div ngClass="row justify-content-center">
+    <div ngClass="col-lg-3" style="background-color: aliceblue;">
+      navigation
+    </div>
+    <div ngClass="col-lg-6">
+      <router-outlet></router-outlet>
+    </div>
+    <div ngClass="col-lg-3" style="background-color: antiquewhite;">additions</div>
   </div>
 </main>
 <footer></footer>
