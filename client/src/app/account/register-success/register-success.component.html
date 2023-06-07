@@ -1,1 +1,20 @@
-<p>register-verify-email-token works!</p>
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div *ngIf="isSuccesful==true;else isNotSuccessful">
+            <h1 class="text-center">Адрес эл.почты подтверждён!</h1>
+            <hr>
+            <p>Вы можете войти на сайт со своими учётными данными:</p>
+            <ul>
+                <li>Эл.почта: {{userEmail}}</li>
+                <li>Пароль: ваш пароль, указанный при регистрации</li>
+            </ul>
+        </div>
+        <ng-template #isNotSuccessful>
+            <h1 class="text-center">Адрес эл.почты не подтверждён</h1>
+            <hr>
+            <div class="alert alert-warning">
+                {{pubm}}
+            </div>
+        </ng-template>
+    </div>
+</div>

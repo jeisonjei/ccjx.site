@@ -7,15 +7,17 @@ import { RegisterConfmComponent } from './account/register-confm/register-confm.
 import { RegisterSuccessComponent } from './account/register-success/register-success.component';
 import { NewPassEmailSentComponent } from './account/new-pass-email-sent/new-pass-email-sent.component';
 import { NewPassSuccessComponent } from './account/new-pass-success/new-pass-success.component';
+import { NewPassRequestComponent } from './account/new-pass-request/new-pass-request.component';
 
 const routes: Routes = [
   { path: 'account/register', component: RegisterComponent },
-  { path: 'account/register-confm', component: RegisterConfmComponent },
-  { path: 'account/register-success', component: RegisterSuccessComponent },
+  { path: 'account/register/confm', component: RegisterConfmComponent },
+  { path: 'account/register/success/:token', component: RegisterSuccessComponent },
   { path: 'account/login', component: LoginComponent },
+  {path:'account/new-pass-request',component:NewPassRequestComponent},
   { path: 'account/new-pass', component: NewPassComponent },
-  { path: 'account/new-pass-email-sent', component: NewPassEmailSentComponent },
-  {path:'account/new-pass-success',component:NewPassSuccessComponent}
+  { path: 'account/new-pass/email-sent', component: NewPassEmailSentComponent },
+  {path:'account/new-pass/success',component:NewPassSuccessComponent}
 ];
 
 @NgModule({

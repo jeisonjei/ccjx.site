@@ -5,5 +5,5 @@ from .account import verify_email_with_token
 
 urlpatterns = [
     path('account/register/',register),
-    path('account/register/verify-email-with-token/',verify_email_with_token)
+    path('account/register/verify-email-with-token/<str:token>',verify_email_with_token)
 ]

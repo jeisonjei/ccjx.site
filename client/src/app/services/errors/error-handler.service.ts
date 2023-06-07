@@ -5,13 +5,13 @@ import { Consts, ServerError } from "../../consts";
   providedIn: 'root'
 })
 export class ErrorHandlerService {
-  @Output() pubmEvent: EventEmitter<string> = new EventEmitter();
+  pubmEvent: EventEmitter<string> = new EventEmitter<string>();
   c: Consts = new Consts();
   constructor() { }
   handleError(error: ServerError) {
     if (error.public) {
       const pubm = error.public;
-      const privm = error.public;
+      const privm = error.private;
       this.pubmEvent.emit(pubm)
       console.error(privm);
     }

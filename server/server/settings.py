@@ -148,10 +148,14 @@ REST_FRAMEWORK={
     )
 }
 
-EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL='ccjx.community@yandex.ru'
 EMAIL_HOST='smtp.yandex.ru'
-EMAIL_PORT='465'
+EMAIL_PORT=465
 EMAIL_USE_TLS=False
 EMAIL_USE_SSL=True
 EMAIL_HOST_USER='ccjx.community@yandex.ru'
-EMAIL_HOST_PASSWORD='wwcnxpjspaxmuksg'
+EMAIL_HOST_PASSWORD='thtxxyhiwxjrernm'
+
+PUBM='public'
+PRIVM='private'

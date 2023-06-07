@@ -28,19 +28,19 @@ def register(request):
         try:
             inactive_user=User.objects.create_user(email,password)
             inactive_user.is_active=False
-            inactive_user.save()
-            subject="Регистрация в OSS Core"
+            subject="Регистрация в ccjx.community"
             token=PasswordResetTokenGenerator().make_token(inactive_user)
+            link=request.scheme+'://'+request.get_host()+'/'+'account/register/success/'+token
+            link=link_adaptto_client(link)
+            body=f"Здравствуйте, вы зарегистрировались на веб-сайте ccjx.community. Для работы с веб-сайтом требуется подтвердить свой адрес электронной почты. Вы можете сделать это перейдя по ссылке {link}"
+            inactive_user.email_user(subject,body)
             verify_email_token=EmailVerificationToken()
             verify_email_token.user=inactive_user
             verify_email_token.token=token
             verify_email_token.save()
-            link=request.scheme+'://'+request.get_host()+'/'+'account/register/verify-email-with-token/'+token
-            link=link_adaptto_client(link)
-            body=f"Здравствуйте, вы зарегистрировались на веб-сайте ccjx.community. Для работы с веб-сайтом требуется подтвердить свой адрес электронной почты. Вы можете сделать это перейдя по ссылке {link}"
-            inactive_user.email_user(subject,body)
-            print(f'=== эл.сообщение отправлено на адрес {inactive_user.email}')
+            print(f'✓ эл.сообщение отправлено на адрес {inactive_user.email}')
         except Exception as e:
+            inactive_user.delete()
             return Response(e.args,status=status.HTTP_400_BAD_REQUEST)
     return Response(status=status.HTTP_201_CREATED)
 
@@ -50,6 +50,11 @@ def verify_email_with_token(request,token):
         token=EmailVerificationToken.objects.get(token=token)
     except ObjectDoesNotExist as e:
         pubm='Пользователь с таким токеном подтверждения не зарегистрирован'
+        privm=e.args
+        error=get_error_object(pubm,privm)
+        return Response(error,status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        pubm='Извините, возникла ошибка'
         privm=e.args
         error=get_error_object(pubm,privm)
         return Response(error,status=status.HTTP_400_BAD_REQUEST)

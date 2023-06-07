@@ -15,4 +15,7 @@ export class AppComponent{
   constructor(private http: HttpClient,public auth:AuthenticationService) {
     console.log(`=== auth.cu: ${JSON.stringify(auth.cu)}`);
   }
+  logout() {
+    this.auth.logout();
+  }
 }

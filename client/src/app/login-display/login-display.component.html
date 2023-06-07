@@ -1,0 +1,13 @@
+<span *ngIf="this.auth.cu?.isLoggedIn; else isLoggedOut">
+    <button mat-button [matMenuTriggerFor]="menu">{{this.auth.cu?.id}}</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Профиль</button>
+      <button mat-menu-item (click)="this.auth.logout()">Выход</button>
+    </mat-menu>
+  </span>
+  <ng-template #isLoggedOut>
+    <span>
+      <button mat-button routerLink="/account/register">Регистрация</button>
+      <button mat-button routerLink="/account/login">Вход</button>
+    </span>
+  </ng-template>

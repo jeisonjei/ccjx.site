@@ -24,6 +24,9 @@ import { NewPassEmailSentComponent } from './account/new-pass-email-sent/new-pas
 import { NewPassSuccessComponent } from './account/new-pass-success/new-pass-success.component';
 import { NewPassRequestComponent } from './account/new-pass-request/new-pass-request.component';
 import { WaitingButtonComponent } from './shared/components/waiting-button/waiting-button.component';
+import { LoggedInHeaderComponent } from './logged-in-header/logged-in-header.component';
+import { LoginDisplayComponent } from './login-display/login-display.component';
+import { LoggedOutHeaderComponent } from './logged-out-header/logged-out-header.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import { WaitingButtonComponent } from './shared/components/waiting-button/waiti
     NewPassEmailSentComponent,
     NewPassSuccessComponent,
     NewPassRequestComponent,
-    WaitingButtonComponent
+    WaitingButtonComponent,
+    LoggedInHeaderComponent,
+    LoginDisplayComponent,
+    LoggedOutHeaderComponent
   ],
   imports: [
     BrowserModule,

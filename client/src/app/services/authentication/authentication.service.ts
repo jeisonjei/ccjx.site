@@ -26,7 +26,7 @@ export class AuthenticationService implements AuthService{
   @Output() loggedIn: EventEmitter<LoginInfo> = new EventEmitter();
   private c: Consts = new Consts();
   public cu: LoginInfo | undefined;
-  constructor(private http: HttpClient, private tokenStorage: TokenStorageService) {
+  constructor(private http: HttpClient, private tokenStorage: TokenStorageService,private router:Router) {
     this.isAuthorized().subscribe(x => {
       if (x) {
         this.cu = this.getCuFromToken();
@@ -121,6 +121,7 @@ export class AuthenticationService implements AuthService{
     this.tokenStorage.clear();
     this.cu = this.getEmptyCu();
     this.loggedIn.emit(this.getEmptyCu());
+    this.router.navigateByUrl('');
   }
 
   private saveAccessData(tokens: any) {
