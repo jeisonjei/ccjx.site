@@ -1,0 +1,10 @@
+<div *ngIf="waiting;else ready">
+    <button ngClass="w-100 mb-4" mat-raised-button color="primary" disabled="true">
+        <mat-progress-spinner color="primary" mode="indeterminate" strokeWidth="3" diameter="25"></mat-progress-spinner>
+    </button>
+</div>
+<div>
+    <ng-template #ready>
+        <button ngClass="w-100 mb-4" mat-raised-button color="primary">{{title}}</button>
+    </ng-template>
+</div>
