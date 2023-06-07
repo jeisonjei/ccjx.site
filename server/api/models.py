@@ -35,3 +35,15 @@ class User(AbstractUser):
     country=models.CharField(blank=True,max_length=52)
     city=models.CharField(blank=True,max_length=52)
     objects=UserManager()
+    
+class EmailVerificationToken(models.Model):
+    user=models.OneToOneField(User,on_delete=models.CASCADE)
+    token=models.CharField(max_length=52,default='')
+    class Meta:
+        db_table='api_verify_email_token'
+
+class NewPasswordToken(models.Model):
+    user=models.OneToOneField(User,on_delete=models.CASCADE)
+    token=models.CharField(max_length=52,default='')
+    class Meta:
+        db_table='api_reset_password_token'
