@@ -156,20 +156,3 @@ EMAIL_USE_TLS=False
 EMAIL_USE_SSL=True
 EMAIL_HOST_USER='ccjx.community@yandex.ru'
 EMAIL_HOST_PASSWORD='wwcnxpjspaxmuksg'
-
-REST_REGISTRATION = {
-    'REGISTER_VERIFICATION_URL': 'https://frontend-host/verify-user/',
-    'RESET_PASSWORD_VERIFICATION_URL': 'https://frontend-host/reset-password/',
-    'REGISTER_EMAIL_VERIFICATION_URL': 'https://frontend-host/verify-email/',
-
-    'VERIFICATION_FROM_EMAIL': 'ccjx.community@yandex.ru',
-}
-
-if os.environ=='nt':
-    URL_CLIENT_VERIFY_USER='http://localhost:4200/accounts/verify-user/'
-    URL_CLIENT_RESET_PASSWORD='http://localhost:4200/accounts/reset-password/'
-    URL_CLIENT_VERIFY_EMAIL='http://localhost:4200/accounts/verify-email/'
-else:
-    URL_CLIENT_VERIFY_USER=''
-    URL_CLIENT_RESET_PASSWORD=''
-    URL_CLIENT_VERIFY_EMAIL=''
