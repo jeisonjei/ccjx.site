@@ -1,1 +1,27 @@
-<p>register works!</p>
+<div class="row justify-content-center">
+    <div ngClass="col-lg-8">
+        <h1 class="text-center">Регистрация</h1>
+        <hr>
+        <form (ngSubmit)="register(f.value)" #f="ngForm">
+            <div class="d-flex flex-column">
+                <mat-form-field appearance="fill">
+                    <mat-label>Электронная почта</mat-label>
+                    <input autocomplete="email" name="email" type="email" matInput ngModel>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Пароль</mat-label>
+                    <input autocomplete="new-password" name="password" type="password" matInput ngModel>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Подтверждение пароля</mat-label>
+                    <input autocomplete="new-password" new-password name="passwordConfirmation" type="password" matInput ngModel>
+                </mat-form-field>
+                <app-waiting-button [waiting]="waiting" title="Регистрация"></app-waiting-button>
+                <div *ngIf="showWarning" class="alert alert-warning">
+                    {{pubm}}
+                </div>
+            </div>
+        </form>
+    
+    </div>
+</div>
