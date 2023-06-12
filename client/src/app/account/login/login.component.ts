@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ErrorHandler, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Consts } from "../../consts";
 import { Observable, ObservableInput, catchError, throwError } from 'rxjs';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { Router } from '@angular/router';

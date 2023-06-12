@@ -1,16 +1,8 @@
 <header>
     <mat-toolbar ngClass="px-4 py-1">
       <mat-toolbar-row>
-        <span>CCJX.COMMUNITY</span>
-        <span ngClass="spacer"></span>
-        <mat-form-field ngClass="w-50" subscriptSizing="dynamic">
-          <input type="text" matInput [matAutocomplete]="auto">
-          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-            <mat-option></mat-option>
-          </mat-autocomplete>
-          <mat-icon matIconPrefix>search</mat-icon>
-        </mat-form-field>
-        <span ngClass="spacer"></span>
+        <button mat-button routerLink="">CCJX.COMMUNITY</button>
+        <app-search-bar ngClass="flex-grow-1"></app-search-bar>
         <app-login-display></app-login-display>
       </mat-toolbar-row>
     </mat-toolbar>

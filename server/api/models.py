@@ -47,3 +47,9 @@ class NewPasswordToken(models.Model):
     token=models.CharField(max_length=52,default='')
     class Meta:
         db_table='api_reset_password_token'
+        
+class Question(models.Model):
+    user=models.ForeignKey(User,related_name='user',  on_delete=models.CASCADE) 
+    topic=models.TextField(blank=True)
+    text=models.TextField(blank=True)
+    

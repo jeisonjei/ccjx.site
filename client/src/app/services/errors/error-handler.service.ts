@@ -1,13 +1,13 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
-import { Consts, ServerError } from "../../consts";
+import { ServerError } from "../../consts";
+import { UrlsService } from 'src/app/urls.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorHandlerService {
   pubmEvent: EventEmitter<string> = new EventEmitter<string>();
-  c: Consts = new Consts();
-  constructor() { }
+  constructor(private urls:UrlsService) { }
   handleError(error: ServerError) {
     if (error.public) {
       const pubm = error.public;
@@ -23,7 +23,7 @@ export class ErrorHandlerService {
         console.error(privm)    ;
       }
       else {
-        const pubm = this.c.DEFAULT_ERROR_MESSAGE;
+        const pubm = this.urls.DEFAULT_ERROR_MESSAGE;
         const privm=JSON.stringify(error);
         this.pubmEvent.emit(pubm);
         console.error(privm);

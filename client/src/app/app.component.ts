@@ -1,8 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Consts } from "./consts";
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Question } from "./consts";
 import { Subject, takeUntil } from 'rxjs';
 import { AuthenticationService, LoginInfo } from './services/authentication/authentication.service';
+import { Router } from '@angular/router';
+import { ErrorHandlerService } from './services/errors/error-handler.service';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +14,12 @@ import { AuthenticationService, LoginInfo } from './services/authentication/auth
 })
 export class AppComponent{
   title = 'client';
-  c: Consts = new Consts();
-  constructor(private http: HttpClient,public auth:AuthenticationService) {
-    console.log(`=== auth.cu: ${JSON.stringify(auth.cu)}`);
+  pubm?: string;
+  constructor(private http: HttpClient,public auth:AuthenticationService,private router:Router,private eh:ErrorHandlerService) {
+    
   }
+
+  
   logout() {
     this.auth.logout();
   }

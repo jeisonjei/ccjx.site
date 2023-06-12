@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./login-display.component.scss']
 })
 export class LoginDisplayComponent {
-  pubm: string | undefined;
+  pubm?: string;
   constructor(public auth: AuthenticationService, private eh: ErrorHandlerService, private http: HttpClient) {
     this.eh.pubmEvent.subscribe((v) => {
       this.pubm = v;

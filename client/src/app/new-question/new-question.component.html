@@ -1,0 +1,13 @@
+<div ngClass="row justify-content-center">
+    <div ngClass="col-lg-6">
+        <h1 ngClass="text-center">{{topic}}</h1>
+        <form (ngSubmit)="addQuestion(form.value)" #form="ngForm">
+            <div ngClass="d-flex flex-column">
+                <mat-form-field appearance="outline">
+                    <textarea ngModel matInput placeholder="Содержимое вопроса..." name="text" id="" cols="85" rows="10" ></textarea>
+                </mat-form-field>
+                <button ngClass="w-50" mat-raised-button color="primary">Добавить вопрос</button>
+            </div>
+        </form>
+    </div>
+</div>

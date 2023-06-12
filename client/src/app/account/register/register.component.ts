@@ -4,7 +4,7 @@ import { EMPTY, catchError } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { ErrorHandlerService } from 'src/app/services/errors/error-handler.service';
-import { Consts } from 'src/app/consts';
+import { UrlsService } from 'src/app/urls.service';
 const baseUrl = { location };
 
 @Component({
@@ -13,11 +13,11 @@ const baseUrl = { location };
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent{
-  c: Consts = new Consts();
   constructor(private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private eh: ErrorHandlerService) {
+    private eh: ErrorHandlerService,
+  private urls:UrlsService) {
     eh.pubmEvent.subscribe(
       (v) => {
         this.pubm = v;
@@ -28,7 +28,7 @@ export class RegisterComponent{
   showWarning: boolean = false;
   waiting: boolean = false;
   register(f: FormControl): void {
-    let url = this.c.URL_REGISTER;
+    let url = this.urls.URL_REGISTER;
     let postObservable = this.http.post(url, f);
     this.waiting = true;
     postObservable.subscribe({
