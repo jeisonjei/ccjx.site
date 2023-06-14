@@ -49,7 +49,12 @@ class NewPasswordToken(models.Model):
         db_table='api_reset_password_token'
         
 class Question(models.Model):
-    user=models.ForeignKey(User,related_name='user',  on_delete=models.CASCADE) 
+    user=models.ForeignKey(User, on_delete=models.CASCADE,null=True) 
     topic=models.TextField(blank=True)
+    text=models.TextField(blank=True)
+    
+class Answer(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    question=models.ForeignKey(Question,on_delete=models.CASCADE,null=True)
     text=models.TextField(blank=True)
     

@@ -9,7 +9,7 @@ import { NewPassEmailSentComponent } from './account/new-pass-email-sent/new-pas
 import { NewPassSuccessComponent } from './account/new-pass-success/new-pass-success.component';
 import { NewPassRequestComponent } from './account/new-pass-request/new-pass-request.component';
 import { NewQuestionComponent } from './new-question/new-question.component';
-import { QuestionComponent } from './question/question.component';
+import { QuestionPageComponent } from './question-page/question-page.component';
 import { MyQuestionsComponent } from './my-questions/my-questions.component';
 
 const routes: Routes = [
@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'account/new-pass-email-sent', component: NewPassEmailSentComponent },
   { path: 'account/new-pass-success/:userEmail', component: NewPassSuccessComponent },
   { path: 'user/:userId/new-question/:questionId', component: NewQuestionComponent },
-  {path:'question/:questionId',component:QuestionComponent},
+  {path:'question/:questionId',component:QuestionPageComponent},
   {path:'my-questions',component:MyQuestionsComponent},
 ];
 

@@ -30,8 +30,10 @@ import { LoggedOutHeaderComponent } from './logged-out-header/logged-out-header.
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { NewQuestionComponent } from './new-question/new-question.component';
 import { AuthenticationModule } from './services/authentication/authentication.module';
-import { QuestionComponent } from './question/question.component';
+import { QuestionPageComponent } from './question-page/question-page.component';
 import { MyQuestionsComponent } from './my-questions/my-questions.component';
+import { AnswerComponent } from './answer/answer.component';
+import { QuestionComponent } from "./question/question.component";
 
 @NgModule({
   declarations: [
@@ -51,8 +53,10 @@ import { MyQuestionsComponent } from './my-questions/my-questions.component';
     LoggedOutHeaderComponent,
     SearchBarComponent,
     NewQuestionComponent,
+    QuestionPageComponent,
+    MyQuestionsComponent,
     QuestionComponent,
-    MyQuestionsComponent
+    AnswerComponent,
   ],
   imports: [
     BrowserModule,

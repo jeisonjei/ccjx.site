@@ -18,6 +18,7 @@ import { HttpClient } from '@angular/common/http';
 import { UrlsService } from '../urls.service';
 import { FormControl, NgForm } from '@angular/forms';
 import { Observable, filter, from, map, of, startWith } from 'rxjs';
+import { QuestionService } from '../question.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -37,7 +38,8 @@ export class SearchBarComponent implements OnInit {
     private router: Router,
     private auth: AuthenticationService,
     private http: HttpClient,
-    private urls: UrlsService
+    private urls: UrlsService,
+    private questionService:QuestionService
   ) {}
   ngOnInit(): void {
     this.getAllQuestions();
@@ -55,37 +57,21 @@ export class SearchBarComponent implements OnInit {
       q.topic.toLowerCase().includes(filterValue)
     );
   }
-  onChange(event: Event) {
-    const e = event.target as HTMLInputElement;
-    let val = e.value;
-    // this.onQuestion(val);
-    this.question.emit(val);
-    this.trigger?.closePanel();
-    this.trigger?.writeValue('');
-  }
-  onQuestion(i: any) {
-    const t = i.value;
+  onQuestion(value: string) {
     const userId = this.auth.cu?.id;
     if (userId == undefined) {
       console.error('Не указан userId');
       return;
     }
-    const url = this.urls.getNewQuestionListUrl(userId);
     const question: Question = {
-      user: userId,
-      topic: t
+      user: {id:userId},
+      topic: value
     };
     const self = this;
-    this.http.post(url, question).subscribe({
-      next(value: any) {
-        const questionId = value.id;
-        const userId = value.user;
-        const url = `user/${userId}/new-question/${questionId}`;
+    this.questionService.add(question).subscribe({
+      next(value) {
+        const url = `user/${value.user.id}/new-question/${value.id}`;
         self.router.navigateByUrl(url);
-      },
-      complete() {},
-      error(err) {
-        self.eh.handleError(err.error);
       },
     });
   }

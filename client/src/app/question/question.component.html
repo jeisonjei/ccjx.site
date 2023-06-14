@@ -1,6 +1,9 @@
-<div class="row justify-content-center">
-    <div class="col-lg-6">
-        <h1 ngClass="text-center">{{topic}}</h1>
-        <p>{{text}}</p>
+<div>
+    <h1 ngClass="text-center">{{question?.topic}}</h1>
+    <p>{{question?.text}}</p>
+    <div ngClass="d-flex">
+        <div ngClass="flex-grow-1"></div>
+        <div>{{question?.user?.email}}</div>
     </div>
 </div>
+

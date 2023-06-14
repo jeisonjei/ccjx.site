@@ -7,6 +7,7 @@ from .views import NewQuestionCreate,NewQuestionDetail
 from .views import QuestionDetail
 from .views import MyQuestionList
 from .views import AllQuestionList
+from .views import AnswerListCreate
 # коллекции с параметрами указываются в единственном числе, это поможет избежать путаницы
 # коллекции без параметров указываются во множественном числе
 urlpatterns = [
@@ -18,5 +19,6 @@ urlpatterns = [
     path('user/<int:user_id>/question/<int:id>/',NewQuestionDetail.as_view()),
     path('question/<int:id>/',QuestionDetail.as_view()),
     path('my-questions/',MyQuestionList.as_view()),
-    path('all-questions/',AllQuestionList.as_view())
+    path('all-questions/',AllQuestionList.as_view()),
+    path('question/<int:id>/answers/',AnswerListCreate.as_view())
 ]

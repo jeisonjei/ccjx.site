@@ -1,6 +1,6 @@
 <div ngClass="row justify-content-center mt-2">
   <div ngClass="col-lg-6">
-    <form subscriptSizing="dynamic" ngClass="d-flex align-items-center" (ngSubmit)="onQuestion(i)">
+    <form subscriptSizing="dynamic" ngClass="d-flex align-items-center" (ngSubmit)="onQuestion(i.value)">
         <mat-icon matIconPrefix>search</mat-icon>
         <div ngClass="flex-grow-1">
           <input #i [formControl]="q" placeholder="Задайте вопрос" ngClass="w-100" type="text" matInput [matAutocomplete]="auto">
@@ -10,7 +10,8 @@
             </mat-option>
           </mat-autocomplete>
         </div>
-        <button ngClass="ms-2" mat-flat-button>Добавить</button>
+        <button ngClass="ms-2" mat-flat-button color="primary">
+          Создать</button>
       </form>
   </div>
 </div>

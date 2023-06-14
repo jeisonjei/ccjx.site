@@ -17,7 +17,7 @@ export class UrlsService {
   public URL_ALL_QUESTIONS = `${this.baseUrl}/all-questions/`;
   
   constructor() { }
-  getNewQuestionListUrl(userId: string) {
+  getNewQuestionCreateUrl(userId: string) {
     const url = `${this.baseUrl}/user/${userId}/question/`;
     return url;
   }
@@ -27,6 +27,10 @@ export class UrlsService {
   }
   getQuestionDetailUrl(questionId: string) {
     const url = `${this.baseUrl}/question/${questionId}/`;
+    return url;
+  }
+  getQuestionAnswers(questionId: string) {
+    const url = `${this.baseUrl}/question/${questionId}/answers/`;
     return url;
   }
   

@@ -49,7 +49,7 @@ export class NewQuestionComponent implements OnInit {
       return;
     }
     const q: Question = {
-      user: userId == undefined ? '' : userId,
+      user: {id:userId == undefined ? '' : userId},
       topic: topic == undefined ? '' : topic,
       text: text,
     };
@@ -57,7 +57,7 @@ export class NewQuestionComponent implements OnInit {
     const self = this;
     this.http.patch(serverUrl, q).subscribe({
       next(value) {
-        console.log(`=== value: ${JSON.stringify(value)}`);
+        
       },
     });
     const url = `question/${questionId}`;
