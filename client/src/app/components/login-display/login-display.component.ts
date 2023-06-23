@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthenticationService } from '../services/authentication/authentication.service';
-import { ErrorHandlerService } from '../services/errors/error-handler.service';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
+import { ErrorHandlerService } from '../../services/error-handler.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({

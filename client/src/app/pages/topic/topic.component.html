@@ -1,0 +1,26 @@
+<div class="row justify-content-center">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+        <app-question [question]="question"></app-question>
+        
+        <div class="mt-2">
+            <div class="d-flex flex-row w-50">
+                <button ngClass="me-1" mat-raised-button color="primary" (click)="answer()">Ответ</button>
+                <button ngClass="ms-1" mat-raised-button color="accent" (click)="comment()">Комментарий</button>
+            </div>
+        </div>
+        <hr>
+        <div ngClass="ms-4">
+            <div *ngFor="let c of comments">
+                <app-comment [comment]="c" ></app-comment>
+            </div>
+        </div>
+        <app-new-comment *ngIf="newCommentDisplay" [relatedItem]="question" (created)="refreshComments()" (display)="refreshNewCommentDisplayState($event)"></app-new-comment>
+        <app-new-answer *ngIf="newAnswerDisplay" (display)="refreshDisplayState($event)" (created)="refreshAnswers()"></app-new-answer>
+        <div *ngFor="let a of answers">
+            <app-answer [answer]="a"></app-answer>
+        </div>
+    </div>
+    <div class="col-lg-3">
+    </div>
+</div>

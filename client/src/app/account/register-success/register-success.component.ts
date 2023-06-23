@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Component, ErrorHandler, OnInit } from '@angular/core';
-import { ErrorHandlerService } from 'src/app/services/errors/error-handler.service';
-import { UrlsService } from 'src/app/urls.service';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
+import { UrlsService } from 'src/app/services/urls.service';
 
 @Component({
   selector: 'app-register-success',

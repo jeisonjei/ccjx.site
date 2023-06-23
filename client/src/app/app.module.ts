@@ -24,16 +24,19 @@ import { NewPassEmailSentComponent } from './account/new-pass-email-sent/new-pas
 import { NewPassSuccessComponent } from './account/new-pass-success/new-pass-success.component';
 import { NewPassRequestComponent } from './account/new-pass-request/new-pass-request.component';
 import { WaitingButtonComponent } from './shared/components/waiting-button/waiting-button.component';
-import { LoggedInHeaderComponent } from './logged-in-header/logged-in-header.component';
-import { LoginDisplayComponent } from './login-display/login-display.component';
-import { LoggedOutHeaderComponent } from './logged-out-header/logged-out-header.component';
-import { SearchBarComponent } from './search-bar/search-bar.component';
-import { NewQuestionComponent } from './new-question/new-question.component';
+import { LoggedInHeaderComponent } from './components/logged-in-header/logged-in-header.component';
+import { LoginDisplayComponent } from './components/login-display/login-display.component';
+import { LoggedOutHeaderComponent } from './components/logged-out-header/logged-out-header.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { NewQuestionComponent } from './pages/new-question/new-question.component';
 import { AuthenticationModule } from './services/authentication/authentication.module';
-import { QuestionPageComponent } from './question-page/question-page.component';
-import { MyQuestionsComponent } from './my-questions/my-questions.component';
-import { AnswerComponent } from './answer/answer.component';
-import { QuestionComponent } from "./question/question.component";
+import { TopicComponent } from './pages/topic/topic.components';
+import { MyQuestionsComponent } from './pages/my-questions/my-questions.component';
+import { AnswerComponent } from './components/answer/answer.component';
+import { QuestionComponent } from "./components/question/question.component";
+import { NewAnswerComponent } from './components/new-answer/new-answer.component';
+import { NewCommentComponent } from './components/new-comment/new-comment.component';
+import { CommentComponent } from './components/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -53,10 +56,13 @@ import { QuestionComponent } from "./question/question.component";
     LoggedOutHeaderComponent,
     SearchBarComponent,
     NewQuestionComponent,
-    QuestionPageComponent,
+    TopicComponent,
     MyQuestionsComponent,
     QuestionComponent,
     AnswerComponent,
+    NewAnswerComponent,
+    NewCommentComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserModule,

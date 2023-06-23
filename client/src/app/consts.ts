@@ -11,15 +11,24 @@ export type User = {
 }
 export type Question = /**модель Question */ {
   id?:string,
+  type?:string
   user:User, /**Передаётся первичный ключ */
   topic: string,
   text?:string,
-  tags?: string[],
 }
 export type Answer = /**модель Answer */ {
   id?: string,
-  question:Question,
+  type?:string
+  question:string,
   user?: string,
   text?: string,
-  tags?:string[]
+}
+export type Comment = /**модель Comment */{
+  id?: string,
+  type?:string
+  question?: string,
+  answer?:string,
+  user: string,
+  text: string,
+  
 }

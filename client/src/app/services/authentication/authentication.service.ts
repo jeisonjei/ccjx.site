@@ -20,7 +20,7 @@ import { TokenStorageService } from './token-storage.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'ngx-auth';
 import jwtDecode from 'jwt-decode';
-import { UrlsService } from 'src/app/urls.service';
+import { UrlsService } from 'src/app/services/urls.service';
 
 interface AccessData {
   accessToken: string;

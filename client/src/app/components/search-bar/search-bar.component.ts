@@ -5,20 +5,21 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { ErrorHandlerService } from '../services/errors/error-handler.service';
+import { ErrorHandlerService } from '../../services/error-handler.service';
 import { Router } from '@angular/router';
 import {
   MatAutocomplete,
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger,
 } from '@angular/material/autocomplete';
-import { AuthenticationService } from '../services/authentication/authentication.service';
-import { Question } from '../consts';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
+import { Question } from '../../consts';
 import { HttpClient } from '@angular/common/http';
-import { UrlsService } from '../urls.service';
+import { UrlsService } from '../../services/urls.service';
 import { FormControl, NgForm } from '@angular/forms';
 import { Observable, filter, from, map, of, startWith } from 'rxjs';
-import { QuestionService } from '../question.service';
+import { QuestionService } from '../../services/question.service';
+import { ValidatorService } from '../../services/validator.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -39,7 +40,8 @@ export class SearchBarComponent implements OnInit {
     private auth: AuthenticationService,
     private http: HttpClient,
     private urls: UrlsService,
-    private questionService:QuestionService
+    private questionService: QuestionService,
+    private validator:ValidatorService
   ) {}
   ngOnInit(): void {
     this.getAllQuestions();
@@ -58,6 +60,9 @@ export class SearchBarComponent implements OnInit {
     );
   }
   onQuestion(value: string) {
+    if (!this.validator.text(value)) {
+      return;
+    }
     const userId = this.auth.cu?.id;
     if (userId == undefined) {
       console.error('Не указан userId');
@@ -68,8 +73,8 @@ export class SearchBarComponent implements OnInit {
       topic: value
     };
     const self = this;
-    this.questionService.add(question).subscribe({
-      next(value) {
+    this.questionService.create(question).subscribe({
+      next(value: { user: { id: any; }; id: any; }) {
         const url = `user/${value.user.id}/new-question/${value.id}`;
         self.router.navigateByUrl(url);
       },
@@ -87,4 +92,6 @@ export class SearchBarComponent implements OnInit {
     this.router.navigateByUrl(`question/${id}`);
     this.trigger?.writeValue('');
   }
+
 }
+

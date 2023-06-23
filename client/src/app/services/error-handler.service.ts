@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
-import { ServerError } from "../../consts";
-import { UrlsService } from 'src/app/urls.service';
+import { ServerError } from "../consts";
+import { UrlsService } from 'src/app/services/urls.service';
 
 @Injectable({
   providedIn: 'root'

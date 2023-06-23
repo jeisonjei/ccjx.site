@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { Observable, ObservableInput, catchError, throwError } from 'rxjs';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { Router } from '@angular/router';
-import { ErrorHandlerService } from "../../services/errors/error-handler.service";
+import { ErrorHandlerService } from "../../services/error-handler.service";
 
 @Component({
   selector: 'app-login',

@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ErrorHandlerService } from '../services/errors/error-handler.service';
-import { Question } from '../consts';
-import { UrlsService } from '../urls.service';
+import { ErrorHandlerService } from '../../services/error-handler.service';
+import { Question } from '../../consts';
+import { UrlsService } from '../../services/urls.service';
 
 @Component({
   selector: 'app-my-questions',

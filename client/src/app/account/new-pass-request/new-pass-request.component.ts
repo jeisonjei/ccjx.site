@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ErrorHandlerService } from '../../services/errors/error-handler.service';
-import { UrlsService } from 'src/app/urls.service';
+import { ErrorHandlerService } from '../../services/error-handler.service';
+import { UrlsService } from 'src/app/services/urls.service';
 
 @Component({
   selector: 'app-new-pass-request',

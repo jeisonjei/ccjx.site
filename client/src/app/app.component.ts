@@ -4,8 +4,8 @@ import { Question } from "./consts";
 import { Subject, takeUntil } from 'rxjs';
 import { AuthenticationService, LoginInfo } from './services/authentication/authentication.service';
 import { Router } from '@angular/router';
-import { ErrorHandlerService } from './services/errors/error-handler.service';
-import { SearchBarComponent } from './search-bar/search-bar.component';
+import { ErrorHandlerService } from './services/error-handler.service';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 @Component({
   selector: 'app-root',

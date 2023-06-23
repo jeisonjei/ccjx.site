@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
-import { UrlsService } from '../urls.service';
-import { Question } from '../consts';
+import { UrlsService } from '../../services/urls.service';
+import { Question } from '../../consts';
 
 @Component({
   selector: 'app-new-question',

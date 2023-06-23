@@ -3,8 +3,8 @@ from .account import register
 from .account import verify_email_with_token
 from .account import send_email_new_password
 from .account import new_password
-from .views import NewQuestionCreate,NewQuestionDetail
-from .views import QuestionDetail
+from .views import CommentListCreate, NewQuestionCreate,NewQuestionDetail
+from .views import TopicDetail
 from .views import MyQuestionList
 from .views import AllQuestionList
 from .views import AnswerListCreate
@@ -17,8 +17,9 @@ urlpatterns = [
     path('account/new-pass/',new_password),
     path('user/<int:user_id>/question/',NewQuestionCreate.as_view()),
     path('user/<int:user_id>/question/<int:id>/',NewQuestionDetail.as_view()),
-    path('question/<int:id>/',QuestionDetail.as_view()),
+    path('question/<int:id>/',TopicDetail.as_view()),
     path('my-questions/',MyQuestionList.as_view()),
     path('all-questions/',AllQuestionList.as_view()),
-    path('question/<int:id>/answers/',AnswerListCreate.as_view())
+    path('questions/<int:id>/answers/',AnswerListCreate.as_view()),
+    path('comments/',CommentListCreate.as_view())
 ]

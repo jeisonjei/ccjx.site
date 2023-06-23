@@ -3,8 +3,8 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { EMPTY, catchError } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
-import { ErrorHandlerService } from 'src/app/services/errors/error-handler.service';
-import { UrlsService } from 'src/app/urls.service';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
+import { UrlsService } from 'src/app/services/urls.service';
 const baseUrl = { location };
 
 @Component({
