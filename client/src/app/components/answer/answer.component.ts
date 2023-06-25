@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { Answer } from '../../consts';
+import { Comment } from '@angular/compiler';
 
 @Component({
   selector: 'app-answer',
@@ -8,9 +9,13 @@ import { Answer } from '../../consts';
 })
 export class AnswerComponent implements OnInit{
   @Input()
-  answer?:any
+  answer?: any
+  newCommentDisplay?: boolean;
+  comments:Comment[]=[];
   ngOnInit(): void {
     
   }
-
+  comment() {
+    this.newCommentDisplay = true;
+  }
 }

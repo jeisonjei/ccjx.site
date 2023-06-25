@@ -17,7 +17,7 @@ import { Question } from '../../consts';
 import { HttpClient } from '@angular/common/http';
 import { UrlsService } from '../../services/urls.service';
 import { FormControl, NgForm } from '@angular/forms';
-import { Observable, filter, from, map, of, startWith } from 'rxjs';
+import { Observable, filter, from, map, of, startWith, timestamp } from 'rxjs';
 import { QuestionService } from '../../services/question.service';
 import { ValidatorService } from '../../services/validator.service';
 
@@ -44,6 +44,8 @@ export class SearchBarComponent implements OnInit {
     private validator:ValidatorService
   ) {}
   ngOnInit(): void {
+    const now = new Date();
+    console.log(`init: ${now}`);
     this.getAllQuestions();
     this.filteredQuestions = this.q.valueChanges.pipe(
       startWith(''),
@@ -60,16 +62,10 @@ export class SearchBarComponent implements OnInit {
     );
   }
   onQuestion(value: string) {
-    if (!this.validator.text(value)) {
-      return;
-    }
+    if (!this.validator.text(value)) return;
     const userId = this.auth.cu?.id;
-    if (userId == undefined) {
-      console.error('Не указан userId');
-      return;
-    }
     const question: Question = {
-      user: {id:userId},
+      user: {id:userId??''},
       topic: value
     };
     const self = this;
@@ -92,6 +88,7 @@ export class SearchBarComponent implements OnInit {
     this.router.navigateByUrl(`question/${id}`);
     this.trigger?.writeValue('');
   }
+  
 
 }
 

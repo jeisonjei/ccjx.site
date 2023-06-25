@@ -30,24 +30,11 @@ export class TopicComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe((v) => {
+    this.activatedRoute.paramMap.subscribe(() => {
       this.getQuestion();
     });
-    this.refreshAnswers();
-    this.refreshComments();
   }
-  refreshAnswers() {
-    const questionId = this.activatedRoute.snapshot.paramMap.get('questionId');
-    this.ans.list(questionId??'').subscribe((v: any) => {
-      this.answers = v;
-    })
 
-  }
-  refreshComments() {
-    this.comms.list().subscribe((v: any) => {
-      this.comments = v;
-    })
-  }
   refreshDisplayState(v: boolean) {
     this.newAnswerDisplay = v;
   }
@@ -58,13 +45,11 @@ export class TopicComponent implements OnInit {
   getQuestion() {
     const questionId = this.activatedRoute.snapshot.paramMap.get('questionId');
     const url = this.urls.getQuestionDetailUrl(questionId??'');
-    const self = this;
-    this.http.get(url).subscribe({
-      next(value: any) {
-        console.log(`=== value: ${JSON.stringify(value)}`);
-        self.question = value;
-      },
-    });
+    this.http.get(url).subscribe((v: any) => {
+      this.question = v;
+      this.answers = v.answers;
+      this.comments = v.comments;
+    })
   }
   answer() {
     this.newAnswerDisplay = true;

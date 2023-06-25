@@ -18,7 +18,7 @@ export class NewAnswerComponent {
   constructor(private arouter: ActivatedRoute,private auth:AuthenticationService,private answer:AnswerService) {
 
    }
-  addAnswer(form:NgForm) {
+  addAnswer(form: NgForm) {
     const questionId = this.arouter.snapshot.paramMap.get('questionId');
     const userId = this.auth.cu?.id??'';
     const text = form.value.text;

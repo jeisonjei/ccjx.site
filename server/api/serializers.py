@@ -17,34 +17,24 @@ class UserSerializer(serializers.Serializer):
     id=serializers.IntegerField()
     email=serializers.CharField(max_length=52,required=False)
     
-class AnswerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=Answer
-        fields="__all__"
-    def to_representation(self, instance):
-        representation=super(AnswerSerializer,self).to_representation(instance)
-        representation['user']=UserSerializer(instance.user).data
-        return representation
-        
+                
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model=Comment
         fields="__all__"        
-    def to_representation(self, instance):
-        representation=super(CommentSerializer,self).to_representation(instance)
-        representation['user']=UserSerializer(instance.user).data
-        representation['question']=TopicSerializer(instance.question).data
-        representation['answer']=AnswerSerializer(instance.answer).data
-        return representation
+
+class AnswerSerializer(serializers.ModelSerializer):
+    comments = CommentSerializer(many=True,required=False)
+    user=UserSerializer(read_only=True)
+    class Meta:
+        model=Answer
+        fields="__all__"
+        depth=0
         
-class TopicSerializer(serializers.Serializer):
-    id=serializers.IntegerField(required=False)
-    user_id=serializers.IntegerField()
-    user=UserSerializer(Topic.user,required=False)
-    topic=serializers.CharField(max_length=255)
-    text=serializers.CharField(max_length=1000,required=False)
-    type=serializers.CharField(max_length=52,required=False)
-    def create(self, validated_data):
-        question=Topic.objects.create(**validated_data)
-        return question
-        
+class TopicSerializer(serializers.ModelSerializer):
+    answers = AnswerSerializer(many=True,required=False,read_only=True)
+    user=UserSerializer(read_only=True)
+    class Meta:
+        model=Topic
+        fields=['id','user','topic','text','type','answers','comments']   
+        depth=1    

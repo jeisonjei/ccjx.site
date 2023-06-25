@@ -2,4 +2,13 @@
 <div ngClass="d-flex justify-content-end">
     <p>{{answer?.user?.email}}</p>
 </div>
+<div>
+    <button mat-raised-button color="accent" (click)="comment()">Комментарий</button>
+</div>
+<div ngClass="ms-4">
+    <div *ngFor="let c of comments">
+        <app-comment [comment]="c" ></app-comment>
+    </div>
+</div>
+
 <hr>

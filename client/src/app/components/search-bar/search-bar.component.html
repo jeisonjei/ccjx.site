@@ -5,7 +5,7 @@
         <div ngClass="flex-grow-1">
           <input #i [formControl]="q" placeholder="Задайте вопрос" ngClass="w-100" type="text" matInput [matAutocomplete]="auto">
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="clearSelection($event)">
-            <mat-option *ngFor="let q of filteredQuestions|async" [value]="q.topic" (onSelectionChange)="navigate(q.id)" routerLink="question/{{q.id}}">
+            <mat-option *ngFor="let q of filteredQuestions|async" (onSelectionChange)="navigate(q.id)">
               {{q.topic}}
             </mat-option>
           </mat-autocomplete>
