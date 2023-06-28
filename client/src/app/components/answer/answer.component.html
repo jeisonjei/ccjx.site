@@ -5,10 +5,11 @@
 <div>
     <button mat-raised-button color="accent" (click)="comment()">Комментарий</button>
 </div>
-<div ngClass="ms-4">
+<hr>
+<app-new-comment *ngIf="newCommentDisplay" [relatedItem]="answer" (created)="refresh()"></app-new-comment>
+<div ngClass="ms-5">
     <div *ngFor="let c of comments">
         <app-comment [comment]="c" ></app-comment>
     </div>
 </div>
 
-<hr>

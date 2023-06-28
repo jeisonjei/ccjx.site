@@ -8,5 +8,5 @@ import { Question } from '../../consts';
 })
 export class QuestionComponent {
   @Input()
-  question?: Question;
+  question?: any;
 }

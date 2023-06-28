@@ -21,19 +21,26 @@ class UserSerializer(serializers.Serializer):
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model=Comment
-        fields="__all__"        
+        fields="__all__"  
+    def to_representation(self, instance):
+        representation=super(CommentSerializer,self).to_representation(instance)
+        representation['user']=UserSerializer(instance.user).data
+        return representation     
 
 class AnswerSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True,required=False)
-    user=UserSerializer(read_only=True)
     class Meta:
         model=Answer
-        fields="__all__"
+        fields=['id','user','question','text','type','comments']
         depth=0
+    def to_representation(self, instance):
+        representation=super(AnswerSerializer,self).to_representation(instance)
+        representation['user']=UserSerializer(instance.user).data
+        return representation
         
 class TopicSerializer(serializers.ModelSerializer):
-    answers = AnswerSerializer(many=True,required=False,read_only=True)
-    user=UserSerializer(read_only=True)
+    answers = AnswerSerializer(many=True,required=False)
+    comments = CommentSerializer(many=True,required=False)
     class Meta:
         model=Topic
         fields=['id','user','topic','text','type','answers','comments']   

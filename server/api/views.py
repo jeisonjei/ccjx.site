@@ -27,8 +27,7 @@ class NewQuestionCreate(APIView):
             privm=e.args
             error=get_error_object(pubm,privm)
             return Response(error, status=status.HTTP_400_BAD_REQUEST)
-
-
+        
 class NewQuestionDetail(APIView):
     def get(self, request, user_id, id):
         try:
@@ -77,10 +76,7 @@ class TopicDetail(generics.RetrieveUpdateDestroyAPIView):
 class AnswerListCreate(generics.ListCreateAPIView):
     lookup_field='id'
     serializer_class=AnswerSerializer
-    def get_queryset(self):
-        question_id = self.kwargs['id']
-        queryset=Answer.objects.filter(question=question_id)
-        return queryset
+    queryset=Topic.objects.all()
 
 class CommentListCreate(generics.ListCreateAPIView):
     lookup_field='id'        

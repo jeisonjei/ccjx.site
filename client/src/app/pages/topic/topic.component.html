@@ -18,7 +18,7 @@
         <app-new-comment *ngIf="newCommentDisplay" [relatedItem]="question" (created)="getQuestion()" (display)="refreshNewCommentDisplayState($event)"></app-new-comment>
         <app-new-answer *ngIf="newAnswerDisplay" (display)="refreshDisplayState($event)" (created)="getQuestion()"></app-new-answer>
         <div *ngFor="let a of answers">
-            <app-answer [answer]="a"></app-answer>
+            <app-answer [answer]="a" (commentCreated)="getQuestion()"></app-answer>
         </div>
     </div>
     <div class="col-lg-3">
