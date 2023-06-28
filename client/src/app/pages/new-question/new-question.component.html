@@ -6,7 +6,10 @@
                 <mat-form-field appearance="outline">
                     <textarea ngModel matInput placeholder="Содержимое вопроса..." name="text" id="" cols="85" rows="10" ></textarea>
                 </mat-form-field>
-                <button ngClass="w-50" mat-raised-button color="primary">Добавить вопрос</button>
+                <div ngClass="d-flex">
+                    <button ngClass="me-1" mat-raised-button color="primary">Добавить вопрос</button>
+                    <button ngClass="ms-1" mat-flat-button (click)="cancel()">Отмена</button>
+                </div>
             </div>
         </form>
     </div>

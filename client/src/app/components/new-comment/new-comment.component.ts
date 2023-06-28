@@ -44,11 +44,13 @@ export class NewCommentComponent implements OnInit{
         answer:relId,
         text:form.value.text
       }
-      console.log(`=== comm: ${JSON.stringify(comm)}`);
       this.coms.create(comm).subscribe(() => {
         this.created.emit(true);
         this.display.emit(false);
       });
     }
+  }
+  hideForm() {
+    this.display.emit(false);
   }
 }

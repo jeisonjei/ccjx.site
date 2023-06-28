@@ -32,4 +32,7 @@ export class NewAnswerComponent {
       this.created.emit(true);
     });
   }
+  hideForm() {
+    this.display.emit(false);
+  }
 }

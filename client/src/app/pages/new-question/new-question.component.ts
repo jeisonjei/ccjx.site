@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { UrlsService } from '../../services/urls.service';
 import { Question } from '../../consts';
+import { QuestionService } from 'src/app/services/question.service';
 
 @Component({
   selector: 'app-new-question',
@@ -12,11 +13,14 @@ import { Question } from '../../consts';
 })
 export class NewQuestionComponent implements OnInit {
   topic?: string;
+  questionId?: string;
+  userId: any;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-    private urls:UrlsService
+    private urls: UrlsService,
+    private quess:QuestionService
   ) {}
   ngOnInit(): void {
     this.getTopic();
@@ -24,6 +28,8 @@ export class NewQuestionComponent implements OnInit {
   getTopic() {
     const userId = this.activatedRoute.snapshot.paramMap.get('userId');
     const questionId = this.activatedRoute.snapshot.paramMap.get('questionId');
+    this.userId = userId ?? '';
+    this.questionId = questionId??'';
     if (userId == undefined || questionId == undefined) {
       console.error('Не задан userId или questionId');
       this.router.navigateByUrl('');
@@ -62,5 +68,9 @@ export class NewQuestionComponent implements OnInit {
     });
     const url = `question/${questionId}`;
     this.router.navigateByUrl(url);
+  }
+  cancel() {
+    this.quess.delete(this.questionId??'').subscribe();
+    this.router.navigateByUrl('');
   }
 }

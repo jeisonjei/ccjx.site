@@ -19,5 +19,5 @@ urlpatterns = [
     path('my-questions/',MyQuestionList.as_view()),
     path('all-questions/',AllQuestionList.as_view()),
     path('answers/',AnswerListCreate.as_view()),
-    path('comments/',CommentListCreate.as_view())
+    path('comments/',CommentListCreate.as_view()),
 ]

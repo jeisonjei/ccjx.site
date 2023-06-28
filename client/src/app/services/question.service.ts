@@ -15,4 +15,8 @@ export class QuestionService {
     const url=this.urls.getNewQuestionCreateUrl(question.user.id);
     return this.http.post(url, question);
   }
+  delete(id: string) {
+    const url = this.urls.getQuestionDeleteUrl(id);
+    return this.http.delete(url);
+  }
 }

@@ -37,6 +37,10 @@ export class UrlsService {
     const url = `${this.baseUrl}/questions/${questionId}/answers/`;
     return url;
   }
+  getQuestionDeleteUrl(questionId: string) {
+    const url = `${this.baseUrl}/question/${questionId}`;
+    return url;
+  }
   
   
 }
