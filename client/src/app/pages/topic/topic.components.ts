@@ -44,7 +44,7 @@ export class TopicComponent implements OnInit {
 
   getQuestion() {
     const questionId = this.activatedRoute.snapshot.paramMap.get('questionId');
-    const url = this.urls.getQuestionDetailUrl(questionId??'');
+    const url = this.urls.getUrlTopicDetail(questionId??'');
     this.http.get(url).subscribe((v: any) => {
       this.question = v;
       this.answers = v.answers;

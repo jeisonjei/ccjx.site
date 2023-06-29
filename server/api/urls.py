@@ -5,19 +5,17 @@ from .account import send_email_new_password
 from .account import new_password
 from .views import CommentListCreate, MyQuestionList, TopicDetail, TopicListCreate
 from .views import AnswerListCreate
-# коллекции с параметрами указываются в единственном числе, это поможет избежать путаницы
-# коллекции без параметров указываются во множественном числе
+# коллекции указываются во множественном числе
 urlpatterns = [
     path('account/register/',register),
     path('account/register/verify-email-with-token/<str:token>',verify_email_with_token),
     path('account/send-email-new-password/',send_email_new_password),
     path('account/new-pass/',new_password),
     
-    path('user/<int:user_id>/question/',TopicListCreate.as_view()),
-    path('user/<int:user_id>/question/<int:id>/',TopicDetail.as_view()),
-    path('question/<int:id>/',TopicDetail.as_view()),
-    path('my-questions/',MyQuestionList.as_view()),
-    path('all-questions/',TopicListCreate.as_view()),
+    path('my-questions/',MyQuestionList.as_view()), # пока оставим
+    
+    path('topics/',TopicListCreate.as_view()),
+    path('topics/<int:id>/',TopicDetail.as_view()),
     path('answers/',AnswerListCreate.as_view()),
     path('comments/',CommentListCreate.as_view()),
 ]

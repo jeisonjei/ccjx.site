@@ -40,7 +40,7 @@ export class NewQuestionComponent implements OnInit {
       this.router.navigateByUrl('');
       return;
     }
-    const url = this.urls.getNewQuestionDetailUrl(userId, questionId);
+    const url = this.urls.getUrlTopicDetail(questionId);
     const self = this;
     this.http.get(url).subscribe({
       next(value: any) {
@@ -64,7 +64,7 @@ export class NewQuestionComponent implements OnInit {
       topic: topic == undefined ? '' : topic,
       text: text,
     };
-    const serverUrl = this.urls.getNewQuestionDetailUrl(userId, questionId);
+    const serverUrl = this.urls.getUrlTopicDetail(questionId);
     const self = this;
     this.http.patch(serverUrl, q).subscribe({
       next(value) {

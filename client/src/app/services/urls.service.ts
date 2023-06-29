@@ -13,34 +13,25 @@ export class UrlsService {
   URL_EMAIL_VERIFICATION = `${this.baseUrl}/account/register/verify-email-with-token/`;
   URL_SEND_EMAIL_NEW_PASS = `${this.baseUrl}/account/send-email-new-password/`;
   URL_NEW_PASS = `${this.baseUrl}/account/new-pass/`;
+
   URL_MY_QUESTIONS = `${this.baseUrl}/my-questions/`;
-  URL_ALL_QUESTIONS = `${this.baseUrl}/all-questions/`;
+  URL_ALL_QUESTIONS = `${this.baseUrl}/topics/`;
   URL_ANSWERS_LIST = `${this.baseUrl}/answers/`;
   URL_ANSWERS_CREATE = `${this.baseUrl}/answers/`;
   URL_COMMENTS_LIST = `${this.baseUrl}/comments/`;
   URL_COMMENTS_CREATE = `${this.baseUrl}/comments/`;
   
   constructor() { }
-  getNewQuestionCreateUrl(userId: string) {
-    const url = `${this.baseUrl}/user/${userId}/question/`;
+  getUrlTopicCreate(userId: string) {
+    const url = `${this.baseUrl}/topics/`;
     return url;
   }
-  getNewQuestionDetailUrl(userId: string, questionId: string) {
-    const url = `${this.baseUrl}/user/${userId}/question/${questionId}/`;
-    return url;
-  }
-  getQuestionDetailUrl(questionId: string) {
-    const url = `${this.baseUrl}/question/${questionId}/`;
-    return url;
-  }
-  getAnswersUrl(questionId: string) {
-    const url = `${this.baseUrl}/questions/${questionId}/answers/`;
+  getUrlTopicDetail(questionId: string) {
+    const url = `${this.baseUrl}/topics/${questionId}/`;
     return url;
   }
   getQuestionDeleteUrl(questionId: string) {
-    const url = `${this.baseUrl}/question/${questionId}`;
+    const url = `${this.baseUrl}/topics/${questionId}`;
     return url;
   }
-  
-  
 }

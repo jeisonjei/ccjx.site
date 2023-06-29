@@ -12,7 +12,7 @@ export class QuestionService {
 
   constructor(private http:HttpClient,private urls:UrlsService,private eh:ErrorHandlerService) { }
   create(question: Question):Observable<any>{
-    const url=this.urls.getNewQuestionCreateUrl(question.user??'');
+    const url=this.urls.getUrlTopicCreate(question.user??'');
     return this.http.post(url, question);
   }
   delete(id: string) {
