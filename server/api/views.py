@@ -1,16 +1,6 @@
-from django.http import Http404
-from django.shortcuts import render
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
-from rest_framework.views import APIView
-from rest_framework import status
-from django.contrib.auth.models import AnonymousUser
-from nameof import nameof
-from .service_functions import get_error_object
-from .models import Answer, Comment, Topic, User
-from .serializers import AnswerSerializer, CommentSerializer, TopicSerializer, UserSerializer
+from .models import Comment, Topic
+from .serializers import AnswerSerializer, CommentSerializer, TopicSerializer
 
 class MyQuestionList(generics.ListAPIView):
     '''
