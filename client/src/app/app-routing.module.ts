@@ -12,6 +12,7 @@ import { NewQuestionComponent } from './pages/new-topic/new-topic.component';
 import { TopicComponent } from './pages/topic/topic.components';
 import { MyQuestionsComponent } from './pages/my-questions/my-questions.component';
 import { ProtectedGuard } from 'ngx-auth';
+import { TopTopicsComponent } from './pages/top-topics/top-topics.component';
 
 const routes: Routes = [
   { path: 'account/register', component: RegisterComponent },
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'account/new-pass-success/:userEmail', component: NewPassSuccessComponent },
   { path: 'users/:userId/new-topic/:topicId', component: NewQuestionComponent },
   { path:'topics/:topicId',component:TopicComponent},
-  { path:'my-questions',component:MyQuestionsComponent},
+  { path: 'my-questions', component: MyQuestionsComponent },
+  {path:'',component:TopTopicsComponent}
 ];
 
 @NgModule({
