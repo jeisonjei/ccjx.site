@@ -13,6 +13,7 @@ import { TopicComponent } from './pages/topic/topic.components';
 import { MyQuestionsComponent } from './pages/my-questions/my-questions.component';
 import { ProtectedGuard } from 'ngx-auth';
 import { TopTopicsComponent } from './pages/top-topics/top-topics.component';
+import { NewsComponent } from './pages/news/news.component';
 
 const routes: Routes = [
   { path: 'account/register', component: RegisterComponent },
@@ -26,7 +27,7 @@ const routes: Routes = [
   { path: 'users/:userId/new-topic/:topicId', component: NewQuestionComponent },
   { path:'topics/:topicId',component:TopicComponent},
   { path: 'my-questions', component: MyQuestionsComponent },
-  {path:'',component:TopTopicsComponent}
+  {path:'',component:NewsComponent}
 ];
 
 @NgModule({
