@@ -26,12 +26,12 @@ export class UrlsService {
     const url = `${this.baseUrl}/topics/`;
     return url;
   }
-  getUrlTopicDetail(questionId: string) {
-    const url = `${this.baseUrl}/topics/${questionId}/`;
+  getUrlTopicDetail(topicId: string) {
+    const url = `${this.baseUrl}/topics/${topicId}/`;
     return url;
   }
-  getQuestionDeleteUrl(questionId: string) {
-    const url = `${this.baseUrl}/topics/${questionId}`;
+  getQuestionDeleteUrl(topicId: string) {
+    const url = `${this.baseUrl}/topics/${topicId}`;
     return url;
   }
 }

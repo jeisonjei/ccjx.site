@@ -13,7 +13,7 @@ import {
   MatAutocompleteTrigger,
 } from '@angular/material/autocomplete';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
-import { Question } from '../../consts';
+import { Topic } from '../../consts';
 import { HttpClient } from '@angular/common/http';
 import { UrlsService } from '../../services/urls.service';
 import { FormControl, NgForm } from '@angular/forms';
@@ -27,8 +27,8 @@ import { ValidatorService } from '../../services/validator.service';
   styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent implements OnInit {
-  allQuestions: Question[] = [];
-  filteredQuestions?: Observable<Question[]>;
+  allQuestions: Topic[] = [];
+  filteredQuestions?: Observable<Topic[]>;
   @Output()
   question: EventEmitter<string> = new EventEmitter();
   @ViewChild(MatAutocompleteTrigger)
@@ -44,8 +44,6 @@ export class SearchBarComponent implements OnInit {
     private validator:ValidatorService
   ) {}
   ngOnInit(): void {
-    const now = new Date();
-    console.log(`init: ${now}`);
     this.getAllQuestions();
     this.filteredQuestions = this.q.valueChanges.pipe(
       startWith(''),
@@ -55,23 +53,23 @@ export class SearchBarComponent implements OnInit {
   clearSelection(event:MatAutocompleteSelectedEvent) {
     event.option.deselect();
   }
-  private _filter(value: string): Question[] {
+  private _filter(value: string): Topic[] {
     const filterValue = value.toLowerCase();
     return this.allQuestions.filter((q) =>
-      q.topic.toLowerCase().includes(filterValue)
+      q.title.toLowerCase().includes(filterValue)
     );
   }
   onQuestion(value: string) {
     if (!this.validator.text(value)) return;
     const userId = this.auth.cu?.id;
-    const question: Question = {
+    const question: Topic = {
       user: userId,
-      topic: value
+      title: value
     };
     const self = this;
     this.questionService.create(question).subscribe({
       next(value: { user: { id: any; }; id: any; }) {
-        const url = `user/${value.user.id}/new-question/${value.id}`;
+        const url = `users/${value.user.id}/new-topic/${value.id}`;
         self.router.navigateByUrl(url);
       },
     });
@@ -85,7 +83,7 @@ export class SearchBarComponent implements OnInit {
     });
   }
   navigate(id?: string) {
-    this.router.navigateByUrl(`question/${id}`);
+    this.router.navigateByUrl(`topics/${id}`);
     this.trigger?.writeValue('');
   }
   

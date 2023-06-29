@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Question } from '../../consts';
+import { Topic } from '../../consts';
 
 @Component({
   selector: 'app-question',

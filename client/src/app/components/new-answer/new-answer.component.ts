@@ -19,11 +19,11 @@ export class NewAnswerComponent {
 
    }
   addAnswer(form: NgForm) {
-    const questionId = this.arouter.snapshot.paramMap.get('questionId');
+    const topicId = this.arouter.snapshot.paramMap.get('topicId');
     const userId = this.auth.cu?.id??'';
     const text = form.value.text;
     const answer :Answer= {
-      question: questionId??'',
+      topic: topicId??'',
       user: userId,
       text: text,
     };

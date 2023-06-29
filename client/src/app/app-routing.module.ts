@@ -8,7 +8,7 @@ import { RegisterSuccessComponent } from './account/register-success/register-su
 import { NewPassEmailSentComponent } from './account/new-pass-email-sent/new-pass-email-sent.component';
 import { NewPassSuccessComponent } from './account/new-pass-success/new-pass-success.component';
 import { NewPassRequestComponent } from './account/new-pass-request/new-pass-request.component';
-import { NewQuestionComponent } from './pages/new-question/new-question.component';
+import { NewQuestionComponent } from './pages/new-topic/new-topic.component';
 import { TopicComponent } from './pages/topic/topic.components';
 import { MyQuestionsComponent } from './pages/my-questions/my-questions.component';
 import { ProtectedGuard } from 'ngx-auth';
@@ -22,8 +22,8 @@ const routes: Routes = [
   { path: 'account/new-pass/:token', component: NewPassComponent },
   { path: 'account/new-pass-email-sent', component: NewPassEmailSentComponent },
   { path: 'account/new-pass-success/:userEmail', component: NewPassSuccessComponent },
-  { path: 'user/:userId/new-question/:questionId', component: NewQuestionComponent },
-  { path:'question/:questionId',component:TopicComponent},
+  { path: 'users/:userId/new-topic/:topicId', component: NewQuestionComponent },
+  { path:'topics/:topicId',component:TopicComponent},
   { path:'my-questions',component:MyQuestionsComponent},
 ];
 

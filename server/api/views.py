@@ -1,5 +1,5 @@
 from rest_framework import generics
-from .models import Comment, Topic
+from .models import Answer, Comment, Topic
 from .serializers import AnswerSerializer, CommentSerializer, TopicSerializer
 
 class MyQuestionList(generics.ListAPIView):
@@ -20,17 +20,17 @@ class TopicListCreate(generics.ListCreateAPIView):
 
 class TopicDetail(generics.RetrieveUpdateDestroyAPIView):
     lookup_field='id'    
-    queryset=Topic.objects.all()
     serializer_class=TopicSerializer
+    queryset=Topic.objects.all()
             
 class AnswerListCreate(generics.ListCreateAPIView):
     lookup_field='id'
     serializer_class=AnswerSerializer
-    queryset=Topic.objects.all()
+    queryset=Answer.objects.all()
 
 class CommentListCreate(generics.ListCreateAPIView):
     lookup_field='id'        
     serializer_class=CommentSerializer
     queryset=Comment.objects.all()
-
+    
 

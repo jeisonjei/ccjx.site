@@ -1,7 +1,6 @@
 <div ngClass="row justify-content-center">
     <div ngClass="col-lg-6">
-        <!-- <h1 ngClass="text-center">{{topic}}</h1> -->
-        <input id="topic" ngClass="text-center mb-2 topic-font" [value]="topic" (change)="handleTopicChange($event)" type='text' name='name'/>
+        <input id="topic" ngClass="text-center mb-2 topic-font" [value]="title" (change)="handleTopicChange($event)" type='text' name='name'/>
         <form (ngSubmit)="addQuestion(form.value)" #form="ngForm">
             <div ngClass="d-flex flex-column">
                 <mat-form-field appearance="outline">

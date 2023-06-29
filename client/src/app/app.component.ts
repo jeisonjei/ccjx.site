@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Question } from "./consts";
+import { Topic } from "./consts";
 import { Subject, takeUntil } from 'rxjs';
 import { AuthenticationService, LoginInfo } from './services/authentication/authentication.service';
 import { Router } from '@angular/router';

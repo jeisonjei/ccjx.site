@@ -50,19 +50,19 @@ class NewPasswordToken(models.Model):
         
 class Topic(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE,null=True) 
-    topic=models.TextField(blank=True)
+    title=models.TextField(blank=True)
     text=models.TextField(blank=True)
     type=models.CharField(default='question')
     
 class Answer(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
-    question=models.ForeignKey(Topic,related_name='answers',on_delete=models.CASCADE,null=True)
+    topic=models.ForeignKey(Topic,related_name='answers',on_delete=models.CASCADE,null=True)
     text=models.TextField(blank=True)
     type=models.CharField(default='answer')
 
 class Comment(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,null = True)
-    question=models.ForeignKey(Topic,related_name='comments',on_delete=models.CASCADE,null=True)
+    topic=models.ForeignKey(Topic,related_name='comments',on_delete=models.CASCADE,null=True)
     answer=models.ForeignKey(Answer,related_name='comments',on_delete=models.CASCADE,null=True)
     text=models.TextField(blank=True)
     type=models.CharField(default='comment')

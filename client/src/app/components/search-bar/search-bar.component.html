@@ -6,7 +6,7 @@
           <input #i [formControl]="q" placeholder="Поиск по вопросам" ngClass="w-100" type="text" matInput [matAutocomplete]="auto">
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="clearSelection($event)">
             <mat-option *ngFor="let q of filteredQuestions|async" (onSelectionChange)="navigate(q.id)">
-              {{q.topic}}
+              {{q.title}}
             </mat-option>
           </mat-autocomplete>
         </div>

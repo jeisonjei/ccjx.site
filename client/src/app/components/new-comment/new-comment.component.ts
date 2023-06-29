@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Answer, Comment, Question, User } from 'src/app/consts';
+import { Answer, Comment, Topic, User } from 'src/app/consts';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { UrlsService } from 'src/app/services/urls.service';
@@ -30,7 +30,7 @@ export class NewCommentComponent implements OnInit{
     if (type=='question') {
       const comm:Comment = {
         user: this.auth.cu?.id ?? '',
-        question: relId,
+        topic: relId,
         text: form.value.text
       }
       this.coms.create(comm).subscribe(() => {

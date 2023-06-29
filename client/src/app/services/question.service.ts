@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Question } from '../consts';
+import { Topic } from '../consts';
 import { HttpClient } from '@angular/common/http';
 import { UrlsService } from './urls.service';
 import { ErrorHandlerService } from './error-handler.service';
@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class QuestionService {
 
   constructor(private http:HttpClient,private urls:UrlsService,private eh:ErrorHandlerService) { }
-  create(question: Question):Observable<any>{
+  create(question: Topic):Observable<any>{
     const url=this.urls.getUrlTopicCreate(question.user??'');
     return this.http.post(url, question);
   }

@@ -28,7 +28,7 @@ import { LoggedInHeaderComponent } from './components/logged-in-header/logged-in
 import { LoginDisplayComponent } from './components/login-display/login-display.component';
 import { LoggedOutHeaderComponent } from './components/logged-out-header/logged-out-header.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
-import { NewQuestionComponent } from './pages/new-question/new-question.component';
+import { NewQuestionComponent } from './pages/new-topic/new-topic.component';
 import { AuthenticationModule } from './services/authentication/authentication.module';
 import { TopicComponent } from './pages/topic/topic.components';
 import { MyQuestionsComponent } from './pages/my-questions/my-questions.component';

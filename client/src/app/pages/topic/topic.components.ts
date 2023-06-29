@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { AfterContentChecked, AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UrlsService } from '../../services/urls.service';
-import { Answer, Question } from '../../consts';
+import { Answer, Topic } from '../../consts';
 import { AnswerService } from 'src/app/services/answer.service';
 import { AnswerComponent } from 'src/app/components/answer/answer.component';
 import { NewAnswerComponent } from 'src/app/components/new-answer/new-answer.component';
@@ -14,7 +14,7 @@ import { CommentService } from 'src/app/services/comment.service';
   styleUrls: ['./topic.component.scss'],
 })
 export class TopicComponent implements OnInit {
-  question?: Question;
+  question?: Topic;
   comments?: [];
   answers?: [];
   newCommentDisplay: boolean = false;
@@ -43,8 +43,8 @@ export class TopicComponent implements OnInit {
   }
 
   getQuestion() {
-    const questionId = this.activatedRoute.snapshot.paramMap.get('questionId');
-    const url = this.urls.getUrlTopicDetail(questionId??'');
+    const topicId = this.activatedRoute.snapshot.paramMap.get('topicId');
+    const url = this.urls.getUrlTopicDetail(topicId??'');
     this.http.get(url).subscribe((v: any) => {
       this.question = v;
       this.answers = v.answers;

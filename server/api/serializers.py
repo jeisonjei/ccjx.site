@@ -31,7 +31,7 @@ class AnswerSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True,required=False)
     class Meta:
         model=Answer
-        fields=['id','user','question','text','type','comments']
+        fields=['id','user','topic','text','type','comments']
         depth=0
     def to_representation(self, instance):
         representation=super(AnswerSerializer,self).to_representation(instance)
@@ -43,7 +43,7 @@ class TopicSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True,required=False)
     class Meta:
         model=Topic
-        fields=['id','user','topic','text','type','answers','comments']   
+        fields=['id','user','title','text','type','answers','comments']   
         depth=0    
     def to_representation(self, instance):
         representation=super(TopicSerializer,self).to_representation(instance)
