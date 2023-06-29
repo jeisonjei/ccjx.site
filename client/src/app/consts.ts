@@ -13,7 +13,7 @@ export type User = {
 export type Question = /**модель Question */ {
   id?:string,
   type?:string
-  user:User, /**Передаётся первичный ключ */
+  user?:string, /**Передаётся первичный ключ */
   topic: string,
   text?:string,
 }

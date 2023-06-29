@@ -65,7 +65,7 @@ export class SearchBarComponent implements OnInit {
     if (!this.validator.text(value)) return;
     const userId = this.auth.cu?.id;
     const question: Question = {
-      user: {id:userId??''},
+      user: userId,
       topic: value
     };
     const self = this;

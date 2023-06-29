@@ -60,7 +60,7 @@ export class NewQuestionComponent implements OnInit {
       return;
     }
     const q: Question = {
-      user: {id:userId == undefined ? '' : userId},
+      user: userId,
       topic: topic == undefined ? '' : topic,
       text: text,
     };

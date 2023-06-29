@@ -44,4 +44,8 @@ class TopicSerializer(serializers.ModelSerializer):
     class Meta:
         model=Topic
         fields=['id','user','topic','text','type','answers','comments']   
-        depth=1    
+        depth=0    
+    def to_representation(self, instance):
+        representation=super(TopicSerializer,self).to_representation(instance)
+        representation['user']=UserSerializer(instance.user).data
+        return representation
