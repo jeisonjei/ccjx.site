@@ -1,0 +1,59 @@
+# текущая директория для этого файла otester, а текущая директория для контейнера - директория / в системе linux.
+# то есть внутри контейнера адрес директории uploads будет /app/uploads (app - это рабочая директорая, указанная в Dockerfile командой WORKDIR)
+networks:
+  net:
+   
+services:
+  client:
+    container_name: ccjxcomm_client
+    build: ./client
+    command: bash -c "ng serve --host 0.0.0.0"
+    depends_on:
+      - server
+    ports:
+      - 4200:4200
+    networks:
+      - net
+    volumes:
+      - ./client/node_modules:/node_modules
+   
+  server:
+    container_name: ccjxcomm_server
+    # местонахождение Dockerfile
+    build: ./server
+    env_file: ./server/.env
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:5000"
+    environment:
+      - DJANGO_SUPERUSER_PASSWORD=1234
+    ports:
+      - 5000:5000
+    networks:
+      - net
+    depends_on:
+      - db
+    volumes:
+      - ./server/uploads:/app/uploads
+  redis:
+      container_name: otester_redis
+      image: redis:7.0.7
+      networks:
+        - net 
+  db:
+      container_name: ccjxcomm_db
+      image: postgres:15
+      environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=1234
+        - POSTGRES_DB=osscore
+      networks:
+        - net
+      volumes:
+        - pg_data:/var/lib/postgresql/data
+
+
+volumes:
+  pg_data:
+    
+
+
+      

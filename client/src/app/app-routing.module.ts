@@ -18,13 +18,13 @@ const routes: Routes = [
   { path: 'account/register/confm', component: RegisterConfmComponent },
   { path: 'account/register/success/:token', component: RegisterSuccessComponent },
   { path: 'account/login', component: LoginComponent },
-  {path:'account/new-pass-request',component:NewPassRequestComponent},
+  { path:'account/new-pass-request',component:NewPassRequestComponent},
   { path: 'account/new-pass/:token', component: NewPassComponent },
   { path: 'account/new-pass-email-sent', component: NewPassEmailSentComponent },
   { path: 'account/new-pass-success/:userEmail', component: NewPassSuccessComponent },
   { path: 'user/:userId/new-question/:questionId', component: NewQuestionComponent },
-  {path:'question/:questionId',component:TopicComponent,canActivate:[ProtectedGuard]},
-  {path:'my-questions',component:MyQuestionsComponent},
+  { path:'question/:questionId',component:TopicComponent},
+  { path:'my-questions',component:MyQuestionsComponent},
 ];
 
 @NgModule({
