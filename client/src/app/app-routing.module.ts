@@ -11,6 +11,7 @@ import { NewPassRequestComponent } from './account/new-pass-request/new-pass-req
 import { NewQuestionComponent } from './pages/new-question/new-question.component';
 import { TopicComponent } from './pages/topic/topic.components';
 import { MyQuestionsComponent } from './pages/my-questions/my-questions.component';
+import { ProtectedGuard } from 'ngx-auth';
 
 const routes: Routes = [
   { path: 'account/register', component: RegisterComponent },
@@ -22,7 +23,7 @@ const routes: Routes = [
   { path: 'account/new-pass-email-sent', component: NewPassEmailSentComponent },
   { path: 'account/new-pass-success/:userEmail', component: NewPassSuccessComponent },
   { path: 'user/:userId/new-question/:questionId', component: NewQuestionComponent },
-  {path:'question/:questionId',component:TopicComponent},
+  {path:'question/:questionId',component:TopicComponent,canActivate:[ProtectedGuard]},
   {path:'my-questions',component:MyQuestionsComponent},
 ];
 

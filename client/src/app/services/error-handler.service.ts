@@ -9,7 +9,12 @@ export class ErrorHandlerService {
   pubmEvent: EventEmitter<string> = new EventEmitter<string>();
   constructor(private urls:UrlsService) { }
   handleError(error: ServerError) {
-    if (error.public) {
+    if (error.detail) {
+      const pubm = error.detail;
+      this.pubmEvent.emit(pubm);
+      console.error(error);
+    }
+    else if (error.public) {
       const pubm = error.public;
       const privm = error.private;
       this.pubmEvent.emit(pubm)

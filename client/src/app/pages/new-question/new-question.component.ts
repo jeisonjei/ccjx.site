@@ -12,7 +12,7 @@ import { QuestionService } from 'src/app/services/question.service';
   styleUrls: ['./new-question.component.scss'],
 })
 export class NewQuestionComponent implements OnInit {
-  topic?: string;
+  topic?: string='';
   questionId?: string;
   userId: any;
   constructor(
@@ -24,6 +24,11 @@ export class NewQuestionComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.getTopic();
+    this.selectTopic();
+  }
+  selectTopic() {
+    const topic = document.getElementById('topic') as HTMLInputElement;
+    topic?.focus();
   }
   getTopic() {
     const userId = this.activatedRoute.snapshot.paramMap.get('userId');
@@ -72,5 +77,10 @@ export class NewQuestionComponent implements OnInit {
   cancel() {
     this.quess.delete(this.questionId??'').subscribe();
     this.router.navigateByUrl('');
+  }
+  handleTopicChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const value = target.value;
+    this.topic = value;
   }
 }

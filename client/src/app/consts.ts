@@ -3,7 +3,8 @@
 
 export type ServerError = {
   public: string,
-  private:string
+  private: string,
+  detail?:string
 }
 export type User = {
   id: string,

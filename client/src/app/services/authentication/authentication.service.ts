@@ -108,7 +108,7 @@ export class AuthenticationService implements AuthService {
         this.saveAccessData(tokens);
         this.cu = this.getCuFromToken();
         this.loggedIn.emit(this.getCuFromToken());
-      })
+      }),
     );
   }
 
@@ -133,7 +133,6 @@ export class AuthenticationService implements AuthService {
     this.tokenStorage.clear();
     this.cu = this.getEmptyCu();
     this.loggedIn.emit(this.getEmptyCu());
-    this.router.navigateByUrl('');
   }
 
   private saveAccessData(tokens: any) {
