@@ -201,3 +201,5 @@ EMAIL_HOST_PASSWORD='thtxxyhiwxjrernm'
 
 PUBM='public'
 PRIVM='private'
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
