@@ -39,6 +39,7 @@ import { NewCommentComponent } from './components/new-comment/new-comment.compon
 import { CommentComponent } from './components/comment/comment.component';
 import { TopTopicsComponent } from './pages/top-topics/top-topics.component';
 import { NewsComponent } from './pages/news/news.component';
+import { PopularArticlesComponent } from './pages/popular-articles/popular-articles.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { NewsComponent } from './pages/news/news.component';
     CommentComponent,
     TopTopicsComponent,
     NewsComponent,
+    PopularArticlesComponent,
   ],
   imports: [
     BrowserModule,
