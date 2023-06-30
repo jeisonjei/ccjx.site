@@ -34,7 +34,7 @@ services:
     volumes:
       - ./server/uploads:/app/uploads
   redis:
-      container_name: otester_redis
+      container_name: ccjxcomm_redis
       image: redis:7.0.7
       networks:
         - net 
