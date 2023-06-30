@@ -32,7 +32,8 @@ export class RegisterComponent{
     let postObservable = this.http.post(url, f);
     this.waiting = true;
     postObservable.subscribe({
-      next:(data) => {
+      next: (data) => {
+        console.log(`=== data: ${JSON.stringify(data)}`);
         this.router.navigateByUrl('/account/register/confm');
         this.waiting = false;
       },

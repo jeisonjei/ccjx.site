@@ -12,6 +12,7 @@ from .service_functions import *
 
 @api_view(['POST'])
 def register(request):
+    print(f'=== {nameof(request)}:{request.data}')
     result=get_user_credentials(request,'register')
     if type(result)==Response:
         return result
