@@ -9,11 +9,13 @@ from .models import User
 from .models import EmailVerificationToken
 from .models import NewPasswordToken
 from .service_functions import *
+from nameof import nameof
 
 @api_view(['POST'])
 def register(request):
-    print(f'=== {nameof(request)}:{request.data}')
+    print('=== from register')
     result=get_user_credentials(request,'register')
+    print(f'=== result: {result}')
     if type(result)==Response:
         return result
     email=result['email']
