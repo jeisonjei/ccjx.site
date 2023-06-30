@@ -16,6 +16,10 @@ services:
       - net
     volumes:
       - ./client/node_modules:/node_modules
+    deploy:
+      resources:
+        limits:
+          memory: 512M
    
   server:
     container_name: ccjxcomm_server
