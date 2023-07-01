@@ -33,3 +33,7 @@ export type Comment = /**модель Comment */{
   text: string,
   
 }
+export interface MessDial {
+  title: string,
+  message:string
+}

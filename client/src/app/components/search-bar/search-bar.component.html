@@ -1,18 +1,20 @@
 <div ngClass="row justify-content-center mt-2">
   <div ngClass="col-lg-8">
-    <form subscriptSizing="dynamic" ngClass="d-flex align-items-center" (ngSubmit)="onQuestion(i.value)">
-        <mat-icon matIconPrefix>search</mat-icon>
-        <div ngClass="flex-grow-1">
-          <input #i [formControl]="q" placeholder="Поиск по вопросам" ngClass="w-100" type="text" matInput [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="clearSelection($event)">
-            <mat-option *ngFor="let q of filteredQuestions|async" (onSelectionChange)="navigate(q.id)">
-              {{q.title}}
-            </mat-option>
-          </mat-autocomplete>
-        </div>
+    <div ngClass="d-flex align-items-center justify-content-between">
+      <mat-icon matIconPrefix>search</mat-icon>
+      <form ngClass="flex-grow-1" subscriptSizing="dynamic" (ngSubmit)="onQuestion(i.value)">
+          <div >
+            <input #i [formControl]="q" placeholder="Поиск по вопросам" ngClass="w-100" type="text" matInput [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="clearSelection($event)">
+              <mat-option *ngFor="let q of filteredQuestions|async" (onSelectionChange)="navigate(q.id)">
+                {{q.title}}
+              </mat-option>
+            </mat-autocomplete>
+          </div>
+        </form>
         <button ngClass="ms-2" mat-flat-button color="primary" (click)="onQuestion('Тема вопроса')">
           Создать вопрос</button>
-      </form>
+    </div>
   </div>
 </div>
 

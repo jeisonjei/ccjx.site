@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Answer } from '../../consts';
 import { Comment } from '@angular/compiler';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-answer',
@@ -13,13 +15,18 @@ export class AnswerComponent implements OnInit{
   @Output()
   commentCreated: EventEmitter<boolean> = new EventEmitter;
   newCommentDisplay?: boolean;
-  comments:Comment[]=[];
+  comments: Comment[] = [];
+  constructor(private auth:AuthenticationService,private dials:DialogService) { }
   ngOnInit(): void {
     this.comments = this.answer.comments;
 
   }
   comment() {
-    this.newCommentDisplay = true;
+    if (!this.auth.cu?.isLoggedIn) {
+      this.dials.showMessDial('Информация','Чтобы добавить ответ или оставить комментарий, нужно зарегистрироваться')
+    } else {
+      this.newCommentDisplay = true;
+    }
   }
   refresh() {
     this.newCommentDisplay = false;

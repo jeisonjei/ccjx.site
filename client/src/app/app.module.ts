@@ -40,6 +40,8 @@ import { CommentComponent } from './components/comment/comment.component';
 import { TopTopicsComponent } from './pages/top-topics/top-topics.component';
 import { NewsComponent } from './pages/news/news.component';
 import { PopularArticlesComponent } from './pages/popular-articles/popular-articles.component';
+import { PleaseRegisterComponent } from './shared/dialogs/please-register/please-register.component';
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -69,6 +71,7 @@ import { PopularArticlesComponent } from './pages/popular-articles/popular-artic
     TopTopicsComponent,
     NewsComponent,
     PopularArticlesComponent,
+    PleaseRegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,7 +89,8 @@ import { PopularArticlesComponent } from './pages/popular-articles/popular-artic
     MatIconModule,
     MatMenuModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

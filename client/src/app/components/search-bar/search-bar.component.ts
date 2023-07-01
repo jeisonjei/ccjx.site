@@ -13,13 +13,17 @@ import {
   MatAutocompleteTrigger,
 } from '@angular/material/autocomplete';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
-import { Topic } from '../../consts';
+import { MessDial, Topic } from '../../consts';
 import { HttpClient } from '@angular/common/http';
 import { UrlsService } from '../../services/urls.service';
 import { FormControl, NgForm } from '@angular/forms';
 import { Observable, filter, from, map, of, startWith, timestamp } from 'rxjs';
 import { QuestionService } from '../../services/question.service';
 import { ValidatorService } from '../../services/validator.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { PleaseRegisterComponent } from 'src/app/shared/dialogs/please-register/please-register.component';
+import { DialogConfig } from '@angular/cdk/dialog';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -41,7 +45,9 @@ export class SearchBarComponent implements OnInit {
     private http: HttpClient,
     private urls: UrlsService,
     private questionService: QuestionService,
-    private validator:ValidatorService
+    private validator: ValidatorService,
+    private dialog: MatDialog,
+    private dials:DialogService
   ) {}
   ngOnInit(): void {
     this.getAllQuestions();
@@ -60,19 +66,24 @@ export class SearchBarComponent implements OnInit {
     );
   }
   onQuestion(value: string) {
-    if (!this.validator.text(value)) return;
-    const userId = this.auth.cu?.id;
-    const question: Topic = {
-      user: userId,
-      title: value
-    };
-    const self = this;
-    this.questionService.create(question).subscribe({
-      next(value: { user: { id: any; }; id: any; }) {
-        const url = `users/${value.user.id}/new-topic/${value.id}`;
-        self.router.navigateByUrl(url);
-      },
-    });
+    if (!this.auth.cu?.isLoggedIn) {
+      this.dials.showMessDial('Информация','Чтобы создавать вопросы, нужно зарегистрироваться');
+    }
+    else{
+      if (!this.validator.text(value)) return;
+      const userId = this.auth.cu?.id;
+      const question: Topic = {
+        user: userId,
+        title: value
+      };
+      const self = this;
+      this.questionService.create(question).subscribe({
+        next(value: { user: { id: any; }; id: any; }) {
+          const url = `users/${value.user.id}/new-topic/${value.id}`;
+          self.router.navigateByUrl(url);
+        },
+      });
+    }
   }
   getAllQuestions() {
     const self = this;

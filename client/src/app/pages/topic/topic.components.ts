@@ -7,6 +7,9 @@ import { AnswerService } from 'src/app/services/answer.service';
 import { AnswerComponent } from 'src/app/components/answer/answer.component';
 import { NewAnswerComponent } from 'src/app/components/new-answer/new-answer.component';
 import { CommentService } from 'src/app/services/comment.service';
+import { AuthService } from 'ngx-auth';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-topic',
@@ -26,7 +29,9 @@ export class TopicComponent implements OnInit {
     private http: HttpClient,
     private urls: UrlsService,
     private ans: AnswerService,
-    private comms:CommentService
+    private comms: CommentService,
+    private auth: AuthenticationService,
+    private dials:DialogService
   ) { }
 
   ngOnInit(): void {
@@ -52,9 +57,17 @@ export class TopicComponent implements OnInit {
     })
   }
   answer() {
-    this.newAnswerDisplay = true;
+    if (!this.auth.cu?.isLoggedIn) {
+      this.dials.showMessDial('Информация','Чтобы добавить ответ или оставить комментарий, нужно зарегистрироваться');
+    } else {
+      this.newAnswerDisplay = true;
+    }
   }
   comment() {
-    this.newCommentDisplay = true;
+    if (!this.auth.cu?.isLoggedIn) {
+      this.dials.showMessDial('Информация','Чтобы добавить ответ или оставить комментарий, нужно зарегистрироваться');
+    } else {
+      this.newCommentDisplay = true;
+    }
   }
 }
