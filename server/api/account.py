@@ -13,9 +13,7 @@ from nameof import nameof
 
 @api_view(['POST'])
 def register(request):
-    print('=== from register')
     result=get_user_credentials(request,'register')
-    print(f'=== result: {result}')
     if type(result)==Response:
         return result
     email=result['email']

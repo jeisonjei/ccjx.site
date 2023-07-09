@@ -54,6 +54,6 @@ def join_url(parts: list):
     return url
 
 def link_adaptto_client(link):
-    link=link.replace('5000','4200')
+    link=link.replace(':5000','')
     link=link.replace('/api','')
     return link
