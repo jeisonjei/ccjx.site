@@ -42,6 +42,7 @@ import { NewsComponent } from './pages/news/news.component';
 import { PopularArticlesComponent } from './pages/popular-articles/popular-articles.component';
 import { PleaseRegisterComponent } from './shared/dialogs/please-register/please-register.component';
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatMenuModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]
