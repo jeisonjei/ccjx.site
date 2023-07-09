@@ -39,7 +39,7 @@ export class NewQuestionComponent implements OnInit {
     const self = this;
     this.http.get(url).subscribe({
       next(value: any) {
-        self.title = value.topic != undefined ? value.topic : 'Новый вопрос';
+        self.title = value.title != undefined ? value.title : 'Новый вопрос';
       },
     });
   }
