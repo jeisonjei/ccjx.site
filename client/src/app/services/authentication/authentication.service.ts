@@ -22,10 +22,6 @@ import { AuthService } from 'ngx-auth';
 import jwtDecode from 'jwt-decode';
 import { UrlsService } from 'src/app/services/urls.service';
 
-interface AccessData {
-  accessToken: string;
-  refreshToken: string;
-}
 
 export interface LoginInfo {
   isLoggedIn: boolean;

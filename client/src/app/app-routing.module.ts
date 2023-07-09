@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'account/new-pass-success/:userEmail', component: NewPassSuccessComponent },
   { path: 'users/:userId/new-topic/:topicId', component: NewQuestionComponent,canActivate:[ProtectedGuard] },
   { path:'topics/:topicId',component:TopicComponent},
-  { path: 'my-questions', component: MyQuestionsComponent },
+  { path: 'my-questions', component: MyQuestionsComponent,canActivate:[ProtectedGuard] },
   {path:'',component:PopularArticlesComponent}
 ];
 
