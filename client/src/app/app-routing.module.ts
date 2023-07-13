@@ -11,7 +11,7 @@ import { NewPassRequestComponent } from './account/new-pass-request/new-pass-req
 import { NewQuestionComponent } from './pages/new-topic/new-topic.component';
 import { TopicComponent } from './pages/topic/topic.components';
 import { MyQuestionsComponent } from './pages/my-questions/my-questions.component';
-import { ProtectedGuard } from 'ngx-auth';
+import { protectedGuard } from 'ngx-auth';
 import { TopTopicsComponent } from './pages/top-topics/top-topics.component';
 import { NewsComponent } from './pages/news/news.component';
 import { PopularArticlesComponent } from './pages/popular-articles/popular-articles.component';
@@ -25,9 +25,9 @@ const routes: Routes = [
   { path: 'account/new-pass/:token', component: NewPassComponent },
   { path: 'account/new-pass-email-sent', component: NewPassEmailSentComponent },
   { path: 'account/new-pass-success/:userEmail', component: NewPassSuccessComponent },
-  { path: 'users/:userId/new-topic/:topicId', component: NewQuestionComponent,canActivate:[ProtectedGuard] },
+  { path: 'users/:userId/new-topic/:topicId', component: NewQuestionComponent,canActivate:[protectedGuard] },
   { path:'topics/:topicId',component:TopicComponent},
-  { path: 'my-questions', component: MyQuestionsComponent,canActivate:[ProtectedGuard] },
+  { path: 'my-questions', component: MyQuestionsComponent,canActivate:[protectedGuard] },
   {path:'',component:PopularArticlesComponent}
 ];
 

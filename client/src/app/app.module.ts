@@ -43,7 +43,6 @@ import { PopularArticlesComponent } from './pages/popular-articles/popular-artic
 import { PleaseRegisterComponent } from './shared/dialogs/please-register/please-register.component';
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { EditorModule } from "@tinymce/tinymce-angular";
 
 @NgModule({
   declarations: [
@@ -93,8 +92,7 @@ import { EditorModule } from "@tinymce/tinymce-angular";
     MatButtonModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    MatTooltipModule,
-    EditorModule
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]
