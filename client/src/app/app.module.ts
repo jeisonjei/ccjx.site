@@ -43,6 +43,7 @@ import { PopularArticlesComponent } from './pages/popular-articles/popular-artic
 import { PleaseRegisterComponent } from './shared/dialogs/please-register/please-register.component';
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { QuillModule } from "ngx-quill";
 
 @NgModule({
   declarations: [
@@ -92,7 +93,8 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     MatButtonModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    MatTooltipModule
+    MatTooltipModule,
+    QuillModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

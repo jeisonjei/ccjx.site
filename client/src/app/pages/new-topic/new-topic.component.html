@@ -1,11 +1,14 @@
 <div ngClass="row justify-content-center">
-    <div ngClass="col-lg-6">
-        <textarea id="topic" ngClass="text-center mb-2 topic-font" [value]="title" (change)="handleTopicChange($event)" type='text' name='name' rows="2" style="height: 7rem;"></textarea>
+    <div ngClass="col-lg-8">
+        <input id="topic" ngClass="text-center mb-2 topic-font" [value]="title" (change)="handleTopicChange($event)" type='text' name='name'/>
         <form (ngSubmit)="addQuestion(form.value)" #form="ngForm">
             <div ngClass="d-flex flex-column">
-                <mat-form-field appearance="outline">
+                <!-- <mat-form-field appearance="outline">
                     <textarea ngModel matInput placeholder="Содержимое вопроса..." name="text" id="" cols="85" rows="10" ></textarea>
-                </mat-form-field>
+                </mat-form-field> -->
+                <quill-editor [(ngModel)]="content" [modules]="modules" [styles]="{minHeight:'250px',width:'100%'}" placeholder="Пишите здесь..." (onEditorCreated)="addBindingCreated($event)" ></quill-editor>
+                <div [innerHTML]="savedContent"></div>
+          
                 <div ngClass="d-flex mt-4">
                     <button ngClass="me-1" mat-raised-button color="primary">Добавить вопрос</button>
                     <button ngClass="ms-1" mat-flat-button (click)="cancel()">Отмена</button>

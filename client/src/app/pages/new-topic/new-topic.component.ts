@@ -5,6 +5,8 @@ import { FormControl } from '@angular/forms';
 import { UrlsService } from '../../services/urls.service';
 import { Topic as Topic } from '../../consts';
 import { QuestionService } from 'src/app/services/question.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import Quill from 'quill';
 
 @Component({
   selector: 'app-new-topic',
@@ -14,14 +16,45 @@ import { QuestionService } from 'src/app/services/question.service';
 export class NewQuestionComponent implements OnInit {
   title: string='';
   topicId: string='';
-  userId: string='';
+  userId: string = '';
+  modules = {};
+  content = '';
+  savedContent:SafeHtml='';
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
     private urls: UrlsService,
-    private quess:QuestionService
-  ) {}
+    private quess: QuestionService,
+    private sanitizer:DomSanitizer
+  ) {
+    this.modules = {
+      formula: true,
+      syntax: true,
+      toolbar: [
+        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+        ['blockquote', 'code-block'],
+    
+        [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+        [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+        [{ 'direction': 'rtl' }],                         // text direction
+    
+        [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    
+        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+        [{ 'font': [] }],
+        [{ 'align': [] }],
+    
+        ['clean'],                                         // remove formatting button
+    
+        ['link', 'image', 'video'],                         // link and image, video
+        ['formula']
+      ]
+    };
+  }
   ngOnInit(): void {
     this.getTopic();
     this.selectTitle();
@@ -71,5 +104,18 @@ export class NewQuestionComponent implements OnInit {
     const target = event.target as HTMLInputElement;
     const value = target.value;
     this.title = value;
+  }
+  
+
+  addBindingCreated(quill: Quill){}
+  log() {
+    console.log(this.content);
+  }
+  byPassHTML() {
+    return this.sanitizer.bypassSecurityTrustHtml(this.content);
+  }
+
+  save() {
+    this.savedContent = this.sanitizer.bypassSecurityTrustHtml(this.content);
   }
 }
