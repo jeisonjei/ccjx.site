@@ -6,7 +6,7 @@
                 <!-- <mat-form-field appearance="outline">
                     <textarea ngModel matInput placeholder="Содержимое вопроса..." name="text" id="" cols="85" rows="10" ></textarea>
                 </mat-form-field> -->
-                <quill-editor [(ngModel)]="content" [modules]="modules" [styles]="{minHeight:'250px',width:'100%'}" placeholder="Пишите здесь..." (onEditorCreated)="addBindingCreated($event)" ></quill-editor>
+                <quill-editor name="text" [(ngModel)]="content" [modules]="modules" [styles]="{minHeight:'250px',width:'100%'}" placeholder="Пишите здесь..." (onEditorCreated)="addBindingCreated($event)" ></quill-editor>
                 <div [innerHTML]="savedContent"></div>
           
                 <div ngClass="d-flex mt-4">

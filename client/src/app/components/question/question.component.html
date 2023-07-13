@@ -1,9 +1,15 @@
 <div>
     <h1 ngClass="text-center">{{question?.title}}</h1>
-    <p>{{question?.text}}</p>
+    <div [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(question?.text)"></div>
     <div ngClass="d-flex">
         <div ngClass="flex-grow-1"></div>
-        <div>{{question?.user?.email}}</div>
+        <div>
+            <div ngClass="d-flex justify-content-end">
+                <button mat-icon-button (click)="editTopic()" color="primary"><mat-icon>edit</mat-icon></button>
+                <button mat-icon-button (click)="deleteTopic()" color="warn"><mat-icon>delete</mat-icon></button>
+            </div>
+            <div>{{question?.user?.email}}</div>
+        </div>
     </div>
 </div>
 

@@ -78,7 +78,7 @@ export class NewQuestionComponent implements OnInit {
   }
   addQuestion(value: any) {
     const title = this.title;
-    const text = value.text;
+    const text = this.content;
     const topicId = this.activatedRoute.snapshot.paramMap.get('topicId');
     const userId = this.activatedRoute.snapshot.paramMap.get('userId');
     const t: Topic = {
@@ -92,7 +92,7 @@ export class NewQuestionComponent implements OnInit {
       next(value) {
         
       },
-    });
+    }); 
     const url = `topics/${topicId}`;
     this.router.navigateByUrl(url);
   }
@@ -108,14 +108,5 @@ export class NewQuestionComponent implements OnInit {
   
 
   addBindingCreated(quill: Quill){}
-  log() {
-    console.log(this.content);
-  }
-  byPassHTML() {
-    return this.sanitizer.bypassSecurityTrustHtml(this.content);
-  }
 
-  save() {
-    this.savedContent = this.sanitizer.bypassSecurityTrustHtml(this.content);
-  }
 }
