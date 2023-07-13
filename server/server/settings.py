@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME','ccjx.community'),
+        'NAME': os.environ.get('DB_NAME','ccjx.site'),
         'USER':os.environ.get('DB_USER','postgres'),
         'PASSWORD':os.environ.get('DB_PASSWORD','1234'),
         'HOST':os.environ.get('DB_HOST','localhost'),
@@ -191,13 +191,13 @@ SIMPLE_JWT = {
 }
 
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL='ccjx.community@yandex.ru'
+DEFAULT_FROM_EMAIL='ccjx.site@yandex.ru'
 EMAIL_HOST='smtp.yandex.ru'
 EMAIL_PORT=465
 EMAIL_USE_TLS=False
 EMAIL_USE_SSL=True
-EMAIL_HOST_USER='ccjx.community@yandex.ru'
-EMAIL_HOST_PASSWORD='thtxxyhiwxjrernm'
+EMAIL_HOST_USER='ccjx.site@yandex.ru'
+EMAIL_HOST_PASSWORD='fkbxmapwgudroknq'
 
 PUBM='public'
 PRIVM='private'

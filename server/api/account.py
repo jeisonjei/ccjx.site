@@ -29,11 +29,11 @@ def register(request):
         try:
             inactive_user=User.objects.create_user(email,password)
             inactive_user.is_active=False
-            subject="Регистрация в ccjx.community"
+            subject="Регистрация в ccjx.site"
             token=PasswordResetTokenGenerator().make_token(inactive_user)
             link=request.scheme+'://'+request.get_host()+'/'+'account/register/success/'+token
             link=link_adaptto_client(link)
-            body=f"Здравствуйте, вы зарегистрировались на веб-сайте ccjx.community. Для работы с веб-сайтом требуется подтвердить свой адрес электронной почты. Вы можете сделать это перейдя по ссылке {link}"
+            body=f"Здравствуйте, вы зарегистрировались на веб-сайте ccjx.site. Для работы с веб-сайтом требуется подтвердить свой адрес электронной почты. Вы можете сделать это перейдя по ссылке {link}"
             inactive_user.email_user(subject,body)
             verify_email_token=EmailVerificationToken()
             verify_email_token.user=inactive_user

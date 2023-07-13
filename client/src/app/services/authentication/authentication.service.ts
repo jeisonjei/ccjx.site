@@ -129,6 +129,7 @@ export class AuthenticationService implements AuthService {
     this.tokenStorage.clear();
     this.cu = this.getEmptyCu();
     this.loggedIn.emit(this.getEmptyCu());
+    this.router.navigateByUrl("/");
   }
 
   private saveAccessData(tokens: any) {

@@ -5,7 +5,7 @@ networks:
    
 services:
   client:
-    container_name: ccjxcomm_client
+    container_name: ccjxsite_client
     build: ./client
     command: bash -c "ng serve --host 0.0.0.0"
     depends_on:
@@ -18,7 +18,7 @@ services:
       - ./client/node_modules:/node_modules
    
   server:
-    container_name: ccjxcomm_server
+    container_name: ccjxsite_server
     # местонахождение Dockerfile
     build: ./server
     env_file: ./server/.env
@@ -34,12 +34,12 @@ services:
     volumes:
       - ./server/uploads:/app/uploads
   redis:
-      container_name: ccjxcomm_redis
+      container_name: ccjxsite_redis
       image: redis:7.0.7
       networks:
         - net 
   db:
-      container_name: ccjxcomm_db
+      container_name: ccjxsite_db
       image: postgres:15
       environment:
         - POSTGRES_USER=postgres
