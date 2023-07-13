@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from nameof import nameof
 import re
+import os
 
 def get_user_credentials(request,operation_type):
     obj=request.data
@@ -54,6 +55,9 @@ def join_url(parts: list):
     return url
 
 def link_adaptto_client(link):
-    link=link.replace(':5000','')
+    if 'posix' in os.name:
+        link=link.replace(':5000','')
+    elif 'nt' in os.name:
+        link=link.replace('5000','4200')
     link=link.replace('/api','')
     return link
