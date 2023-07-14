@@ -44,7 +44,6 @@ import { PleaseRegisterComponent } from './shared/dialogs/please-register/please
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { QuillModule } from "ngx-quill";
-import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RefreshTokenErrorInterceptor } from '_helpers/refresh.token.error.interceptor';
 import { EditTopicComponent } from './pages/edit-topic/edit-topic.component';
 
@@ -101,7 +100,6 @@ import { EditTopicComponent } from './pages/edit-topic/edit-topic.component';
     QuillModule.forRoot()
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: RefreshTokenErrorInterceptor, multi:true}
   ],
   bootstrap: [AppComponent]
 })
