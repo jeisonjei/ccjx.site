@@ -6,7 +6,10 @@ import { UrlsService } from '../../services/urls.service';
 import { Topic as Topic } from '../../consts';
 import { TopicService } from 'src/app/services/question.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import Quill from 'quill';
+import * as QuillNamespace from 'quill';
+let Quill: any = QuillNamespace;
+import ImageResize from 'quill-image-resize-module';
+Quill.register('modules/imageResize', ImageResize);
 
 @Component({
   selector: 'app-new-topic',
@@ -31,6 +34,7 @@ export class NewQuestionComponent implements OnInit {
     this.modules = {
       formula: true,
       syntax: true,
+      imageResize:true,
       toolbar: [
         ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
         ['blockquote', 'code-block'],
@@ -107,6 +111,6 @@ export class NewQuestionComponent implements OnInit {
   }
   
 
-  addBindingCreated(quill: Quill){}
+  addBindingCreated(quill: any){}
 
 }

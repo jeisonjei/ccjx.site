@@ -3,8 +3,11 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TopicService } from '@app/services/question.service';
 import { UrlsService } from '@app/services/urls.service';
-import Quill from 'quill';
 import { Topic } from "@app/consts";
+import * as QuillNamespace from 'quill';
+let Quill: any = QuillNamespace;
+import ImageResize from 'quill-image-resize-module';
+Quill.register('modules/imageResize', ImageResize);
 
 @Component({
   selector: 'app-edit-topic',
@@ -35,6 +38,7 @@ export class EditTopicComponent implements OnInit {
     this.modules = {
       formula: true,
       syntax: true,
+      imageResize:true,
       toolbar: [
         ['bold', 'italic', 'underline', 'strike'], // toggled buttons
         ['blockquote', 'code-block'],
@@ -80,5 +84,5 @@ export class EditTopicComponent implements OnInit {
     const value = target.value;
     this.title = value;
   }
-  addBindingCreated(quill: Quill) {}
+  addBindingCreated(quill: any) {}
 }

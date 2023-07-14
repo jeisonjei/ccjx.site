@@ -1,10 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import Quill from 'quill';
 import { Answer } from 'src/app/consts';
 import { AnswerService } from 'src/app/services/answer.service';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import * as QuillNamespace from 'quill';
+let Quill: any = QuillNamespace;
+import ImageResize from 'quill-image-resize-module';
+Quill.register('modules/imageResize', ImageResize);
 
 @Component({
   selector: 'app-new-answer',
@@ -22,6 +25,7 @@ export class NewAnswerComponent {
     this.modules = {
       formula: true,
       syntax: true,
+      imageResize:true,
       toolbar: [
         ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
         ['blockquote', 'code-block'],
@@ -63,5 +67,5 @@ export class NewAnswerComponent {
   hideForm() {
     this.display.emit(false);
   }
-  addBindingCreated(quill: Quill){}
+  addBindingCreated(quill: any){}
 }
