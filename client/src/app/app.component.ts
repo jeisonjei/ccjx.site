@@ -16,12 +16,11 @@ export class AppComponent{
   title = 'client';
   pubm?: string;
   constructor(private http: HttpClient,public auth:AuthenticationService,private router:Router,private eh:ErrorHandlerService) {
-    
+    this.auth.loggedIn.subscribe((v) => {
+      if (!v.isLoggedIn) {
+        this.auth.logout();
+      }
+    })
   }
 
-  
-  logout() {
-    this.auth.logout();
-    this.router.navigateByUrl('/');
-  }
 }
