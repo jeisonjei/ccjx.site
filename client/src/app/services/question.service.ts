@@ -15,6 +15,14 @@ export class QuestionService {
     const url=this.urls.getUrlTopicCreate(question.user??'');
     return this.http.post(url, question);
   }
+  retrieve(id: string) {
+    const url = this.urls.getUrlTopicDetail(id);
+    return this.http.get(url);
+  }
+  update(topic: Topic) {
+    const url = this.urls.getUrlTopicDetail(topic.id ?? 'error');
+    return this.http.patch(url,topic);
+  }
   delete(id: string) {
     const url = this.urls.getQuestionDeleteUrl(id);
     return this.http.delete(url);
