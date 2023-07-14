@@ -1,1 +1,33 @@
-<p>edit-topic works!</p>
+<div ngClass="row justify-content-center">
+    <div ngClass="col-lg-8">
+      <input
+        id="topic"
+        ngClass="text-center mb-2 topic-font"
+        [value]="title"
+        (change)="handleTopicChange($event)"
+        type="text"
+        name="name"
+      />
+      <form (ngSubmit)="edit(form)" #form="ngForm">
+        <div ngClass="d-flex flex-column">
+          <quill-editor
+            name="text"
+            [(ngModel)]="content"
+            [modules]="modules"
+            [styles]="{ minHeight: '250px', width: '100%' }"
+            placeholder="Пишите здесь..."
+            (onEditorCreated)="addBindingCreated($event)"
+          ></quill-editor>
+          <div ngClass="d-flex mt-4">
+            <button ngClass="me-1" mat-raised-button color="primary">
+              Редактировать вопрос
+            </button>
+            <button ngClass="ms-1" mat-flat-button (click)="cancel()">
+              Отмена
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
