@@ -8,12 +8,12 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class QuestionService {
+export class TopicService {
 
   constructor(private http:HttpClient,private urls:UrlsService,private eh:ErrorHandlerService) { }
-  create(question: Topic):Observable<any>{
-    const url=this.urls.getUrlTopicCreate(question.user??'');
-    return this.http.post(url, question);
+  create(topic: Topic):Observable<any>{
+    const url=this.urls.getUrlTopicCreate(topic.user??'');
+    return this.http.post(url, topic);
   }
   retrieve(id: string) {
     const url = this.urls.getUrlTopicDetail(id);

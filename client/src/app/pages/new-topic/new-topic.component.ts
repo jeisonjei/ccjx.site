@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { UrlsService } from '../../services/urls.service';
 import { Topic as Topic } from '../../consts';
-import { QuestionService } from 'src/app/services/question.service';
+import { TopicService } from 'src/app/services/question.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import Quill from 'quill';
 
@@ -25,7 +25,7 @@ export class NewQuestionComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private urls: UrlsService,
-    private quess: QuestionService,
+    private quess: TopicService,
     private sanitizer:DomSanitizer
   ) {
     this.modules = {
