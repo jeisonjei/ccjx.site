@@ -44,6 +44,8 @@ import { PleaseRegisterComponent } from './shared/dialogs/please-register/please
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { QuillModule } from "ngx-quill";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { RefreshTokenErrorInterceptor } from '_helpers/refresh.token.error.interceptor';
 
 @NgModule({
   declarations: [
@@ -96,7 +98,9 @@ import { QuillModule } from "ngx-quill";
     MatTooltipModule,
     QuillModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: RefreshTokenErrorInterceptor, multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
