@@ -46,6 +46,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { QuillModule } from "ngx-quill";
 import { RefreshTokenErrorInterceptor } from '_helpers/refresh.token.error.interceptor';
 import { EditTopicComponent } from './pages/edit-topic/edit-topic.component';
+import { EditAnswerComponent } from './components/edit-answer/edit-answer.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { EditTopicComponent } from './pages/edit-topic/edit-topic.component';
     PopularArticlesComponent,
     PleaseRegisterComponent,
     EditTopicComponent,
+    EditAnswerComponent,
   ],
   imports: [
     BrowserModule,

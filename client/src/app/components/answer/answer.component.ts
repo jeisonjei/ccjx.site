@@ -11,6 +11,12 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./answer.component.scss'],
 })
 export class AnswerComponent implements OnInit {
+deleteAnswer() {
+throw new Error('Method not implemented.');
+}
+updateAnswer() {
+throw new Error('Method not implemented.');
+}
   @Input()
   answer?: any;
   @Output()
