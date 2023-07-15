@@ -6,8 +6,10 @@ import {
 import { EventEmitter, Injectable, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
+  BehaviorSubject,
   MonoTypeOperatorFunction,
   Observable,
+  Subject,
   catchError,
   map,
   of,
@@ -33,8 +35,7 @@ export interface LoginInfo {
   providedIn: 'root',
 })
 export class AuthenticationService implements AuthService {
-  @Output() loggedIn: EventEmitter<LoginInfo> = new EventEmitter();
-  public cu: LoginInfo | undefined;
+  loggedIn: BehaviorSubject<LoginInfo | null> = new BehaviorSubject<LoginInfo | null>(null);
   constructor(
     private http: HttpClient,
     private tokenStorage: TokenStorageService,
@@ -43,13 +44,23 @@ export class AuthenticationService implements AuthService {
   ) {
     this.isAuthorized().subscribe((x) => {
       if (x) {
-        this.cu = this.getCuFromToken();
+        this.loggedIn.next(this.getCuFromToken());
       } else {
-        this.cu = this.getEmptyCu();
+        this.loggedIn.next(null);
       }
     });
   }
+  public get userValue() {
+    return this.loggedIn.value;
+  }
+  public refreshShouldHappen(response: HttpErrorResponse, request?: HttpRequest<any> | undefined): boolean {
+    return response.status === 401;
+  }
+
   public isAuthorized(): Observable<boolean> {
+    /**
+     * Этот метод всего лишь проверяет, есть ли сохранённые токены или нет. Он не проверяет верность токенов
+     */
     return this.tokenStorage.getAccessToken().pipe(map((token) => !!token));
   }
 
@@ -80,30 +91,26 @@ export class AuthenticationService implements AuthService {
       ),
       tap((tokens) => {
         this.saveAccessData(tokens);
-        this.cu = this.getCuFromToken();
+        this.loggedIn.next(this.getCuFromToken());
       }),
       catchError((err) => {
         this.logout();
 
-        return throwError(err);
+        return throwError(()=>err);
       })
     );
   }
 
-  public refreshShouldHappen(response: HttpErrorResponse): boolean {
-    return response.status === 401;
-  }
-
-  public verifyTokenRequest(url: string): boolean {
-    return url.endsWith('/refresh/');
+  
+  public verifyRefreshToken(req:HttpRequest<any>): boolean {
+    return req.url.endsWith('/refresh/');
   }
 
   public login(f: FormControl): Observable<any> {
     return this.http.post(this.urls.URL_TOKEN, f, { withCredentials: true }).pipe(
       tap((tokens) => {
         this.saveAccessData(tokens);
-        this.cu = this.getCuFromToken();
-        this.loggedIn.emit(this.getCuFromToken());
+        this.loggedIn.next(this.getCuFromToken());
       }),
     );
   }
@@ -121,14 +128,9 @@ export class AuthenticationService implements AuthService {
     }
     return { isLoggedIn: true, id: id, userEmail: email };
   }
-  private getEmptyCu() {
-    return { isLoggedIn: false, id: undefined, userEmail: undefined };
-  }
-
   public logout(): void {
     this.tokenStorage.clear();
-    this.cu = this.getEmptyCu();
-    this.loggedIn.emit(this.getEmptyCu());
+    this.loggedIn.next(null);
     this.router.navigateByUrl("/");
   }
 

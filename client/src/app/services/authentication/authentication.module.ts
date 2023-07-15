@@ -8,7 +8,7 @@ import { AuthenticationService } from './authentication.service';
   providers: [
     { provide: PROTECTED_FALLBACK_PAGE_URI, useValue: '/' },
     { provide: PUBLIC_FALLBACK_PAGE_URI, useValue: '/account/login' },
-    { provide: AUTH_SERVICE, useClass: AuthenticationService }
+    { provide: AUTH_SERVICE, useExisting: AuthenticationService }
   ]
 })
 export class AuthenticationModule {

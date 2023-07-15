@@ -29,7 +29,7 @@ export class NewCommentComponent implements OnInit{
     const relId = this.relatedItem?.id;
     if (type=='question') {
       const comm:Comment = {
-        user: this.auth.cu?.id ?? '',
+        user: this.auth.userValue?.id ?? '',
         topic: relId,
         text: form.value.text
       }
@@ -40,7 +40,7 @@ export class NewCommentComponent implements OnInit{
     }
     else if (type=='answer') {
       const comm: Comment = {
-        user: this.auth.cu?.id ?? '',
+        user: this.auth.userValue?.id ?? '',
         answer:relId,
         text:form.value.text
       }

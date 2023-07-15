@@ -66,12 +66,12 @@ export class SearchBarComponent implements OnInit {
     );
   }
   onQuestion(value: string) {
-    if (!this.auth.cu?.isLoggedIn) {
+    if (!this.auth.userValue?.isLoggedIn) {
       this.dials.showMessDial('Информация','Чтобы создавать вопросы, нужно зарегистрироваться');
     }
     else{
       if (!this.validator.text(value)) return;
-      const userId = this.auth.cu?.id;
+      const userId = this.auth.userValue?.id;
       const question: Topic = {
         user: userId,
         title: value

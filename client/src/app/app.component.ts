@@ -12,15 +12,16 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent{
+export class AppComponent implements OnInit{
   title = 'client';
   pubm?: string;
+  userValue?: LoginInfo|null;
   constructor(private http: HttpClient,public auth:AuthenticationService,private router:Router,private eh:ErrorHandlerService) {
-    this.auth.loggedIn.subscribe((v) => {
-      if (!v.isLoggedIn) {
-        this.auth.logout();
-      }
-    })
+  }
+  ngOnInit(): void {
+    this.auth.loggedIn.subscribe(v => {
+      this.userValue = v;
+    });
   }
 
 }

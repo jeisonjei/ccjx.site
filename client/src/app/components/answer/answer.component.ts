@@ -26,7 +26,7 @@ export class AnswerComponent implements OnInit {
     this.comments = this.answer.comments;
   }
   comment() {
-    if (!this.auth.cu?.isLoggedIn) {
+    if (!this.auth.userValue?.isLoggedIn) {
       this.dials.showMessDial(
         'Информация',
         'Чтобы добавить ответ или оставить комментарий, нужно зарегистрироваться'

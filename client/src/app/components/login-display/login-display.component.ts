@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication/authentication.service';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { AuthenticationService, LoginInfo } from '../../services/authentication/authentication.service';
 import { ErrorHandlerService } from '../../services/error-handler.service';
 import { HttpClient } from '@angular/common/http';
 
@@ -8,12 +8,18 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './login-display.component.html',
   styleUrls: ['./login-display.component.scss']
 })
-export class LoginDisplayComponent {
+export class LoginDisplayComponent implements OnInit{
   pubm?: string;
-  constructor(public auth: AuthenticationService, private eh: ErrorHandlerService, private http: HttpClient) {
+  userValue?: LoginInfo|null;
+  constructor(public auth: AuthenticationService, private eh: ErrorHandlerService, private http: HttpClient, private ngZone: NgZone) {
+  }
+  ngOnInit(): void {
     this.eh.pubmEvent.subscribe((v) => {
       this.pubm = v;
-    })
+    });
+    this.auth.loggedIn.subscribe(v => {
+      this.userValue = v;
+    })    
   }
   
 }

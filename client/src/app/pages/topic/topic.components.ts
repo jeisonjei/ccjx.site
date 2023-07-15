@@ -57,14 +57,14 @@ export class TopicComponent implements OnInit {
     })
   }
   answer() {
-    if (!this.auth.cu?.isLoggedIn) {
+    if (!this.auth.userValue?.isLoggedIn) {
       this.dials.showMessDial('Информация','Чтобы добавить ответ или оставить комментарий, нужно зарегистрироваться');
     } else {
       this.newAnswerDisplay = true;
     }
   }
   comment() {
-    if (!this.auth.cu?.isLoggedIn) {
+    if (!this.auth.userValue?.isLoggedIn) {
       this.dials.showMessDial('Информация','Чтобы добавить ответ или оставить комментарий, нужно зарегистрироваться');
     } else {
       this.newCommentDisplay = true;

@@ -52,7 +52,7 @@ export class NewAnswerComponent {
    }
   addAnswer(form: NgForm) {
     const topicId = this.arouter.snapshot.paramMap.get('topicId');
-    const userId = this.auth.cu?.id??'';
+    const userId = this.auth.userValue?.id??'';
     const text = this.content;
     const answer :Answer= {
       topic: topicId??'',

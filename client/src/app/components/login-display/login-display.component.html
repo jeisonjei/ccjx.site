@@ -1,5 +1,5 @@
-<span *ngIf="this.auth.cu?.isLoggedIn; else isLoggedOut">
-    <button mat-button [matMenuTriggerFor]="menu">{{this.auth.cu?.userEmail}}</button>
+<span *ngIf="userValue?.isLoggedIn; else isLoggedOut">
+    <button mat-button [matMenuTriggerFor]="menu">{{userValue?.userEmail}}</button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item>Профиль</button>
       <button mat-menu-item routerLink="my-questions">Мои вопросы</button>
