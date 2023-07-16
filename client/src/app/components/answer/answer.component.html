@@ -2,7 +2,7 @@
 <div ngClass="d-flex">
     <div ngClass="flex-grow-1"></div>
     <div>
-        <div ngClass="d-flex justify-content-end">
+        <div ngClass="d-flex justify-content-end" *ngIf="answer.user.id==this.auth.userValue?.id">
             <button mat-icon-button (click)="onEdit.emit(answer)" color="primary"><mat-icon>edit</mat-icon></button>
             <button mat-icon-button (click)="onDelete.emit(answer)" color="warn"><mat-icon>delete</mat-icon></button>
         </div>

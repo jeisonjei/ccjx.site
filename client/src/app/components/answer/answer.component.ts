@@ -23,7 +23,7 @@ export class AnswerComponent implements OnInit {
   newCommentDisplay?: boolean;
   comments: Comment[] = [];
   constructor(
-    private auth: AuthenticationService,
+    public auth: AuthenticationService,
     private dials: DialogService,
     public sanitizer: DomSanitizer
   ) {}
