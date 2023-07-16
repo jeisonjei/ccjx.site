@@ -5,11 +5,6 @@ import { FormControl } from '@angular/forms';
 import { UrlsService } from '../../services/urls.service';
 import { Topic as Topic } from '../../consts';
 import { TopicService } from 'src/app/services/question.service';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import * as QuillNamespace from 'quill';
-let Quill: any = QuillNamespace;
-import ImageResize from 'quill-image-resize-module';
-Quill.register('modules/imageResize', ImageResize);
 
 @Component({
   selector: 'app-new-topic',
@@ -20,44 +15,13 @@ export class NewQuestionComponent implements OnInit {
   title: string='';
   topicId: string='';
   userId: string = '';
-  modules = {};
-  content = '';
-  savedContent:SafeHtml='';
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
     private urls: UrlsService,
-    private quess: TopicService,
-    private sanitizer:DomSanitizer
-  ) {
-    this.modules = {
-      formula: true,
-      syntax: true,
-      imageResize:true,
-      toolbar: [
-        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-        ['blockquote', 'code-block'],
+    private quess: TopicService  ) {
     
-        [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-        [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-        [{ 'direction': 'rtl' }],                         // text direction
-    
-        [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-    
-        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-        [{ 'font': [] }],
-        [{ 'align': [] }],
-    
-        ['clean'],                                         // remove formatting button
-    
-        ['link', 'image', 'video'],                         // link and image, video
-        ['formula']
-      ]
-    };
   }
   ngOnInit(): void {
     this.getTopic();
@@ -80,9 +44,9 @@ export class NewQuestionComponent implements OnInit {
       },
     });
   }
-  addQuestion(value: any) {
+  addQuestion(content: string) {
     const title = this.title;
-    const text = this.content;
+    const text = content;
     const topicId = this.activatedRoute.snapshot.paramMap.get('topicId');
     const userId = this.activatedRoute.snapshot.paramMap.get('userId');
     const t: Topic = {
@@ -101,6 +65,7 @@ export class NewQuestionComponent implements OnInit {
     this.router.navigateByUrl(url);
   }
   cancel() {
+    console.log(`🔥 : ${this.cancel.name}`);
     this.quess.delete(this.topicId??'').subscribe();
     this.router.navigateByUrl('');
   }
@@ -111,6 +76,6 @@ export class NewQuestionComponent implements OnInit {
   }
   
 
-  addBindingCreated(quill: any){}
+ 
 
 }

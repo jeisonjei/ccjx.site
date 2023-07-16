@@ -13,4 +13,11 @@ export class AnswerService {
     const url = this.urls.URL_ANSWERS_CREATE;
     return this.http.post(url,answer);
   }
+  retrieve(id: string) {
+    
+  }
+  update(answer?: Answer) {
+    const url = this.urls.getUrlAnswerDetail(answer?.id ?? 'error');
+    return this.http.patch(url,answer);
+  }
 }

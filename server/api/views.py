@@ -28,6 +28,11 @@ class AnswerListCreate(generics.ListCreateAPIView):
     lookup_field='id'
     serializer_class=AnswerSerializer
     queryset=Answer.objects.all()
+    
+class AnswerDetail(generics.RetrieveUpdateDestroyAPIView):
+    lookup_field='id'
+    serializer_class=AnswerSerializer
+    queryset=Answer.objects.all()
 
 class CommentListCreate(generics.ListCreateAPIView):
     lookup_field='id'        

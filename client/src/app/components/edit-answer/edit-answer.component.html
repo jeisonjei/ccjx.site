@@ -1,1 +1,6 @@
-<p>edit-answer works!</p>
+<div ngClass="row justify-content-center my-2">
+    <div ngClass="col">
+        <app-common-editor-rich [content]="answer?.text??''" (onCancel)="hideForm()" (onSave)="updateAnswer($event)"></app-common-editor-rich>
+    </div>
+</div>
+

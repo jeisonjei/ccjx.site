@@ -3,8 +3,8 @@
     <div ngClass="flex-grow-1"></div>
     <div>
         <div ngClass="d-flex justify-content-end">
-            <button mat-icon-button (click)="updateAnswer()" color="primary"><mat-icon>edit</mat-icon></button>
-            <button mat-icon-button (click)="deleteAnswer()" color="warn"><mat-icon>delete</mat-icon></button>
+            <button mat-icon-button (click)="onEdit.emit(answer)" color="primary"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button (click)="del()" color="warn"><mat-icon>delete</mat-icon></button>
         </div>
         <div>{{answer?.user?.email}}</div>
     </div>

@@ -10,6 +10,7 @@ export type User = {
   id: string,
   email?:string
 }
+// входящий и исходящий типы отличаются, см. serializers.py
 export type Topic = /**модель Question */ {
   id?:string,
   type?:string
@@ -17,6 +18,7 @@ export type Topic = /**модель Question */ {
   title: string,
   text?:string,
 }
+// входящий и исходящий типы отличаются, см. serializers.py
 export type Answer = /**модель Answer */ {
   id?: string,
   type?:string

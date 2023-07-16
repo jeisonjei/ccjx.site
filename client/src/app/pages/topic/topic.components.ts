@@ -22,8 +22,10 @@ export class TopicComponent implements OnInit {
   answers?: [];
   newCommentDisplay: boolean = false;
   newAnswerDisplay: boolean = false;
+  answerEdit?: Answer;
   @ViewChild(NewAnswerComponent)
   newAnswerComponent?: NewAnswerComponent;
+  editAnswerDisplay: boolean=false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private http: HttpClient,
@@ -43,6 +45,9 @@ export class TopicComponent implements OnInit {
   refreshDisplayState(v: boolean) {
     this.newAnswerDisplay = v;
   }
+  refreshEditAnswerDisplayState(v: boolean) {
+    this.editAnswerDisplay = v;
+  }
   refreshNewCommentDisplayState(v: boolean) {
     this.newCommentDisplay = v;
   }
@@ -61,6 +66,15 @@ export class TopicComponent implements OnInit {
       this.dials.showMessDial('Информация','Чтобы добавить ответ или оставить комментарий, нужно зарегистрироваться');
     } else {
       this.newAnswerDisplay = true;
+    }
+  }
+  editAnswer(answer?: Answer) {
+    if (!this.auth.userValue?.isLoggedIn) {
+      this.dials.showMessDial('Информация','Чтобы добавить ответ или оставить комментарий, нужно зарегистрироваться');
+    }
+    else {
+      this.editAnswerDisplay = true;
+      this.answerEdit = answer;
     }
   }
   comment() {

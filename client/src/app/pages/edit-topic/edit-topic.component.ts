@@ -19,7 +19,6 @@ export class EditTopicComponent implements OnInit {
   userId = '';
   topicId = '';
   content = '';
-  modules = {};
   constructor(
     private activatedRoute: ActivatedRoute,
     private topicService: TopicService,
@@ -35,40 +34,14 @@ export class EditTopicComponent implements OnInit {
       this.title = v.title;
       this.content = v.text;
     });
-    this.modules = {
-      formula: true,
-      syntax: true,
-      imageResize:true,
-      toolbar: [
-        ['bold', 'italic', 'underline', 'strike'], // toggled buttons
-        ['blockquote', 'code-block'],
-
-        [{ header: 1 }, { header: 2 }], // custom button values
-        [{ list: 'ordered' }, { list: 'bullet' }],
-        [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
-        [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
-        [{ direction: 'rtl' }], // text direction
-
-        [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
-        [{ header: [1, 2, 3, 4, 5, 6, false] }],
-
-        [{ color: [] }, { background: [] }], // dropdown with defaults from theme
-        [{ font: [] }],
-        [{ align: [] }],
-
-        ['clean'], // remove formatting button
-
-        ['link', 'image', 'video'], // link and image, video
-        ['formula'],
-      ],
-    };
+    
   }
-  edit(form: NgForm) {
+  edit(content: string) {
     const topic: Topic = {
       id: this.topicId,
       user: this.userId,
       title: this.title,
-      text: this.content,
+      text: content,
     }
     this.topicService.update(topic).subscribe(() => {
       const url = `/topics/${this.topicId}`;
@@ -84,5 +57,4 @@ export class EditTopicComponent implements OnInit {
     const value = target.value;
     this.title = value;
   }
-  addBindingCreated(quill: any) {}
 }

@@ -8,26 +8,7 @@
         type="text"
         name="name"
       />
-      <form (ngSubmit)="edit(form)" #form="ngForm">
-        <div ngClass="d-flex flex-column">
-          <quill-editor
-            name="text"
-            [(ngModel)]="content"
-            [modules]="modules"
-            [styles]="{ minHeight: '250px', width: '100%' }"
-            placeholder="Пишите здесь..."
-            (onEditorCreated)="addBindingCreated($event)"
-          ></quill-editor>
-          <div ngClass="d-flex mt-4">
-            <button ngClass="me-1" mat-raised-button color="primary">
-              Редактировать вопрос
-            </button>
-            <button ngClass="ms-1" mat-flat-button (click)="cancel()">
-              Отмена
-            </button>
-          </div>
-        </div>
-      </form>
+      <app-common-editor-rich [content]="content" (onCancel)="cancel()" (onSave)="edit($event)"></app-common-editor-rich>
     </div>
   </div>
   

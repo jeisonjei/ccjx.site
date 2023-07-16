@@ -47,6 +47,8 @@ import { QuillModule } from "ngx-quill";
 import { RefreshTokenErrorInterceptor } from '_helpers/refresh.token.error.interceptor';
 import { EditTopicComponent } from './pages/edit-topic/edit-topic.component';
 import { EditAnswerComponent } from './components/edit-answer/edit-answer.component';
+import { CommonEditorRichComponent } from './shared/components/common-editor-rich/common-editor-rich.component';
+import { CommonEditorSimpleComponent } from './shared/components/common-editor-simple/common-editor-simple.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +81,8 @@ import { EditAnswerComponent } from './components/edit-answer/edit-answer.compon
     PleaseRegisterComponent,
     EditTopicComponent,
     EditAnswerComponent,
+    CommonEditorRichComponent,
+    CommonEditorSimpleComponent,
   ],
   imports: [
     BrowserModule,

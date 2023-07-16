@@ -11,16 +11,13 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./answer.component.scss'],
 })
 export class AnswerComponent implements OnInit {
-deleteAnswer() {
-throw new Error('Method not implemented.');
-}
-updateAnswer() {
-throw new Error('Method not implemented.');
-}
+
   @Input()
   answer?: any;
   @Output()
   commentCreated: EventEmitter<boolean> = new EventEmitter();
+  @Output()
+  onEdit: EventEmitter<any> = new EventEmitter();
   newCommentDisplay?: boolean;
   comments: Comment[] = [];
   constructor(
@@ -45,4 +42,10 @@ throw new Error('Method not implemented.');
     this.newCommentDisplay = false;
     this.commentCreated.emit();
   }
+  edit() {
+  throw new Error('Method not implemented.');
+  }
+  del() {
+    throw new Error('Method not implemented.');
+    }
 }

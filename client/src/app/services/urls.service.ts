@@ -34,4 +34,7 @@ export class UrlsService {
     const url = `${this.baseUrl}/topics/${topicId}`;
     return url;
   }
+  getUrlAnswerDetail(id: string) {
+    return `${this.baseUrl}/answers/${id}/`;
+  }
 }

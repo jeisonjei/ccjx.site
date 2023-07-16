@@ -1,20 +1,5 @@
 <div ngClass="row justify-content-center my-2">
     <div ngClass="col">
-        <form (ngSubmit)="addAnswer(form)" #form="ngForm">
-            <div ngClass="d-flex flex-column">
-                <quill-editor
-                        name="text"
-                        [(ngModel)]="content"
-                        [modules]="modules"
-                        [styles]="{ minHeight: '250px', width: '100%' }"
-                        placeholder="Пишите здесь..."
-                        (onEditorCreated)="addBindingCreated($event)"
-                      ></quill-editor>
-                <div ngClass="d-flex">
-                    <button ngClass="me-1" mat-raised-button color="primary">Добавить ответ</button>
-                    <button ngClass="ms-1" mat-flat-button (click)="hideForm()">Отмена</button>
-                </div>
-            </div>
-        </form>
+        <app-common-editor-rich [content]="answer?.text??''" (onCancel)="hideForm()" (onSave)="addAnswer($event)"></app-common-editor-rich>
     </div>
 </div>
