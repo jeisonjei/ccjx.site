@@ -3,8 +3,10 @@ from .account import register
 from .account import verify_email_with_token
 from .account import send_email_new_password
 from .account import new_password
-from .views import CommentListCreate, MyQuestionList, TopicDetail, TopicListCreate
+from .views import MyQuestionList
+from .views import TopicDetail, TopicListCreate
 from .views import AnswerListCreate, AnswerDetail
+from .views import CommentListCreate, CommentDetail
 # коллекции указываются во множественном числе
 urlpatterns = [
     path('account/register/',register),
@@ -19,4 +21,5 @@ urlpatterns = [
     path('answers/',AnswerListCreate.as_view()),
     path('answers/<int:id>/',AnswerDetail.as_view()),
     path('comments/',CommentListCreate.as_view()),
+    path('comments/<int:id>/', CommentDetail.as_view())
 ]

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { AfterContentChecked, AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UrlsService } from '../../services/urls.service';
-import { Answer, Topic } from '../../consts';
+import { Answer, Comment, Topic } from '../../consts';
 import { AnswerService } from 'src/app/services/answer.service';
 import { AnswerComponent } from 'src/app/components/answer/answer.component';
 import { NewAnswerComponent } from 'src/app/components/new-answer/new-answer.component';
@@ -27,6 +27,7 @@ export class TopicComponent implements OnInit {
   newAnswerComponent?: NewAnswerComponent;
   editAnswerDisplay: boolean=false;
   editCommentDisplay: boolean=false;
+  commentEdit: Comment | undefined;
   constructor(
     private activatedRoute: ActivatedRoute,
     private http: HttpClient,
@@ -83,9 +84,11 @@ export class TopicComponent implements OnInit {
   }
   deleteAnswer(answer?: Answer) {
     this.dials.showDelConfDial("Удаление ответа", "Вы действительно хотите удалить свой ответ?").subscribe(v => {
-      this.ans.delete(answer?.id).subscribe(v => {
-        this.getQuestion();
-      });
+      if (v) {
+        this.ans.delete(answer?.id).subscribe(v => {
+          this.getQuestion();
+        });  
+      }
     });
   }
   comment() {
@@ -94,5 +97,24 @@ export class TopicComponent implements OnInit {
     } else {
       this.newCommentDisplay = true;
     }
+  }
+  editComment(comment?: Comment) {
+    console.log(`🔥 comment: ${JSON.stringify(comment)}`);
+    if (!this.auth.userValue?.isLoggedIn) {
+      this.dials.showMessDial('Информация','Чтобы добавить ответ или оставить комментарий, нужно зарегистрироваться');
+    }
+    else {
+      this.editCommentDisplay = true;
+      this.commentEdit = comment;
+    }
+  }
+  deleteComment(comment?: Comment) {
+    this.dials.showDelConfDial("Удаление комментария", "Вы действительно хотите удалить свой комментарий?").subscribe(v => {
+      if (v) {
+        this.comms.delete(comment?.id).subscribe(v => {
+          this.getQuestion();
+        })
+      }
+    })
   }
 }

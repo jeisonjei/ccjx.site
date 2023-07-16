@@ -12,11 +12,11 @@
         <hr>
         <div ngClass="ms-4">
             <div *ngFor="let c of comments">
-                <app-comment [comment]="c" ></app-comment>
+                <app-comment [comment]="c" (onEdit)="editComment($event)" (onDelete)="deleteComment($event)"></app-comment>
             </div>
         </div>
         <app-new-comment *ngIf="newCommentDisplay" [relatedItem]="question" (created)="getQuestion()" (display)="refreshNewCommentDisplayState($event)"></app-new-comment>
-        <app-edit-comment *ngIf="editCommentDisplay" [relatedItem]="question" (updated)="getQuestion()" (display)="refreshEditCommentDisplayState($event)"></app-edit-comment>
+        <app-edit-comment *ngIf="editCommentDisplay" [comment]="commentEdit" [relatedItem]="question" (updated)="getQuestion()" (display)="refreshEditCommentDisplayState($event)"></app-edit-comment>
         <app-new-answer *ngIf="newAnswerDisplay" (display)="refreshDisplayState($event)" (created)="getQuestion()"></app-new-answer>
         <app-edit-answer *ngIf="editAnswerDisplay" [answer]="answerEdit" (display)="refreshEditAnswerDisplayState($event)" (updated)="getQuestion()"></app-edit-answer>
         <div *ngFor="let a of answers">

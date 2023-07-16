@@ -14,10 +14,11 @@
     <button mat-raised-button color="accent" (click)="comment()">Комментарий</button>
 </div>
 <hr>
-<app-new-comment *ngIf="newCommentDisplay" [relatedItem]="answer" (created)="refresh()"></app-new-comment>
 <div ngClass="ms-5">
     <div *ngFor="let c of comments">
-        <app-comment [comment]="c" ></app-comment>
+        <app-comment [comment]="c" (onEdit)="editComment($event)" (onDelete)="deleteComment($event)"></app-comment>
     </div>
 </div>
+<app-new-comment *ngIf="newCommentDisplay" [relatedItem]="answer" (created)="refresh()"></app-new-comment>
+<app-edit-comment *ngIf="editCommentDisplay" [comment]="commentEdit" [relatedItem]="answer" (updated)="refresh()" (display)="refreshEditCommentDisplayState($event)"></app-edit-comment>
 

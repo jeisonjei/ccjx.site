@@ -24,14 +24,14 @@ export class NewCommentComponent implements OnInit{
     
     
   }
-  addComment(form: NgForm) {
+  addComment(content:string) {
     const type = this.relatedItem?.type;
     const relId = this.relatedItem?.id;
     if (type=='question') {
       const comm:Comment = {
         user: this.auth.userValue?.id ?? '',
         topic: relId,
-        text: form.value.text
+        text: content
       }
       this.coms.create(comm).subscribe(() => {
         this.created.emit(true);
@@ -42,7 +42,7 @@ export class NewCommentComponent implements OnInit{
       const comm: Comment = {
         user: this.auth.userValue?.id ?? '',
         answer:relId,
-        text:form.value.text
+        text:content
       }
       this.coms.create(comm).subscribe(() => {
         this.created.emit(true);

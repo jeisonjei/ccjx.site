@@ -1,4 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
+import { AuthenticationService } from '@app/services/authentication/authentication.service';
+import { EventEmitter } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-comment',
@@ -8,6 +11,9 @@ import { Component, Input } from '@angular/core';
 export class CommentComponent {
   @Input()
   comment?: any;
-
-
+  constructor(public auth:AuthenticationService, public sanitizer: DomSanitizer) { }
+  @Output()
+  onEdit: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onDelete: EventEmitter<any> = new EventEmitter();
 }

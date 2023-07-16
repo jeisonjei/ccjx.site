@@ -1,17 +1,5 @@
 <div ngClass="row justify-content-center my-2">
     <div ngClass="col">
-        <form (ngSubmit)="addComment(form)" #form="ngForm">
-            <div ngClass="d-flex flex-column">
-                <mat-form-field appearance="outline">
-                    <textarea ngModel matInput placeholder="Содержимое комментария..." name="text" id="" cols="85" rows="10" ></textarea>
-                </mat-form-field>
-
-                <div ngClass="d-flex">
-                    <button ngClass="me-1" mat-raised-button color="primary">Добавить комментарий</button>
-                    <button ngClass="ms-1" mat-flat-button (click)="hideForm()">Отмена</button>
-                </div>
-
-            </div>
-        </form>
+        <app-common-editor-simple (onCancel)="hideForm()" (onSave)="addComment($event)"></app-common-editor-simple>
     </div>
 </div>

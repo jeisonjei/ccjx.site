@@ -37,4 +37,7 @@ export class UrlsService {
   getUrlAnswerDetail(id: string) {
     return `${this.baseUrl}/answers/${id}/`;
   }
+  getUrlCommentDetail(id: string) {
+    return `${this.baseUrl}/comments/${id}/`;
+  }
 }
