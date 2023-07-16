@@ -1,0 +1,12 @@
+<div ngClass="pb-4">
+    <div mat-dialog-title>
+        <h1>{{data.title}}</h1>
+    </div>
+    <div mat-dialog-content>
+        {{data.message}}
+    </div>
+    <div ngClass="ms-3" mat-dialog-actions>
+        <button mat-flat-button color="warn" [tabIndex]="-1" (click)="del()">Удалить</button>
+        <button mat-flat-button (click)="cancel()">Отмена</button>
+    </div>
+</div>

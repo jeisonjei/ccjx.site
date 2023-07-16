@@ -39,3 +39,7 @@ export interface MessDial {
   title: string,
   message:string
 }
+export interface DelConfDial{
+  title: string,
+  message:string
+}

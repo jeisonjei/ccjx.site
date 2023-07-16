@@ -77,6 +77,13 @@ export class TopicComponent implements OnInit {
       this.answerEdit = answer;
     }
   }
+  deleteAnswer(answer?: Answer) {
+    this.dials.showDelConfDial("Удаление ответа", "Вы действительно хотите удалить свой ответ?").subscribe(v => {
+      this.ans.delete(answer?.id).subscribe(v => {
+        this.getQuestion();
+      });
+    });
+  }
   comment() {
     if (!this.auth.userValue?.isLoggedIn) {
       this.dials.showMessDial('Информация','Чтобы добавить ответ или оставить комментарий, нужно зарегистрироваться');

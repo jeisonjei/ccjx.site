@@ -20,4 +20,8 @@ export class AnswerService {
     const url = this.urls.getUrlAnswerDetail(answer?.id ?? 'error');
     return this.http.patch(url,answer);
   }
+  delete(id?: string) {
+    const url = this.urls.getUrlAnswerDetail(id ?? 'error');
+    return this.http.delete(url);
+  }
 }

@@ -19,7 +19,7 @@
         <app-new-answer *ngIf="newAnswerDisplay" (display)="refreshDisplayState($event)" (created)="getQuestion()"></app-new-answer>
         <app-edit-answer *ngIf="editAnswerDisplay" [answer]="answerEdit" (display)="refreshEditAnswerDisplayState($event)" (updated)="getQuestion()"></app-edit-answer>
         <div *ngFor="let a of answers">
-            <app-answer [answer]="a" (commentCreated)="getQuestion()" (onEdit)="editAnswer($event)"></app-answer>
+            <app-answer [answer]="a" (commentCreated)="getQuestion()" (onEdit)="editAnswer($event)" (onDelete)="deleteAnswer($event)"></app-answer>
         </div>
     </div>
     <div class="col-lg-3">

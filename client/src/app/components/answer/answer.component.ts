@@ -18,6 +18,8 @@ export class AnswerComponent implements OnInit {
   commentCreated: EventEmitter<boolean> = new EventEmitter();
   @Output()
   onEdit: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onDelete: EventEmitter<Answer> = new EventEmitter();
   newCommentDisplay?: boolean;
   comments: Comment[] = [];
   constructor(
