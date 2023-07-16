@@ -67,6 +67,9 @@ export class AnswerComponent implements OnInit {
     this.newCommentDisplay = false;
     this.commentCreated.emit();
   }
+  refreshNewCommentDisplayState(v: boolean) {
+    this.newCommentDisplay = v;
+  }
   refreshEditCommentDisplayState(v: boolean) {
     this.editCommentDisplay = v;
   }

@@ -1,12 +1,13 @@
-<div id="comment-content" [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(comment?.text)"></div>
-<div ngClass="d-flex justify-content-end">
-    <div ngClass="flex-grow-1"></div>
-    <div>
-        <div ngClass="d-flex justify-content-end" *ngIf="comment.user.id==this.auth.userValue?.id">
-            <button mat-icon-button (click)="onEdit.emit(comment)" color="primary"><mat-icon>edit</mat-icon></button>
-            <button mat-icon-button (click)="onDelete.emit(comment)" color="warn"><mat-icon>delete</mat-icon></button>
+<div ngClass="comment">
+    <div [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(comment?.text)"></div>
+    <div ngClass="d-flex justify-content-end">
+        <div ngClass="flex-grow-1"></div>
+        <div>
+            <div ngClass="d-flex justify-content-end" *ngIf="comment.user.id==this.auth.userValue?.id">
+                <button mat-icon-button (click)="onEdit.emit(comment)" color="primary"><mat-icon>edit</mat-icon></button>
+                <button mat-icon-button (click)="onDelete.emit(comment)" color="warn"><mat-icon>delete</mat-icon></button>
+            </div>
+            <div>{{comment?.user?.email}}</div>
         </div>
-        <p>{{comment?.user?.email}}</p>
     </div>
 </div>
-<hr>

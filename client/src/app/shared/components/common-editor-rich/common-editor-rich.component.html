@@ -8,7 +8,7 @@
           placeholder="Пишите здесь..."
           (onEditorCreated)="addBindingCreated($event)"
         ></quill-editor>
-        <div ngClass="d-flex mt-4">
+        <div ngClass="d-flex mt-2">
           <button ngClass="me-1" mat-raised-button color="primary" (click)="onSave.emit(content)">
             Добавить
           </button>

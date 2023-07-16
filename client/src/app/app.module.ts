@@ -51,6 +51,7 @@ import { CommonEditorRichComponent } from './shared/components/common-editor-ric
 import { CommonEditorSimpleComponent } from './shared/components/common-editor-simple/common-editor-simple.component';
 import { DelConfComponent } from './shared/dialogs/del-conf/del-conf.component';
 import { EditCommentComponent } from './components/edit-comment/edit-comment.component';
+import { MatCardModule } from "@angular/material/card";
 
 @NgModule({
   declarations: [
@@ -107,7 +108,8 @@ import { EditCommentComponent } from './components/edit-comment/edit-comment.com
     MatProgressSpinnerModule,
     MatDialogModule,
     MatTooltipModule,
-    QuillModule.forRoot()
+    QuillModule.forRoot(),
+    MatCardModule
   ],
   providers: [
   ],

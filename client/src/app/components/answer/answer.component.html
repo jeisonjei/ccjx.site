@@ -1,24 +1,27 @@
-<div [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(answer?.text)"></div>
-<div ngClass="d-flex">
-    <div ngClass="flex-grow-1"></div>
-    <div>
-        <div ngClass="d-flex justify-content-end" *ngIf="answer.user.id==this.auth.userValue?.id">
-            <button mat-icon-button (click)="onEdit.emit(answer)" color="primary"><mat-icon>edit</mat-icon></button>
-            <button mat-icon-button (click)="onDelete.emit(answer)" color="warn"><mat-icon>delete</mat-icon></button>
+<mat-card ngClass="p-4 mb-3">
+    <div ngClass="answer">
+        <div [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(answer?.text)"></div>
+        <div ngClass="d-flex">
+            <div ngClass="flex-grow-1"></div>
+            <div>
+                <div ngClass="d-flex justify-content-end" *ngIf="answer.user.id==this.auth.userValue?.id">
+                    <button mat-icon-button (click)="onEdit.emit(answer)" color="primary"><mat-icon>edit</mat-icon></button>
+                    <button mat-icon-button (click)="onDelete.emit(answer)" color="warn"><mat-icon>delete</mat-icon></button>
+                </div>
+                <div>{{answer?.user?.email}}</div>
+            </div>
         </div>
-        <div>{{answer?.user?.email}}</div>
+    
+        <div ngClass="ms-5">
+            <div *ngFor="let c of comments">
+                <app-comment [comment]="c" (onEdit)="editComment($event)" (onDelete)="deleteComment($event)"></app-comment>
+            </div>
+        </div>
+        <div>
+            <button mat-button color="accent" (click)="comment()" matTooltip="Комментарий"><mat-icon>comment</mat-icon></button>
+        </div>
     </div>
-</div>
-
-<div>
-    <button mat-raised-button color="accent" (click)="comment()">Комментарий</button>
-</div>
-<hr>
-<div ngClass="ms-5">
-    <div *ngFor="let c of comments">
-        <app-comment [comment]="c" (onEdit)="editComment($event)" (onDelete)="deleteComment($event)"></app-comment>
-    </div>
-</div>
-<app-new-comment *ngIf="newCommentDisplay" [relatedItem]="answer" (created)="refresh()"></app-new-comment>
-<app-edit-comment *ngIf="editCommentDisplay" [comment]="commentEdit" [relatedItem]="answer" (updated)="refresh()" (display)="refreshEditCommentDisplayState($event)"></app-edit-comment>
+    <app-new-comment *ngIf="newCommentDisplay" [relatedItem]="answer" (created)="refresh()" (display)="refreshNewCommentDisplayState($event)"></app-new-comment>
+    <app-edit-comment *ngIf="editCommentDisplay" [comment]="commentEdit" [relatedItem]="answer" (updated)="refresh()" (display)="refreshEditCommentDisplayState($event)"></app-edit-comment>
+</mat-card>
 

@@ -1,28 +1,30 @@
-<div class="row justify-content-center">
-    <div class="col-lg-3"></div>
-    <div class="col-lg-6">
-        <app-question [question]="question"></app-question>
-        
-        <div class="mt-2">
-            <div class="d-flex flex-row w-50">
-                <button ngClass="me-1" mat-raised-button color="primary" (click)="answer()">Ответ</button>
-                <button ngClass="ms-1" mat-raised-button color="accent" (click)="comment()">Комментарий</button>
+<div ngClass="row justify-content-center">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+        <mat-card ngClass="p-4 mb-3">
+            <div ngClass="question">
+                <app-question [question]="question"></app-question>
+                <div ngClass="ms-5">
+                    <div *ngFor="let c of comments">
+                        <app-comment [comment]="c" (onEdit)="editComment($event)" (onDelete)="deleteComment($event)"></app-comment>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <div class="d-flex flex-row w-50">
+                        <button ngClass="me-1" mat-button color="primary" (click)="answer()" matTooltip="Ответ"><mat-icon>reply</mat-icon></button>
+                        <button ngClass="ms-1" mat-button color="accent" (click)="comment()" matTooltip="Комментарий"><mat-icon>comment</mat-icon></button>
+                    </div>
+                </div>
             </div>
-        </div>
-        <hr>
-        <div ngClass="ms-4">
-            <div *ngFor="let c of comments">
-                <app-comment [comment]="c" (onEdit)="editComment($event)" (onDelete)="deleteComment($event)"></app-comment>
-            </div>
-        </div>
-        <app-new-comment *ngIf="newCommentDisplay" [relatedItem]="question" (created)="getQuestion()" (display)="refreshNewCommentDisplayState($event)"></app-new-comment>
-        <app-edit-comment *ngIf="editCommentDisplay" [comment]="commentEdit" [relatedItem]="question" (updated)="getQuestion()" (display)="refreshEditCommentDisplayState($event)"></app-edit-comment>
-        <app-new-answer *ngIf="newAnswerDisplay" (display)="refreshDisplayState($event)" (created)="getQuestion()"></app-new-answer>
-        <app-edit-answer *ngIf="editAnswerDisplay" [answer]="answerEdit" (display)="refreshEditAnswerDisplayState($event)" (updated)="getQuestion()"></app-edit-answer>
+            <app-new-comment *ngIf="newCommentDisplay" [relatedItem]="question" (created)="getQuestion()" (display)="refreshNewCommentDisplayState($event)"></app-new-comment>
+            <app-edit-comment *ngIf="editCommentDisplay" [comment]="commentEdit" [relatedItem]="question" (updated)="getQuestion()" (display)="refreshEditCommentDisplayState($event)"></app-edit-comment>
+            <app-new-answer *ngIf="newAnswerDisplay" (display)="refreshDisplayState($event)" (created)="getQuestion()"></app-new-answer>
+            <app-edit-answer *ngIf="editAnswerDisplay" [answer]="answerEdit" (display)="refreshEditAnswerDisplayState($event)" (updated)="getQuestion()"></app-edit-answer>
+        </mat-card>
         <div *ngFor="let a of answers">
             <app-answer [answer]="a" (commentCreated)="getQuestion()" (onEdit)="editAnswer($event)" (onDelete)="deleteAnswer($event)"></app-answer>
         </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-2">
     </div>
 </div>
