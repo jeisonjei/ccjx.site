@@ -26,6 +26,7 @@ export class TopicComponent implements OnInit {
   @ViewChild(NewAnswerComponent)
   newAnswerComponent?: NewAnswerComponent;
   editAnswerDisplay: boolean=false;
+  editCommentDisplay: boolean=false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private http: HttpClient,
@@ -50,6 +51,9 @@ export class TopicComponent implements OnInit {
   }
   refreshNewCommentDisplayState(v: boolean) {
     this.newCommentDisplay = v;
+  }
+  refreshEditCommentDisplayState(v: boolean) {
+    this.editCommentDisplay = v;
   }
 
   getQuestion() {

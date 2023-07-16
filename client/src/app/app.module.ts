@@ -50,6 +50,7 @@ import { EditAnswerComponent } from './components/edit-answer/edit-answer.compon
 import { CommonEditorRichComponent } from './shared/components/common-editor-rich/common-editor-rich.component';
 import { CommonEditorSimpleComponent } from './shared/components/common-editor-simple/common-editor-simple.component';
 import { DelConfComponent } from './shared/dialogs/del-conf/del-conf.component';
+import { EditCommentComponent } from './components/edit-comment/edit-comment.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { DelConfComponent } from './shared/dialogs/del-conf/del-conf.component';
     CommonEditorRichComponent,
     CommonEditorSimpleComponent,
     DelConfComponent,
+    EditCommentComponent,
   ],
   imports: [
     BrowserModule,
