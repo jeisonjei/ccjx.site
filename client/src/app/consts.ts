@@ -16,7 +16,9 @@ export type Topic = /**модель Question */ {
   type?:string
   user?:string, /**Передаётся первичный ключ */
   title: string,
-  text?:string,
+  text?: string,
+  is_article?: boolean;
+  is_private?: boolean;
 }
 // входящий и исходящий типы отличаются, см. serializers.py
 export type Answer = /**модель Answer */ {

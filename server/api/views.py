@@ -16,7 +16,7 @@ class MyQuestionList(generics.ListAPIView):
 
 class TopicListCreate(generics.ListCreateAPIView):
     lookup_field='id'
-    queryset=Topic.objects.all()
+    queryset=Topic.objects.filter(is_private=False)
     serializer_class=TopicSerializer
 
 class TopicDetail(generics.RetrieveUpdateDestroyAPIView):

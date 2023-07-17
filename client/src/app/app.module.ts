@@ -54,6 +54,7 @@ import { EditCommentComponent } from './components/edit-comment/edit-comment.com
 import { MatCardModule } from "@angular/material/card";
 import { RandomTopicComponent } from './pages/random-topic/random-topic.component';
 import { MatProgressBar, MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -113,7 +114,8 @@ import { MatProgressBar, MatProgressBarModule } from "@angular/material/progress
     MatTooltipModule,
     QuillModule.forRoot(),
     MatCardModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatCheckboxModule
   ],
   providers: [
   ],

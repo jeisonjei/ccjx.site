@@ -15,6 +15,8 @@ export class NewQuestionComponent implements OnInit {
   title: string='';
   topicId: string='';
   userId: string = '';
+  isArticle: boolean = false;
+  isPrivate: boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -40,7 +42,7 @@ export class NewQuestionComponent implements OnInit {
     const self = this;
     this.http.get(url).subscribe({
       next(value: any) {
-        self.title = value.title != undefined ? value.title : 'Новый вопрос';
+        self.title = value.title != undefined ? value.title : 'Новая запись';
       },
     });
   }
@@ -53,9 +55,12 @@ export class NewQuestionComponent implements OnInit {
       user: userId??'Error',
       title: title,
       text: text,
+      is_article: this.isArticle,
+      is_private:this.isPrivate
     };
     const serverUrl = this.urls.getUrlTopicDetail(topicId??'Error');
     const self = this;
+    console.log(`🔥 topic: ${JSON.stringify(t)}`);
     this.http.patch(serverUrl, t).subscribe({
       next(value) {
         
@@ -74,7 +79,12 @@ export class NewQuestionComponent implements OnInit {
     const value = target.value;
     this.title = value;
   }
-  
+  onIsArticleChange(checked: boolean) {
+    this.isArticle = checked;
+  } 
+  onIsPrivateChange(checked: boolean) {
+    this.isPrivate = checked;
+  }
 
  
 

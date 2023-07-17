@@ -52,6 +52,8 @@ class Topic(models.Model):
     title=models.TextField(blank=True)
     text=models.TextField(blank=True)
     type=models.CharField(default='question')
+    is_article=models.BooleanField(default=False)
+    is_private = models.BooleanField(default=False)
     
 class Answer(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
