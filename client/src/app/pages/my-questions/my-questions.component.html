@@ -1,7 +1,10 @@
 <div ngClass="row justify-content-center">
-    <div ngClass="col-lg-6">
-        <div *ngFor="let q of myQuestions">
-            <a routerLink="/topics/{{q.id}}">{{q.title}}</a>
-        </div>
+    <div ngClass="col-lg-8">
+        <mat-card ngClass="p-4">
+            <h1 ngClass="text-center">Мои записи</h1>
+            <div *ngFor="let q of myQuestions">
+                <a routerLink="/topics/{{q.id}}">{{q.title}}</a>
+            </div>
+        </mat-card>
     </div>
 </div>
