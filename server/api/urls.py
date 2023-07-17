@@ -5,6 +5,7 @@ from .account import send_email_new_password
 from .account import new_password
 from .views import MyQuestionList
 from .views import TopicDetail, TopicListCreate
+from .views import TopicLastList
 from .views import AnswerListCreate, AnswerDetail
 from .views import CommentListCreate, CommentDetail
 # коллекции указываются во множественном числе
@@ -18,6 +19,7 @@ urlpatterns = [
     
     path('topics/',TopicListCreate.as_view()),
     path('topics/<int:id>/',TopicDetail.as_view()),
+    path('topics/last/<int:amount>/',TopicLastList.as_view()),
     path('answers/',AnswerListCreate.as_view()),
     path('answers/<int:id>/',AnswerDetail.as_view()),
     path('comments/',CommentListCreate.as_view()),

@@ -16,6 +16,10 @@ export class TopicService {
     return this.http.get(url);
 
   }
+  lastList(amount:number) {
+    const url = this.urls.getUrlTopicLast(amount);
+    return this.http.get(url);
+  }
   create(topic: Topic):Observable<any>{
     const url=this.urls.getUrlTopicCreate(topic.user??'');
     return this.http.post(url, topic);

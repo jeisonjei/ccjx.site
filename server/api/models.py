@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
@@ -54,6 +55,7 @@ class Topic(models.Model):
     type=models.CharField(default='question')
     is_article=models.BooleanField(default=False)
     is_private = models.BooleanField(default=False)
+    date_created = models.DateTimeField(auto_now_add=True,null=True)
     
 class Answer(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)

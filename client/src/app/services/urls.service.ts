@@ -30,6 +30,10 @@ export class UrlsService {
     const url = `${this.baseUrl}/topics/${topicId}/`;
     return url;
   }
+  getUrlTopicLast(amount: number) {
+    const url = `${this.baseUrl}/topics/last/${amount}/`;
+    return url;
+  }
   getQuestionDeleteUrl(topicId: string) {
     const url = `${this.baseUrl}/topics/${topicId}`;
     return url;

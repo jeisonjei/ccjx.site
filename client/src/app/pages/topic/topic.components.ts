@@ -32,6 +32,7 @@ export class TopicComponent implements OnInit {
   editAnswerDisplay: boolean = false;
   editCommentDisplay: boolean = false;
   commentEdit: Comment | undefined;
+  lastTopics:any[]=[];
   constructor(
     private activatedRoute: ActivatedRoute,
     private http: HttpClient,
@@ -49,6 +50,9 @@ export class TopicComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(() => {
       this.getQuestion();
     });
+    this.tops.lastList(10).subscribe((v:any) => {
+      this.lastTopics = v;
+    })
   }
 
   refreshDisplayState(v: boolean) {
@@ -163,4 +167,5 @@ export class TopicComponent implements OnInit {
       });
     }
   }
+
 }
