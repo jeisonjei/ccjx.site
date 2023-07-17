@@ -1,23 +1,25 @@
 <div class="row justify-content-center align-items-center">
-    <div class="col-lg-4 col-md-6 col-sm-8">
-        <h1 class="text-center">Вход</h1>
-        <hr>
-        <form (ngSubmit)="login(f.value)" #f="ngForm">
-            <div class="d-flex flex-column">
-                <mat-form-field appearance="fill">
-                    <mat-label>Электронная почта</mat-label>
-                    <input autocomplete="email" name="email" type="email" matInput ngModel>
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Пароль</mat-label>
-                    <input autocomplete="current-password" name="password" type="password" matInput ngModel>
-                </mat-form-field>
-                <p><a mat-flat-button routerLink="/account/new-pass-request">Забыли пароль?</a></p>
-                <app-waiting-button [waiting]="waiting" title="Вход"></app-waiting-button>
-                <div *ngIf="showWarning" class="alert alert-warning">
-                    {{pubm}}
+    <div class="col-lg-4 col-md-6 col-sm-8"><mat-card ngClass="p-4">
+        
+            <h1 class="text-center">Вход</h1>
+            <hr>
+            <form (ngSubmit)="login(f.value)" #f="ngForm">
+                <div class="d-flex flex-column">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Электронная почта</mat-label>
+                        <input autocomplete="email" name="email" type="email" matInput ngModel>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Пароль</mat-label>
+                        <input autocomplete="current-password" name="password" type="password" matInput ngModel>
+                    </mat-form-field>
+                    <p><a mat-flat-button routerLink="/account/new-pass-request">Забыли пароль?</a></p>
+                    <app-waiting-button [waiting]="waiting" title="Вход"></app-waiting-button>
+                    <div *ngIf="showWarning" class="alert alert-warning">
+                        {{pubm}}
+                    </div>
                 </div>
-            </div>
-        </form>
-    </div>
+            </form>
+        
+    </mat-card></div>
 </div>

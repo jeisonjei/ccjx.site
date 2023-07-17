@@ -1,13 +1,15 @@
 <div ngClass="row justify-content-center">
   <div ngClass="col-lg-8">
-    <input
-      id="topic"
-      ngClass="text-center mb-2 topic-font"
-      [value]="title"
-      (change)="handleTopicChange($event)"
-      type="text"
-      name="name"
-    />
-    <app-common-editor-rich (onCancel)="cancel()" (onSave)="addQuestion($event)"></app-common-editor-rich>
+      <mat-card ngClass="p-4">
+      <input
+        id="topic"
+        ngClass="text-center mb-2 topic-font"
+        [value]="title"
+        (change)="handleTopicChange($event)"
+        type="text"
+        name="name"
+      />
+      <app-common-editor-rich (onCancel)="cancel()" (onSave)="addQuestion($event)"></app-common-editor-rich>
+    </mat-card>
+    </div>
   </div>
-</div>
