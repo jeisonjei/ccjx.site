@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterContentChecked, AfterViewChecked, AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UrlsService } from '../../services/urls.service';
 import { Answer, Comment, Topic } from '../../consts';
 import { AnswerService } from 'src/app/services/answer.service';
@@ -11,6 +11,7 @@ import { AuthService } from 'ngx-auth';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { DialogService } from 'src/app/services/dialog.service';
 import { TopicService } from '@app/services/question.service';
+import { ValidatorService } from '@app/services/validator.service';
 
 @Component({
   selector: 'app-topic',
@@ -39,7 +40,9 @@ export class TopicComponent implements OnInit {
     private comms: CommentService,
     private auth: AuthenticationService,
     private dials: DialogService,
-    private tops: TopicService
+    private tops: TopicService,
+    private router: Router,
+    private validator: ValidatorService
   ) { }
 
   ngOnInit(): void {
@@ -139,5 +142,25 @@ export class TopicComponent implements OnInit {
         })
       }
     })
+  }
+  onQuestion(value: string) {
+    if (!this.auth.userValue?.isLoggedIn) {
+      this.dials.showMessDial('Информация','Чтобы создавать вопросы, нужно зарегистрироваться');
+    }
+    else{
+      if (!this.validator.text(value)) return;
+      const userId = this.auth.userValue?.id;
+      const question: Topic = {
+        user: userId,
+        title: value
+      };
+      const self = this;
+      this.tops.create(question).subscribe({
+        next(value: { user: { id: any; }; id: any; }) {
+          const url = `users/${value.user.id}/new-topic/${value.id}`;
+          self.router.navigateByUrl(url);
+        },
+      });
+    }
   }
 }

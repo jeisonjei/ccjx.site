@@ -2,7 +2,7 @@
   <div ngClass="col-lg-8">
     <div ngClass="d-flex align-items-center justify-content-between">
       <mat-icon matIconPrefix>search</mat-icon>
-      <form ngClass="flex-grow-1" subscriptSizing="dynamic" (ngSubmit)="onQuestion(i.value)">
+      <form ngClass="flex-grow-1" subscriptSizing="dynamic">
           <div >
             <input #i [formControl]="q" placeholder="Поиск по вопросам" ngClass="w-100" type="text" matInput [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="clearSelection($event)">
@@ -12,8 +12,7 @@
             </mat-autocomplete>
           </div>
         </form>
-        <button matTooltip="Создать новый вопрос" ngClass="ms-2" mat-flat-button color="primary" (click)="onQuestion('Тема вопроса')">
-          Вопрос</button>
+        
     </div>
   </div>
 </div>

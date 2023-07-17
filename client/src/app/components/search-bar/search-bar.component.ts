@@ -65,26 +65,7 @@ export class SearchBarComponent implements OnInit {
       q.title.toLowerCase().includes(filterValue)
     );
   }
-  onQuestion(value: string) {
-    if (!this.auth.userValue?.isLoggedIn) {
-      this.dials.showMessDial('Информация','Чтобы создавать вопросы, нужно зарегистрироваться');
-    }
-    else{
-      if (!this.validator.text(value)) return;
-      const userId = this.auth.userValue?.id;
-      const question: Topic = {
-        user: userId,
-        title: value
-      };
-      const self = this;
-      this.questionService.create(question).subscribe({
-        next(value: { user: { id: any; }; id: any; }) {
-          const url = `users/${value.user.id}/new-topic/${value.id}`;
-          self.router.navigateByUrl(url);
-        },
-      });
-    }
-  }
+  
   getAllQuestions() {
     const self = this;
     this.http.get(this.urls.URL_ALL_QUESTIONS).subscribe({
