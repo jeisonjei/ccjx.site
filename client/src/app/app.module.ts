@@ -52,6 +52,7 @@ import { CommonEditorSimpleComponent } from './shared/components/common-editor-s
 import { DelConfComponent } from './shared/dialogs/del-conf/del-conf.component';
 import { EditCommentComponent } from './components/edit-comment/edit-comment.component';
 import { MatCardModule } from "@angular/material/card";
+import { RandomTopicComponent } from './pages/random-topic/random-topic.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { MatCardModule } from "@angular/material/card";
     CommonEditorSimpleComponent,
     DelConfComponent,
     EditCommentComponent,
+    RandomTopicComponent,
   ],
   imports: [
     BrowserModule,

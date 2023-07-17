@@ -10,7 +10,12 @@ import { Observable } from 'rxjs';
 })
 export class TopicService {
 
-  constructor(private http:HttpClient,private urls:UrlsService,private eh:ErrorHandlerService) { }
+  constructor(private http: HttpClient, private urls: UrlsService, private eh: ErrorHandlerService) { }
+  list() {
+    const url = this.urls.getUrlTopicCreate('');
+    return this.http.get(url);
+
+  }
   create(topic: Topic):Observable<any>{
     const url=this.urls.getUrlTopicCreate(topic.user??'');
     return this.http.post(url, topic);

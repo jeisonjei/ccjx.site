@@ -16,6 +16,7 @@ import { TopTopicsComponent } from './pages/top-topics/top-topics.component';
 import { NewsComponent } from './pages/news/news.component';
 import { PopularArticlesComponent } from './pages/popular-articles/popular-articles.component';
 import { EditTopicComponent } from './pages/edit-topic/edit-topic.component';
+import { RandomTopicComponent } from './pages/random-topic/random-topic.component';
 
 const routes: Routes = [
   { path: 'account/register', component: RegisterComponent },
@@ -30,7 +31,7 @@ const routes: Routes = [
   { path: 'users/:userId/edit-topic/:topicId', component: EditTopicComponent, canActivate: [protectedGuard]},
   { path:'topics/:topicId',component:TopicComponent},
   { path: 'my-questions', component: MyQuestionsComponent,canActivate:[protectedGuard] },
-  {path:'',component:PopularArticlesComponent}
+  {path:'',component:RandomTopicComponent}
 ];
 
 @NgModule({
