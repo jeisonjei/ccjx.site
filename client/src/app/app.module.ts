@@ -53,6 +53,7 @@ import { DelConfComponent } from './shared/dialogs/del-conf/del-conf.component';
 import { EditCommentComponent } from './components/edit-comment/edit-comment.component';
 import { MatCardModule } from "@angular/material/card";
 import { RandomTopicComponent } from './pages/random-topic/random-topic.component';
+import { MatProgressBar, MatProgressBarModule } from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [
@@ -111,7 +112,8 @@ import { RandomTopicComponent } from './pages/random-topic/random-topic.componen
     MatDialogModule,
     MatTooltipModule,
     QuillModule.forRoot(),
-    MatCardModule
+    MatCardModule,
+    MatProgressBarModule
   ],
   providers: [
   ],

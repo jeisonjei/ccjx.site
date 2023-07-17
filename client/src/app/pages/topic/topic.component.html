@@ -3,18 +3,23 @@
     <div class="col-lg-8">
         <mat-card ngClass="p-4 mb-3">
             <div ngClass="question">
-                <app-question [question]="question"></app-question>
-                <div ngClass="ms-5">
-                    <div *ngFor="let c of comments">
-                        <app-comment [comment]="c" (onEdit)="editComment($event)" (onDelete)="deleteComment($event)"></app-comment>
-                    </div>
+                <div *ngIf="!question;else ready">
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
                 </div>
-                <div class="mt-2">
-                    <div class="d-flex flex-row w-50">
-                        <button ngClass="me-1" mat-button color="primary" (click)="answer()" matTooltip="Ответ"><mat-icon>reply</mat-icon></button>
-                        <button ngClass="ms-1" mat-button color="accent" (click)="comment()" matTooltip="Комментарий"><mat-icon>comment</mat-icon></button>
+                <ng-template #ready>
+                    <app-question [question]="question"></app-question>
+                    <div ngClass="ms-5">
+                        <div *ngFor="let c of comments">
+                            <app-comment [comment]="c" (onEdit)="editComment($event)" (onDelete)="deleteComment($event)"></app-comment>
+                        </div>
                     </div>
-                </div>
+                    <div class="mt-2">
+                        <div class="d-flex flex-row w-50">
+                            <button ngClass="me-1" mat-button color="primary" (click)="answer()" matTooltip="Ответ"><mat-icon>reply</mat-icon></button>
+                            <button ngClass="ms-1" mat-button color="accent" (click)="comment()" matTooltip="Комментарий"><mat-icon>comment</mat-icon></button>
+                        </div>
+                    </div>
+                </ng-template>
             </div>
             <app-new-comment *ngIf="newCommentDisplay" [relatedItem]="question" (created)="getQuestion()" (display)="refreshNewCommentDisplayState($event)"></app-new-comment>
             <app-edit-comment *ngIf="editCommentDisplay" [comment]="commentEdit" [relatedItem]="question" (updated)="getQuestion()" (display)="refreshEditCommentDisplayState($event)"></app-edit-comment>
