@@ -47,3 +47,15 @@ body {
 .spacer{
     flex:1 1 auto;
 }
+
+// quill
+
+.katex { font-size: 1.4em !important; }
+.ql-container {
+  box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px !important;
+  height: 100%;
+  margin: 0px;
+  position: relative;
+}

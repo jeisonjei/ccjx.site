@@ -1,6 +1,6 @@
 <div>
     <h1 ngClass="text-center">{{question?.title}}</h1>
-    <quill-view [content]="question?.text"></quill-view>
+    <quill-view [content]="question?.text" [style]="{fontSize:'120%'}"></quill-view>
     <!-- <div [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(question?.text)"></div> -->
     <div ngClass="d-flex">
         <div ngClass="flex-grow-1"></div>
