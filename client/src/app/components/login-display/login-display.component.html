@@ -1,6 +1,6 @@
-<div ngClass="d-none d-lg-flex">
+<div ngClass="d-none d-lg-flex me-4">
   <span *ngIf="userValue?.isLoggedIn; else isLoggedOut">
-    <button mat-button [matMenuTriggerFor]="menu">{{userValue?.userEmail}}</button>
+    <button mat-button [matMenuTriggerFor]="menu"><span>{{userValue?.userEmail}}</span></button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item>Профиль</button>
       <button mat-menu-item routerLink="my-questions">Мои записи</button>
