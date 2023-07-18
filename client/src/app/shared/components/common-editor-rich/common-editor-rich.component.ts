@@ -25,7 +25,7 @@ export class CommonEditorRichComponent {
       imageResize:true,
       toolbar: [
         ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-        ['blockquote', 'code-block'],
+        ['blockquote', 'code-block','code'],
     
         [{ 'header': 1 }, { 'header': 2 }],               // custom button values
         [{ 'list': 'ordered'}, { 'list': 'bullet' }],
