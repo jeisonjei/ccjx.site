@@ -30,6 +30,7 @@ export class TopicService {
   }
   retrieve(id: string) {
     const url = this.urls.getUrlTopicDetail(id);
+    console.log(`🔥 url: ${url}`);
     return this.http.get(url);
   }
   update(topic: Topic) {

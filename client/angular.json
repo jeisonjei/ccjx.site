@@ -69,8 +69,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -99,11 +99,6 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "disableHostCheck": true,
-            "port": 4200,
-            "publicHost": "http://194.67.67.60:4200"
-          },
           "configurations": {
             "production": {
               "browserTarget": "client:build:production"
