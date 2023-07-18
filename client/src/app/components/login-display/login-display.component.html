@@ -9,14 +9,14 @@
     </mat-menu>
   </span>
   <ng-template #isLoggedOut>
-    <span>
+    <span style="color: white;">
       <button mat-button routerLink="/account/register">Регистрация</button>
       <button mat-button routerLink="/account/login">Вход</button>
     </span>
   </ng-template>
 </div>
 <div ngClass="d-lg-none">
-  <span *ngIf="userValue?.isLoggedIn; else isLoggedOut">
+  <span *ngIf="userValue?.isLoggedIn; else isLoggedOut1">
     <button mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
     <mat-menu #menu="matMenu">
         <div mat-menu-item>{{this.auth.userValue?.userEmail}}</div>
@@ -26,8 +26,8 @@
       <button mat-menu-item (click)="this.auth.logout()">Выход</button>
     </mat-menu>
   </span>
-  <ng-template #isLoggedOut>
-    <button mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+  <ng-template #isLoggedOut1>
+    <button mat-button [matMenuTriggerFor]="menu"><mat-icon style="color: white;">menu</mat-icon></button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item routerLink="/account/register">Регистрация</button>
       <button mat-menu-item routerLink="/account/login">Вход</button>

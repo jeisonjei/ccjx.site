@@ -7,6 +7,7 @@
      left: 50%;
      transform: translateX(-50%);
      top: 2px;  
+     z-index: 1000;
     }
  
    &-input:focus + .search-box-placeholder-wrapper {
