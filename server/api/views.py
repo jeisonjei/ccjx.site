@@ -38,7 +38,7 @@ class TopicLastList(generics.ListAPIView):
     
 class TopicCount(APIView):
     def get(self, request):
-        return Response(Topic.objects.count())
+        return Response(Topic.objects.filter(is_private=False).values_list('id',flat=True))
             
 class AnswerListCreate(generics.ListCreateAPIView):
     lookup_field='id'
