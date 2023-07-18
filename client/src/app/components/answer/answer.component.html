@@ -1,6 +1,7 @@
 <mat-card ngClass="p-4 mb-3">
     <div ngClass="answer">
-        <div [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(answer?.text)"></div>
+        <quill-view [content]="answer?.text"></quill-view>
+        <!-- <div [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(answer?.text)"></div> -->
         <div ngClass="d-flex">
             <div ngClass="flex-grow-1"></div>
             <div>

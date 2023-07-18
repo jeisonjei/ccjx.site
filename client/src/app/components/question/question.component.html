@@ -1,6 +1,7 @@
 <div>
     <h1 ngClass="text-center">{{question?.title}}</h1>
-    <div [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(question?.text)"></div>
+    <quill-view [content]="question?.text"></quill-view>
+    <!-- <div [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(question?.text)"></div> -->
     <div ngClass="d-flex">
         <div ngClass="flex-grow-1"></div>
         <div>

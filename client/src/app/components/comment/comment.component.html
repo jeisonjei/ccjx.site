@@ -1,5 +1,6 @@
 <div ngClass="comment">
-    <div [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(comment?.text)"></div>
+    <quill-view [content]="comment?.text"></quill-view>
+    <!-- <div [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(comment?.text)"></div> -->
     <div ngClass="d-flex justify-content-end">
         <div ngClass="flex-grow-1"></div>
         <div>
