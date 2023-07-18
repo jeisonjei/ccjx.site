@@ -1,9 +1,13 @@
 <header>
-    <mat-toolbar ngClass="px-4 py-1">
-      <mat-toolbar-row>
-        <a style="text-decoration: none;color:black" routerLink=""><div ngClass="text-start">CCJX.SITE</div><div ngClass="text-start">сообщество</div></a>
-        <app-search-bar ngClass="flex-grow-1"></app-search-bar>
-        <app-login-display></app-login-display>
+    <mat-toolbar ngClass="px-5 py-1">
+      <mat-toolbar-row ngClass="row justify-content-between">
+        <div ngClass="col-lg-1 d-none d-lg-flex"><a style="text-decoration: none;color:black" routerLink=""><div ngClass="text-start">CCJX.SITE</div><div ngClass="text-start">сообщество</div></a></div>
+        <div ngClass="col-10">
+          <app-search-bar ngClass="flex-grow-1"></app-search-bar>
+        </div>
+        <div ngClass="col-1">
+          <app-login-display></app-login-display>
+        </div>
       </mat-toolbar-row>
     </mat-toolbar>
   </header>

@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class LoginDisplayComponent implements OnInit{
   pubm?: string;
   userValue?: LoginInfo|null;
-  constructor(public auth: AuthenticationService, private eh: ErrorHandlerService, private http: HttpClient, private ngZone: NgZone) {
+  constructor(public auth: AuthenticationService, private eh: ErrorHandlerService) {
   }
   ngOnInit(): void {
     this.eh.pubmEvent.subscribe((v) => {

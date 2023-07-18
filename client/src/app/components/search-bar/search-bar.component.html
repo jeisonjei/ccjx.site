@@ -1,10 +1,15 @@
 <div ngClass="row justify-content-center">
-  <div ngClass="col-lg-8">
+  <div ngClass="col">
     <div ngClass="d-flex align-items-center justify-content-between">
-      <mat-icon matIconPrefix>search</mat-icon>
       <form ngClass="flex-grow-1" subscriptSizing="dynamic">
           <div >
-            <input #i [formControl]="q" placeholder="Поиск по вопросам" ngClass="w-100" type="text" matInput [matAutocomplete]="auto">
+            <div ngClass="search-box">
+              <input #i [formControl]="q" style="font-family: Arial, FontAwesome;" ngClass="search-box-input w-100" type="search" matInput [matAutocomplete]="auto">
+              <div class="search-box-placeholder-wrapper">
+                <fa-icon [icon]="faMagnifyingGlass" class="search-box-placeholder"></fa-icon>
+                <span>&nbsp;Поиск по записям</span>
+              </div>
+            </div>
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="clearSelection($event)">
               <mat-option *ngFor="let q of filteredQuestions|async" (onSelectionChange)="navigate(q.id)">
                 {{q.title}}

@@ -24,6 +24,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PleaseRegisterComponent } from 'src/app/shared/dialogs/please-register/please-register.component';
 import { DialogConfig } from '@angular/cdk/dialog';
 import { DialogService } from 'src/app/services/dialog.service';
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-search-bar',
@@ -33,6 +34,7 @@ import { DialogService } from 'src/app/services/dialog.service';
 export class SearchBarComponent implements OnInit {
   allQuestions: Topic[] = [];
   filteredQuestions?: Observable<Topic[]>;
+  faMagnifyingGlass = faMagnifyingGlass;
   @Output()
   question: EventEmitter<string> = new EventEmitter();
   @ViewChild(MatAutocompleteTrigger)

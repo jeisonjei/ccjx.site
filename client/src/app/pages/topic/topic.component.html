@@ -1,6 +1,6 @@
 <div ngClass="row justify-content-center">
     <div class="col-lg-2"></div>
-    <div class="col-lg-8">
+    <div class="col-lg-7">
         <mat-card ngClass="p-4 mb-3">
             <div ngClass="question">
                 <div *ngIf="!question;else ready">
@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="col-lg-2">
-        <button ngClass="ms-2" mat-flat-button color="primary" (click)="onQuestion('Новая запись')">
+        <button mat-flat-button color="primary" (click)="onQuestion('Новая запись')">
             Создать запись</button>
             <hr>
             <h3>Новые записи</h3>

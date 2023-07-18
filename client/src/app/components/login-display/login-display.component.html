@@ -1,4 +1,5 @@
-<span *ngIf="userValue?.isLoggedIn; else isLoggedOut">
+<div ngClass="d-none d-lg-flex">
+  <span *ngIf="userValue?.isLoggedIn; else isLoggedOut">
     <button mat-button [matMenuTriggerFor]="menu">{{userValue?.userEmail}}</button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item>Профиль</button>
@@ -13,3 +14,24 @@
       <button mat-button routerLink="/account/login">Вход</button>
     </span>
   </ng-template>
+</div>
+<div ngClass="d-lg-none">
+  <span *ngIf="userValue?.isLoggedIn; else isLoggedOut">
+    <button mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+    <mat-menu #menu="matMenu">
+        <div mat-menu-item>{{this.auth.userValue?.userEmail}}</div>
+      <button mat-menu-item>Профиль</button>
+      <button mat-menu-item routerLink="my-questions">Мои записи</button>
+      <button mat-menu-item routerLink="my-answers">Мои ответы</button>
+      <button mat-menu-item (click)="this.auth.logout()">Выход</button>
+    </mat-menu>
+  </span>
+  <ng-template #isLoggedOut>
+    <button mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/account/register">Регистрация</button>
+      <button mat-menu-item routerLink="/account/login">Вход</button>
+    </mat-menu>
+  </ng-template>
+
+</div>

@@ -55,6 +55,8 @@ import { MatCardModule } from "@angular/material/card";
 import { RandomTopicComponent } from './pages/random-topic/random-topic.component';
 import { MatProgressBar, MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { LoginDisplaySmallComponent } from './components/login-display-small/login-display-small.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -92,6 +94,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     DelConfComponent,
     EditCommentComponent,
     RandomTopicComponent,
+    LoginDisplaySmallComponent,
   ],
   imports: [
     BrowserModule,
@@ -115,7 +118,8 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     QuillModule.forRoot(),
     MatCardModule,
     MatProgressBarModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    FontAwesomeModule
   ],
   providers: [
   ],

@@ -1,0 +1,15 @@
+.search-box {   
+    position: relative;
+ 
+   &-placeholder-wrapper {
+     pointer-events: none;
+     position: absolute;
+     left: 50%;
+     transform: translateX(-50%);
+     top: 2px;  
+    }
+ 
+   &-input:focus + .search-box-placeholder-wrapper {
+     display: none;  
+   } 
+ }
