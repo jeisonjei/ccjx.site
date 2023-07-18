@@ -1,4 +1,6 @@
 from rest_framework import generics
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import Answer, Comment, Topic
 from .serializers import AnswerSerializer, CommentSerializer, TopicSerializer
@@ -33,6 +35,10 @@ class TopicLastList(generics.ListAPIView):
         amount = self.kwargs['amount']
         queryset=Topic.objects.filter(is_private=False).order_by('date_created').order_by(F('id').desc())[:amount]
         return queryset
+    
+class TopicCount(APIView):
+    def get(self, request):
+        return Response(Topic.objects.count())
             
 class AnswerListCreate(generics.ListCreateAPIView):
     lookup_field='id'
