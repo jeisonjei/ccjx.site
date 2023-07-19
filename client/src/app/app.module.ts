@@ -59,6 +59,8 @@ import { LoginDisplaySmallComponent } from './components/login-display-small/log
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatBadgeModule } from "@angular/material/badge";
 import { MatChipsModule } from "@angular/material/chips";
+import { MatSortModule } from "@angular/material/sort";
+import { MatTableModule } from "@angular/material/table";
 
 @NgModule({
   declarations: [
@@ -123,7 +125,9 @@ import { MatChipsModule } from "@angular/material/chips";
     MatCheckboxModule,
     FontAwesomeModule,
     MatBadgeModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSortModule,
+    MatTableModule
   ],
   providers: [
   ],

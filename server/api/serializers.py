@@ -43,7 +43,7 @@ class TopicSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True,required=False)
     class Meta:
         model=Topic
-        fields=['id','user','title','text','type','answers','comments','is_article','is_private']   
+        fields=['id','user','title','text','type','answers','comments','is_article','is_private','date_created']   
         depth=0    
     def to_representation(self, instance):
         representation=super(TopicSerializer,self).to_representation(instance)
