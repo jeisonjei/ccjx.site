@@ -69,12 +69,9 @@ export class SearchBarComponent implements OnInit {
   }
   
   getAllQuestions() {
-    const self = this;
-    this.http.get(this.urls.URL_ALL_QUESTIONS).subscribe({
-      next(value: any) {
-        self.allQuestions = [...value];
-      },
-    });
+    this.questionService.listShort().subscribe((v:any) => {
+      this.allQuestions = [...v];
+    })
   }
   navigate(id?: string) {
     this.router.navigateByUrl(`topics/${id}`);

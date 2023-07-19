@@ -16,6 +16,10 @@ export class TopicService {
     return this.http.get(url);
 
   }
+  listShort() {
+    const url = this.urls.getUrlTopicListShort();
+    return this.http.get(url);
+  }
   count() {
     const url = this.urls.getUrlTopicCount();
     return this.http.get(url);

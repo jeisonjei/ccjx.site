@@ -3,9 +3,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import Answer, Comment, Topic
-from .serializers import AnswerSerializer, CommentSerializer, TopicSerializer
+from .serializers import AnswerSerializer, CommentSerializer, TopicSerializer, TopicSerializerShort
 from django.db.models import F
 import itertools
+from nameof import nameof
 
 class MyQuestionList(generics.ListAPIView):
     '''
@@ -20,8 +21,13 @@ class MyQuestionList(generics.ListAPIView):
 
 class TopicListCreate(generics.ListCreateAPIView):
     lookup_field='id'
-    queryset=Topic.objects.filter(is_private=False)
     serializer_class=TopicSerializer
+    queryset=Topic.objects.filter(is_private=False)
+    
+class TopicListShort(generics.ListAPIView):
+    lookup_field='id'
+    serializer_class=TopicSerializerShort
+    queryset=Topic.objects.filter(is_private=False)
 
 class TopicDetail(generics.RetrieveUpdateDestroyAPIView):
     lookup_field='id'    
@@ -30,7 +36,7 @@ class TopicDetail(generics.RetrieveUpdateDestroyAPIView):
     
 class TopicLastList(generics.ListAPIView):
     lookup_field='id'
-    serializer_class=TopicSerializer
+    serializer_class=TopicSerializerShort
     def get_queryset(self):
         amount = self.kwargs['amount']
         queryset=Topic.objects.filter(is_private=False).order_by('date_created').order_by(F('id').desc())[:amount]

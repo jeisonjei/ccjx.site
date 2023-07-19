@@ -57,6 +57,8 @@ import { MatProgressBar, MatProgressBarModule } from "@angular/material/progress
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { LoginDisplaySmallComponent } from './components/login-display-small/login-display-small.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatBadgeModule } from "@angular/material/badge";
+import { MatChipsModule } from "@angular/material/chips";
 
 @NgModule({
   declarations: [
@@ -119,7 +121,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatCardModule,
     MatProgressBarModule,
     MatCheckboxModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatBadgeModule,
+    MatChipsModule
   ],
   providers: [
   ],

@@ -1,5 +1,13 @@
 <div>
-    <h1 ngClass="text-center">{{question?.title}}</h1>
+    <div>
+        <div ngClass="flex-grow-1 d-flex justify-content-end">
+            <mat-chip *ngIf="question?.is_article; else q">статья</mat-chip>
+            <ng-template #q>
+                <mat-chip>вопрос</mat-chip>
+            </ng-template>
+        </div>
+        <h1 ngClass="text-center">{{question?.title}}</h1>
+    </div>
     <quill-view [content]="question?.text" [style]="{fontSize:'120%'}"></quill-view>
     <!-- <div [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(question?.text)"></div> -->
     <div ngClass="d-flex">

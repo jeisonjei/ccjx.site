@@ -38,6 +38,10 @@ export class UrlsService {
     const url = `${this.baseUrl}/topics/count/`;
     return url;
   }
+  getUrlTopicListShort() {
+    const url = `${this.baseUrl}/topics/short/`;
+    return url;
+  }
 
   getQuestionDeleteUrl(topicId: string) {
     const url = `${this.baseUrl}/topics/${topicId}`;

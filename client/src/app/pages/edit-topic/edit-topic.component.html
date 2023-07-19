@@ -1,6 +1,10 @@
 <div ngClass="row justify-content-center">
     <div ngClass="col-lg-8">
       <mat-card ngClass="p-4">
+        <div ngClass="d-flex flex-row">
+          <mat-checkbox [checked]="isArticle" (change)="onIsArticleChange($event.checked)">Статья (только комментарии)</mat-checkbox>
+          <mat-checkbox [checked]="isPrivate" (change)="onIsPrivateChange($event.checked)">Личная запись</mat-checkbox>
+        </div>
         <input
           id="topic"
           ngClass="text-center mb-2 topic-font"

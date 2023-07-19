@@ -19,6 +19,8 @@ export class EditTopicComponent implements OnInit {
   userId = '';
   topicId = '';
   content = '';
+  isArticle: boolean=false;
+  isPrivate: boolean=false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private topicService: TopicService,
@@ -33,6 +35,8 @@ export class EditTopicComponent implements OnInit {
     this.topicService.retrieve(this.topicId).subscribe((v: any) => {
       this.title = v.title;
       this.content = v.text;
+      this.isArticle = v.is_article;
+      this.isPrivate = v.is_private;
     });
     
   }
@@ -42,6 +46,8 @@ export class EditTopicComponent implements OnInit {
       user: this.userId,
       title: this.title,
       text: content,
+      is_article: this.isArticle,
+      is_private: this.isPrivate
     }
     this.topicService.update(topic).subscribe(() => {
       const url = `/topics/${this.topicId}`;
@@ -57,4 +63,11 @@ export class EditTopicComponent implements OnInit {
     const value = target.value;
     this.title = value;
   }
+  onIsArticleChange(checked: boolean) {
+    this.isArticle = checked;
+  } 
+  onIsPrivateChange(checked: boolean) {
+    this.isPrivate = checked;
+  }
+
 }

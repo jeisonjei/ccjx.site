@@ -49,3 +49,8 @@ class TopicSerializer(serializers.ModelSerializer):
         representation=super(TopicSerializer,self).to_representation(instance)
         representation['user']=UserSerializer(instance.user).data
         return representation
+    
+class TopicSerializerShort(serializers.ModelSerializer):
+    class Meta:
+        model = Topic
+        fields = ['id','title']    

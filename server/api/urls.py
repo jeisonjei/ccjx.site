@@ -5,6 +5,7 @@ from .account import send_email_new_password
 from .account import new_password
 from .views import MyQuestionList
 from .views import TopicDetail, TopicListCreate
+from .views import TopicListShort
 from .views import TopicLastList
 from .views import TopicCount
 from .views import AnswerListCreate, AnswerDetail
@@ -19,6 +20,7 @@ urlpatterns = [
     path('my-questions/',MyQuestionList.as_view()), # пока оставим
     
     path('topics/',TopicListCreate.as_view()),
+    path('topics/short/',TopicListShort.as_view()),
     path('topics/<int:id>/',TopicDetail.as_view()),
     path('topics/last/<int:amount>/',TopicLastList.as_view()),
     path('topics/count/',TopicCount.as_view()),
