@@ -1,7 +1,7 @@
 <div>
     <div>
         <div ngClass="flex-grow-1 d-flex justify-content-end">
-            <mat-chip *ngIf="question?.is_article; else q">статья</mat-chip>
+            <mat-chip *ngIf="question?.is_article; else q">статья/заметка</mat-chip>
             <ng-template #q>
                 <mat-chip>вопрос</mat-chip>
             </ng-template>
