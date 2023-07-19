@@ -6,6 +6,7 @@ import { Topic } from '../../consts';
 import { UrlsService } from '../../services/urls.service';
 import { MatSort, MatSortable, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { TopicService } from '@app/services/question.service';
 
 @Component({
   selector: 'app-my-questions',
@@ -23,14 +24,16 @@ export class MyQuestionsComponent{
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private eh: ErrorHandlerService,
-    private urls:UrlsService
+    private urls: UrlsService,
+    private tops: TopicService
   ) {
     this.getMyQuestions();
   }
   getMyQuestions() {
     const self = this;
-    this.http.get(this.urls.URL_MY_QUESTIONS).subscribe({
+    this.tops.listShort().subscribe({
       next(value: any) {
+        console.log(`🔥 v: ${JSON.stringify(value)}`);
         self.myQuestions = value;
         for (const item of self.myQuestions) {
           let dateTime = self.formatDate(item.date_created??'error');
