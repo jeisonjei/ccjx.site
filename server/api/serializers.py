@@ -39,6 +39,9 @@ class AnswerSerializer(serializers.ModelSerializer):
         return representation
         
 class TopicSerializer(serializers.ModelSerializer):
+    '''
+    Этот сериалайзер используется для отображения конкретного вопроса
+    '''
     answers = AnswerSerializer(many=True,required=False)
     comments = CommentSerializer(many=True,required=False)
     class Meta:
@@ -51,11 +54,17 @@ class TopicSerializer(serializers.ModelSerializer):
         return representation
     
 class TopicSerializerShort(serializers.ModelSerializer):
+    '''
+    Этот сериалайзер используется для загрузки всех вопросов в поле поиска (компонент search-bar)
+    '''
     class Meta:
         model = Topic
         fields = ['id','title']    
 
 class TopicSerializerMy(serializers.ModelSerializer):
+    '''
+    Этот сериалайзер используется для загрузки вопросов для страницы "Мои записи"
+    '''
     class Meta:
         model = Topic
         fields = ['id','title','date_created']    
