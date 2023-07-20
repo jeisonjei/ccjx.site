@@ -53,4 +53,9 @@ class TopicSerializer(serializers.ModelSerializer):
 class TopicSerializerShort(serializers.ModelSerializer):
     class Meta:
         model = Topic
+        fields = ['id','title']    
+
+class TopicSerializerMy(serializers.ModelSerializer):
+    class Meta:
+        model = Topic
         fields = ['id','title','date_created']    

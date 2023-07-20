@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import Answer, Comment, Topic
-from .serializers import AnswerSerializer, CommentSerializer, TopicSerializer, TopicSerializerShort
+from .serializers import AnswerSerializer, CommentSerializer, TopicSerializer, TopicSerializerShort, TopicSerializerMy
 from django.db.models import F
 import itertools
 from nameof import nameof
@@ -12,7 +12,7 @@ class MyQuestionList(generics.ListAPIView):
     '''
     Пока что класс используется для отображения списка вопросов, принадлежащих пользователю на странице 'Мои вопросы'
     '''
-    serializer_class = TopicSerializer
+    serializer_class = TopicSerializerMy
 
     def get_queryset(self):
         user = self.request.user

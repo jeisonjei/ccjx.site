@@ -42,7 +42,10 @@ export class UrlsService {
     const url = `${this.baseUrl}/topics/short/`;
     return url;
   }
-
+  getUrlTopicListMy() {
+    const url = `${this.baseUrl}/my-questions/`;
+    return url;
+  }
   getQuestionDeleteUrl(topicId: string) {
     const url = `${this.baseUrl}/topics/${topicId}`;
     return url;

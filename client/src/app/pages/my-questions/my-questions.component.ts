@@ -31,17 +31,16 @@ export class MyQuestionsComponent{
   }
   getMyQuestions() {
     const self = this;
-    this.tops.listShort().subscribe({
+    this.tops.listShortMy().subscribe({
       next(value: any) {
-        console.log(`🔥 v: ${JSON.stringify(value)}`);
         self.myQuestions = value;
         for (const item of self.myQuestions) {
           let dateTime = self.formatDate(item.date_created??'error');
           item.date_created = dateTime;
         }
         self.dataSource=new MatTableDataSource(self.myQuestions.slice());
-        self.sort?.sort(({ id: 'date', start: 'desc'}) as MatSortable);
         self.dataSource.sort = self.sort??null;
+        self.sort?.sort(({ id: 'date', start: 'desc'}) as MatSortable);
     
       },
     });

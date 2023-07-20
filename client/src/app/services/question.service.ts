@@ -20,6 +20,10 @@ export class TopicService {
     const url = this.urls.getUrlTopicListShort();
     return this.http.get(url);
   }
+  listShortMy() {
+    const url = this.urls.getUrlTopicListMy();
+    return this.http.get(url);
+  }
   count() {
     const url = this.urls.getUrlTopicCount();
     return this.http.get(url);
@@ -34,7 +38,6 @@ export class TopicService {
   }
   retrieve(id: string) {
     const url = this.urls.getUrlTopicDetail(id);
-    console.log(`🔥 url: ${url}`);
     return this.http.get(url);
   }
   update(topic: Topic) {
