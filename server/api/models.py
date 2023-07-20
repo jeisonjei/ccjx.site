@@ -56,12 +56,14 @@ class Topic(models.Model):
     is_article=models.BooleanField(default=False)
     is_private = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True,null=True)
+    scores = models.IntegerField(default=0)
     
 class Answer(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     topic=models.ForeignKey(Topic,related_name='answers',on_delete=models.CASCADE,null=True)
     text=models.TextField(blank=True)
     type=models.CharField(default='answer')
+    scores=models.IntegerField(default=0)
 
 class Comment(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,null = True)
