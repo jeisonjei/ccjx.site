@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Quill as Q } from "quill";
 import * as QuillNamespace from 'quill';
 let Quill: any = QuillNamespace;
 import ImageResize from 'quill-image-resize-module';
@@ -42,5 +43,22 @@ export class CommonEditorRichComponent {
       ]
     };
   }
-  addBindingCreated(quill: any){}
+  addBindingCreated(quill: Q) {
+    quill.keyboard.addBinding({ key: 'c', altKey: true } as any, (range, context) => {
+      if (context.format.code) {
+        quill.format('code',false);
+      }
+      else {
+        quill.format('code', true);
+      }
+    });
+    quill.keyboard.addBinding({ key: 'm', ctrlKey: true } as any, (range, context) => {
+      if (quill.getFormat(range)['font']==='monospace') {
+        quill.format('font','');
+      }
+      else {
+        quill.format('font','monospace');
+      }
+    })
+  }
 }
