@@ -8,8 +8,14 @@
         </div>
         <h1 ngClass="text-center">{{question?.title}}</h1>
     </div>
-    <quill-view [content]="question?.text" [style]="{fontSize:'120%'}"></quill-view>
-    <!-- <div [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(question?.text)"></div> -->
+    <div ngClass="grid2">
+        <div ngClass="d-flex flex-column align-items-center">
+            <button mat-icon-button (click)="plus()"><fa-icon [icon]="faArrowUp"></fa-icon></button>
+            <button mat-icon-button (click)="minus()"><fa-icon [icon]="faArrowDown"></fa-icon></button>
+            {{question?.scores}}
+        </div>
+        <quill-view [content]="question?.text" [style]="{fontSize:'120%'}"></quill-view>
+    </div>
     <div ngClass="d-flex">
         <div ngClass="flex-grow-1"></div>
         <div>
