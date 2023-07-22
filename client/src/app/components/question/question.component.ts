@@ -6,6 +6,7 @@ import { AuthenticationService } from '@app/services/authentication/authenticati
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { VoteService } from '@app/services/vote.service';
+import { DialogService } from '@app/services/dialog.service';
 
 @Component({
   selector: 'app-question',
@@ -25,7 +26,8 @@ export class QuestionComponent implements OnInit {
     public sanitizer: DomSanitizer,
     private router: Router,
     public auth: AuthenticationService,
-    private vote: VoteService
+    private vote: VoteService,
+    private dials: DialogService
   ) {}
   ngOnInit() {
     const v = this.question?.votes;
@@ -72,10 +74,10 @@ export class QuestionComponent implements OnInit {
     );
     const b2 = this.question?.user?.id == this.auth.userValue?.id;
     if (b1) {
-      console.log('=== Вы уже проголосовали за эту запись');
+	this.dials.showMessDial('Информация','Вы уже проголосовали за эту запись');
     }
     if (b2) {
-      console.log('=== Позвольте другим оценить вашу запись');
+ 	this.dials.showMessDial('Информация','Нельзя голосовать за собственные записи');
     }
     if (b1 || b2) return false;
     return true;
