@@ -26,11 +26,9 @@ export class QuestionComponent implements OnInit{
 	  if(v.length>0){
 		  let sum = 0;
 	 	for(let vote of v){
-			console.log(`=== vote: ${JSON.stringify(vote)}`);
 			sum = sum + Number(vote.score);
 		}	
 		this.votes = sum;
-	  console.log(`=== votes: ${this.votes}`);
 	  }
    }
    editTopic() {
