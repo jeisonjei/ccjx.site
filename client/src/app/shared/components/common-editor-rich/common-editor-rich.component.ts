@@ -23,7 +23,7 @@ export class CommonEditorRichComponent {
     this.modules = {
       formula: true,
       syntax: true,
-      imageResize:true,
+      imageResize: true,
       toolbar: [
         ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
         [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
@@ -53,12 +53,12 @@ export class CommonEditorRichComponent {
       }
     });
     quill.keyboard.addBinding({ key: 'm', ctrlKey: true } as any, (range, context) => {
-      if (quill.getFormat(range)['font']==='monospace') {
-        quill.format('font','');
+      if (quill.getFormat(range)['font'] === 'monospace') {
+        quill.format('font', '');
       }
       else {
-        quill.format('font','monospace');
+        quill.format('font', 'monospace');
       }
-    })
+    });
   }
 }

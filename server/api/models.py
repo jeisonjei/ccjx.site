@@ -56,14 +56,15 @@ class Topic(models.Model):
     is_article=models.BooleanField(default=False)
     is_private = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True,null=True)
-    scores = models.IntegerField(default=0)
+    date_modified = models.DateTimeField(null = True)
     
 class Answer(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     topic=models.ForeignKey(Topic,related_name='answers',on_delete=models.CASCADE,null=True)
     text=models.TextField(blank=True)
     type=models.CharField(default='answer')
-    scores=models.IntegerField(default=0)
+    date_created = models.DateTimeField(auto_now_add = True, null = True)
+    date_modified = models.DateTimeField(null = True)
 
 class Comment(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,null = True)
@@ -71,4 +72,14 @@ class Comment(models.Model):
     answer=models.ForeignKey(Answer,related_name='comments',on_delete=models.CASCADE,null=True)
     text=models.TextField(blank=True)
     type=models.CharField(default='comment')
+    date_created = models.DateTimeField(auto_now_add = True, null = True)
+    date_modified = models.DateTimeField(null = True)
     
+class Vote(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE, null = True)
+    topic = models.ForeignKey(Topic, related_name = 'votes', on_delete = models.CASCADE, null = True)
+    answer = models.ForeignKey(Answer, related_name = 'votes', on_delete = models.CASCADE, null = True)
+    score = models.IntegerField(default=1)
+    date_created = models.DateTimeField(auto_now_add = True, null = True)
+    
+

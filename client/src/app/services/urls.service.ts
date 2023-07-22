@@ -56,4 +56,10 @@ export class UrlsService {
   getUrlCommentDetail(id: string) {
     return `${this.baseUrl}/comments/${id}/`;
   }
+  getUrlVoteList(){
+	return `${this.baseUrl}/votes/`;
+  }
+  getUrlVoteCreate(){
+	return `${this.baseUrl}/votes/`;
+  }
 }
