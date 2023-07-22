@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/services/authentication/authentication.service';
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { VoteService } from "@app/services/vote.service";
 
 @Component({
   selector: 'app-question',
@@ -18,16 +19,21 @@ export class QuestionComponent implements OnInit{
   faArrowUp=faArrowUp;
   faArrowDown=faArrowDown;
   votes: number = 0;
-  constructor(public sanitizer: DomSanitizer,private router: Router, public auth:AuthenticationService) {
+  constructor(public sanitizer: DomSanitizer,private router: Router, public auth:AuthenticationService, private vote: VoteService) {
    }
   ngOnInit() {
-	let sum = 0;
-	for(let vote of this.question?.votes){
-		sum = sum + vote.score;
-	}
-	this.votes = sum;
+	  const v = this.question?.votes;
+	  if(v.length>0){
+		  let sum = 0;
+	 	for(let vote of v){
+			console.log(`=== vote: ${JSON.stringify(vote)}`);
+			sum = sum + Number(vote.score);
+		}	
+		this.votes = sum;
+	  console.log(`=== votes: ${this.votes}`);
+	  }
    }
-  editTopic() {
+   editTopic() {
     const url = `/users/${this.question?.user?.id}/edit-topic/${this.question?.id}`;
     this.router.navigateByUrl(url);
   }
@@ -35,9 +41,22 @@ export class QuestionComponent implements OnInit{
     
   }
   plus() {
-    this.question.scores=this.question.scores+1;
+  	this.votes=this.votes+1;
+	const vote = {
+		user: this.auth.userValue?.id,
+		topic: this.question?.id,
+		score: 1
+	}
+       this.vote.create(vote).subscribe();
   }
   minus() {
-    this.question.scores=this.question.scores-1;
+    this.votes = this.votes -1;
+    const vote = {
+    	user: this.auth.userValue?.id,
+	topic: this.question?.id,
+	score: -1
+    };
+    this.vote.create(vote).subscribe();
+	
   }
 }

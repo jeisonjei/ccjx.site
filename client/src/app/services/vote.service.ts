@@ -12,12 +12,8 @@ export class VoteService {
   list(){
 	  const url = this.urls.getUrlVoteList();
 	  return this.http.get(url).pipe(
-		  map(v => {
-			  let sum = 0;
-			  for(let vote of v){
-				  sum = sum + vote.score;
-			  }
-			  return sum;
+		  map((v:any) => {
+			 return v.reduce((x,y) => x.score + y.score); 
 		  })
 	  )
 
