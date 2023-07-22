@@ -1,60 +1,83 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { Topic } from '../../consts';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/services/authentication/authentication.service';
-import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
-import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import { VoteService } from "@app/services/vote.service";
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { VoteService } from '@app/services/vote.service';
 
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
-  styleUrls: ['./question.component.scss']
+  styleUrls: ['./question.component.scss'],
 })
-export class QuestionComponent implements OnInit{
+export class QuestionComponent implements OnInit {
   @Input()
   question?: any;
+  @Output()
+  voteUpdated: EventEmitter<any> = new EventEmitter();
   content?: SafeHtml = '';
-  faArrowUp=faArrowUp;
-  faArrowDown=faArrowDown;
+  faArrowUp = faArrowUp;
+  faArrowDown = faArrowDown;
   votes: number = 0;
-  constructor(public sanitizer: DomSanitizer,private router: Router, public auth:AuthenticationService, private vote: VoteService) {
-   }
+  constructor(
+    public sanitizer: DomSanitizer,
+    private router: Router,
+    public auth: AuthenticationService,
+    private vote: VoteService
+  ) {}
   ngOnInit() {
-	  const v = this.question?.votes;
-	  if(v.length>0){
-		  let sum = 0;
-	 	for(let vote of v){
-			sum = sum + Number(vote.score);
-		}	
-		this.votes = sum;
-	  }
-   }
-   editTopic() {
+    const v = this.question?.votes;
+    if (v.length > 0) {
+      let sum = 0;
+      for (let vote of v) {
+        sum = sum + Number(vote.score);
+      }
+      this.votes = sum;
+    }
+  }
+  editTopic() {
     const url = `/users/${this.question?.user?.id}/edit-topic/${this.question?.id}`;
     this.router.navigateByUrl(url);
   }
-  deleteTopic() {
-    
-  }
+  deleteTopic() {}
   plus() {
-  	this.votes=this.votes+1;
-	const vote = {
-		user: this.auth.userValue?.id,
-		topic: this.question?.id,
-		score: 1
-	}
-       this.vote.create(vote).subscribe();
+    if (!this.validateVote()) return;
+    this.votes = this.votes + 1;
+    const vote = {
+      user: this.auth.userValue?.id,
+      topic: this.question?.id,
+      score: 1,
+    };
+    this.vote.create(vote).subscribe((v) => {
+      this.voteUpdated.emit();
+    });
   }
   minus() {
-    this.votes = this.votes -1;
+    if (!this.validateVote()) return;
+    this.votes = this.votes - 1;
     const vote = {
-    	user: this.auth.userValue?.id,
-	topic: this.question?.id,
-	score: -1
+      user: this.auth.userValue?.id,
+      topic: this.question?.id,
+      score: -1,
     };
-    this.vote.create(vote).subscribe();
-	
+    this.vote.create(vote).subscribe((v) => {
+      this.voteUpdated.emit();
+    });
+  }
+  validateVote() {
+    const b1 = this.question?.votes.some(
+      (v) => v.user == this.auth.userValue?.id
+    );
+    const b2 = this.question?.user?.id == this.auth.userValue?.id;
+    if (b1) {
+      console.log('=== Вы уже проголосовали за эту запись');
+    }
+    if (b2) {
+      console.log('=== Позвольте другим оценить вашу запись');
+    }
+    if (b1 || b2) return false;
+    return true;
   }
 }

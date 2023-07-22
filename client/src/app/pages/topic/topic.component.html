@@ -7,7 +7,7 @@
                     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
                 </div>
                 <ng-template #ready>
-                    <app-question [question]="question"></app-question>
+                    <app-question [question]="question" (voteUpdated)="getQuestion()"></app-question>
                     <div ngClass="ms-5">
                         <div *ngFor="let c of comments">
                             <app-comment [comment]="c" (onEdit)="editComment($event)" (onDelete)="deleteComment($event)"></app-comment>
