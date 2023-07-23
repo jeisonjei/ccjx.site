@@ -3,3 +3,8 @@
 
     border-bottom: 2px solid gray;
 }
+.grid2{
+    display: grid;
+    grid-template-columns: 1fr 16fr;
+    
+}

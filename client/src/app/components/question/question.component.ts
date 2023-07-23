@@ -18,7 +18,6 @@ export class QuestionComponent implements OnInit {
   question?: any;
   @Output()
   voteUpdated: EventEmitter<any> = new EventEmitter();
-  content?: SafeHtml = '';
   faArrowUp = faArrowUp;
   faArrowDown = faArrowDown;
   votes: number = 0;

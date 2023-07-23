@@ -1,7 +1,14 @@
 <mat-card ngClass="p-4 mb-3">
     <div ngClass="answer">
+	<div ngClass="grid2">
+        <div ngClass="d-flex flex-column align-items-center">
+            <button mat-icon-button (click)="plus()"><fa-icon [icon]="faArrowUp"></fa-icon></button>
+            <button mat-icon-button (click)="minus()"><fa-icon [icon]="faArrowDown"></fa-icon></button>
+            {{votes}}
+        </div>
         <quill-view [content]="answer?.text"></quill-view>
-        <!-- <div [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(answer?.text)"></div> -->
+	
+	</div>
         <div ngClass="d-flex">
             <div ngClass="flex-grow-1"></div>
             <div>
