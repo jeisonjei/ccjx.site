@@ -1,7 +1,9 @@
 <div>
     <div>
-        <div ngClass="flex-grow-1 d-flex justify-content-end">
+        <div ngClass="flex-grow-1 d-flex justify-content-between align-items-center">
+		 <div>Создана {{dateCreated}} </div>
             <mat-chip *ngIf="question?.is_article; else q">статья/заметка</mat-chip>
+	
             <ng-template #q>
                 <mat-chip>вопрос</mat-chip>
             </ng-template>

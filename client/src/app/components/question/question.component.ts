@@ -21,6 +21,7 @@ export class QuestionComponent implements OnInit {
   faArrowUp = faArrowUp;
   faArrowDown = faArrowDown;
   votes: number = 0;
+  dateCreated:string = '';
   constructor(
     public sanitizer: DomSanitizer,
     private router: Router,
@@ -29,6 +30,7 @@ export class QuestionComponent implements OnInit {
     private dials: DialogService
   ) {}
   ngOnInit() {
+    this.dateCreated = this.formatDate(this.question?.date_created);
     const v = this.question?.votes;
     if (v.length > 0) {
       let sum = 0;
@@ -81,4 +83,18 @@ export class QuestionComponent implements OnInit {
     if (b1 || b2) return false;
     return true;
   }
+  formatDate(dateTime:string) {
+    let date = new Date(dateTime);
+      return Intl.DateTimeFormat('ru-RU', {
+        year: 'numeric',
+        month: 'long',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        timeZone: 'Europe/Moscow',
+        timeZoneName: 'short',
+      }).format(date);
+  }
+
 }

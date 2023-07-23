@@ -54,8 +54,8 @@ export class MyQuestionsComponent{
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
-        // timeZone: 'Europe/Moscow',
-        // timeZoneName: 'short',
+        //timeZone: 'Europe/Moscow',
+        //timeZoneName: 'short',
       }).format(date);
   }
   sortData(sort: Sort) {

@@ -27,7 +27,7 @@
             <app-edit-answer *ngIf="editAnswerDisplay" [answer]="answerEdit" (display)="refreshEditAnswerDisplayState($event)" (updated)="getQuestion()"></app-edit-answer>
         </mat-card>
         <div *ngFor="let a of answers">
-            <app-answer [answer]="a" (commentCreated)="getQuestion()" (onEdit)="editAnswer($event)" (onDelete)="deleteAnswer($event)"></app-answer>
+            <app-answer [answer]="a" (commentCreated)="getQuestion()" (onEdit)="editAnswer($event)" (onDelete)="deleteAnswer($event)" (voteUpdated)="getQuestion()"></app-answer>
         </div>
     </div>
     <div class="col-lg-2">
