@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter, OnChanges } from '@angular/core';
 import { Topic } from '../../consts';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { DialogService } from '@app/services/dialog.service';
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.scss'],
 })
-export class QuestionComponent implements OnInit {
+export class QuestionComponent implements OnInit, OnChanges {
   @Input()
   question?: any;
   @Output()
@@ -30,7 +30,10 @@ export class QuestionComponent implements OnInit {
     private dials: DialogService
   ) {}
   ngOnInit() {
-    this.dateCreated = this.formatDate(this.question?.date_created);
+
+      }
+  ngOnChanges(){
+this.dateCreated = this.formatDate(this.question?.date_created);
     const v = this.question?.votes;
     if (v.length > 0) {
       let sum = 0;
@@ -39,6 +42,10 @@ export class QuestionComponent implements OnInit {
       }
       this.votes = sum;
     }
+    else {
+	    this.votes = 0;
+    }
+
   }
   editTopic() {
     const url = `/users/${this.question?.user?.id}/edit-topic/${this.question?.id}`;
