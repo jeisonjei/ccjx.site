@@ -7,7 +7,7 @@
         </div>
        <div ngClass="grid2">
         <div ngClass="d-flex align-items-center">
-          <input (keyup)="tagAddOnEnter($event)" type="text" placeholder="Тэги..." [formControl]="myControl" [matAutocomplete]="auto"
+          <input ngClass="input" (keyup)="tagAddOnEnter($event)" type="text" placeholder="Тэги..." [formControl]="myControl" [matAutocomplete]="auto"
             [value]="tagSelected" #autocompleteInput [matChipInputFor]="chipGrid">
           <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
             <mat-option *ngFor="let tag of tagsFiltered|async" [value]="tag">{{tag.name}}</mat-option>
