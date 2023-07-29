@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UrlsService {
-
   baseUrl: string = `http://${location.hostname}:5000/api`;
   DEFAULT_ERROR_MESSAGE = 'Извините, возникла ошибка';
   URL_TOKEN = `${this.baseUrl}/token/`;
@@ -20,35 +19,28 @@ export class UrlsService {
   URL_ANSWERS_CREATE = `${this.baseUrl}/answers/`;
   URL_COMMENTS_LIST = `${this.baseUrl}/comments/`;
   URL_COMMENTS_CREATE = `${this.baseUrl}/comments/`;
-  
-  constructor() { }
+
+  constructor() {}
   getUrlTopicCreate(userId: string) {
-    const url = `${this.baseUrl}/topics/`;
-    return url;
+    return `${this.baseUrl}/topics/`;
   }
   getUrlTopicDetail(topicId: string) {
-    const url = `${this.baseUrl}/topics/${topicId}/`;
-    return url;
+    return `${this.baseUrl}/topics/${topicId}/`;
   }
   getUrlTopicLast(amount: number) {
-    const url = `${this.baseUrl}/topics/last/${amount}/`;
-    return url;
+    return `${this.baseUrl}/topics/last/${amount}/`;
   }
   getUrlTopicCount() {
-    const url = `${this.baseUrl}/topics/count/`;
-    return url;
+    return `${this.baseUrl}/topics/count/`;
   }
   getUrlTopicListShort() {
-    const url = `${this.baseUrl}/topics/short/`;
-    return url;
+    return `${this.baseUrl}/topics/short/`;
   }
   getUrlTopicListMy() {
-    const url = `${this.baseUrl}/my-questions/`;
-    return url;
+    return `${this.baseUrl}/my-questions/`;
   }
   getQuestionDeleteUrl(topicId: string) {
-    const url = `${this.baseUrl}/topics/${topicId}`;
-    return url;
+    return `${this.baseUrl}/topics/${topicId}`;
   }
   getUrlAnswerDetail(id: string) {
     return `${this.baseUrl}/answers/${id}/`;
@@ -56,10 +48,19 @@ export class UrlsService {
   getUrlCommentDetail(id: string) {
     return `${this.baseUrl}/comments/${id}/`;
   }
-  getUrlVoteList(){
-	return `${this.baseUrl}/votes/`;
+  getUrlVoteList() {
+    return `${this.baseUrl}/votes/`;
   }
-  getUrlVoteCreate(){
-	return `${this.baseUrl}/votes/`;
+  getUrlVoteCreate() {
+    return `${this.baseUrl}/votes/`;
+  }
+  getUrlTagList() {
+    return `${this.baseUrl}/tags/`;
+  }
+  getUrlTagCreate() {
+    return `${this.baseUrl}/tags/`;
+  }
+  getUrlTagRetrieve(id: string) {
+    return `${this.baseUrl}/tags/${id}`;
   }
 }
