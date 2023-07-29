@@ -3,10 +3,17 @@
         <div ngClass="flex-grow-1 d-flex justify-content-between align-items-center">
 		 <div>Создана {{dateCreated}} </div>
             <mat-chip *ngIf="question?.is_article; else q">статья/заметка</mat-chip>
-	
             <ng-template #q>
                 <mat-chip>вопрос</mat-chip>
             </ng-template>
+        </div>
+        <div>
+          <mat-chip-grid #chipGrid>
+            <mat-chip-row *ngFor="let tag of question.tags">
+              {{tag.name}}
+            </mat-chip-row>
+          </mat-chip-grid>
+ 
         </div>
         <h1 ngClass="text-center">{{question?.title}}</h1>
     </div>
