@@ -82,4 +82,7 @@ class Vote(models.Model):
     score = models.IntegerField(default=1)
     date_created = models.DateTimeField(auto_now_add = True, null = True)
     
-
+class Tag(models.Model):
+    name = models.CharField(default='',unique=True)
+    description = models.TextField(null=True)
+    topics = models.ManyToManyField(Topic,related_name='tags')

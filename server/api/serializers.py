@@ -4,7 +4,7 @@ from rest_framework import serializers
 from rest_framework.renderers import JSONRenderer
 from nameof import nameof
 
-from .models import Answer, Topic, User,Comment, Vote
+from .models import Answer, Tag, Topic, User,Comment, Vote
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -55,7 +55,7 @@ class TopicSerializer(serializers.ModelSerializer):
     votes = VoteSerializer(many = True, required = False)
     class Meta:
         model=Topic
-        fields=['id','user','title','text','type','answers','comments','is_article','is_private','date_created','votes']   
+        fields=['id','user','title','text','type','answers','comments','is_article','is_private','date_created','votes','tags']   
         depth=0    
     def to_representation(self, instance):
         representation=super(TopicSerializer,self).to_representation(instance)
@@ -68,7 +68,7 @@ class TopicSerializerShort(serializers.ModelSerializer):
     '''
     class Meta:
         model = Topic
-        fields = ['id','title']    
+        fields = ['id','title','tags']    
 
 class TopicSerializerMy(serializers.ModelSerializer):
     '''
@@ -77,4 +77,13 @@ class TopicSerializerMy(serializers.ModelSerializer):
     class Meta:
         model = Topic
         fields = ['id','title','date_created']    
+        
+class TagSerializer(serializers.ModelSerializer):
+    '''
+    Сериализатор тэгов
+    '''
+    class Meta:
+        model = Tag
+        fields = ['id','name','description','topics']
+    
 

@@ -2,8 +2,8 @@ from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from .models import Answer, Comment, Topic, Vote
-from .serializers import AnswerSerializer, CommentSerializer, TopicSerializer, TopicSerializerShort, TopicSerializerMy, VoteSerializer
+from .models import Answer, Comment, Tag, Topic, Vote
+from .serializers import AnswerSerializer, CommentSerializer, TagSerializer, TopicSerializer, TopicSerializerShort, TopicSerializerMy, VoteSerializer
 from django.db.models import F
 import itertools
 from nameof import nameof
@@ -70,3 +70,8 @@ class VoteListCreate(generics.ListCreateAPIView):
     lookup_field = 'id'
     serializer_class = VoteSerializer
     queryset = Vote.objects.all()
+
+class TagListCreate(generics.ListCreateAPIView):
+    lookup_field='id'
+    serializer_class=TagSerializer
+    queryset=Tag.objects.all()
