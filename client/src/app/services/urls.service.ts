@@ -52,7 +52,7 @@ export class UrlsService {
     return `${this.baseUrl}/votes/`;
   }
   getUrlVoteCreate() {
-    return `${this.baseUrl}/votes/`;
+    return `${this.baseUrl}/votes/`;  
   }
   getUrlTagList() {
     return `${this.baseUrl}/tags/`;
@@ -61,6 +61,12 @@ export class UrlsService {
     return `${this.baseUrl}/tags/`;
   }
   getUrlTagRetrieve(id: string) {
-    return `${this.baseUrl}/tags/${id}`;
+    return `${this.baseUrl}/tags/${id}/`;
+  }
+  getUrlTagUpdate(id: string) {
+    return `${this.baseUrl}/tags/${id}/`;
+  }
+  getUrlTagDelete(id: string) {
+    return `${this.baseUrl}/tags/${id}/`;
   }
 }

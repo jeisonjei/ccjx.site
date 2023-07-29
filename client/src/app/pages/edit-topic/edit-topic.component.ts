@@ -49,7 +49,7 @@ export class EditTopicComponent implements OnInit {
       is_article: this.isArticle,
       is_private: this.isPrivate
     }
-    this.topicService.update(topic).subscribe(() => {
+    this.topicService.update(this.topicId,topic).subscribe(() => {
       const url = `/topics/${this.topicId}`;
       this.router.navigateByUrl(url);
     });

@@ -45,6 +45,14 @@ class AnswerSerializer(serializers.ModelSerializer):
         representation=super(AnswerSerializer,self).to_representation(instance)
         representation['user']=UserSerializer(instance.user).data
         return representation
+
+class TagSerializer(serializers.ModelSerializer):
+    '''
+    Сериализатор тэгов
+    '''
+    class Meta:
+        model = Tag
+        fields = ['id','name','description','topics']
         
 class TopicSerializer(serializers.ModelSerializer):
     '''
@@ -53,6 +61,7 @@ class TopicSerializer(serializers.ModelSerializer):
     answers = AnswerSerializer(many=True,required=False)
     comments = CommentSerializer(many=True,required=False)
     votes = VoteSerializer(many = True, required = False)
+    tags = TagSerializer(many = True, required = False)
     class Meta:
         model=Topic
         fields=['id','user','title','text','type','answers','comments','is_article','is_private','date_created','votes','tags']   
@@ -77,13 +86,3 @@ class TopicSerializerMy(serializers.ModelSerializer):
     class Meta:
         model = Topic
         fields = ['id','title','date_created']    
-        
-class TagSerializer(serializers.ModelSerializer):
-    '''
-    Сериализатор тэгов
-    '''
-    class Meta:
-        model = Tag
-        fields = ['id','name','description','topics']
-    
-

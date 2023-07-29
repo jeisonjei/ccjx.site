@@ -1,7 +1,7 @@
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,AllowAny
 from .models import Answer, Comment, Tag, Topic, Vote
 from .serializers import AnswerSerializer, CommentSerializer, TagSerializer, TopicSerializer, TopicSerializerShort, TopicSerializerMy, VoteSerializer
 from django.db.models import F
@@ -25,6 +25,7 @@ class TopicListCreate(generics.ListCreateAPIView):
     queryset=Topic.objects.filter(is_private=False)
     
 class TopicListShort(generics.ListAPIView):
+    permission_classes=[AllowAny]
     lookup_field='id'
     serializer_class=TopicSerializerShort
     queryset=Topic.objects.filter(is_private=False)
@@ -35,6 +36,7 @@ class TopicDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset=Topic.objects.all()
     
 class TopicLastList(generics.ListAPIView):
+    permission_classes=[AllowAny]
     lookup_field='id'
     serializer_class=TopicSerializerShort
     def get_queryset(self):
@@ -43,8 +45,17 @@ class TopicLastList(generics.ListAPIView):
         return queryset
     
 class TopicCount(APIView):
+    permission_classes=[AllowAny]
     def get(self, request):
         return Response(Topic.objects.filter(is_private=False).values_list('id',flat=True))
+
+class TopicTagList(generics.ListAPIView):
+    lookup_field='id'
+    serializer_class=TopicSerializer
+    def get_queryset(self):
+        topic_id=self.kwargs['id']
+        queryset=Topic.objects.filter(id=topic_id)
+        return queryset
             
 class AnswerListCreate(generics.ListCreateAPIView):
     lookup_field='id'
@@ -75,6 +86,7 @@ class TagListCreate(generics.ListCreateAPIView):
     lookup_field='id'
     serializer_class=TagSerializer
     queryset=Tag.objects.all()
+    
 
 class TagDetail(generics.RetrieveUpdateDestroyAPIView):
     lookup_field='id'

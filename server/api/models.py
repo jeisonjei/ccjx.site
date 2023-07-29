@@ -85,4 +85,4 @@ class Vote(models.Model):
 class Tag(models.Model):
     name = models.CharField(default='',unique=True)
     description = models.TextField(null=True)
-    topics = models.ManyToManyField(Topic,related_name='tags')
+    topics = models.ManyToManyField(Topic,related_name='tags',blank=True)

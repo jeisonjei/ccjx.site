@@ -13,6 +13,7 @@ from .views import CommentListCreate, CommentDetail
 from .views import VoteListCreate
 from .views import TagListCreate
 from .views import TagDetail
+from .views import TopicTagList
 # коллекции указываются во множественном числе
 urlpatterns = [
     path('account/register/',register),
@@ -27,6 +28,7 @@ urlpatterns = [
     path('topics/<int:id>/',TopicDetail.as_view()),
     path('topics/last/<int:amount>/',TopicLastList.as_view()),
     path('topics/count/',TopicCount.as_view()),
+    path('topics/<int:id>/tags/', TopicTagList.as_view()),
 
     path('answers/',AnswerListCreate.as_view()),
     path('answers/<int:id>/',AnswerDetail.as_view()),
@@ -35,7 +37,7 @@ urlpatterns = [
     path('comments/<int:id>/', CommentDetail.as_view()),
 
     path('votes/', VoteListCreate.as_view()),
-    
+
     path('tags/', TagListCreate.as_view()),
-    path('tags/<int:id>/',TagDetail.as_view())
+    path('tags/<int:id>/',TagDetail.as_view()),
 ]

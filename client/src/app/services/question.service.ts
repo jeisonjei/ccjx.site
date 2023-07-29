@@ -40,8 +40,8 @@ export class TopicService {
     const url = this.urls.getUrlTopicDetail(id);
     return this.http.get(url);
   }
-  update(topic: any) {
-    const url = this.urls.getUrlTopicDetail(topic.id ?? 'error');
+  update(id:string,topic: any) {
+    const url = this.urls.getUrlTopicDetail(id ?? 'error');
     return this.http.patch(url,topic);
   }
   delete(id: string) {
