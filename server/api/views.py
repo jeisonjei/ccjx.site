@@ -75,3 +75,8 @@ class TagListCreate(generics.ListCreateAPIView):
     lookup_field='id'
     serializer_class=TagSerializer
     queryset=Tag.objects.all()
+
+class TagDetail(generics.RetrieveUpdateDestroyAPIView):
+    lookup_field='id'
+    serializer_class=TagSerializer
+    queryset=Tag.objects.all()
