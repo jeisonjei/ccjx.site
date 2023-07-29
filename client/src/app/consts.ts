@@ -38,6 +38,12 @@ export type Comment = /**модель Comment */{
   text: string,
   
 }
+export interface Tag{
+  id: string,
+  name: string,
+  description?: string,
+  topics:string[]
+}
 export interface MessDial {
   title: string,
   message:string
