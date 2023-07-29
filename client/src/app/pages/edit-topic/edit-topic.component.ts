@@ -10,13 +10,16 @@ import ImageResize from 'quill-image-resize-module';
 import { TagService } from '@app/services/tag.service';
 import { Observable, map, startWith } from 'rxjs';
 Quill.register('modules/imageResize', ImageResize);
+import { faTag  } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-edit-topic',
   templateUrl: './edit-topic.component.html',
   styleUrls: ['./edit-topic.component.scss'],
 })
+
 export class EditTopicComponent implements OnInit {
+  faTag = faTag;
   title = '';
   userId = '';
   topicId = '';

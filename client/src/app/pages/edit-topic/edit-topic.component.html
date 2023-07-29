@@ -6,15 +6,15 @@
           <mat-checkbox [checked]="isPrivate" (change)="onIsPrivateChange($event.checked)">Личная запись</mat-checkbox>
         </div>
        <div ngClass="grid2">
-        <div>
+        <div ngClass="d-flex align-items-center">
           <input (keyup)="tagAddOnEnter($event)" type="text" placeholder="Тэги..." [formControl]="myControl" [matAutocomplete]="auto"
             [value]="tagSelected" #autocompleteInput [matChipInputFor]="chipGrid">
           <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
             <mat-option *ngFor="let tag of tagsFiltered|async" [value]="tag">{{tag.name}}</mat-option>
           </mat-autocomplete>
-          <button mat-icon-button (click)="tagCreate(autocompleteInput.value)"><mat-icon>add</mat-icon></button>
+          <button ngClass="mx-1" mat-icon-button (click)="tagCreate(autocompleteInput.value)"><fa-icon [icon]="faTag"></fa-icon></button>
         </div>
-        <div>
+        <div ngClass="d-flex align-items-center ms-4">
           <mat-chip-grid #chipGrid>
             <mat-chip-row *ngFor="let tag of tagsAdded" (removed)="tagDelete(tag)">
               {{tag.name}}

@@ -7,6 +7,7 @@ import { Tag, Topic as Topic } from '../../consts';
 import { TopicService } from 'src/app/services/question.service';
 import { TagService } from '@app/services/tag.service';
 import { Observable, map, startWith } from 'rxjs';
+import { faTag  } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-new-topic',
@@ -14,6 +15,7 @@ import { Observable, map, startWith } from 'rxjs';
   styleUrls: ['./new-topic.component.scss'],
 })
 export class NewQuestionComponent implements OnInit {
+  faTag = faTag;
   title: string='';
   topicId: string='';
   userId: string = '';
