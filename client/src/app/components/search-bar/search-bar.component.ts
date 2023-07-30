@@ -52,10 +52,14 @@ export class SearchBarComponent implements OnInit {
     private dials: DialogService
   ) {}
   ngOnInit(): void {
+    console.log(`🔥 0: ${0}`);
     this.getAllQuestions();
     this.filteredQuestions = this.q.valueChanges.pipe(
       startWith(''),
       map((value: string) => {
+        if (value===undefined) {
+          return this._filter(value || '', this.allQuestions);
+        }
         const matchTagNotCompleted = value.match(/^\([^\)]*$/);
         const matchTagComplete = value.match(/^\(.*\).*$/);
         if (matchTagNotCompleted != null) {
@@ -64,7 +68,6 @@ export class SearchBarComponent implements OnInit {
         } else if (matchTagComplete != null) {
           const v = value.replace(/\(.*\)( |)+/, '');
           const m = value.match(/^\(.*\)/);
-          console.log(`🔥 v: ${v}`);
           let tag;
           if (m!=null) {
             tag = m[0].replace('(', '').replace(')', '');
