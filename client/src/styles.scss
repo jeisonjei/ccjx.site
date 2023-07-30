@@ -59,3 +59,7 @@ body {
   margin: 0px;
   position: relative;
 }
+// переопределение ширины пункта строки поиска - чтобы тэги отображались на другой стороне строки
+.mat-mdc-option .mdc-list-item__primary-text{
+  width:100%;
+ }

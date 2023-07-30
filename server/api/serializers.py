@@ -75,6 +75,7 @@ class TopicSerializerShort(serializers.ModelSerializer):
     '''
     Этот сериалайзер используется для загрузки всех вопросов в поле поиска (компонент search-bar)
     '''
+    tags = TagSerializer(many = True,required=False)
     class Meta:
         model = Topic
         fields = ['id','title','tags']    
