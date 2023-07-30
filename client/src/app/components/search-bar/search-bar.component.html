@@ -12,6 +12,10 @@
             </div>
           </div>
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="clearSelection($event)">
+            <mat-option>
+              <div><span ngClass="bold">(имя тэга) ...слова поиска...</span> - поиск по тегу, затем по словам в заголовке темы</div>
+              <hr>
+            </mat-option>
             <mat-option *ngFor="let q of filteredQuestions|async" (onSelectionChange)="navigate(q.id)">
               <div ngClass="d-flex justify-content-between align-items-center">
                 <span>{{q.title}}</span>
