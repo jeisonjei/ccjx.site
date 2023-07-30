@@ -8,11 +8,11 @@
             </ng-template>
         </div>
         <div>
-          <mat-chip-grid #chipGrid>
-            <mat-chip-row *ngFor="let tag of question.tags">
+          <div>
+            <mat-chip ngClass="small" *ngFor="let tag of question.tags">
               {{tag.name}}
-            </mat-chip-row>
-          </mat-chip-grid>
+            </mat-chip>
+        </div>
  
         </div>
         <h1 ngClass="text-center">{{question?.title}}</h1>

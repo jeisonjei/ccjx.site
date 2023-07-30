@@ -24,7 +24,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PleaseRegisterComponent } from 'src/app/shared/dialogs/please-register/please-register.component';
 import { DialogConfig } from '@angular/cdk/dialog';
 import { DialogService } from 'src/app/services/dialog.service';
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-search-bar',
@@ -49,35 +49,61 @@ export class SearchBarComponent implements OnInit {
     private questionService: TopicService,
     private validator: ValidatorService,
     private dialog: MatDialog,
-    private dials:DialogService
+    private dials: DialogService
   ) {}
   ngOnInit(): void {
     this.getAllQuestions();
     this.filteredQuestions = this.q.valueChanges.pipe(
       startWith(''),
-      map((value) => this._filter(value || ''))
+      map((value: string) => {
+        const matchTagNotCompleted = value.match(/^\([^\)]*$/);
+        const matchTagComplete = value.match(/^\(.*\).*$/);
+        if (matchTagNotCompleted != null) {
+          const tag = matchTagNotCompleted[0].replace('(', '');
+          return this._filterByTag(tag, this.allQuestions);
+        } else if (matchTagComplete != null) {
+          const v = value.replace(/\(.*\)( |)+/, '');
+          const m = value.match(/^\(.*\)/);
+          console.log(`🔥 v: ${v}`);
+          let tag;
+          if (m!=null) {
+            tag = m[0].replace('(', '').replace(')', '');
+            const topics = this._filterByTag(tag, this.allQuestions);
+            const filtered = this._filter(v, topics);
+            return filtered;
+          }
+          return this._filter(value || '', this.allQuestions);
+        } else {
+          return this._filter(value || '', this.allQuestions);
+        }
+      })
     );
   }
-  clearSelection(event:MatAutocompleteSelectedEvent) {
+  clearSelection(event: MatAutocompleteSelectedEvent) {
     event.option.deselect();
   }
-  private _filter(value: string): Topic[] {
+  private _filter(value: string, collection: any): Topic[] {
     const filterValue = value.toLowerCase();
-    return this.allQuestions.filter((q) =>
+    return collection.filter((q) =>
       q.title.toLowerCase().includes(filterValue)
     );
   }
-  
+  private _filterByTag(value: string, collection: any): Topic[] {
+    const filterValue = value.toLowerCase();
+    const questions = collection.filter((v) => {
+      const tagNames = v.tags.map((v) => v.name);
+      return tagNames.some((v) => v.includes(filterValue));
+    });
+    return questions;
+  }
+
   getAllQuestions() {
-    this.questionService.listShort().subscribe((v:any) => {
+    this.questionService.listShort().subscribe((v: any) => {
       this.allQuestions = [...v];
-    })
+    });
   }
   navigate(id?: string) {
     this.router.navigateByUrl(`topics/${id}`);
     this.trigger?.writeValue('');
   }
-  
-
 }
-
