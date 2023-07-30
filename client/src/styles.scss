@@ -63,3 +63,6 @@ body {
 .mat-mdc-option .mdc-list-item__primary-text{
   width:100%;
  }
+ .unselectable.mat-mdc-option.mdc-list-item--disabled .mdc-list-item__primary-text{
+  opacity: 1;
+ }
