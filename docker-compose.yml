@@ -2,9 +2,10 @@
 # то есть внутри контейнера адрес директории uploads будет /app/uploads (app - это рабочая директорая, указанная в Dockerfile командой WORKDIR)
 networks:
   net:
-   
+
 services:
   client:
+    restart: always
     container_name: ccjxsite_client
     build: ./client
     # command: bash -c "ng serve --host 0.0.0.0"
@@ -16,8 +17,9 @@ services:
       - net
     volumes:
       - ./client/node_modules:/node_modules
-   
+
   server:
+    restart: always
     container_name: ccjxsite_server
     # местонахождение Dockerfile
     build: ./server
@@ -34,26 +36,23 @@ services:
     volumes:
       - ./server/uploads:/app/uploads
   redis:
-      container_name: ccjxsite_redis
-      image: redis:7.0.7
-      networks:
-        - net 
+    restart: always
+    container_name: ccjxsite_redis
+    image: redis:7.0.7
+    networks:
+      - net
   db:
-      container_name: ccjxsite_db
-      image: postgres:15
-      environment:
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=1234
-        - POSTGRES_DB=osscore
-      networks:
-        - net
-      volumes:
-        - pg_data:/var/lib/postgresql/data
-
+    restart: always
+    container_name: ccjxsite_db
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=osscore
+    networks:
+      - net
+    volumes:
+      - pg_data:/var/lib/postgresql/data
 
 volumes:
   pg_data:
-    
-
-
-      
