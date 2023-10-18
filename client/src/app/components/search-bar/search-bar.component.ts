@@ -52,7 +52,6 @@ export class SearchBarComponent implements OnInit {
     private dials: DialogService
   ) {}
   ngOnInit(): void {
-    console.log(`🔥 0: ${0}`);
     this.getAllQuestions();
     this.filteredQuestions = this.q.valueChanges.pipe(
       startWith(''),
