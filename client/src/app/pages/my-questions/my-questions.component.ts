@@ -7,6 +7,7 @@ import { UrlsService } from '../../services/urls.service';
 import { MatSort, MatSortable, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TopicService } from '@app/services/question.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-my-questions',
@@ -34,10 +35,6 @@ export class MyQuestionsComponent{
     this.tops.listShortMy().subscribe({
       next(value: any) {
         self.myQuestions = value;
-        for (const item of self.myQuestions) {
-          let dateTime = self.formatDate(item.date_created??'error');
-          item.date_created = dateTime;
-        }
         self.dataSource=new MatTableDataSource(self.myQuestions.slice());
         self.dataSource.sort = self.sort??null;
         self.sort?.sort(({ id: 'date', start: 'desc'}) as MatSortable);
@@ -59,25 +56,50 @@ export class MyQuestionsComponent{
       }).format(date);
   }
   sortData(sort: Sort) {
-    const data = this.myQuestions.slice();
-    if (!sort.active || sort.direction==='asc') {
-      this.dataSource = data;
-      return;
+    let data:any[]=[];
+    if (sort.direction==='asc') {
+      data=sortByDateAscending(this.myQuestions);
     }
-    this.dataSource = data.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'date':
-          return compare(a.date_created??'error',b.date_created??'error',isAsc);
-        case 'record':
-          return compare(a.title??'error',b.title??'error',isAsc);
-        default:
-          return 0;
-      }
-    })
+    else if (sort.direction==='desc') {
+      data=sortByDateDescending(this.myQuestions);
+    }
+    else {
+      data = this.myQuestions;
+    }
+    this.sortedData = data.map((item: any) => {
+      const obj = {...item, date_created: this.formatDate(item.date_created)};
+      return obj;
+    });
+
   }
-  
 }
-function compare(a: string, b: string, isAsc: boolean) {
-  return (a<b?-1:1)*(isAsc?1:-1);
+
+function sortByDateAscending(array: any[]) {
+  array.sort((a, b) => {
+    try {
+      const dateA = moment(a.date_created, 'DD-MM-YYYY HH:mm:ss');
+      const dateB = moment(b.date_created, 'DD-MM-YYYY HH:mm:ss');   
+      return dateA.diff(dateB);
+    } catch (error) {
+      console.error(error);
+    }
+    return 0;
+
+  });
+  return array;
+}
+function sortByDateDescending(array: any[]) {
+  array.sort((a, b) => {
+    try {
+      const dateA = moment(a.date_created,'DD-MM-YYYY HH:mm:ss');
+      const dateB = moment(b.date_created, 'DD-MM-YYYY HH:mm:ss');     
+      return dateB.diff(dateA);
+    } catch (error) {
+      console.error(error);
+    }
+    return 0;
+
+  });
+  return array;
+
 }

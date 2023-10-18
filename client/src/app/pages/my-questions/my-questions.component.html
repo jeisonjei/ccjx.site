@@ -2,17 +2,17 @@
     <div ngClass="col-lg-8">
         <mat-card ngClass="p-4">
             <h1 ngClass="text-center">Мои записи</h1>
-            <table mat-table matSort (matSortChange)="sortData($event)" [dataSource]="dataSource">
-                <ng-container matColumnDef="date">
-                    <th mat-header-cell *matHeaderCellDef  mat-sort-header sortActionDescription="Sort by date">Дата</th>
-                    <td ngClass="mx-1" mat-cell *matCellDef="let item">{{item.date_created}}</td>
-                </ng-container>
-                <ng-container matColumnDef="record">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Запись</th>
-                    <td ngClass="mx-1" mat-cell *matCellDef="let item"><a ngClass="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" routerLink="/topics/{{item.id}}">{{item.title}}</a></td>
-                </ng-container>
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <table matSort (matSortChange)="sortData($event)">
+                <tr>
+                    <th mat-sort-header="date">Дата создания</th>
+                    <th mat-sort-header="record">Запись</th>
+                </tr>
+                <tr *ngFor="let record of sortedData">
+                    <td>{{record.date_created}}</td>
+                    <td><a
+                        ngClass="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                        routerLink="/topics/{{record.id}}">{{record.title}}</a></td>
+                </tr>
             </table>
         </mat-card>
     </div>
