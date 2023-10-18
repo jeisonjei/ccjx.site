@@ -77,8 +77,8 @@ export class MyQuestionsComponent{
 function sortByDateAscending(array: any[]) {
   array.sort((a, b) => {
     try {
-      const dateA = moment(a.date_created, 'DD-MM-YYYY HH:mm:ss');
-      const dateB = moment(b.date_created, 'DD-MM-YYYY HH:mm:ss');   
+      const dateA = moment(a.date_created, moment.ISO_8601);
+      const dateB = moment(b.date_created, moment.ISO_8601);   
       return dateA.diff(dateB);
     } catch (error) {
       console.error(error);
@@ -91,8 +91,8 @@ function sortByDateAscending(array: any[]) {
 function sortByDateDescending(array: any[]) {
   array.sort((a, b) => {
     try {
-      const dateA = moment(a.date_created,'DD-MM-YYYY HH:mm:ss');
-      const dateB = moment(b.date_created, 'DD-MM-YYYY HH:mm:ss');     
+      const dateA = moment(a.date_created,moment.ISO_8601);
+      const dateB = moment(b.date_created, moment.ISO_8601);     
       return dateB.diff(dateA);
     } catch (error) {
       console.error(error);
