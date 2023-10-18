@@ -111,16 +111,31 @@ export class MyQuestionsComponent {
   }
   sortData(sort: Sort) {
     let data: any[] = [];
-    if (sort.direction === 'asc') {
-      data = sortByDateAscending(this.myQuestions);
-    } else if (sort.direction === 'desc') {
-      data = sortByDateDescending(this.myQuestions);
-    } else {
-      data = this.myQuestions;
+    if (sort.active=='is_private') {
+      if (sort.direction==='asc') {
+        data = this.myQuestions.sort((a, b) => {
+          return a.is_private - b.is_private;
+        })
+      }
+      else if (sort.direction === 'desc') {
+        data = this.myQuestions.sort((a, b) => {
+          return b.is_private - a.is_private;
+        })
+      }
+      else {
+        data = this.myQuestions;
+      }
     }
-    for (const item of data) {
-      console.log(`🔥 item: ${JSON.stringify(item)}`);
+    if (sort.active=='date') {
+      if (sort.direction === 'asc') {
+        data = sortByDateAscending(this.myQuestions);
+      } else if (sort.direction === 'desc') {
+        data = sortByDateDescending(this.myQuestions);
+      } else {
+        data = this.myQuestions;
+      }
     }
+
     this.sortedData = data.map((item: any) => {
       const obj = { ...item, date_created: this.formatDate(item.date_created) };
       return obj;

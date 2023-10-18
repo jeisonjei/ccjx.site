@@ -3,15 +3,24 @@
         <mat-card ngClass="p-4">
             <h1 ngClass="text-center">Мои записи</h1>
             <table matSort (matSortChange)="sortData($event)">
-                <tr>
-                    <th mat-sort-header="date">Дата создания</th>
-                    <th mat-sort-header="record">Запись</th>
-                </tr>
+                <thead>
+                    <th mat-sort-header="is_private">Личная</th>
+                    <th ngClass="w-25" mat-sort-header="date">Дата создания</th>
+                    <th ngClass="w-40" mat-sort-header="record">Запись</th>
+                    <th>Тэг</th>
+                </thead>
                 <tr *ngFor="let record of sortedData">
+                    <td ngClass="text-center">
+                        <mat-icon fontIcon="check" *ngIf="record.is_private"></mat-icon>
+                    </td>
                     <td>{{record.date_created}}</td>
-                    <td><a
-                        ngClass="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                        routerLink="/topics/{{record.id}}">{{record.title}}</a></td>
+                    <td><a ngClass="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                            routerLink="/topics/{{record.id}}">{{record.title}}</a></td>
+                    <td> <mat-chip ngClass="small" *ngFor="let tag of record.tags">
+                            {{tag.name}}
+                        </mat-chip>
+
+                    </td>
                 </tr>
             </table>
         </mat-card>

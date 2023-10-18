@@ -84,6 +84,7 @@ class TopicSerializerMy(serializers.ModelSerializer):
     '''
     Этот сериалайзер используется для загрузки вопросов для страницы "Мои записи"
     '''
+    tags = TagSerializer(many = True, required = False)
     class Meta:
         model = Topic
-        fields = ['id','title','date_created']    
+        fields = ['id','title','date_created','tags','is_article','is_private']    
