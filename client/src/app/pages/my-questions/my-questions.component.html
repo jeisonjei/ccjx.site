@@ -5,7 +5,7 @@
             <table matSort (matSortChange)="sortData($event)">
                 <thead>
                     <th mat-sort-header="is_private">Личная</th>
-                    <th ngClass="w-25" mat-sort-header="date">Дата создания</th>
+                    <th ngClass="w-30" mat-sort-header="date">Дата создания</th>
                     <th ngClass="w-40" mat-sort-header="record">Запись</th>
                     <th>Тэг</th>
                 </thead>
@@ -16,7 +16,8 @@
                     <td>{{record.date_created}}</td>
                     <td><a ngClass="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
                             routerLink="/topics/{{record.id}}">{{record.title}}</a></td>
-                    <td> <mat-chip ngClass="small" *ngFor="let tag of record.tags">
+                    <td> 
+                        <mat-chip ngClass="small p-1" *ngFor="let tag of record.tags">
                             {{tag.name}}
                         </mat-chip>
 
