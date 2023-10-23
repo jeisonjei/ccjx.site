@@ -83,6 +83,7 @@ class Vote(models.Model):
     date_created = models.DateTimeField(auto_now_add = True, null = True)
     
 class Tag(models.Model):
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
     name = models.CharField(default='',unique=True)
     description = models.TextField(null=True)
     topics = models.ManyToManyField(Topic,related_name='tags',blank=True)

@@ -52,8 +52,8 @@ class TagSerializer(serializers.ModelSerializer):
     '''
     class Meta:
         model = Tag
-        fields = ['id','name','description','topics']
-        
+        fields = ['id','user','name','description','topics']
+                
 class TopicSerializer(serializers.ModelSerializer):
     '''
     Этот сериалайзер используется для отображения конкретного вопроса
