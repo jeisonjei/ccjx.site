@@ -37,10 +37,11 @@ export type Comment = /**модель Comment */{
   answer?:string,
   user: string,
   text: string,
-  
+
 }
 export interface Tag{
   id?: string,
+  user?: string,
   name: string,
   description?: string,
   topics:string[]

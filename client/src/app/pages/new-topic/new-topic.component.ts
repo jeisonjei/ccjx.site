@@ -33,7 +33,7 @@ export class NewQuestionComponent implements OnInit {
     private urls: UrlsService,
     private quess: TopicService,
     private tagService: TagService) {
-    
+
   }
   ngOnInit(): void {
     this.getTopic();
@@ -49,7 +49,7 @@ export class NewQuestionComponent implements OnInit {
       // при выборе элемента сюда передаётся объект тэг. В этом случае возврат
       return;
     }
-    const filterValue = v.toLowerCase(); 
+    const filterValue = v.toLowerCase();
     return this.tags.filter(v=>v.name.toLowerCase().includes(filterValue));
   }
   selectTitle() {
@@ -87,9 +87,9 @@ export class NewQuestionComponent implements OnInit {
     console.log(`🔥 topic: ${JSON.stringify(t)}`);
     this.http.patch(serverUrl, t).subscribe({
       next(value) {
-        
+
       },
-    }); 
+    });
     const url = `topics/${topicId}`;
     this.router.navigateByUrl(url);
   }
@@ -105,20 +105,21 @@ export class NewQuestionComponent implements OnInit {
   }
   onIsArticleChange(checked: boolean) {
     this.isArticle = checked;
-  } 
+  }
   onIsPrivateChange(checked: boolean) {
     this.isPrivate = checked;
   }
   tagList() {
     this.tagService.list().subscribe((v:any) => {
       this.tags = v;
-    })    
+    })
   }
   tagCreate(tagName: string) {
     if (!this.tags.map(v=>v.name).includes(tagName)) {
       // создать новый тэг
       const tag:Tag = {
         name: tagName,
+        user: undefined,
         topics: [this.topicId]
       }
       this.tagService.create(tag).subscribe(v => {
