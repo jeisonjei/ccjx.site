@@ -8,6 +8,7 @@ import { MatSort, MatSortable, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TopicService } from '@app/services/question.service';
 import * as moment from 'moment';
+import { TagService } from '@app/services/tag.service';
 
 @Component({
   selector: 'app-my-questions',
@@ -16,6 +17,7 @@ import * as moment from 'moment';
 })
 export class MyQuestionsComponent {
   myQuestions: any;
+  myTags: any;
   sortedData: any[] = [];
   displayedColumns: string[] = ['date', 'record'];
   dataSource = new MatTableDataSource();
@@ -26,18 +28,30 @@ export class MyQuestionsComponent {
     private activatedRoute: ActivatedRoute,
     private eh: ErrorHandlerService,
     private urls: UrlsService,
-    private tops: TopicService
+    private tops: TopicService,
+    private tagService: TagService
   ) {
     this.getMyQuestions();
+    this.getMyTags();
   }
   getMyQuestions() {
     const self = this;
     this.tops.listShortMy().subscribe({
       next(value: any) {
         self.myQuestions = value;
+        const tags:any[]=[];
+        for (const topic of value) {
+          for (const tag of topic.tags) {
+            tags.push(tag.name);
+          }
+        }
+        self.myTags = tags;
         self.sort?.sort({ id: 'date', start: 'desc' } as MatSortable);
       },
     });
+  }
+  getMyTags() {
+
   }
   formatDate(dateTime: string) {
     let date = new Date(dateTime);
@@ -69,7 +83,7 @@ export class MyQuestionsComponent {
         data = this.myQuestions;
       }
     }
-    if (sort.active=='date') {
+    else if (sort.active=='date') {
       if (sort.direction === 'asc') {
         data = sortByDateAscending(this.myQuestions);
       } else if (sort.direction === 'desc') {
@@ -78,11 +92,13 @@ export class MyQuestionsComponent {
         data = this.myQuestions;
       }
     }
-
     this.sortedData = data.map((item: any) => {
       const obj = { ...item, date_created: this.formatDate(item.date_created) };
       return obj;
     });
+  }
+  onChipSelect(event: any) {
+
   }
 }
 
@@ -110,5 +126,17 @@ function sortByDateDescending(array: any[]) {
     }
     return 0;
   });
+  return array;
+}
+function sortByTagAscending(array: any[]) {
+  array.sort( (a, b) => {
+    return a.tag.localeCompare(b.tag);
+  })
+  return array;
+}
+function sortByTagDescending(array: any[]) {
+  array.sort( (a, b) => {
+    return b.tag.localeCompare(a.tag);
+  })
   return array;
 }

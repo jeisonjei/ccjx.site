@@ -2,6 +2,11 @@
     <div ngClass="col-lg-8">
         <mat-card ngClass="p-4">
             <h1 ngClass="text-center">Мои записи</h1>
+            <div>
+              <mat-chip ngClass="m-1" (select)="onChipSelect($event)" *ngFor="let tag of myTags">
+                {{tag}}
+              </mat-chip>
+            </div>
             <table matSort (matSortChange)="sortData($event)">
                 <thead>
                     <th mat-sort-header="is_private">Личная</th>
@@ -16,11 +21,10 @@
                     <td>{{record.date_created}}</td>
                     <td><a ngClass="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
                             routerLink="/topics/{{record.id}}">{{record.title}}</a></td>
-                    <td> 
-                        <mat-chip ngClass="small p-1" *ngFor="let tag of record.tags">
+                    <td>
+                        <mat-chip ngClass="small m-1" *ngFor="let tag of record.tags">
                             {{tag.name}}
                         </mat-chip>
-
                     </td>
                 </tr>
             </table>
