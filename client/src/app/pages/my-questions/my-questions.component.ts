@@ -11,6 +11,8 @@ import { TopicService } from '@app/services/question.service';
 import * as moment from 'moment';
 import { TagService } from '@app/services/tag.service';
 import { MatChipEvent, MatChipListboxChange, MatChipSelectionChange } from '@angular/material/chips';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogService } from '@app/services/dialog.service';
 
 @Component({
   selector: 'app-my-questions',
@@ -32,7 +34,8 @@ export class MyQuestionsComponent {
     private eh: ErrorHandlerService,
     private urls: UrlsService,
     private tops: TopicService,
-    private tagService: TagService
+    private tagService: TagService,
+    private dialogService: DialogService
   ) {
     this.getMyQuestions();
     this.getMyTags();
@@ -151,6 +154,21 @@ export class MyQuestionsComponent {
       });
       this.sortedData = data;
     }
+  }
+  deleteRecord(record:Topic) {
+    this.dialogService.showDelConfDial('Удаление записи', 'Вы уверены, что хотите удалить запись?').subscribe((v) => {
+      if (v) {
+        // если у записи нет ни комментариев, ни ответов, то её можно удалить
+        this.tops.retrieve(record.id ?? 'error').subscribe((v:any) => {
+          if (v.answers.length==0 && v.comments.length == 0) {
+            this.tops.delete(record.id ?? 'error').subscribe();
+          }
+          else {
+            this.dialogService.showMessDial('Информация','К вашей записи уже оставлены комментарии и/или ответы, теперь её нельзя удалить');
+          }
+        })
+      }
+    });
   }
 }
 

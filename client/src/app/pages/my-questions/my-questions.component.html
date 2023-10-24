@@ -26,6 +26,9 @@
                             {{tag.name}}
                         </mat-chip>
                     </td>
+                    <td ngClass="ps-4">
+                      <button mat-flat-button color="warn" (click)="deleteRecord(record)">Удалить</button>
+                    </td>
                 </tr>
             </table>
         </mat-card>
