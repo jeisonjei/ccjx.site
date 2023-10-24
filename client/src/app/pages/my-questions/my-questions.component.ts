@@ -33,7 +33,7 @@ export class MyQuestionsComponent {
     private activatedRoute: ActivatedRoute,
     private eh: ErrorHandlerService,
     private urls: UrlsService,
-    private tops: TopicService,
+    private topicService: TopicService,
     private tagService: TagService,
     private dialogService: DialogService
   ) {
@@ -42,7 +42,7 @@ export class MyQuestionsComponent {
   }
   getMyQuestions() {
     const self = this;
-    this.tops.listShortMy().subscribe({
+    this.topicService.listShortMy().subscribe({
       next(value: any) {
         self.myQuestions = value;
         const tags:any[]=[];
@@ -155,20 +155,20 @@ export class MyQuestionsComponent {
       this.sortedData = data;
     }
   }
-  deleteRecord(record:Topic) {
-    this.dialogService.showDelConfDial('Удаление записи', 'Вы уверены, что хотите удалить запись?').subscribe((v) => {
-      if (v) {
-        // если у записи нет ни комментариев, ни ответов, то её можно удалить
-        this.tops.retrieve(record.id ?? 'error').subscribe((v:any) => {
-          if (v.answers.length==0 && v.comments.length == 0) {
-            this.tops.delete(record.id ?? 'error').subscribe();
-          }
-          else {
-            this.dialogService.showMessDial('Информация','К вашей записи уже оставлены комментарии и/или ответы, теперь её нельзя удалить');
+  deleteRecord(record: Topic) {
+    const id = record.id ?? 'error';
+    this.topicService.retrieve(id).subscribe((v: any) => {
+      if (v.answers.length==0 && v.comments.length==0) {
+        this.dialogService.showDelConfDial('Удаление записи', 'Вы уверены, что хотите удалить запись?').subscribe((v) => {
+          if (v) {
+            this.topicService.delete(id).subscribe();
           }
         })
       }
-    });
+      else {
+        this.dialogService.showMessDial('Информация','К вашей записи уже оставлены комментарии и/или ответы, поэтому её нельзя удалить');
+      }
+    })
   }
 }
 
