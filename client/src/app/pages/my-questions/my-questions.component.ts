@@ -140,7 +140,7 @@ export class MyQuestionsComponent {
     }
   }
   onChipSelect(event: MatChipListboxChange) {
-    this.selectedTags = event.source.value;
+    this.selectedTags = Array.from(new Set(this.selectedTags));
     if (this.selectedTags.length==0) {
       this.sortedData = this.myQuestions.map((item: any) => {
         const obj = { ...item, date_created: this.formatDate(item.date_created) };
