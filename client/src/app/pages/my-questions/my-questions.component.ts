@@ -1,3 +1,4 @@
+import { filter } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,6 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { TopicService } from '@app/services/question.service';
 import * as moment from 'moment';
 import { TagService } from '@app/services/tag.service';
+import { MatChipEvent, MatChipListboxChange, MatChipSelectionChange } from '@angular/material/chips';
 
 @Component({
   selector: 'app-my-questions',
@@ -18,6 +20,7 @@ import { TagService } from '@app/services/tag.service';
 export class MyQuestionsComponent {
   myQuestions: any;
   myTags: any;
+  selectedTags: any;
   sortedData: any[] = [];
   displayedColumns: string[] = ['date', 'record'];
   dataSource = new MatTableDataSource();
@@ -68,37 +71,86 @@ export class MyQuestionsComponent {
   }
   sortData(sort: Sort) {
     let data: any[] = [];
-    if (sort.active=='is_private') {
-      if (sort.direction==='asc') {
-        data = this.myQuestions.sort((a, b) => {
-          return a.is_private - b.is_private;
-        })
-      }
-      else if (sort.direction === 'desc') {
-        data = this.myQuestions.sort((a, b) => {
-          return b.is_private - a.is_private;
-        })
-      }
-      else {
-        data = this.myQuestions;
-      }
-    }
-    else if (sort.active=='date') {
-      if (sort.direction === 'asc') {
-        data = sortByDateAscending(this.myQuestions);
-      } else if (sort.direction === 'desc') {
-        data = sortByDateDescending(this.myQuestions);
-      } else {
-        data = this.myQuestions;
-      }
-    }
-    this.sortedData = data.map((item: any) => {
-      const obj = { ...item, date_created: this.formatDate(item.date_created) };
-      return obj;
-    });
-  }
-  onChipSelect(event: any) {
+    if (this.selectedTags?.length > 0) {
+      const dataWithSelectedTags = this.myQuestions.filter((topic: Topic) => {
+        return topic.tags.some(tag=>this.selectedTags.includes(tag.name));
+      });
 
+      if (sort.active=='is_private') {
+        if (sort.direction==='asc') {
+          data = dataWithSelectedTags.sort((a, b) => {
+            return a.is_private - b.is_private;
+          })
+        }
+        else if (sort.direction === 'desc') {
+          data = dataWithSelectedTags.sort((a, b) => {
+            return b.is_private - a.is_private;
+          })
+        }
+        else {
+          data = dataWithSelectedTags;
+        }
+      }
+      else if (sort.active=='date') {
+        if (sort.direction === 'asc') {
+          data = sortByDateAscending(dataWithSelectedTags);
+        } else if (sort.direction === 'desc') {
+          data = sortByDateDescending(dataWithSelectedTags);
+        } else {
+          data = dataWithSelectedTags;
+        }
+      }
+      this.sortedData = data.map((item: any) => {
+        const obj = { ...item, date_created: this.formatDate(item.date_created) };
+        return obj;
+      });
+    }
+    else {
+      if (sort.active=='is_private') {
+        if (sort.direction==='asc') {
+          data = this.myQuestions.sort((a, b) => {
+            return a.is_private - b.is_private;
+          })
+        }
+        else if (sort.direction === 'desc') {
+          data = this.myQuestions.sort((a, b) => {
+            return b.is_private - a.is_private;
+          })
+        }
+        else {
+          data = this.myQuestions;
+        }
+      }
+      else if (sort.active=='date') {
+        if (sort.direction === 'asc') {
+          data = sortByDateAscending(this.myQuestions);
+        } else if (sort.direction === 'desc') {
+          data = sortByDateDescending(this.myQuestions);
+        } else {
+          data = this.myQuestions;
+        }
+      }
+      this.sortedData = data.map((item: any) => {
+        const obj = { ...item, date_created: this.formatDate(item.date_created) };
+        return obj;
+      });
+    }
+  }
+  onChipSelect(event: MatChipListboxChange) {
+    this.selectedTags = event.source.value;
+    if (this.selectedTags.length==0) {
+      this.sortedData = this.myQuestions.map((item: any) => {
+        const obj = { ...item, date_created: this.formatDate(item.date_created) };
+        return obj;
+      });
+
+    }
+    else {
+      const data = this.sortedData.filter((topic: Topic) => {
+        return topic.tags.some(tag=>this.selectedTags.includes(tag.name));
+      });
+      this.sortedData = data;
+    }
   }
 }
 

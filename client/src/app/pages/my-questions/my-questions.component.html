@@ -2,11 +2,11 @@
     <div ngClass="col-lg-8">
         <mat-card ngClass="p-4">
             <h1 ngClass="text-center">Мои записи</h1>
-            <div>
-              <mat-chip ngClass="m-1" (select)="onChipSelect($event)" *ngFor="let tag of myTags">
+            <mat-chip-listbox multiple="true" (change)="onChipSelect($event)">
+              <mat-chip-option ngClass="m-1" *ngFor="let tag of myTags">
                 {{tag}}
-              </mat-chip>
-            </div>
+              </mat-chip-option>
+            </mat-chip-listbox>
             <table matSort (matSortChange)="sortData($event)">
                 <thead>
                     <th mat-sort-header="is_private">Личная</th>
