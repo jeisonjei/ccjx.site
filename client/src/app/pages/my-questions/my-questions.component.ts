@@ -51,7 +51,15 @@ export class MyQuestionsComponent {
             tags.push(tag.name);
           }
         }
-        self.myTags = tags;
+        const uniqueTags:any = [];
+        for (let i = 0; i < tags.length; i++) {
+          if (uniqueTags.indexOf(tags[i])===-1) {
+            uniqueTags.push(tags[i]);
+          }
+
+        }
+
+        self.myTags = uniqueTags;
         self.sort?.sort({ id: 'date', start: 'desc' } as MatSortable);
       },
     });
@@ -141,14 +149,6 @@ export class MyQuestionsComponent {
   }
   onChipSelect(event: MatChipListboxChange) {
     this.selectedTags = event.source.value;
-    const uniqueTags:any = [];
-    for (let i = 0; i < this.selectedTags.length; i++) {
-      if (uniqueTags.indexOf(this.selectedTags[i])===-1) {
-        uniqueTags.push(this.selectedTags[i]);
-      }
-
-    }
-    this.selectedTags = uniqueTags;
     if (this.selectedTags.length==0) {
       this.sortedData = this.myQuestions.map((item: any) => {
         const obj = { ...item, date_created: this.formatDate(item.date_created) };
