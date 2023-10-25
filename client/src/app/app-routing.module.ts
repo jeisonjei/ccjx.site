@@ -14,6 +14,7 @@ import { MyQuestionsComponent } from './pages/my-questions/my-questions.componen
 import { protectedGuard } from 'ngx-auth';
 import { EditTopicComponent } from './pages/edit-topic/edit-topic.component';
 import { RandomTopicComponent } from './pages/random-topic/random-topic.component';
+import { PopularAndNotComponent } from './pages/popular-and-not/popular-and-not.component';
 
 const routes: Routes = [
   { path: 'account/register', component: RegisterComponent },
@@ -28,7 +29,7 @@ const routes: Routes = [
   { path: 'users/:userId/edit-topic/:topicId', component: EditTopicComponent, canActivate: [protectedGuard]},
   { path:'topics/:topicId',component:TopicComponent},
   { path: 'my-questions', component: MyQuestionsComponent,canActivate:[protectedGuard] },
-  {path:'',component:RandomTopicComponent}
+  {path:'',component:PopularAndNotComponent}
 ];
 
 @NgModule({
