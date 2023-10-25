@@ -26,7 +26,7 @@ urlpatterns = [
     path('topics/',TopicListCreate.as_view()),
     path('topics/short/',TopicListShort.as_view()),
     path('topics/<int:id>/',TopicDetail.as_view()),
-    path('topics/last/<int:amount>/',TopicRecentList.as_view()),
+    path('topics/recent/<int:amount>/',TopicRecentList.as_view()),
     path('topics/count/',TopicCount.as_view()),
     path('topics/<int:id>/tags/', TopicTagList.as_view()),
 

@@ -28,7 +28,7 @@ export class UrlsService {
     return `${this.baseUrl}/topics/${topicId}/`;
   }
   getUrlTopicLast(amount: number) {
-    return `${this.baseUrl}/topics/last/${amount}/`;
+    return `${this.baseUrl}/topics/recent/${amount}/`;
   }
   getUrlTopicCount() {
     return `${this.baseUrl}/topics/count/`;
