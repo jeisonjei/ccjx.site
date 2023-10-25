@@ -6,7 +6,7 @@ from .account import new_password
 from .views import MyQuestionList, MyTagList
 from .views import TopicDetail, TopicListCreate
 from .views import TopicListShort
-from .views import TopicLastList
+from .views import TopicRecentList
 from .views import TopicCount
 from .views import AnswerListCreate, AnswerDetail
 from .views import CommentListCreate, CommentDetail
@@ -26,7 +26,7 @@ urlpatterns = [
     path('topics/',TopicListCreate.as_view()),
     path('topics/short/',TopicListShort.as_view()),
     path('topics/<int:id>/',TopicDetail.as_view()),
-    path('topics/last/<int:amount>/',TopicLastList.as_view()),
+    path('topics/last/<int:amount>/',TopicRecentList.as_view()),
     path('topics/count/',TopicCount.as_view()),
     path('topics/<int:id>/tags/', TopicTagList.as_view()),
 

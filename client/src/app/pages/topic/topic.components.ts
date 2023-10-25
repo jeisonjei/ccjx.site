@@ -50,7 +50,7 @@ export class TopicComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(() => {
       this.getQuestion();
     });
-    this.tops.lastList(10).subscribe((v:any) => {
+    this.tops.listRecent(10).subscribe((v:any) => {
       this.lastTopics = v;
     })
   }

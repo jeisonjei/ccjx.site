@@ -16,7 +16,7 @@ constructor(private tagService:TagService, private topicService:TopicService){}
     this.tagService.list().subscribe((v: any) => {
       this.tags = v;
     });
-    this.topicService.lastList(10).subscribe((v: any) => {
+    this.topicService.listRecent(10).subscribe((v: any) => {
       this.recentQuestions = v;
     })
   }

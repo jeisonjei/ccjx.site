@@ -28,7 +28,7 @@ export class TopicService {
     const url = this.urls.getUrlTopicCount();
     return this.http.get(url);
   }
-  lastList(amount:number) {
+  listRecent(amount:number) {
     const url = this.urls.getUrlTopicLast(amount);
     return this.http.get(url);
   }

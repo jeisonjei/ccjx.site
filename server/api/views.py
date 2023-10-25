@@ -35,7 +35,7 @@ class TopicDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class=TopicSerializer
     queryset=Topic.objects.all()
     
-class TopicLastList(generics.ListAPIView):
+class TopicRecentList(generics.ListAPIView):
     permission_classes=[AllowAny]
     lookup_field='id'
     serializer_class=TopicSerializerShort
