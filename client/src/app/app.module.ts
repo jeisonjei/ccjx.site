@@ -39,7 +39,6 @@ import { NewCommentComponent } from './components/new-comment/new-comment.compon
 import { CommentComponent } from './components/comment/comment.component';
 import { TopTopicsComponent } from './pages/top-topics/top-topics.component';
 import { NewsComponent } from './pages/news/news.component';
-import { PopularArticlesComponent } from './pages/popular-articles/popular-articles.component';
 import { PleaseRegisterComponent } from './shared/dialogs/please-register/please-register.component';
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatTooltipModule } from "@angular/material/tooltip";
@@ -89,7 +88,6 @@ import { MatTableModule } from "@angular/material/table";
     CommentComponent,
     TopTopicsComponent,
     NewsComponent,
-    PopularArticlesComponent,
     PleaseRegisterComponent,
     EditTopicComponent,
     EditAnswerComponent,
