@@ -1,8 +1,8 @@
 <div ngClass="m-grid">
   <div>
-    <h1>
+    <h2>
       Тэги
-    </h1>
+    </h2>
     <mat-chip-listbox multiple="true">
       <mat-chip-option *ngFor="let tag of tags">
         {{tag.name}}
@@ -11,20 +11,20 @@
   </div>
   <div ngClass="i-grid">
     <div>
-      <h1>Новые вопросы</h1>
+      <h2>10 новых вопросов</h2>
       <div *ngFor="let question of recentQuestions" ngClass="my-2">
           <a ngClass="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" routerLink="/topics/{{question.id}}">{{question.title}}</a>
       </div>
 
     </div>
     <div>
-      <h1>Популярные вопросы</h1>
+      <h2>Вопросы без ответа</h2>
     </div>
     <div>
-      <h1>Популярные статьи</h1>
+      <h2>Популярные статьи</h2>
     </div>
     <div>
-      <h1>Непопулярные вопросы</h1>
+      <h2>Популярные вопросы</h2>
     </div>
   </div>
 </div>

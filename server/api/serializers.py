@@ -78,7 +78,7 @@ class TopicSerializerShort(serializers.ModelSerializer):
     tags = TagSerializer(many = True,required=False)
     class Meta:
         model = Topic
-        fields = ['id','title','tags']    
+        fields = ['id','title','is_article','tags']    
 
 class TopicSerializerMy(serializers.ModelSerializer):
     '''

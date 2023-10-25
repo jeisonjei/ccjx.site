@@ -17,7 +17,7 @@ constructor(private tagService:TagService, private topicService:TopicService){}
       this.tags = v;
     });
     this.topicService.listRecent(10).subscribe((v: any) => {
-      this.recentQuestions = v;
+      this.recentQuestions = v.filter(topic=>!topic.is_article);
     })
   }
 }
