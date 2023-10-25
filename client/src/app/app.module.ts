@@ -60,6 +60,7 @@ import { MatBadgeModule } from "@angular/material/badge";
 import { MatChipsModule } from "@angular/material/chips";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTableModule } from "@angular/material/table";
+import { PopularAndNotComponent } from './pages/popular-and-not/popular-and-not.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { MatTableModule } from "@angular/material/table";
     EditCommentComponent,
     RandomTopicComponent,
     LoginDisplaySmallComponent,
+    PopularAndNotComponent,
   ],
   imports: [
     BrowserModule,
