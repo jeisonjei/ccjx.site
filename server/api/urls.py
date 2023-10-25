@@ -3,7 +3,7 @@ from .account import register
 from .account import verify_email_with_token
 from .account import send_email_new_password
 from .account import new_password
-from .views import MyQuestionList, MyTagList
+from .views import MyQuestionList
 from .views import TopicDetail, TopicListCreate
 from .views import TopicListShort
 from .views import TopicRecentList
@@ -39,6 +39,5 @@ urlpatterns = [
     path('votes/', VoteListCreate.as_view()),
 
     path('tags/', TagListCreate.as_view()),
-    path('tags/my/',MyTagList.as_view()),
     path('tags/<int:id>/',TagDetail.as_view()),
 ]

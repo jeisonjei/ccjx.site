@@ -87,14 +87,6 @@ class TagListCreate(generics.ListCreateAPIView):
     serializer_class=TagSerializer
     queryset=Tag.objects.all()
     
-class MyTagList(generics.ListAPIView):
-    lookup_field='id'
-    serializer_class=TagSerializer
-    def get_queryset(self):
-        user = self.request.user
-        queryset = Tag.objects.filter(user=user)
-        return queryset
-
 class TagDetail(generics.RetrieveUpdateDestroyAPIView):
     lookup_field='id'
     serializer_class=TagSerializer
