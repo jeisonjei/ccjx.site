@@ -98,7 +98,7 @@ import { PopularAndNotComponent } from './pages/popular-and-not/popular-and-not.
     EditCommentComponent,
     RandomTopicComponent,
     LoginDisplaySmallComponent,
-    PopularAndNotComponent,
+    PopularAndNotComponent
   ],
   imports: [
     BrowserModule,

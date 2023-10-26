@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'users/:userId/new-topic/:topicId', component: NewQuestionComponent, canActivate: [protectedGuard] },
   { path: 'users/:userId/edit-topic/:topicId', component: EditTopicComponent, canActivate: [protectedGuard]},
   { path:'topics/:topicId',component:TopicComponent},
-  { path: 'my-questions', component: MyQuestionsComponent,canActivate:[protectedGuard] },
+  { path: 'my-questions', component: MyQuestionsComponent, canActivate: [protectedGuard] },
   {path:'',component:PopularAndNotComponent}
 ];
 
