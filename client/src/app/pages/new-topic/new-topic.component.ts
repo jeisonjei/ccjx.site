@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { UrlsService } from '../../services/urls.service';
@@ -34,6 +34,17 @@ export class NewQuestionComponent implements OnInit {
     private quess: TopicService,
     private tagService: TagService) {
 
+  }
+  @HostListener('window:beforeunload',['$event'])
+  onBeforeUnload(event: Event) {
+    event.preventDefault();
+    event.returnValue = false;
+  }
+  @HostListener('window:unload',['$event'])
+  onUnload(event: Event) {
+    fetch(this.urls.getQuestionDeleteUrl(this.topicId), { method: 'DELETE', keepalive: true }).then().catch(error => {
+      console.error(error);
+    })
   }
   ngOnInit(): void {
     this.getTopic();
@@ -84,7 +95,6 @@ export class NewQuestionComponent implements OnInit {
     };
     const serverUrl = this.urls.getUrlTopicDetail(topicId??'Error');
     const self = this;
-    console.log(`🔥 topic: ${JSON.stringify(t)}`);
     this.http.patch(serverUrl, t).subscribe({
       next(value) {
 
@@ -94,7 +104,6 @@ export class NewQuestionComponent implements OnInit {
     this.router.navigateByUrl(url);
   }
   cancel() {
-    console.log(`🔥 : ${this.cancel.name}`);
     this.quess.delete(this.topicId??'').subscribe();
     this.router.navigateByUrl('');
   }
