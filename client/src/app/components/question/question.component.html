@@ -15,7 +15,7 @@
         </div>
  
         </div>
-        <h1 ngClass="text-center">{{question?.title}}</h1>
+        <h1 ngClass="text-center mt-4">{{question?.title}}</h1>
     </div>
     <div ngClass="grid2">
         <div ngClass="d-flex flex-column align-items-center">
@@ -23,7 +23,9 @@
             <button mat-icon-button (click)="minus()"><fa-icon [icon]="faArrowDown"></fa-icon></button>
             {{votes}}
         </div>
-        <ckeditor class="ckeditor-viewer" [editor]="Editor" [config]="{toolbar:[]}" [disabled]="true" [data]="question?.text"></ckeditor>
+        <div ngClass="mx-5">
+            <ckeditor class="ckeditor-viewer" [editor]="Editor" [config]="{toolbar:[]}" [disabled]="true" [data]="question?.text"></ckeditor>
+        </div>
     </div>
     <div ngClass="d-flex">
         <div ngClass="flex-grow-1"></div>
