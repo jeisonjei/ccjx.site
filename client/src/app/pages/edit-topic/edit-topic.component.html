@@ -3,7 +3,7 @@
       <mat-card ngClass="p-4">
         <div ngClass="d-flex flex-row">
           <mat-checkbox [checked]="isArticle" (change)="onIsArticleChange($event.checked)">Статья/заметка (только комментарии)</mat-checkbox>
-          <mat-checkbox [checked]="isPrivate" (change)="onIsPrivateChange($event.checked)">Личная запись</mat-checkbox>
+          <mat-checkbox [checked]="isPrivate" (change)="onIsPrivateChange($event.checked)">Личная запись (открыта по ссылке)</mat-checkbox>
         </div>
        <div ngClass="grid2">
         <div ngClass="d-flex align-items-center">

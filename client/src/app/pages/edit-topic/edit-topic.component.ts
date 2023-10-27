@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TopicService } from '@app/services/question.service';
@@ -18,19 +18,20 @@ import { faTag  } from "@fortawesome/free-solid-svg-icons";
   styleUrls: ['./edit-topic.component.scss'],
 })
 
-export class EditTopicComponent implements OnInit {
+export class EditTopicComponent implements OnInit, AfterViewInit {
   faTag = faTag;
   title = '';
   userId = '';
   topicId = '';
-  content = '';
+  content = '123';
   isArticle: boolean=false;
   isPrivate: boolean=false;
   myControl: FormControl=new FormControl('');
   tags: any[]=[];
   tagsFiltered?: Observable<any[]>;
   tagsAdded: any[]=[];
-  tagSelected:any =null;
+  tagSelected: any = null;
+  markdownSelected='';
   constructor(
     private activatedRoute: ActivatedRoute,
     private topicService: TopicService,
@@ -38,6 +39,9 @@ export class EditTopicComponent implements OnInit {
     private urls: UrlsService,
     private tagService: TagService
   ) {}
+  ngAfterViewInit(): void {
+    
+  }
   ngOnInit(): void {
     this.getTopic();
     this.tagList();

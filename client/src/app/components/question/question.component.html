@@ -23,7 +23,7 @@
             <button mat-icon-button (click)="minus()"><fa-icon [icon]="faArrowDown"></fa-icon></button>
             {{votes}}
         </div>
-        <quill-view [content]="question?.text" [style]="{fontSize:'120%'}"></quill-view>
+        <ckeditor class="ckeditor-viewer" [editor]="Editor" [config]="{toolbar:[]}" [disabled]="true" [data]="question?.text"></ckeditor>
     </div>
     <div ngClass="d-flex">
         <div ngClass="flex-grow-1"></div>

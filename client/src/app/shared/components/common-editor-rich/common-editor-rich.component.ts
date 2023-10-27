@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Renderer2 } from '@angular/core';
+import * as Editor from '@src/assets/ckeditor';
 
 
 @Component({
@@ -7,19 +8,29 @@ import { Renderer2 } from '@angular/core';
   templateUrl: './common-editor-rich.component.html',
   styleUrls: ['./common-editor-rich.component.scss']
 })
-export class CommonEditorRichComponent implements OnInit{
+export class CommonEditorRichComponent implements OnInit,OnChanges{
   @Input()
   content = '';
   @Output()
   onCancel: EventEmitter<any> = new EventEmitter();
   @Output()
   onSave: EventEmitter<any> = new EventEmitter();
+  public Editor = Editor;
+  public model = {
+    editorData: ''
+  };
   constructor(private renderer:Renderer2) {
   }
   ngOnInit(): void {
-    const script = this.renderer.createElement('script');
-    script.src = 'assets/bundle.js';
-    this.renderer.appendChild(document.head,script);
-
+    
+  }
+  ngOnChanges(changes: any) {
+    if (changes.content) {
+      this.model.editorData = this.content;
+    }
+  }
+  save() {
+    this.content = this.model.editorData;
+    this.onSave.emit(this.content);
   }
 }

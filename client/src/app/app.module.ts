@@ -61,7 +61,8 @@ import { MatChipsModule } from "@angular/material/chips";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTableModule } from "@angular/material/table";
 import { PopularAndNotComponent } from './pages/popular-and-not/popular-and-not.component';
-
+import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
+import { MatRadioModule } from "@angular/material/radio";
 @NgModule({
   declarations: [
     AppComponent,
@@ -127,7 +128,9 @@ import { PopularAndNotComponent } from './pages/popular-and-not/popular-and-not.
     MatBadgeModule,
     MatChipsModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    CKEditorModule,
+    MatRadioModule
   ],
   providers: [
   ],

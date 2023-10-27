@@ -7,6 +7,7 @@ import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { VoteService } from '@app/services/vote.service';
 import { DialogService } from '@app/services/dialog.service';
+import * as Editor from '@src/assets/ckeditor';
 
 @Component({
   selector: 'app-question',
@@ -21,7 +22,8 @@ export class QuestionComponent implements OnInit, OnChanges {
   faArrowUp = faArrowUp;
   faArrowDown = faArrowDown;
   votes: number = 0;
-  dateCreated:string = '';
+  dateCreated: string = '';
+  public Editor = Editor;
   constructor(
     public sanitizer: DomSanitizer,
     private router: Router,
@@ -30,7 +32,7 @@ export class QuestionComponent implements OnInit, OnChanges {
     private dials: DialogService
   ) {}
   ngOnInit() {
-
+    
       }
   ngOnChanges(){
 this.dateCreated = this.formatDate(this.question?.date_created);
