@@ -1,3 +1,7 @@
+.n-grid{
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+}
 .m-grid{
   display:grid;
   grid-template-columns: 1fr;

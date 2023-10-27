@@ -1,6 +1,6 @@
-<div ngClass="row justify-content-center">
-    <div class="col-lg-2"></div>
-    <div class="col-lg-7">
+<div ngClass="row justify-content-center m-grid">
+    <div></div>
+    <div>
         <mat-card ngClass="p-4 mb-3">
             <div ngClass="question">
                 <div *ngIf="!question;else ready">
@@ -30,7 +30,7 @@
             <app-answer [answer]="a" (commentCreated)="getQuestion()" (onEdit)="editAnswer($event)" (onDelete)="deleteAnswer($event)" (voteUpdated)="getQuestion()"></app-answer>
         </div>
     </div>
-    <div class="col-lg-2">
+    <div>
         <button mat-flat-button color="primary" (click)="onQuestion('Новая запись')">
             Создать запись</button>
             <hr>
