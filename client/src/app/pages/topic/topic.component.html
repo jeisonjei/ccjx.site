@@ -4,7 +4,8 @@
         <mat-card ngClass="p-4 mb-3">
             <div ngClass="question">
                 <div *ngIf="!question;else ready">
-                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                    <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+                    <p>Извините, запрашиваемая запись не найдена.</p>
                 </div>
                 <ng-template #ready>
                     <app-question [question]="question" (voteUpdated)="getQuestion()"></app-question>
