@@ -63,6 +63,7 @@ import { MatTableModule } from "@angular/material/table";
 import { PopularAndNotComponent } from './pages/popular-and-not/popular-and-not.component';
 import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
 import { MatRadioModule } from "@angular/material/radio";
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -99,7 +100,8 @@ import { MatRadioModule } from "@angular/material/radio";
     EditCommentComponent,
     RandomTopicComponent,
     LoginDisplaySmallComponent,
-    PopularAndNotComponent
+    PopularAndNotComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

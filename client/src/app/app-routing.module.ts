@@ -15,8 +15,11 @@ import { protectedGuard } from 'ngx-auth';
 import { EditTopicComponent } from './pages/edit-topic/edit-topic.component';
 import { RandomTopicComponent } from './pages/random-topic/random-topic.component';
 import { PopularAndNotComponent } from './pages/popular-and-not/popular-and-not.component';
+import { NotFoundError } from 'rxjs';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
+  {path:'',component:PopularAndNotComponent},
   { path: 'account/register', component: RegisterComponent },
   { path: 'account/register/confm', component: RegisterConfmComponent },
   { path: 'account/register/success/:token', component: RegisterSuccessComponent },
@@ -29,7 +32,7 @@ const routes: Routes = [
   { path: 'users/:userId/edit-topic/:topicId', component: EditTopicComponent, canActivate: [protectedGuard]},
   { path:'topics/:topicId',component:TopicComponent},
   { path: 'my-questions', component: MyQuestionsComponent, canActivate: [protectedGuard] },
-  {path:'',component:PopularAndNotComponent}
+  {path: '**', component:NotFoundComponent},
 ];
 
 @NgModule({
