@@ -145,7 +145,6 @@ export class NewQuestionComponent implements OnInit {
   tagDelete(tag: Tag) {
     const index = tag.topics.findIndex(v=>v==this.topicId);
     tag.topics.splice(index,1);
-    console.log(`🔥 tag: ${JSON.stringify(tag)}`);
     this.tagService.deleteFromTopic(tag?.id??'error',{topics:tag.topics}).subscribe(v => {
       this.getTopic();
     })
