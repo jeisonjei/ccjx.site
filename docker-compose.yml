@@ -24,7 +24,7 @@ services:
     # местонахождение Dockerfile
     build: ./server
     env_file: ./server/.env
-    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:5000"
+    command: bash -c "python manage.py migrate && python manage.py runserver_plus --cert-file fullchain.pem --key-file privkey.pem 0.0.0.0:5000"
     environment:
       - DJANGO_SUPERUSER_PASSWORD=1234
     ports:

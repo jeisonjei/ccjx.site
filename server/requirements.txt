@@ -1,5 +1,6 @@
 django==4.2
 django-extensions
+Werkzeug
 psycopg2>=2.8
 requests
 pyOpenSSL
