@@ -7,6 +7,7 @@ from .serializers import AnswerSerializer, CommentSerializer, TagSerializer, Top
 from django.db.models import F
 import itertools
 from nameof import nameof
+from django.db.models import Count
 
 class MyQuestionList(generics.ListAPIView):
     '''
@@ -64,7 +65,7 @@ class TopicNonAnswered(generics.ListAPIView):
     '''
     pass    
 
-class TopicArticlesPopular(generics.ListAPIView):
+class TopicArticlesPopularList(generics.ListAPIView):
     '''
     Класс для возвращения популярных статей. Планируется использовать для отображения
     статей на главной странице сайта.
@@ -75,8 +76,16 @@ class TopicArticlesPopular(generics.ListAPIView):
     Если у двух статей одинаковые оценки, то они сортируются по дате добавления.
     Получится, что если ни у каких статей нет оценок, будут отображатся просто самые новые статьи.
     '''
-    pass
-    
+    permission_classes=[AllowAny]
+    lookup_field='id'
+    serializer_class=TopicSerializer
+    def get_queryset(self):
+        q = self.kwargs['amount']
+        topics = Topic.objects.annotate(votes_count=Count('votes'))
+        topics_ordered_by_votes_desc = topics.filter(is_private=False).filter(is_article=True).order_by('-votes_count')[:q]
+        queryset = topics_ordered_by_votes_desc
+        return queryset
+
 class TopicCount(APIView):
     '''
     Класс использовался для отображения случайного вопроса на главной странице.

@@ -39,6 +39,9 @@ export class UrlsService {
   getUrlTopicListMy() {
     return `${this.baseUrl}/my-questions/`;
   }
+  getUrlTopicArticlesPopularList(amount:number) {
+    return `${this.baseUrl}/topics/articles/popular/${amount}/`
+  }
   getQuestionDeleteUrl(topicId: string) {
     return `${this.baseUrl}/topics/${topicId}`;
   }

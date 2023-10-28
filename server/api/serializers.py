@@ -56,7 +56,8 @@ class TagSerializer(serializers.ModelSerializer):
                 
 class TopicSerializer(serializers.ModelSerializer):
     '''
-    Этот сериалайзер используется для отображения конкретного вопроса
+    Этот сериалайзер пока что используется для отображения конкретного вопроса,
+    так как здесь присутствуют все поля и их получение затратно
     '''
     answers = AnswerSerializer(many=True,required=False)
     comments = CommentSerializer(many=True,required=False)
