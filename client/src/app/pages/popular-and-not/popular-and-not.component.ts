@@ -14,7 +14,8 @@ import { ValidatorService } from '@app/services/validator.service';
 })
 export class PopularAndNotComponent implements OnInit{
   tags: Tag[]=[];
-  recentQuestions:Topic[]=[];
+  recentQuestions: Topic[] = [];
+  popularArticles: Topic[]=[];
   constructor(private tagService: TagService, private topicService: TopicService, private auth:AuthenticationService,private dials:DialogService,private validator:ValidatorService,private tops:TopicService,private router:Router){}
   ngOnInit(): void {
     this.tagService.list().subscribe((v: any) => {
@@ -22,6 +23,9 @@ export class PopularAndNotComponent implements OnInit{
     });
     this.topicService.listRecent(10).subscribe((v: any) => {
       this.recentQuestions = v;
+    });
+    this.topicService.listArticlesPopular(10).subscribe((v: any) => {
+      this.popularArticles = v;
     })
   }
   onQuestion(value: string) {
