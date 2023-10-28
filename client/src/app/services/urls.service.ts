@@ -42,6 +42,9 @@ export class UrlsService {
   getUrlTopicPopularArticlesList(count:number) {
     return `${this.baseUrl}/topics/articles/popular/${count}/`
   }
+  getUrlTopicNonAnsweredList(count: number) {
+    return `${this.baseUrl}/topics/nonanswered/${count}/`
+  }
   getQuestionDeleteUrl(topicId: string) {
     return `${this.baseUrl}/topics/${topicId}`;
   }

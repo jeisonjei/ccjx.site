@@ -28,12 +28,16 @@ export class TopicService {
     const url = this.urls.getUrlTopicCount();
     return this.http.get(url);
   }
-  listRecent(amount:number) {
-    const url = this.urls.getUrlTopicLast(amount);
+  listRecent(count:number) {
+    const url = this.urls.getUrlTopicLast(count);
     return this.http.get(url);
   }
-  listPopularArticles(amount: number) {
-    const url = this.urls.getUrlTopicPopularArticlesList(amount);
+  listPopularArticles(count: number) {
+    const url = this.urls.getUrlTopicPopularArticlesList(count);
+    return this.http.get(url);
+  }
+  listNonAnswered(count: number) {
+    const url = this.urls.getUrlTopicNonAnsweredList(count);
     return this.http.get(url);
   }
   create(topic: Topic):Observable<any>{
