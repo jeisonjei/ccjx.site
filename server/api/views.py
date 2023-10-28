@@ -25,17 +25,27 @@ class TopicListCreate(generics.ListCreateAPIView):
     queryset=Topic.objects.filter(is_private=False)
     
 class TopicListShort(generics.ListAPIView):
+    '''
+    Класс используется для загрузки вопросов в форму поиска
+    '''
     permission_classes=[AllowAny]
     lookup_field='id'
     serializer_class=TopicSerializerShort
     queryset=Topic.objects.filter(is_private=False)
 
 class TopicDetail(generics.RetrieveUpdateDestroyAPIView):
+    '''
+    Класс используется для получения и отображения одного вопроса
+    '''
     lookup_field='id'    
     serializer_class=TopicSerializer
     queryset=Topic.objects.all()
     
 class TopicRecentList(generics.ListAPIView):
+    '''
+    Класс предназначен для получения какого-то количества самых свежих вопросов. 
+    Сейчас используется для списков '10 новых записей' на главной странице и 'Новые записи' на странице Topic
+    '''
     permission_classes=[AllowAny]
     lookup_field='id'
     serializer_class=TopicSerializerShort
@@ -45,11 +55,19 @@ class TopicRecentList(generics.ListAPIView):
         return queryset
     
 class TopicCount(APIView):
+    '''
+    Класс использовался для отображения случайного вопроса на главной странице.
+    -OBSOLETE-
+    '''
     permission_classes=[AllowAny]
     def get(self, request):
         return Response(Topic.objects.filter(is_private=False).values_list('id',flat=True))
 
 class TopicTagList(generics.ListAPIView):
+    '''
+    Назначение пока не ясно. Вроде бы нигде не используется
+    -OBSOLETE-
+    '''
     lookup_field='id'
     serializer_class=TopicSerializer
     def get_queryset(self):
@@ -58,21 +76,33 @@ class TopicTagList(generics.ListAPIView):
         return queryset
             
 class AnswerListCreate(generics.ListCreateAPIView):
+    '''
+    Класс для создания ответов
+    '''
     lookup_field='id'
     serializer_class=AnswerSerializer
     queryset=Answer.objects.all()
     
 class AnswerDetail(generics.RetrieveUpdateDestroyAPIView):
+    '''
+    Класс для получения одного конкретного ответа
+    '''
     lookup_field='id'
     serializer_class=AnswerSerializer
     queryset=Answer.objects.all()
 
 class CommentListCreate(generics.ListCreateAPIView):
+    '''
+    Класс для создания комментариев
+    '''
     lookup_field='id'        
     serializer_class=CommentSerializer
     queryset=Comment.objects.all()
     
 class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
+    '''
+    Класс для получения одного конкретного комментария
+    '''
     lookup_field='id'
     serializer_class=CommentSerializer
     queryset=Comment.objects.all()
@@ -83,11 +113,17 @@ class VoteListCreate(generics.ListCreateAPIView):
     queryset = Vote.objects.all()
 
 class TagListCreate(generics.ListCreateAPIView):
+    '''
+    Класс для создания тэгов
+    '''
     lookup_field='id'
     serializer_class=TagSerializer
     queryset=Tag.objects.all()
     
 class TagDetail(generics.RetrieveUpdateDestroyAPIView):
+    '''
+    Класс для получения одного конкретного тэга
+    '''
     lookup_field='id'
     serializer_class=TagSerializer
     queryset=Tag.objects.all()
