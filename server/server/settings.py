@@ -94,6 +94,13 @@ DATABASES = {
     }
 }
 
+if 'posix' in os.name:
+    REDIS_HOST='redis'
+    REDIS_PORT=6379
+else:
+    REDIS_HOST='127.0.0.1'
+    REDIS_PORT=6379
+
 
 
 # Password validation

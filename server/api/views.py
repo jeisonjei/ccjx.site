@@ -12,6 +12,11 @@ from django.db.models import Sum
 from rest_framework.pagination import PageNumberPagination
 from django.core.paginator import Paginator
 import random
+import redis
+from django.conf import settings
+
+redis_connection = redis.StrictRedis(host=settings.REDIS_HOST,
+                                         port=settings.REDIS_PORT, db=0, decode_responses=True)
 
 class MyQuestionList(generics.ListAPIView):
     '''
@@ -58,6 +63,7 @@ class TopicRecentList(generics.ListAPIView):
         amount = self.kwargs['amount']
         queryset=Topic.objects.filter(is_private=False).order_by('date_created').order_by(F('id').desc())[:amount]
         return queryset
+    
 class TopicNonAnsweredList(generics.ListAPIView):
     '''
     Класс для возвращения вопросов, у которых нет ответа. Планируется использовать для отображения
@@ -73,13 +79,18 @@ class TopicNonAnsweredList(generics.ListAPIView):
     def get_queryset(self):
         count=self.kwargs['count']
         topics = Topic.objects.all().filter(is_article=False).filter(is_private=False).annotate(scores=Sum('votes__score')).annotate(answers_count=Count('answers')).exclude(answers_count__gt=0)            
-        self.counter = self.request.session.get('counter',0)
+        # self.counter = self.request.session.get('counter',0)
+        self.counter = int(redis_connection.get('counter'))
+        if self.counter==None:
+            self.counter=0
         self.counter+=1
         paginator = Paginator(topics,count)
         if self.counter>paginator.num_pages:
             self.counter=1
-        self.request.session['counter']=self.counter
+        # self.request.session['counter']=self.counter
+        redis_connection.set('counter',self.counter)
         page = paginator.get_page(self.counter)
+        print(f'counter: {self.counter}')
         queryset = page.object_list
         return queryset
 
