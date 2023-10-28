@@ -79,7 +79,20 @@ class TopicSerializerShort(serializers.ModelSerializer):
     tags = TagSerializer(many = True,required=False)
     class Meta:
         model = Topic
-        fields = ['id','title','is_article','tags']    
+        fields = ['id','title','is_article','tags']   
+        
+class TopicSerializerLists(serializers.ModelSerializer):
+    '''
+    Этот сериалайзер используется для списков, которые отображаются на главной странице и боковой панели.
+    Возможно он заменит собой TopicSerializerShort - тот, что выше, так как
+    оба созданы для получения легковесных порций данных.
+    Причина, по которой создаётся этот новый сериализатор в том, что в предыдущем нет поля 'scores', 
+    которое назначается динамически в классе представления при помощи метода annotate
+    ''' 
+    scores = serializers.IntegerField()
+    class Meta:
+        model = Topic
+        fields = ['id','title','scores']
 
 class TopicSerializerMy(serializers.ModelSerializer):
     '''

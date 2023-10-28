@@ -3,11 +3,12 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated,AllowAny
 from .models import Answer, Comment, Tag, Topic, Vote
-from .serializers import AnswerSerializer, CommentSerializer, TagSerializer, TopicSerializer, TopicSerializerShort, TopicSerializerMy, VoteSerializer
+from .serializers import AnswerSerializer, CommentSerializer, TagSerializer, TopicSerializer, TopicSerializerLists, TopicSerializerShort, TopicSerializerMy, VoteSerializer
 from django.db.models import F
 import itertools
 from nameof import nameof
 from django.db.models import Count
+from django.db.models import Sum
 
 class MyQuestionList(generics.ListAPIView):
     '''
@@ -65,7 +66,7 @@ class TopicNonAnswered(generics.ListAPIView):
     '''
     pass    
 
-class TopicArticlesPopularList(generics.ListAPIView):
+class TopicPopularArticlesList(generics.ListAPIView):
     '''
     Класс для возвращения популярных статей. Планируется использовать для отображения
     статей на главной странице сайта.
@@ -78,12 +79,13 @@ class TopicArticlesPopularList(generics.ListAPIView):
     '''
     permission_classes=[AllowAny]
     lookup_field='id'
-    serializer_class=TopicSerializer
+    serializer_class=TopicSerializerLists
     def get_queryset(self):
-        q = self.kwargs['amount']
-        topics = Topic.objects.annotate(votes_count=Count('votes'))
-        topics_ordered_by_votes_desc = topics.filter(is_private=False).filter(is_article=True).order_by('-votes_count')[:q]
-        queryset = topics_ordered_by_votes_desc
+        count = self.kwargs['count']
+        topics = Topic.objects.all().filter(is_private=False).filter(is_article=True).annotate(scores=Sum('votes__score'))
+        topics_ordered_by_scores=topics.exclude(scores=None).order_by('-scores')[:count]
+        topics_with_custom_field=topics_ordered_by_scores.values('id','title','scores')
+        queryset = topics_with_custom_field
         return queryset
 
 class TopicCount(APIView):

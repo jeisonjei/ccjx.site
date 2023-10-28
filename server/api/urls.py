@@ -14,7 +14,7 @@ from .views import VoteListCreate
 from .views import TagListCreate
 from .views import TagDetail
 from .views import TopicTagList
-from .views import TopicArticlesPopularList
+from .views import TopicPopularArticlesList
 # коллекции указываются во множественном числе
 urlpatterns = [
     path('account/register/',register),
@@ -30,7 +30,7 @@ urlpatterns = [
     path('topics/recent/<int:amount>/',TopicRecentList.as_view()),
     path('topics/count/',TopicCount.as_view()),
     path('topics/<int:id>/tags/', TopicTagList.as_view()), # -OBSOLETE-
-    path('topics/articles/popular/<int:amount>/',TopicArticlesPopularList.as_view()),
+    path('topics/articles/popular/<int:count>/',TopicPopularArticlesList.as_view()),
 
     path('answers/',AnswerListCreate.as_view()),
     path('answers/<int:id>/',AnswerDetail.as_view()),
