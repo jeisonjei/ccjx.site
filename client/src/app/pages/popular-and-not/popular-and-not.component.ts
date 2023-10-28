@@ -24,7 +24,7 @@ export class PopularAndNotComponent implements OnInit{
     this.topicService.listRecent(10).subscribe((v: any) => {
       this.recentQuestions = v;
     });
-    this.topicService.listArticlesPopular(10).subscribe((v: any) => {
+    this.topicService.listPopularArticles(10).subscribe((v: any) => {
       this.popularArticles = v;
     })
   }
