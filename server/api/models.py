@@ -57,6 +57,15 @@ class Topic(models.Model):
     is_private = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True,null=True)
     date_modified = models.DateTimeField(null = True)
+
+    def __str__(self) -> str:
+        return self.title
+    
+    class Meta:
+        ordering = ['-date_created']
+        indexes = [
+            models.Index(fields=['-date_created'])
+        ]
     
 class Answer(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
