@@ -9,6 +9,9 @@ import itertools
 from nameof import nameof
 from django.db.models import Count
 from django.db.models import Sum
+from rest_framework.pagination import PageNumberPagination
+from django.core.paginator import Paginator
+import random
 
 class MyQuestionList(generics.ListAPIView):
     '''
@@ -55,8 +58,7 @@ class TopicRecentList(generics.ListAPIView):
         amount = self.kwargs['amount']
         queryset=Topic.objects.filter(is_private=False).order_by('date_created').order_by(F('id').desc())[:amount]
         return queryset
-    
-class TopicNonAnswered(generics.ListAPIView):
+class TopicNonAnsweredList(generics.ListAPIView):
     '''
     Класс для возвращения вопросов, у которых нет ответа. Планируется использовать для отображения
     списка таких вопросов на главной странице сайта.
@@ -64,7 +66,22 @@ class TopicNonAnswered(generics.ListAPIView):
     Сортировка по дате добавления, НО (!) При каждом запросе область выборки должна смещаться,
     для того, чтобы потенциально были показаны все вопросы без ответа.
     '''
-    pass    
+    permission_classes=[AllowAny]
+    lookup_field='id'
+    serializer_class = TopicSerializerLists
+    counter=0
+    def get_queryset(self):
+        count=self.kwargs['count']
+        topics = Topic.objects.all().filter(is_article=False).filter(is_private=False).annotate(scores=Sum('votes__score')).annotate(answers_count=Count('answers')).exclude(answers_count__gt=0)            
+        self.counter = self.request.session.get('counter',0)
+        self.counter+=1
+        paginator = Paginator(topics,count)
+        if self.counter>paginator.num_pages:
+            self.counter=1
+        self.request.session['counter']=self.counter
+        page = paginator.get_page(self.counter)
+        queryset = page.object_list
+        return queryset
 
 class TopicPopularArticlesList(generics.ListAPIView):
     '''

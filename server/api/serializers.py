@@ -90,9 +90,11 @@ class TopicSerializerLists(serializers.ModelSerializer):
     которое назначается динамически в классе представления при помощи метода annotate
     ''' 
     scores = serializers.IntegerField()
+    tags = TagSerializer(many = True,required=False)
+
     class Meta:
         model = Topic
-        fields = ['id','title','scores']
+        fields = ['id','title','tags','scores']
 
 class TopicSerializerMy(serializers.ModelSerializer):
     '''
