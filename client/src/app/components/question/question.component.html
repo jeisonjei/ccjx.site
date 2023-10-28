@@ -15,6 +15,17 @@
         </div>
  
         </div>
+        <div ngClass="d-flex">
+            <div ngClass="flex-grow-1"></div>
+            <div>
+                <div *ngIf="question?.user?.id == this.auth.userValue?.id" ngClass="d-flex justify-content-end">
+                    <button mat-icon-button (click)="editTopic()" color="primary">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </div>
+                <div>{{question?.user?.email}}</div>
+            </div>
+        </div>
         <h1 ngClass="text-center mt-4">{{question?.title}}</h1>
     </div>
     <div ngClass="grid2">
@@ -25,17 +36,6 @@
         </div>
         <div ngClass="mx-5">
             <ckeditor class="ckeditor-viewer" [editor]="Editor" [config]="{toolbar:[]}" [disabled]="true" [data]="question?.text"></ckeditor>
-        </div>
-    </div>
-    <div ngClass="d-flex">
-        <div ngClass="flex-grow-1"></div>
-        <div>
-            <div *ngIf="question?.user?.id == this.auth.userValue?.id" ngClass="d-flex justify-content-end">
-                <button mat-icon-button (click)="editTopic()" color="primary">
-                    <mat-icon>edit</mat-icon>
-                </button>
-            </div>
-            <div>{{question?.user?.email}}</div>
         </div>
     </div>
 </div>
