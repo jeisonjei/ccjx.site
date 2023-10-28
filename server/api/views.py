@@ -80,9 +80,11 @@ class TopicNonAnsweredList(generics.ListAPIView):
         count=self.kwargs['count']
         topics = Topic.objects.all().filter(is_article=False).filter(is_private=False).annotate(scores=Sum('votes__score')).annotate(answers_count=Count('answers')).exclude(answers_count__gt=0)            
         # self.counter = self.request.session.get('counter',0)
-        self.counter = int(redis_connection.get('counter'))
-        if self.counter==None:
+        i = redis_connection.get('counter')
+        if i==None:
             self.counter=0
+        else:
+            self.counter=int(i)
         self.counter+=1
         paginator = Paginator(topics,count)
         if self.counter>paginator.num_pages:
