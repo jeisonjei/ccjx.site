@@ -195,7 +195,9 @@ class TagListCreate(generics.ListCreateAPIView):
     '''
     lookup_field='id'
     serializer_class=TagSerializer
-    queryset=Tag.objects.all()
+    tags=Tag.objects.annotate(topics_count=Count('topics'))
+    queryset=tags.filter(topics_count__gt=0)
+    
     
 class TagDetail(generics.RetrieveUpdateDestroyAPIView):
     '''
