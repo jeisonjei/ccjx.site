@@ -97,6 +97,9 @@ class Tag(models.Model):
     name = models.CharField(default='',unique=True)
     description = models.TextField(null=True)
     topics = models.ManyToManyField(Topic,related_name='tags',blank=True)
+    
+    def __str__(self) -> str:
+        return self.name
 
     class Meta:
         ordering=['name']
