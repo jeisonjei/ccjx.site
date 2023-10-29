@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { AfterContentChecked, AfterViewChecked, AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterContentChecked, AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UrlsService } from '../../services/urls.service';
 import { Answer, Comment, Topic } from '../../consts';
@@ -17,6 +17,7 @@ import { ValidatorService } from '@app/services/validator.service';
   selector: 'app-topic',
   templateUrl: './topic.component.html',
   styleUrls: ['./topic.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TopicComponent implements OnInit {
   @Input()

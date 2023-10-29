@@ -9,7 +9,7 @@ import { NewPassEmailSentComponent } from './account/new-pass-email-sent/new-pas
 import { NewPassSuccessComponent } from './account/new-pass-success/new-pass-success.component';
 import { NewPassRequestComponent } from './account/new-pass-request/new-pass-request.component';
 import { NewQuestionComponent } from './pages/new-topic/new-topic.component';
-import { TopicComponent } from './pages/topic/topic.components';
+import { TopicComponent } from './pages/topic/topic.component';
 import { MyQuestionsComponent } from './pages/my-questions/my-questions.component';
 import { protectedGuard } from 'ngx-auth';
 import { EditTopicComponent } from './pages/edit-topic/edit-topic.component';

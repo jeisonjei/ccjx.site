@@ -30,7 +30,7 @@ import { LoggedOutHeaderComponent } from './components/logged-out-header/logged-
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { NewQuestionComponent } from './pages/new-topic/new-topic.component';
 import { AuthenticationModule } from './services/authentication/authentication.module';
-import { TopicComponent } from './pages/topic/topic.components';
+import { TopicComponent } from './pages/topic/topic.component';
 import { MyQuestionsComponent } from './pages/my-questions/my-questions.component';
 import { AnswerComponent } from './components/answer/answer.component';
 import { QuestionComponent } from "./components/question/question.component";
