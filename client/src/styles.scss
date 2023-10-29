@@ -95,4 +95,12 @@ body {
   background: var(--ck-color-widget-blurred-border);
   display: none;
 }
-
+// mat-autocomplete
+div.mat-mdc-autocomplete-panel {
+  max-height: 600px !important;
+}
+.cdk-text-field-autofill-monitored[_ngcontent-ng-c2859764860]:not(:-webkit-autofill) {
+  padding: 5px 15px 5px 15px !important;
+  border-radius: 5px;
+  border: 2px solid lightgray;
+}

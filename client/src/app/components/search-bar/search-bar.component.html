@@ -11,7 +11,7 @@
               <span>&nbsp;Поиск по записям</span>
             </div>
           </div>
-          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="clearSelection($event)">
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="clearSelection($event)" ngClass="single-autocomplete">
             <mat-option ngClass="unselectable" disabled="true">
               <div><span ngClass="bold">(имя тэга) ...слова поиска...</span> - поиск по тегу, затем по словам в заголовке темы</div>
               <hr>
