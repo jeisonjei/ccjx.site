@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Topic } from '../consts';
-import { HttpClient } from '@angular/common/http';
+import { Tag, Topic } from '../consts';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { UrlsService } from './urls.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { Observable } from 'rxjs';
@@ -39,6 +39,30 @@ export class TopicService {
   listNonAnswered(count: number) {
     const url = this.urls.getUrlTopicNonAnsweredList(count);
     return this.http.get(url);
+  }
+  listRecentByTag(count:number, tags: string[]) {
+    const url = this.urls.getUrlTopicLast(count);
+    let params = new HttpParams();
+    for (const tag of tags) {
+      params=params.append('tags',tag)
+    }
+    return this.http.get(url,{params:params});
+  }
+  listPopularArticlesByTag(count: number, tags: string[]) {
+    const url = this.urls.getUrlTopicPopularArticlesList(count);
+    let params = new HttpParams();
+    for (const tag of tags) {
+      params=params.append('tags', tag);
+    }
+    return this.http.get(url,{params:params});
+  }
+  listNonAnsweredByTag(count: number, tags: string[]) {
+    const url = this.urls.getUrlTopicNonAnsweredList(count);
+    let params = new HttpParams();
+    for (const tag of tags) {
+      params=params.append('tags',tag);
+    }
+    return this.http.get(url,{params:params});
   }
   create(topic: Topic):Observable<any>{
     const url=this.urls.getUrlTopicCreate(topic.user??'');

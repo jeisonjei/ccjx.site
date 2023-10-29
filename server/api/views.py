@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated,AllowAny
 from .models import Answer, Comment, Tag, Topic, Vote
 from .serializers import AnswerSerializer, CommentSerializer, TagSerializer, TopicSerializer, TopicSerializerLists, TopicSerializerShort, TopicSerializerMy, VoteSerializer
 from django.db.models import F
+from django.db.models import Q
 import itertools
 from nameof import nameof
 from django.db.models import Count
@@ -60,8 +61,13 @@ class TopicRecentList(generics.ListAPIView):
     lookup_field='id'
     serializer_class=TopicSerializerShort
     def get_queryset(self):
-        amount = self.kwargs['amount']
-        queryset=Topic.objects.filter(is_private=False).order_by('date_created').order_by(F('id').desc())[:amount]
+        tag_names = self.request.GET.getlist('tags')
+        count = self.kwargs['count']
+        if len(tag_names)>0:
+            topics = Topic.objects.filter(is_private=False,tags__name__in=tag_names).distinct()
+        else:
+            topics = Topic.objects.filter(is_private=False)
+        queryset=topics[:count]
         return queryset
     
 class TopicNonAnsweredList(generics.ListAPIView):
@@ -77,9 +83,13 @@ class TopicNonAnsweredList(generics.ListAPIView):
     serializer_class = TopicSerializerLists
     counter=0
     def get_queryset(self):
+        tag_names = self.request.GET.getlist('tags')
         count=self.kwargs['count']
-        topics = Topic.objects.all().filter(is_article=False).filter(is_private=False).annotate(scores=Sum('votes__score')).annotate(answers_count=Count('answers')).exclude(answers_count__gt=0)            
-        # self.counter = self.request.session.get('counter',0)
+        if len(tag_names)>0:
+            topics = Topic.objects.filter(is_article=False,is_private=False,tags__name__in=tag_names).distinct()
+        else:
+            topics = Topic.objects.filter(is_article=False,is_private=False)
+        topics = topics.annotate(scores=Sum('votes__score')).annotate(answers_count=Count('answers')).exclude(answers_count__gt=0)            
         i = redis_connection.get('counter')
         if i==None:
             self.counter=0
@@ -89,10 +99,8 @@ class TopicNonAnsweredList(generics.ListAPIView):
         paginator = Paginator(topics,count)
         if self.counter>paginator.num_pages:
             self.counter=1
-        # self.request.session['counter']=self.counter
         redis_connection.set('counter',self.counter)
         page = paginator.get_page(self.counter)
-        print(f'counter: {self.counter}')
         queryset = page.object_list
         return queryset
 
@@ -111,8 +119,13 @@ class TopicPopularArticlesList(generics.ListAPIView):
     lookup_field='id'
     serializer_class=TopicSerializerLists
     def get_queryset(self):
+        tag_names = self.request.GET.getlist('tags')
         count = self.kwargs['count']
-        topics = Topic.objects.all().filter(is_private=False).filter(is_article=True).annotate(scores=Sum('votes__score'))
+        if len(tag_names)>0:
+            topics = Topic.objects.filter(is_private=False,is_article=True,tags__name__in=tag_names).distinct()
+        else:
+            topics = Topic.objects.filter(is_private=False,is_article=True)
+        topics = topics.annotate(scores=Sum('votes__score'))
         topics_ordered_by_scores=topics.exclude(scores=None).order_by('-scores')[:count]
         topics_with_custom_field=topics_ordered_by_scores.values('id','title','scores')
         queryset = topics_with_custom_field
