@@ -10,7 +10,7 @@ import { CommentService } from 'src/app/services/comment.service';
 import { AuthService } from 'ngx-auth';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { DialogService } from 'src/app/services/dialog.service';
-import { TopicService } from '@app/services/question.service';
+import { TopicService } from '@app/services/topic.service';
 import { ValidatorService } from '@app/services/validator.service';
 
 @Component({

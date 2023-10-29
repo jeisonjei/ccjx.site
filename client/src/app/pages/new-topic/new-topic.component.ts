@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { UrlsService } from '../../services/urls.service';
 import { Tag, Topic as Topic } from '../../consts';
-import { TopicService } from 'src/app/services/question.service';
+import { TopicService } from '@app/services/topic.service';
 import { TagService } from '@app/services/tag.service';
 import { Observable, map, startWith } from 'rxjs';
 import { faTag  } from "@fortawesome/free-solid-svg-icons";

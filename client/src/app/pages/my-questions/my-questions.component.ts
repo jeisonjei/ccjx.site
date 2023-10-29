@@ -7,7 +7,7 @@ import { Topic } from '../../consts';
 import { UrlsService } from '../../services/urls.service';
 import { MatSort, MatSortable, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { TopicService } from '@app/services/question.service';
+import { TopicService } from '@app/services/topic.service';
 import * as moment from 'moment';
 import { TagService } from '@app/services/tag.service';
 import { MatChipEvent, MatChipListboxChange, MatChipSelectionChange } from '@angular/material/chips';

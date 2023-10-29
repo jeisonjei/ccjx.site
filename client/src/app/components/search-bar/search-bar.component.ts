@@ -18,7 +18,7 @@ import { HttpClient } from '@angular/common/http';
 import { UrlsService } from '../../services/urls.service';
 import { FormControl, NgForm } from '@angular/forms';
 import { Observable, filter, from, map, of, startWith, timestamp } from 'rxjs';
-import { TopicService } from '../../services/question.service';
+import { TopicService } from '../../services/topic.service';
 import { ValidatorService } from '../../services/validator.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PleaseRegisterComponent } from 'src/app/shared/dialogs/please-register/please-register.component';

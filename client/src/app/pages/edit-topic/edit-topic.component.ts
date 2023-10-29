@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TopicService } from '@app/services/question.service';
+import { TopicService } from '@app/services/topic.service';
 import { UrlsService } from '@app/services/urls.service';
 import { Tag, Topic } from "@app/consts";
 import * as QuillNamespace from 'quill';
