@@ -5,12 +5,9 @@ psycopg2>=2.8
 requests
 pyOpenSSL
 nameof
-celery
 jsonpickle
 redis
 django-cors-headers
 djangorestframework
 djangorestframework-simplejwt
-daphne
-channels
-channels_redis
+whitenoise
