@@ -17,7 +17,6 @@ import { ValidatorService } from '@app/services/validator.service';
   selector: 'app-topic',
   templateUrl: './topic.component.html',
   styleUrls: ['./topic.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TopicComponent implements OnInit {
   @Input()
