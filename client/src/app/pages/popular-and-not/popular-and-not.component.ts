@@ -22,7 +22,7 @@ export class PopularAndNotComponent implements OnInit{
   constructor(private tagService: TagService, private topicService: TopicService, private auth:AuthenticationService,private dials:DialogService,private validator:ValidatorService,private tops:TopicService,private router:Router){}
   ngOnInit(): void {
     this.tagService.list().subscribe((v: any) => {
-      this.tags = v;
+      this.tags = v.sort((a,b)=>a.name.localeCompare(b.name));
     });
     this.refreshData();
   }

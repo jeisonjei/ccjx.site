@@ -59,7 +59,7 @@ export class MyQuestionsComponent {
 
         }
 
-        self.myTags = uniqueTags;
+        self.myTags = uniqueTags.sort((a,b)=>a.localeCompare(b));
         self.sort?.sort({ id: 'date', start: 'desc' } as MatSortable);
       },
     });
