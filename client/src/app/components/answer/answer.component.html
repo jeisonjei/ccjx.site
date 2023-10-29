@@ -6,7 +6,7 @@
             <button mat-icon-button (click)="minus()"><fa-icon [icon]="faArrowDown"></fa-icon></button>
             {{votes}}
         </div>
-        <quill-view [content]="answer?.text"></quill-view>
+        <ckeditor class="ckeditor-viewer" [editor]="Editor" [config]="{toolbar:[]}" [disabled]="true" [data]="answer?.text"></ckeditor>
 	
 	</div>
         <div ngClass="d-flex">

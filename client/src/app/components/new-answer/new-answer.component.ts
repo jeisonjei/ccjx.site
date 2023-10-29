@@ -4,10 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Answer } from 'src/app/consts';
 import { AnswerService } from 'src/app/services/answer.service';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-import * as QuillNamespace from 'quill';
-let Quill: any = QuillNamespace;
-import ImageResize from 'quill-image-resize-module';
-Quill.register('modules/imageResize', ImageResize);
 
 @Component({
   selector: 'app-new-answer',

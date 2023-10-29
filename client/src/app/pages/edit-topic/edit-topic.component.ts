@@ -4,12 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TopicService } from '@app/services/topic.service';
 import { UrlsService } from '@app/services/urls.service';
 import { Tag, Topic } from "@app/consts";
-import * as QuillNamespace from 'quill';
-let Quill: any = QuillNamespace;
-import ImageResize from 'quill-image-resize-module';
 import { TagService } from '@app/services/tag.service';
 import { Observable, map, startWith } from 'rxjs';
-Quill.register('modules/imageResize', ImageResize);
 import { faTag  } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
@@ -135,7 +131,6 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
   tagDelete(tag: Tag) {
     const index = tag.topics.findIndex(v=>v==this.topicId);
     tag.topics.splice(index,1);
-    console.log(`🔥 tag: ${JSON.stringify(tag)}`);
     this.tagService.deleteFromTopic(tag?.id??'error',{topics:tag.topics}).subscribe(v => {
       this.getTopic();
     })

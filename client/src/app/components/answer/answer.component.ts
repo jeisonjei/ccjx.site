@@ -8,6 +8,7 @@ import { CommentService } from '@app/services/comment.service';
 import { VoteService } from '@app/services/vote.service';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import * as Editor from '@src/assets/ckeditor';
 
 @Component({
   selector: 'app-answer',
@@ -33,6 +34,7 @@ export class AnswerComponent implements OnInit {
   commentEdit: any;
   faArrowUp = faArrowUp;
   faArrowDown = faArrowDown;
+  public Editor = Editor;
   constructor(
     public auth: AuthenticationService,
     private dials: DialogService,

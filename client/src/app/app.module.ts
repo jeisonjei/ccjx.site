@@ -42,7 +42,6 @@ import { NewsComponent } from './pages/news/news.component';
 import { PleaseRegisterComponent } from './shared/dialogs/please-register/please-register.component';
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { QuillModule } from "ngx-quill";
 import { RefreshTokenErrorInterceptor } from '_helpers/refresh.token.error.interceptor';
 import { EditTopicComponent } from './pages/edit-topic/edit-topic.component';
 import { EditAnswerComponent } from './components/edit-answer/edit-answer.component';
@@ -122,7 +121,6 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatTooltipModule,
-    QuillModule.forRoot(),
     MatCardModule,
     MatProgressBarModule,
     MatCheckboxModule,

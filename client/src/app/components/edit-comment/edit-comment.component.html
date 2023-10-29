@@ -1,5 +1,5 @@
 <div ngClass="row justify-content-center my-2">
     <div ngClass="col">
-        <app-common-editor-simple [content]="comment?.text??''" (onCancel)="hideForm()" (onSave)="updateComment($event)"></app-common-editor-simple>
+        <app-common-editor-rich [content]="comment?.text" (onCancel)="hideForm()" (onSave)="updateComment($event)"></app-common-editor-rich>
     </div>
 </div>

@@ -1,5 +1,5 @@
 <div ngClass="comment">
-    <quill-view [content]="comment?.text"></quill-view>
+    <ckeditor class="ckeditor-viewer" [editor]="Editor" [config]="{toolbar:[]}" [disabled]="true" [data]="comment?.text"></ckeditor>
     <!-- <div [innerHTML]="this.sanitizer.bypassSecurityTrustHtml(comment?.text)"></div> -->
     <div ngClass="d-flex justify-content-end">
         <div ngClass="flex-grow-1"></div>
