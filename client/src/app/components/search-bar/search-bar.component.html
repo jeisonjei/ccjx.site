@@ -5,7 +5,7 @@
         <div>
           <div ngClass="search-box">
             <input #i [formControl]="q" style="font-family: Arial, FontAwesome;" ngClass="search-box-input w-100"
-              type="search" matInput [matAutocomplete]="auto">
+              type="search" matInput [matAutocomplete]="auto" (focus)="getAllQuestions()">
             <div class="search-box-placeholder-wrapper">
               <fa-icon [icon]="faMagnifyingGlass" class="search-box-placeholder"></fa-icon>
               <span>&nbsp;Поиск по записям</span>

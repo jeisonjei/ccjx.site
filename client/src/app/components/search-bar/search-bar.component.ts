@@ -25,6 +25,7 @@ import { PleaseRegisterComponent } from 'src/app/shared/dialogs/please-register/
 import { DialogConfig } from '@angular/cdk/dialog';
 import { DialogService } from 'src/app/services/dialog.service';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { isUndefined } from 'util';
 
 @Component({
   selector: 'app-search-bar',
@@ -41,22 +42,13 @@ export class SearchBarComponent implements OnInit {
   trigger?: MatAutocompleteTrigger;
   q: FormControl<any> = new FormControl('');
   constructor(
-    private eh: ErrorHandlerService,
     private router: Router,
-    private auth: AuthenticationService,
-    private http: HttpClient,
-    private urls: UrlsService,
-    private questionService: TopicService,
-    private validator: ValidatorService,
-    private dialog: MatDialog,
-    private dials: DialogService
-  ) {}
+    private topicService: TopicService) { }
   ngOnInit(): void {
-    this.getAllQuestions();
     this.filteredQuestions = this.q.valueChanges.pipe(
       startWith(''),
       map((value: string) => {
-        if (value===undefined) {
+        if (value === undefined) {
           return this._filter(value || '', this.allQuestions);
         }
         const matchTagNotCompleted = value.match(/^\([^\)]*$/);
@@ -68,7 +60,7 @@ export class SearchBarComponent implements OnInit {
           const v = value.replace(/\(.*\)( |)+/, '');
           const m = value.match(/^\(.*\)/);
           let tag;
-          if (m!=null) {
+          if (m != null) {
             tag = m[0].replace('(', '').replace(')', '');
             const topics = this._filterByTag(tag, this.allQuestions);
             const filtered = this._filter(v, topics);
@@ -100,7 +92,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   getAllQuestions() {
-    this.questionService.listShort().subscribe((v: any) => {
+    this.topicService.listShort().subscribe((v: any) => {
       this.allQuestions = [...v];
     });
   }
