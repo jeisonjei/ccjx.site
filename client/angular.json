@@ -56,7 +56,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
 
             ],
-            "allowedCommonJsDependencies": [],
+            "allowedCommonJsDependencies": ["@src/assets/ckeditor","moment"],
             "scripts": [
             ]
           },
