@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="107.74464mm"
+   height="30.635242mm"
+   viewBox="0 0 107.74467 30.635242"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2" />
+  <g
+     id="layer1"
+     transform="translate(-41.468557,-20.186975)">
+    <text
+       xml:space="preserve"
+       style="font-size:19.7957px;line-height:0.8;font-family:Candara;-inkscape-font-specification:'Candara, Normal';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round"
+       x="79.798561"
+       y="34.16394"
+       id="text322"><tspan
+         id="tspan318"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:19.7957px;font-family:Candara;-inkscape-font-specification:'Candara, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1"
+         x="79.798561"
+         y="34.16394">CCJX.site</tspan><tspan
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:19.7957px;font-family:Candara;-inkscape-font-specification:'Candara, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1"
+         x="79.798561"
+         y="50.0005"
+         id="tspan320">Блокнот</tspan></text>
+    <g
+       id="g334"
+       transform="matrix(0.75606418,0,0,0.75606418,22.166334,-24.810969)"
+       style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-opacity:1">
+      <rect
+         style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+         id="rect324"
+         width="30.15317"
+         height="38.519367"
+         x="136.88397"
+         y="60.516037"
+         ry="3.4859154" />
+      <path
+         style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+         d="m 142.81002,66.759284 h 18.30106"
+         id="path326" />
+      <path
+         style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+         d="m 142.81002,74.154027 h 18.30106"
+         id="path328" />
+      <path
+         style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+         d="m 142.81002,81.548774 h 18.30106"
+         id="path330" />
+      <path
+         style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:1.00378;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+         d="m 166.95618,89.002773 -11.45957,9.972448"
+         id="path332" />
+    </g>
+  </g>
+</svg>
