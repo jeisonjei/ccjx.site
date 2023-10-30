@@ -1,8 +1,33 @@
-.question{
-    padding:0 0 10px 0;
+.question {
+    padding: 0 0 10px 0;
     border-bottom: 2px solid gray;
 }
-.m-grid{
+
+.m-grid {
     display: grid;
-    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-areas:
+        "feat"
+        "content"
+        "recent";
+}
+
+@media (min-width: 600px) {
+    .m-grid {
+        grid-template-areas: 
+        "feat content recent";
+        grid-template-columns: 1fr 4fr 1fr;
+        column-gap: 20px;
+    }
+}
+
+.feat {
+    grid-area: feat;
+}
+
+.content {
+    grid-area: content;
+}
+
+.recent {
+    grid-area: recent;
 }
