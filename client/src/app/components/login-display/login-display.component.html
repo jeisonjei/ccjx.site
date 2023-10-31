@@ -1,9 +1,9 @@
 <div ngClass="d-none d-lg-flex me-4">
   <span *ngIf="userValue?.isLoggedIn; else isLoggedOut">
+    <button matTooltip="Мои записи" mat-button routerLink="my-questions"><mat-icon>notes</mat-icon></button>
     <button mat-button [matMenuTriggerFor]="menu"><span>{{userValue?.userEmail}}</span></button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item>Профиль</button>
-      <button mat-menu-item routerLink="my-questions">Мои записи</button>
       <button mat-menu-item routerLink="my-answers">Мои ответы</button>
       <button mat-menu-item (click)="this.auth.logout()">Выход</button>
     </mat-menu>
