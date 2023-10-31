@@ -106,6 +106,7 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
       // создать новый тэг
       const tag:Tag = {
         name: tagName,
+        is_private:false,
         topics: [this.topicId]
       }
       this.tagService.create(tag).subscribe(v => {

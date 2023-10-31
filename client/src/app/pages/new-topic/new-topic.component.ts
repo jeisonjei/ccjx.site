@@ -128,6 +128,7 @@ export class NewQuestionComponent implements OnInit {
       // создать новый тэг
       const tag:Tag = {
         name: tagName,
+        is_private:false,
         user: undefined,
         topics: [this.topicId]
       }
