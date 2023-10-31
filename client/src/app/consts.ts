@@ -44,6 +44,7 @@ export interface Tag{
   id?: string,
   user?: string,
   name: string,
+  is_private: boolean,
   description?: string,
   topics:string[]
 }
