@@ -191,15 +191,32 @@ class VoteListCreate(generics.ListCreateAPIView):
 
 class TagListCreate(generics.ListCreateAPIView):
     '''
-    Класс для создания тэгов
+    Класс для создания тэгов и получения списка.
+    Все тэги, у которых is_private=False считаются публичными и 
+    их могут использовать все пользователи для маркировки своих записей. В этом случае
+    если кто-то создал тэг, которого ещё не было, этот тэг появляется в полях поиска у всех пользователей.
+    В то же время у пользователя могут быть личные тэги, которые он не хотел бы показывать всем, но которые также
+    сможет использовать для маркировки своих записей (возможно в том числе публичных). 
     '''
     lookup_field='id'
     serializer_class=TagSerializer
     def get_queryset(self):
-        tags=Tag.objects.annotate(topics_count=Count('topics'))
+        tags=Tag.objects.filter(is_private=False).annotate(topics_count=Count('topics'))
         queryset=tags
         return queryset
     
+class TagMyList(generics.ListCreateAPIView):
+    '''
+    Класс используется для отображения списка тэгов в поле поиска при создании или редактировании записи.
+    К этот список будут включаться все публичные тэги плюс личные тэги пользователя.
+    '''    
+    lookup_field='id'
+    serializer_class=TagSerializer
+    def get_queryset(self):
+        user = self.request.user
+        tags = Tag.objects.filter(Q(is_private=False) | Q(is_private=True,user=user))
+        queryset = tags
+        return queryset
     
 class TagDetail(generics.RetrieveUpdateDestroyAPIView):
     '''
@@ -208,3 +225,6 @@ class TagDetail(generics.RetrieveUpdateDestroyAPIView):
     lookup_field='id'
     serializer_class=TagSerializer
     queryset=Tag.objects.all()
+    def patch(self, request, *args, **kwargs):
+        print(request.data)
+        return super().patch(request, *args, **kwargs)
