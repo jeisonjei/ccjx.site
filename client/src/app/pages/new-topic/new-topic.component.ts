@@ -193,7 +193,7 @@ export class NewQuestionComponent implements OnInit {
           self.tagService.update(tag.id ?? 'error', tag).subscribe((v: any) => {
             tag.is_private = value.is_private;
             tag.backgroundColor = backgroundColor;
-  
+            self.cdr.detectChanges();
           });
         },
         error(err) {
