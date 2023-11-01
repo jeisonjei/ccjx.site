@@ -7,6 +7,8 @@ import { Tag, Topic } from "@app/consts";
 import { TagService } from '@app/services/tag.service';
 import { Observable, map, startWith } from 'rxjs';
 import { faTag  } from "@fortawesome/free-solid-svg-icons";
+import { AuthService } from 'ngx-auth';
+import { AuthenticationService } from '@app/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-edit-topic',
@@ -33,7 +35,8 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
     private topicService: TopicService,
     private router: Router,
     private urls: UrlsService,
-    private tagService: TagService
+    private tagService: TagService,
+    private auth:AuthenticationService
   ) {}
   ngAfterViewInit(): void {
     
@@ -144,15 +147,38 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
     return tag && tag.name ? tag.name : '';
   } 
   makeTagPrivate(tag: Tag) {
+    let backgroundColor: string = '';
+    let is_private = false;
     if (tag.is_private) {
-      tag.is_private = false;
-      tag.backgroundColor = '#e0e0e0';
+      is_private = false;
+      backgroundColor = '#e0e0e0';
     }
     else {
-      tag.is_private = true;
-      tag.backgroundColor = '#ff4081';
+      is_private = true;
+      backgroundColor = '#ffecb3';
     }
-    this.tagService.update(tag.id ?? 'error', tag).subscribe();
+    let obj = { ...tag };
+    obj.is_private = is_private;
+    const self = this;
+    this.tagService.update(obj.id ?? 'error', obj).subscribe(
+      {
+        next(value: any) {
+          // если получилось поменять значение (то есть тэг свободен), то присвоим этот тэг
+          tag.user = self.auth.userValue?.id;
+          // и обновим снова для смены владельца
+          self.tagService.update(tag.id ?? 'error', tag).subscribe((v: any) => {
+            tag.is_private = value.is_private;
+            tag.backgroundColor = backgroundColor;
+  
+          });
+        },
+        error(err) {
+          console.error(err);
+          return;
+        },
+      }
+    );
+
   }
 
 
