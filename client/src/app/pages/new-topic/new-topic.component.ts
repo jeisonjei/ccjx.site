@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { HttpClient, JsonpInterceptor } from '@angular/common/http';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { UrlsService } from '../../services/urls.service';
@@ -9,6 +9,7 @@ import { TagService } from '@app/services/tag.service';
 import { Observable, map, startWith } from 'rxjs';
 import { faTag  } from "@fortawesome/free-solid-svg-icons";
 import { AuthenticationService } from '@app/services/authentication/authentication.service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-new-topic',
@@ -34,7 +35,8 @@ export class NewQuestionComponent implements OnInit {
     private urls: UrlsService,
     private quess: TopicService,
     private tagService: TagService,
-  private auth: AuthenticationService) {
+    private auth: AuthenticationService,
+    private cdr: ChangeDetectorRef) {
 
   }
   @HostListener('window:beforeunload',['$event'])
@@ -121,7 +123,7 @@ export class NewQuestionComponent implements OnInit {
     this.isPrivate = checked;
   }
   tagList() {
-    this.tagService.listMy().subscribe((v:any) => {
+    this.tagService.listMy().subscribe((v: any) => {
       this.tags = v;
     })
   }
@@ -169,17 +171,38 @@ export class NewQuestionComponent implements OnInit {
     return tag && tag.name ? tag.name : '';
   }
   makeTagPrivate(tag: Tag) {
+    let backgroundColor: string = '';
+    let is_private = false;
     if (tag.is_private) {
-      tag.is_private = false;
-      tag.backgroundColor = '#e0e0e0';
+      is_private = false;
+      backgroundColor = '#e0e0e0';
     }
     else {
-      tag.is_private = true;
-      tag.backgroundColor = '#ff4081';
+      is_private = true;
+      backgroundColor = '#ffecb3';
     }
-    this.tagService.update(tag.id ?? 'error', tag).subscribe((v) => {
-      
-    });
+    let obj = { ...tag };
+    obj.is_private = is_private;
+    const self = this;
+    this.tagService.update(obj.id ?? 'error', obj).subscribe(
+      {
+        next(value: any) {
+          // если получилось поменять значение (то есть тэг свободен), то присвоим этот тэг
+          tag.user = self.auth.userValue?.id;
+          // и обновим снова для смены владельца
+          self.tagService.update(tag.id ?? 'error', tag).subscribe((v: any) => {
+            tag.is_private = value.is_private;
+            tag.backgroundColor = backgroundColor;
+  
+          });
+        },
+        error(err) {
+          console.error(err);
+          return;
+        },
+      }
+    );
+
   }
 
 }

@@ -1,6 +1,7 @@
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
 from rest_framework.permissions import IsAuthenticated,AllowAny
 from .models import Answer, Comment, Tag, Topic, Vote
 from .serializers import AnswerSerializer, CommentSerializer, TagSerializer, TopicSerializer, TopicSerializerLists, TopicSerializerShort, TopicSerializerMy, VoteSerializer
@@ -226,5 +227,15 @@ class TagDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class=TagSerializer
     queryset=Tag.objects.all()
     def patch(self, request, *args, **kwargs):
-        print(request.data)
+        user = request.user
+        tag_id=kwargs['id']
+        tag = Tag.objects.get(id=tag_id)
+        is_private=request.data.get('is_private')
+        topics = tag.topics.count()
+        print(f'🔥 {nameof(is_private)}:{is_private}')
+        print(f'🔥 {nameof(tag.is_private)}:{tag.is_private}')
+        print(f'🔥 {nameof(topics)}:{topics}')
+        if is_private==True and tag.is_private==False:
+            if tag.topics.exclude(user=user).exists():
+                return Response("Tag already in use by other users. Choose another name",status=status.HTTP_400_BAD_REQUEST)
         return super().patch(request, *args, **kwargs)

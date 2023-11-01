@@ -175,7 +175,10 @@ export class MyQuestionsComponent {
       if (v.answers.length==0 && v.comments.length==0) {
         this.dialogService.showDelConfDial('Удаление записи', 'Вы уверены, что хотите удалить запись?').subscribe((v) => {
           if (v) {
-            this.topicService.delete(id).subscribe(v=>this.getMyQuestions());
+            this.topicService.delete(id).subscribe(v => {
+              this.getMyQuestions();
+              
+            });
           }
         })
       }

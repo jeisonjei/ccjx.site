@@ -11,7 +11,7 @@
           <input ngClass="input" (keyup)="tagAddOnEnter($event)" type="text" placeholder="Тэги..." [formControl]="myControl"
             [matAutocomplete]="auto" [value]="tagSelected" #autocompleteInput [matChipInputFor]="chipGrid">
           <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-            <mat-option *ngFor="let tag of tagsFiltered|async" [value]="tag">{{tag.name}}<mat-icon *ngIf="tag.is_private">lock</mat-icon></mat-option>
+            <mat-option *ngFor="let tag of tagsFiltered|async" [value]="tag" [ngClass]="{'tagPrivate':tag.is_private}">{{tag.name}}</mat-option>
           </mat-autocomplete>
           <button ngClass="mx-1" mat-icon-button (click)="tagCreate(autocompleteInput.value)"><fa-icon
               [icon]="faTag"></fa-icon></button>
