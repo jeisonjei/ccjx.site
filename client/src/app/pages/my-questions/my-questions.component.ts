@@ -13,6 +13,8 @@ import { TagService } from '@app/services/tag.service';
 import { MatChipEvent, MatChipListboxChange, MatChipSelectionChange } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogService } from '@app/services/dialog.service';
+import { AuthenticationService } from '@app/services/authentication/authentication.service';
+import { ValidatorService } from '@app/services/validator.service';
 
 @Component({
   selector: 'app-my-questions',
@@ -35,7 +37,11 @@ export class MyQuestionsComponent {
     private urls: UrlsService,
     private topicService: TopicService,
     private tagService: TagService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private auth: AuthenticationService,
+    private validator: ValidatorService,
+    private tops: TopicService,
+    private dials: DialogService
   ) {
     this.getMyQuestions();
     this.getMyTags();
@@ -177,6 +183,26 @@ export class MyQuestionsComponent {
         this.dialogService.showMessDial('Информация','К вашей записи уже оставлены комментарии и/или ответы, поэтому её нельзя удалить');
       }
     })
+  }
+  onQuestion(value: string) {
+    if (!this.auth.userValue?.isLoggedIn) {
+      this.dials.showMessDial('Информация','Чтобы создавать вопросы, нужно зарегистрироваться');
+    }
+    else{
+      if (!this.validator.text(value)) return;
+      const userId = this.auth.userValue?.id;
+      const question: Topic = {
+        user: userId,
+        title: value
+      };
+      const self = this;
+      this.tops.create(question).subscribe({
+        next(value: { user: { id: any; }; id: any; }) {
+          const url = `users/${value.user.id}/new-topic/${value.id}`;
+          self.router.navigateByUrl(url);
+        },
+      });
+    }
   }
 }
 

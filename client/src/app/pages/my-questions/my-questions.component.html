@@ -1,5 +1,6 @@
-<div ngClass="row justify-content-center">
-    <div ngClass="col-lg-8">
+<div ngClass="m-grid">
+    <div ngClass="feat"></div>
+    <div ngClass="content">
         <mat-card ngClass="p-4">
             <h1 ngClass="text-center">Мои записи</h1>
             <mat-chip-listbox multiple="true" (change)="onChipSelect($event)">
@@ -32,5 +33,10 @@
                 </tr>
             </table>
         </mat-card>
+    </div>
+    <div ngClass="recent">
+        <button mat-flat-button color="primary" (click)="onQuestion('Новая запись')">
+            Создать запись</button>
+            <hr>
     </div>
 </div>

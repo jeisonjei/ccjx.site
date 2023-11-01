@@ -1,6 +1,8 @@
 .n-grid{
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
+  column-gap: 20px;
+
 }
 .m-grid{
   display:grid;
