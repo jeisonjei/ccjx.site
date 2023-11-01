@@ -148,15 +148,12 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
     return tag && tag.name ? tag.name : '';
   } 
   makeTagPrivate(tag: Tag) {
-    let backgroundColor: string = '';
     let is_private = false;
     if (tag.is_private) {
       is_private = false;
-      backgroundColor = '#e0e0e0';
     }
     else {
       is_private = true;
-      backgroundColor = '#ffecb3';
     }
     let obj = { ...tag };
     obj.is_private = is_private;
@@ -165,12 +162,11 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
       {
         next(value: any) {
           // если получилось поменять значение (то есть тэг свободен), то присвоим этот тэг
-          tag.user = self.auth.userValue?.id;
+          obj.user = self.auth.userValue?.id;
           // и обновим снова для смены владельца
-          self.tagService.update(tag.id ?? 'error', tag).subscribe((v: any) => {
+          self.tagService.update(obj.id ?? 'error', obj).subscribe((v: any) => {
             tag.is_private = value.is_private;
-            tag.backgroundColor = backgroundColor;
-            self.cdr.detectChanges();
+           self.cdr.detectChanges();
           });
         },
         error(err) {
