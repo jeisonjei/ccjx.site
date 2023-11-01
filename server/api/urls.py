@@ -12,6 +12,7 @@ from .views import AnswerListCreate, AnswerDetail
 from .views import CommentListCreate, CommentDetail
 from .views import VoteListCreate
 from .views import TagListCreate
+from .views import TagMyList
 from .views import TagDetail
 from .views import TopicTagList
 from .views import TopicPopularArticlesList
@@ -43,5 +44,6 @@ urlpatterns = [
     path('votes/', VoteListCreate.as_view()),
 
     path('tags/', TagListCreate.as_view()),
+    path('tags/my/', TagMyList.as_view()),
     path('tags/<int:id>/',TagDetail.as_view()),
 ]

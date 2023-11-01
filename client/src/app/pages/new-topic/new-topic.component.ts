@@ -119,7 +119,7 @@ export class NewQuestionComponent implements OnInit {
     this.isPrivate = checked;
   }
   tagList() {
-    this.tagService.list().subscribe((v:any) => {
+    this.tagService.listMy().subscribe((v:any) => {
       this.tags = v;
     })
   }

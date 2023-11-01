@@ -13,6 +13,10 @@ export class TagService {
     const url = this.urls.getUrlTagList();
     return this.http.get(url);
   }
+  listMy() {
+    const url = this.urls.getUrlTagMyList();
+    return this.http.get(url);
+  }
   create(tag: Tag) {
     const url = this.urls.getUrlTagCreate();
     return this.http.post(url,tag);
