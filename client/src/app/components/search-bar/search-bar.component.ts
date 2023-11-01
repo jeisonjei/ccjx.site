@@ -1,8 +1,10 @@
 import {
   Component,
+  ElementRef,
   EventEmitter,
   OnInit,
   Output,
+  Renderer2,
   ViewChild,
 } from '@angular/core';
 import { ErrorHandlerService } from '../../services/error-handler.service';
@@ -26,6 +28,7 @@ import { DialogConfig } from '@angular/cdk/dialog';
 import { DialogService } from 'src/app/services/dialog.service';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { isUndefined } from 'util';
+import { ShortcutsService } from '@app/services/shortcut.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -40,11 +43,22 @@ export class SearchBarComponent implements OnInit {
   question: EventEmitter<string> = new EventEmitter();
   @ViewChild(MatAutocompleteTrigger)
   trigger?: MatAutocompleteTrigger;
+  @ViewChild('i') searchInput?:ElementRef;
   q: FormControl<any> = new FormControl('');
   constructor(
     private router: Router,
-    private topicService: TopicService) { }
+    private topicService: TopicService,
+    private shortcutService: ShortcutsService,
+  private renderer:Renderer2) { }
   ngOnInit(): void {
+    this.shortcutService.subject.subscribe((v) => {
+      if (v) {
+        this.renderer.selectRootElement(this.searchInput?.nativeElement).focus();
+      }
+      else {
+        this.renderer.selectRootElement(this.searchInput?.nativeElement).blur();
+      }
+    })
     this.filteredQuestions = this.q.valueChanges.pipe(
       startWith(''),
       map((value: string) => {

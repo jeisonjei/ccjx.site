@@ -8,7 +8,7 @@
               type="search" matInput [matAutocomplete]="auto" (focus)="getAllQuestions()">
             <div class="search-box-placeholder-wrapper">
               <fa-icon [icon]="faMagnifyingGlass" class="search-box-placeholder"></fa-icon>
-              <span>&nbsp;Поиск по записям</span>
+              <span>&nbsp;Поиск по записям (Ctrl+k)</span>
             </div>
           </div>
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="clearSelection($event)" ngClass="single-autocomplete">
