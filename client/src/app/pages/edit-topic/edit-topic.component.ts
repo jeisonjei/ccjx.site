@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TopicService } from '@app/services/topic.service';
@@ -36,7 +36,8 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
     private router: Router,
     private urls: UrlsService,
     private tagService: TagService,
-    private auth:AuthenticationService
+    private auth: AuthenticationService,
+    private cdr:ChangeDetectorRef
   ) {}
   ngAfterViewInit(): void {
     
@@ -169,7 +170,7 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
           self.tagService.update(tag.id ?? 'error', tag).subscribe((v: any) => {
             tag.is_private = value.is_private;
             tag.backgroundColor = backgroundColor;
-  
+            self.cdr.detectChanges();
           });
         },
         error(err) {
