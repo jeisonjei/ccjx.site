@@ -46,7 +46,8 @@ export interface Tag{
   name: string,
   is_private: boolean,
   description?: string,
-  topics:string[]
+  topics: string[],
+  backgroundColor?: string;
 }
 export interface MessDial {
   title: string,

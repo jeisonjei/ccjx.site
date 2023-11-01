@@ -166,5 +166,15 @@ export class NewQuestionComponent implements OnInit {
   displayFn(tag: any) {
     return tag && tag.name ? tag.name : '';
   }
+  makeTagPrivate(tag: Tag) {
+    if (tag.is_private) {
+      tag.is_private = false;
+      tag.backgroundColor = '#e0e0e0';
+    }
+    else {
+      tag.is_private = true;
+      tag.backgroundColor = '#ff4081';
+    }
+  }
 
 }

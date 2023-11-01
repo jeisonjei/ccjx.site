@@ -18,8 +18,11 @@
         </div>
         <div ngClass="d-flex align-items-center ms-4">
           <mat-chip-grid #chipGrid>
-            <mat-chip-row *ngFor="let tag of tagsAdded" (removed)="tagDelete(tag)">
-              {{tag.name}}
+            <mat-chip-row *ngFor="let tag of tagsAdded" (removed)="tagDelete(tag)" (click)="makeTagPrivate(tag)" [ngStyle]="{'background-color':tag.backgroundColor}">
+              <div ngClass="d-flex align-items-center">
+                <mat-icon *ngIf="tag.is_private" ngClass="me-1">lock</mat-icon>
+                <span>{{tag.name}}</span>
+              </div>
               <button matChipRemove><mat-icon>cancel</mat-icon></button>
             </mat-chip-row>
           </mat-chip-grid>
