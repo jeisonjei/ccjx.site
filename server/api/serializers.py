@@ -52,7 +52,7 @@ class TagSerializer(serializers.ModelSerializer):
     '''
     class Meta:
         model = Tag
-        fields = ['id','user','name','description','topics']
+        fields = ['id','user','name','is_private','description','topics']
                 
 class TopicSerializer(serializers.ModelSerializer):
     '''

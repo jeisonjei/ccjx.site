@@ -8,6 +8,7 @@ import { TopicService } from '@app/services/topic.service';
 import { TagService } from '@app/services/tag.service';
 import { Observable, map, startWith } from 'rxjs';
 import { faTag  } from "@fortawesome/free-solid-svg-icons";
+import { AuthenticationService } from '@app/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-new-topic',
@@ -32,7 +33,8 @@ export class NewQuestionComponent implements OnInit {
     private http: HttpClient,
     private urls: UrlsService,
     private quess: TopicService,
-    private tagService: TagService) {
+    private tagService: TagService,
+  private auth: AuthenticationService) {
 
   }
   @HostListener('window:beforeunload',['$event'])
@@ -129,7 +131,7 @@ export class NewQuestionComponent implements OnInit {
       const tag:Tag = {
         name: tagName,
         is_private:false,
-        user: undefined,
+        user: this.auth.userValue?.id,
         topics: [this.topicId]
       }
       this.tagService.create(tag).subscribe(v => {
@@ -175,6 +177,9 @@ export class NewQuestionComponent implements OnInit {
       tag.is_private = true;
       tag.backgroundColor = '#ff4081';
     }
+    this.tagService.update(tag.id ?? 'error', tag).subscribe((v) => {
+      
+    });
   }
 
 }
