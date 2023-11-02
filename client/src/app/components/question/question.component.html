@@ -26,7 +26,7 @@
                 <div>{{question?.user?.email}}</div>
             </div>
         </div>
-        <h1 ngClass="text-center mt-4">{{question?.title}}</h1>
+        <h1 ngClass="text-center mt-4" style="overflow: hidden; text-overflow:ellipsis;max-width:90vw">{{question?.title}}</h1>
     </div>
     <div ngClass="grid2">
         <div ngClass="d-flex flex-column align-items-center votes">
