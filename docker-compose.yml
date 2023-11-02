@@ -24,7 +24,7 @@ services:
     # местонахождение Dockerfile
     build: ./server
     env_file: ./server/.env
-    command: sh -c "python manage.py migrate && gunicorn --bind 0.0.0.0:5000 --certfile fullchain.pem --keyfile privkey.pem server.wsgi:application"
+    command: sh -c "python manage.py migrate && gunicorn --timeout 90 --bind 0.0.0.0:5000 --certfile fullchain.pem --keyfile privkey.pem server.wsgi:application"
     environment:
       - DJANGO_SUPERUSER_PASSWORD=1234
     ports:
