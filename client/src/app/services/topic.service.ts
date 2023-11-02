@@ -72,9 +72,17 @@ export class TopicService {
     const url = this.urls.getUrlTopicDetail(id);
     return this.http.get(url);
   }
-  update(id:string,topic: any) {
+  update(id: string, topic: Topic) {
     const url = this.urls.getUrlTopicDetail(id ?? 'error');
-    return this.http.patch(url,topic);
+    console.log(`🔥 topic.is_private: ${topic.is_private}`);
+    let params = new HttpParams();
+    if (topic.is_private) {
+      params=params.append('is_private', true);
+      return this.http.patch(url, topic, { params: params });
+    }
+    else {
+        return this.http.patch(url,topic);      
+    }
   }
   delete(id: string) {
     const url = this.urls.getQuestionDeleteUrl(id);

@@ -97,15 +97,10 @@ export class NewQuestionComponent implements OnInit {
       is_article: this.isArticle,
       is_private:this.isPrivate
     };
-    const serverUrl = this.urls.getUrlTopicDetail(topicId??'Error');
-    const self = this;
-    this.http.patch(serverUrl, t).subscribe({
-      next(value) {
-
-      },
+    this.topicService.update(topicId ?? 'error', t).subscribe((v: any) => {
+      const url = `topics/${topicId}`;
+      this.router.navigateByUrl(url);      
     });
-    const url = `topics/${topicId}`;
-    this.router.navigateByUrl(url);
   }
   cancel() {
     this.topicService.delete(this.topicId??'').subscribe();
