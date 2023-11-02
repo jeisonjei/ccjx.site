@@ -232,9 +232,6 @@ class TagDetail(generics.RetrieveUpdateDestroyAPIView):
         tag = Tag.objects.get(id=tag_id)
         is_private=request.data.get('is_private')
         topics = tag.topics.count()
-        print(f'🔥 {nameof(is_private)}:{is_private}')
-        print(f'🔥 {nameof(tag.is_private)}:{tag.is_private}')
-        print(f'🔥 {nameof(topics)}:{topics}')
         if is_private==True and tag.is_private==False:
             if tag.topics.exclude(user=user).exists():
                 return Response("Tag already in use by other users. Choose another name",status=status.HTTP_400_BAD_REQUEST)
