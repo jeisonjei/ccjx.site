@@ -5,10 +5,8 @@
             <h1 ngClass="text-center">Мои записи</h1>
             <mat-chip-listbox multiple="true" (change)="onChipSelect($event)">
               <mat-chip-option ngClass="m-1" *ngFor="let tag of myTags">
-                <div ngClass="d-flex align-items-center">
-                    <app-lock-icon *ngIf="tag.is_private"></app-lock-icon>
-                    {{tag.name}}
-                </div>
+                  <mat-icon style="color: gray;" matChipTrailingIcon *ngIf="tag.is_private">lock</mat-icon>
+                  {{tag.name}}
               </mat-chip-option>
             </mat-chip-listbox>
             <table matSort (matSortChange)="sortData($event)">

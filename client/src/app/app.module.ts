@@ -63,7 +63,6 @@ import { PopularAndNotComponent } from './pages/popular-and-not/popular-and-not.
 import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
 import { MatRadioModule } from "@angular/material/radio";
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { LockIconComponent } from './shared/components/lock-icon/lock-icon.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -101,8 +100,7 @@ import { LockIconComponent } from './shared/components/lock-icon/lock-icon.compo
     RandomTopicComponent,
     LoginDisplaySmallComponent,
     PopularAndNotComponent,
-    NotFoundComponent,
-    LockIconComponent
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

@@ -164,7 +164,7 @@ export class MyQuestionsComponent {
     }
     else {
       const data = this.sortedData.filter((topic: Topic) => {
-        return topic.tags.some(tag=>this.selectedTags.includes(tag.name));
+        return topic.tags.some(tag =>this.selectedTags.includes(tag.name));
       });
       this.sortedData = data;
     }
