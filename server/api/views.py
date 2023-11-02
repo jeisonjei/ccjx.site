@@ -59,7 +59,7 @@ class TopicDetail(generics.RetrieveUpdateDestroyAPIView):
             topic = self.queryset.get(id=topic_id)
         except Topic.DoesNotExist:
             return Response("Topic not found.", status=status.HTTP_404_NOT_FOUND)
-        if not user.is_authenticated and topic.is_private:
+        if topic.is_private and not user==topic.user:
             return Response("Topic not found", status=status.HTTP_404_NOT_FOUND)
         return super().get(request, *args, **kwargs)
     
