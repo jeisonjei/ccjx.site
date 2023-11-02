@@ -99,7 +99,7 @@ body {
 div.mat-mdc-autocomplete-panel {
   max-height: 600px !important;
 }
-.cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+.cdk-text-field-autofill-monitored.search-box-input:not(:-webkit-autofill) {
   padding: 5px 15px 5px 15px !important;
   border-radius: 5px;
   border: 2px solid lightgray;

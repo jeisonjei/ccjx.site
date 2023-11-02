@@ -2,7 +2,7 @@
     <div>
         <div ngClass="flex-grow-1 d-flex justify-content-between align-items-center">
 		 <div>Создана {{dateCreated}} </div>
-            <div *ngIf="question?.is_article; else q">статья/заметка</div>
+            <div *ngIf="question?.is_article; else q"><span *ngIf="question?.is_private">личная&nbsp;</span>статья/заметка</div>
             <ng-template #q>
                 <div>вопрос</div>
             </ng-template>
