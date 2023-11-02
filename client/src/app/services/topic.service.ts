@@ -64,6 +64,14 @@ export class TopicService {
     }
     return this.http.get(url,{params:params});
   }
+  listTopicsMyByTag(tags: string[]) {
+    const url = this.urls.getUrlTopicListMy();
+    let params = new HttpParams();
+    for (const tag of tags) {
+      params = params.append('tags',tag);
+    }
+    return this.http.get(url,{params:params});
+  }
   create(topic: Topic):Observable<any>{
     const url=this.urls.getUrlTopicCreate(topic.user??'');
     return this.http.post(url, topic);
