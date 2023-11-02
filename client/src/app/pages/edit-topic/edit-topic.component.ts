@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TopicService } from '@app/services/topic.service';
@@ -9,6 +9,8 @@ import { Observable, map, startWith } from 'rxjs';
 import { faTag  } from "@fortawesome/free-solid-svg-icons";
 import { AuthService } from 'ngx-auth';
 import { AuthenticationService } from '@app/services/authentication/authentication.service';
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import { DialogService } from '@app/services/dialog.service';
 
 @Component({
   selector: 'app-edit-topic',
@@ -37,8 +39,14 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
     private urls: UrlsService,
     private tagService: TagService,
     private auth: AuthenticationService,
-    private cdr:ChangeDetectorRef
-  ) {}
+    private cdr: ChangeDetectorRef,
+    private dialogService: DialogService
+  ) { }
+  @ViewChild(MatAutocompleteTrigger)
+  autocomplete?: MatAutocompleteTrigger;
+  @ViewChild('autocompleteInput')
+  autoInput?: ElementRef;
+
   ngAfterViewInit(): void {
     
   }
@@ -111,10 +119,22 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
       const tag:Tag = {
         name: tagName,
         is_private:false,
+        user: this.auth.userValue?.id,
         topics: [this.topicId]
       }
-      this.tagService.create(tag).subscribe(v => {
-        this.tagsAdded.push(v);
+      const self = this;
+      this.tagService.create(tag).subscribe({
+        next(value) {
+          self.tagsAdded.push(value);
+        },
+        error(err) {
+          if (err.error.name[0].includes('уже существует')) {
+            self.autocomplete?.closePanel();
+            self.autoInput?.nativeElement.blur();
+            const random = Math.floor(Math.random() * 1000) + 1;
+            self.dialogService.showMessDial("Информация", `Извините, тэг "${tag.name}" уже кем-то занят. Попробуйте использовать другой тэг, например "${tag.name}-${random}"`);
+            }
+        },
       });
     }
     else {
