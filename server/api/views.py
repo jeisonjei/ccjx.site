@@ -27,9 +27,14 @@ class MyQuestionList(generics.ListAPIView):
     serializer_class = TopicSerializerMy
 
     def get_queryset(self):
+        tag_names=self.request.GET.getlist('tags')
         user = self.request.user
-        queryset = Topic.objects.all()
-        return queryset.filter(user=user)
+        if len(tag_names)>0:
+            topics=Topic.objects.filter(tags__name__in=tag_names,user=user).distinct()
+        else:
+            topics=Topic.objects.filter(user=user)
+        queryset=topics
+        return queryset
 
 class TopicListCreate(generics.ListCreateAPIView):
     lookup_field='id'

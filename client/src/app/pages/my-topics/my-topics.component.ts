@@ -44,7 +44,6 @@ export class MyQuestionsComponent {
     private dials: DialogService
   ) {
     this.getMyQuestions();
-    this.getMyTags();
   }
   getMyQuestions() {
     const self = this;
@@ -70,8 +69,8 @@ export class MyQuestionsComponent {
       },
     });
   }
-  getMyTags() {
-
+  refreshDataWithTags(tags:string[]) {
+    return this.topicService.listTopicsMyByTag(tags);
   }
   formatDate(dateTime: string) {
     let date = new Date(dateTime);
@@ -155,7 +154,7 @@ export class MyQuestionsComponent {
   }
   onChipSelect(event: MatChipListboxChange) {
     this.selectedTags = event.source.value;
-    if (this.selectedTags.length==0) {
+    if (this.selectedTags.length == 0) {
       this.sortedData = this.myQuestions.map((item: any) => {
         const obj = { ...item, date_created: this.formatDate(item.date_created) };
         return obj;
@@ -163,10 +162,14 @@ export class MyQuestionsComponent {
 
     }
     else {
-      const data = this.sortedData.filter((topic: Topic) => {
-        return topic.tags.some(tag =>this.selectedTags.includes(tag.name));
+      this.refreshDataWithTags(this.selectedTags).subscribe((v: any) => {
+        const data = v.map((item: any) => {
+          const obj = { ...item, date_created: this.formatDate(item.date_created) };
+          return obj;
+        });
+        this.sortedData=sortByDateDescending(data);
+        
       });
-      this.sortedData = data;
     }
   
   }
