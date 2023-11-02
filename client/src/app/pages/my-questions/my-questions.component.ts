@@ -168,7 +168,13 @@ export class MyQuestionsComponent {
       });
       this.sortedData = data;
     }
+  
   }
+  editTopic(record:Topic) {
+    const url = `/users/${this.auth.userValue?.id}/edit-topic/${record?.id}`;
+    this.router.navigateByUrl(url);
+  }
+
   deleteRecord(record: Topic) {
     const id = record.id ?? 'error';
     this.topicService.retrieve(id).subscribe((v: any) => {

@@ -15,6 +15,7 @@
                     <th ngClass="w-30" mat-sort-header="date">Дата создания</th>
                     <th ngClass="w-40" mat-sort-header="record">Запись</th>
                     <th>Тэг</th>
+                    <th></th>
                 </thead>
                 <tr *ngFor="let record of sortedData">
                     <td ngClass="text-center">
@@ -29,7 +30,10 @@
                         </mat-chip>
                     </td>
                     <td>
-                      <button mat-flat-button color="warn" (click)="deleteRecord(record)">Удалить</button>
+                        <div ngClass="d-flex">
+                            <button ngClass="mx-1" mat-icon-button color="primary" (click)="editTopic(record)"><mat-icon>edit</mat-icon></button>
+                            <button ngClass="mx-1" mat-icon-button color="warn" (click)="deleteRecord(record)"><mat-icon>delete</mat-icon></button>
+                        </div>
                     </td>
                 </tr>
             </table>
