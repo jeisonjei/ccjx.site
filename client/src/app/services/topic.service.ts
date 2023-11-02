@@ -74,7 +74,6 @@ export class TopicService {
   }
   update(id: string, topic: Topic) {
     const url = this.urls.getUrlTopicDetail(id ?? 'error');
-    console.log(`🔥 topic.is_private: ${topic.is_private}`);
     let params = new HttpParams();
     if (topic.is_private) {
       params=params.append('is_private', true);
