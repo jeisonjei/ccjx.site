@@ -1,0 +1,29 @@
+.grid{
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-template-areas: 
+    "search menu";
+}
+.search{
+    grid-area: search;
+}
+.menu{
+    grid-area: menu;
+}
+.logo{
+    grid-area: logo;
+    display: none;
+}
+@media (min-width:600px) {
+    .grid{
+        display: grid;
+        grid-template-columns: 1fr 4fr 1fr;
+        grid-template-areas: 
+        "logo search menu";
+        column-gap: 20px;
+    }
+    .logo{
+        grid-area: logo;
+        display: block;
+    }
+}

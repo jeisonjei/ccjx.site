@@ -29,6 +29,12 @@ import { DialogService } from 'src/app/services/dialog.service';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { isUndefined } from 'util';
 import { ShortcutsService } from '@app/services/shortcut.service';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+
+const customBreakpoints = {
+  small: '(max-width:599px)',
+  large: '(min-width:600px)'
+}
 
 @Component({
   selector: 'app-search-bar',
@@ -45,12 +51,17 @@ export class SearchBarComponent implements OnInit {
   trigger?: MatAutocompleteTrigger;
   @ViewChild('i') searchInput?:ElementRef;
   q: FormControl<any> = new FormControl('');
+  screenSize$?: Observable<boolean>;
   constructor(
     private router: Router,
     private topicService: TopicService,
     private shortcutService: ShortcutsService,
-  private renderer:Renderer2) { }
+    private renderer: Renderer2,
+  private breakpointObserver:BreakpointObserver) { }
   ngOnInit(): void {
+    this.screenSize$ = this.breakpointObserver.observe(customBreakpoints.small).pipe(
+      map(result => result.matches)
+    );
     this.shortcutService.subject.subscribe((v) => {
       if (v) {
         this.renderer.selectRootElement(this.searchInput?.nativeElement).focus();
