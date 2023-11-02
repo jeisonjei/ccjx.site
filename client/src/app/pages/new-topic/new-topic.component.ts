@@ -33,7 +33,7 @@ export class NewQuestionComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private urls: UrlsService,
-    private quess: TopicService,
+    private topicService: TopicService,
     private tagService: TagService,
     private auth: AuthenticationService,
     private cdr: ChangeDetectorRef) {
@@ -108,7 +108,7 @@ export class NewQuestionComponent implements OnInit {
     this.router.navigateByUrl(url);
   }
   cancel() {
-    this.quess.delete(this.topicId??'').subscribe();
+    this.topicService.delete(this.topicId??'').subscribe();
     this.router.navigateByUrl('');
   }
   handleTopicChange(event: Event) {
