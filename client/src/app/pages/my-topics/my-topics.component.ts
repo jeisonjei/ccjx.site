@@ -17,9 +17,9 @@ import { AuthenticationService } from '@app/services/authentication/authenticati
 import { ValidatorService } from '@app/services/validator.service';
 
 @Component({
-  selector: 'app-my-questions',
-  templateUrl: './my-questions.component.html',
-  styleUrls: ['./my-questions.component.scss'],
+  selector: 'app-my-topics',
+  templateUrl: './my-topics.component.html',
+  styleUrls: ['./my-topics.component.scss'],
 })
 export class MyQuestionsComponent {
   myQuestions: any;

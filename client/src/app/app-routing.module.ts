@@ -10,7 +10,7 @@ import { NewPassSuccessComponent } from './account/new-pass-success/new-pass-suc
 import { NewPassRequestComponent } from './account/new-pass-request/new-pass-request.component';
 import { NewQuestionComponent } from './pages/new-topic/new-topic.component';
 import { TopicComponent } from './pages/topic/topic.component';
-import { MyQuestionsComponent } from './pages/my-questions/my-questions.component';
+import { MyQuestionsComponent } from './pages/my-topics/my-topics.component';
 import { protectedGuard } from 'ngx-auth';
 import { EditTopicComponent } from './pages/edit-topic/edit-topic.component';
 import { RandomTopicComponent } from './pages/random-topic/random-topic.component';
