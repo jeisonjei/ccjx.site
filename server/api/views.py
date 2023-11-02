@@ -52,6 +52,16 @@ class TopicDetail(generics.RetrieveUpdateDestroyAPIView):
     lookup_field='id'    
     serializer_class=TopicSerializer
     queryset=Topic.objects.all()
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        topic_id = kwargs.get('id')
+        try:
+            topic = self.queryset.get(id=topic_id)
+        except Topic.DoesNotExist:
+            return Response("Topic not found.", status=status.HTTP_404_NOT_FOUND)
+        if not user.is_authenticated and topic.is_private:
+            return Response("Topic not found", status=status.HTTP_404_NOT_FOUND)
+        return super().get(request, *args, **kwargs)
     
 class TopicRecentList(generics.ListAPIView):
     '''
