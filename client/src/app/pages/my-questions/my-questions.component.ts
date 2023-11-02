@@ -54,18 +54,18 @@ export class MyQuestionsComponent {
         const tags:any[]=[];
         for (const topic of value) {
           for (const tag of topic.tags) {
-            tags.push(tag.name);
+            tags.push({name:tag.name,is_private:tag.is_private});
           }
         }
         const uniqueTags:any = [];
         for (let i = 0; i < tags.length; i++) {
-          if (uniqueTags.indexOf(tags[i])===-1) {
+          if (uniqueTags.map(t=>t.name).indexOf(tags[i].name)===-1) {
             uniqueTags.push(tags[i]);
           }
 
         }
 
-        self.myTags = uniqueTags.sort((a,b)=>a.localeCompare(b));
+        self.myTags = uniqueTags.sort((a,b)=>a.name.localeCompare(b.name));
         self.sort?.sort({ id: 'date', start: 'desc' } as MatSortable);
       },
     });
