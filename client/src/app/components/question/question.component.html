@@ -29,12 +29,12 @@
         <h1 ngClass="text-center mt-4">{{question?.title}}</h1>
     </div>
     <div ngClass="grid2">
-        <div ngClass="d-flex flex-column align-items-center">
+        <div ngClass="d-flex flex-column align-items-center votes">
             <button mat-icon-button (click)="plus()"><fa-icon [icon]="faArrowUp"></fa-icon></button>
             <button mat-icon-button (click)="minus()"><fa-icon [icon]="faArrowDown"></fa-icon></button>
             {{votes}}
         </div>
-        <div ngClass="mx-5">
+        <div ngClass="content">
             <ckeditor class="ckeditor-viewer" [editor]="Editor" [config]="{toolbar:[]}" [disabled]="true" [data]="question?.text"></ckeditor>
         </div>
     </div>

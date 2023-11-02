@@ -4,9 +4,26 @@
 }
 .grid2{
     display: grid;
-    grid-template-columns: 1fr 16fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    "votes"
+    "content";
     
 }
 .small{
     font-size: 12px;
+}
+@media (min-width:600px) {
+    .grid2{
+        display: grid;
+        grid-template-columns: 1fr 16fr;
+        grid-template-areas: 
+        "votes content";
+    }
+}
+.votes{
+    grid-area: votes;
+}
+.content{
+    grid-area: content;
 }
