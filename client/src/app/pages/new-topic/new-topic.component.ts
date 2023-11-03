@@ -144,6 +144,12 @@ export class NewQuestionComponent implements OnInit {
           self.tagsAdded.push(value);
         },
         error(err) {
+          /**
+           * Эта ошибка никогда не возникнет, так как на серверной стороне, в модели убрана проверка
+           * на уникальность имён тэгов. Уникальность имени проверяется только для публичных тэгов в модуле view.py 
+           * при создании, но если такой тэг уже есть среди this.tags, то выполняется блок 'else', то есть попытки
+           * создания нового тэга не происходит, а берётся уже существующий.
+           */
           if (err.error.name[0].includes('уже существует')) {
             self.autocomplete?.closePanel();
             self.autoInput?.nativeElement.blur();
