@@ -212,7 +212,8 @@ export class NewQuestionComponent implements OnInit {
           });
         },
         error(err) {
-          console.error(err);
+          self.dialogService.showMessDial("Информация",err.error.public_message);
+          console.error(err.error.public_message);
           return;
         },
       }

@@ -63,9 +63,9 @@ class TopicDetail(generics.RetrieveUpdateDestroyAPIView):
         try:
             topic = self.queryset.get(id=topic_id)
         except Topic.DoesNotExist:
-            return Response("Topic not found.", status=status.HTTP_404_NOT_FOUND)
+            return Response({'public_message':"Запись не найдена"}, status=status.HTTP_404_NOT_FOUND)
         if topic.is_private and not user==topic.user:
-            return Response("Topic not found", status=status.HTTP_404_NOT_FOUND)
+            return Response({'public_message':"Запись не найдена"}, status=status.HTTP_404_NOT_FOUND)
         return super().get(request, *args, **kwargs)
     
 class TopicRecentList(generics.ListAPIView):
@@ -235,7 +235,7 @@ class TagListCreate(generics.ListCreateAPIView):
         name=kwargs.get('name')
         # Проверить, существует ли тэг с таким именем среди публичных тэгов
         if Tag.objects.filter(name=name,is_private=False).exists():
-            return Response({'error':'Tag with this name already exists among public tags'},status=status.HTTP_400_BAD_REQUEST)
+            return Response({'public_message':'Tag with this name already exists among public tags'},status=status.HTTP_400_BAD_REQUEST)
         return super().create(request, *args, **kwargs)
     
 class TagMyList(generics.ListCreateAPIView):
@@ -267,11 +267,11 @@ class TagDetail(generics.RetrieveUpdateDestroyAPIView):
         if make_private and not tag.is_private:
             # Check if the user already has a tag with the same name
             if Tag.objects.filter(name=tag_name,user=user,is_private=True).exists():
-                return Response({'error':f"You already have a tag with the name '{tag_name}'."},status=status.HTTP_400_BAD_REQUEST)
+                return Response({'public_message':f"Извините, у вас уже есть тэг '{tag_name}'."},status=status.HTTP_400_BAD_REQUEST)
             # Check if the tag is already used by someone else as public
             if tag.topics.exclude(user=user).exists():
-                return Response({'error':f"The tag '{tag_name}' is already used by someone else as public. Choose another name."}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'public_message':f"Извините, тэг '{tag_name}' уже кем-то использовался как публичный для маркировки записей. Пожалуйста, возьмите другое имя для нового личного тэга."}, status=status.HTTP_400_BAD_REQUEST)
         if not make_private and tag.is_private:
             if Tag.objects.filter(name=tag_name,is_private=False).exists():
-                return Response({'error':f"Tag '{tag_name} already exists among public tags.'"})
+                return Response({'public_message':f"Извините, '{tag_name} уже существует среди публичных тэгов.'"})
         return super().patch(request, *args, **kwargs)
