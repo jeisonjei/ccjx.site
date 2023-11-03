@@ -95,7 +95,7 @@ class Vote(models.Model):
     
 class Tag(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
-    name = models.CharField(default='',unique=True)
+    name = models.CharField(default='')
     is_private = models.BooleanField(default=False)
     description = models.TextField(null=True)
     topics = models.ManyToManyField(Topic,related_name='tags',blank=True)
