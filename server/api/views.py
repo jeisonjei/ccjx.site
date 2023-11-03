@@ -213,6 +213,14 @@ class TagListCreate(generics.ListCreateAPIView):
     если кто-то создал тэг, которого ещё не было, этот тэг появляется в полях поиска у всех пользователей.
     В то же время у пользователя могут быть личные тэги, которые он не хотел бы показывать всем, но которые также
     сможет использовать для маркировки своих записей (возможно в том числе публичных). 
+    По умолчанию с клиентской стороны все создаваемые тэги публичные, поэтому при создании
+    проверяется только, существует ли тэг с таким id среди публичных.
+    Предполагается, что пользователь не должен желать использовать публичный тэг в качестве личного, так как
+    в этом случае можно просто пользоваться публичным тэгом.
+    В то же время пользователь может создать тэг, которого нет среди публичных и сделать его личным. 
+    В этом случае задействуется класс TagDetail.
+    Уникальность тэгов в модели будет отключена, так как у разных пользователей могут быть 
+    личные тэги с одинаковыми именами. Проверки выполняются в классах этого модуля.
     '''
     lookup_field='id'
     serializer_class=TagSerializer
@@ -220,6 +228,15 @@ class TagListCreate(generics.ListCreateAPIView):
         tags=Tag.objects.filter(is_private=False).annotate(topics_count=Count('topics'))
         queryset=tags
         return queryset
+    def create(self, request, *args, **kwargs):
+        '''
+        По умолчанию при нажатии Enter в поле тэгов создаются публичные тэги
+        '''
+        name=kwargs.get('name')
+        # Проверить, существует ли тэг с таким именем среди публичных тэгов
+        if Tag.objects.filter(name=name,is_private=False).exists():
+            return Response({'error':'Tag with this name already exists among public tags'},status=status.HTTP_400_BAD_REQUEST)
+        return super().create(request, *args, **kwargs)
     
 class TagMyList(generics.ListCreateAPIView):
     '''
@@ -245,9 +262,13 @@ class TagDetail(generics.RetrieveUpdateDestroyAPIView):
         user = request.user
         tag_id=kwargs['id']
         tag = Tag.objects.get(id=tag_id)
-        is_private=request.data.get('is_private')
-        topics = tag.topics.count()
-        if is_private==True and tag.is_private==False:
+        tag_name=request.data.get('name',tag.name)
+        make_private=request.data.get('is_private')
+        if make_private and not tag.is_private:
+            # Check if the user already has a tag with the same name
+            if Tag.objects.filter(name=tag_name,user=user).exists():
+                return Response({'error':f"You already have a tag with the name '{tag_name}'."},status=status.HTTP_400_BAD_REQUEST)
+            # Check if the tag is already used by someone else as public
             if tag.topics.exclude(user=user).exists():
-                return Response("Tag already in use by other users. Choose another name",status=status.HTTP_400_BAD_REQUEST)
+                return Response({'error':f"The tag '{tag_name}' is already used by someone else as public. Choose another name."}, status=status.HTTP_400_BAD_REQUEST)
         return super().patch(request, *args, **kwargs)
