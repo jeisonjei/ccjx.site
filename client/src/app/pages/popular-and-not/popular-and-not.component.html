@@ -23,14 +23,14 @@
       <h2>10 новых записей</h2>
       <div *ngFor="let question of recentQuestions" ngClass="my-2">
         <a ngClass="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-          routerLink="/topics/{{question.id}}">{{question.title}}</a>
+          routerLink="/topics/{{this.topicService.getIdentifier(question)}}">{{question.title}}</a>
       </div>
     </div>
     <div>
       <h2>Вопросы без ответа</h2>
       <div *ngFor="let question of nonAnsweredQuestions" ngClass="my-2">
         <a ngClass="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-          routerLink="/topics/{{question.id}}">{{question.title}}</a>
+          routerLink="/topics/{{this.topicService.getIdentifier(question)}}">{{question.title}}</a>
       </div>
 
     </div>
@@ -39,7 +39,7 @@
       <div *ngFor="let article of popularArticles" ngClass="my-2">
         <div ngClass="d-inline-flex align-items-center">
           <a ngClass="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-            routerLink="/topics/{{article.id}}">{{article.title}}</a>
+            routerLink="/topics/{{this.topicService.getIdentifier(article)}}">{{article.title}}</a>
           <!-- <span ngClass="ms-2 scores-badge">{{article.scores}}</span> -->
 
         </div>
