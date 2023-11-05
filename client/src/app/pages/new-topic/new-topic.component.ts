@@ -95,7 +95,7 @@ export class NewQuestionComponent implements OnInit {
   addQuestion(content: string) {
     const title = this.title;
     const text = content;
-    const topicId = this.activatedRoute.snapshot.paramMap.get('topicId');
+    const topicSlug = this.activatedRoute.snapshot.paramMap.get('topicSlug');
     const userId = this.activatedRoute.snapshot.paramMap.get('userId');
     const t: Topic = {
       user: userId??'Error',
@@ -104,8 +104,8 @@ export class NewQuestionComponent implements OnInit {
       is_article: this.isArticle,
       is_private:this.isPrivate
     };
-    this.topicService.update(topicId ?? 'error', t).subscribe((v: any) => {
-      const url = `topics/${topicId}`;
+    this.topicService.update(topicSlug ?? 'error', t).subscribe((v: any) => {
+      const url = `topics/${topicSlug}`;
       this.router.navigateByUrl(url);      
     });
   }
