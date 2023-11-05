@@ -20,9 +20,19 @@ th {
 .m-grid {
   display: grid;
   grid-template-areas:
-      "feat"
-      "content"
-      "recent";
+  "recent"
+  "content"
+  "feat"
+  
+}
+.feat{
+ grid-area: feat;
+}
+.recent{
+  grid-area: recent;
+}
+.content{
+  grid-area: content;
 }
 
 @media (min-width: 600px) {
