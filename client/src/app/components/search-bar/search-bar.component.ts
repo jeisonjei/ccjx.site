@@ -43,7 +43,7 @@ export class SearchBarComponent implements OnInit {
   screenSize$?: Observable<boolean>;
   constructor(
     private router: Router,
-    private topicService: TopicService,
+    public topicService: TopicService,
     private shortcutService: ShortcutsService,
     private renderer: Renderer2,
   private breakpointObserver:BreakpointObserver) { }
@@ -110,8 +110,8 @@ export class SearchBarComponent implements OnInit {
       this.allQuestions = [...v];
     });
   }
-  navigate(id?: string) {
-    this.router.navigateByUrl(`topics/${id}`);
+  navigate(topic:Topic) {
+    this.router.navigateByUrl(`topics/${this.topicService.getIdentifier(topic)}`);
     this.trigger?.writeValue('');
   }
 }
