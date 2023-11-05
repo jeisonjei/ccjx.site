@@ -13,6 +13,7 @@ export type User = {
 // входящий и исходящий типы отличаются, см. serializers.py
 export type Topic = /**модель Question */ {
   id?:string,
+  slug?:string,
   type?:string
   user?:string, /**Передаётся первичный ключ */
   title: string,
