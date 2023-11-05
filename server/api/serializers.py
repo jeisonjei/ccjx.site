@@ -65,7 +65,7 @@ class TopicSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many = True, required = False)
     class Meta:
         model=Topic
-        fields=['id','user','title','text','type','answers','comments','is_article','is_private','date_created','votes','tags']   
+        fields=['id','slug','user','title','text','type','answers','comments','is_article','is_private','date_created','votes','tags']   
         depth=0    
     def to_representation(self, instance):
         representation=super(TopicSerializer,self).to_representation(instance)
@@ -79,7 +79,7 @@ class TopicSerializerShort(serializers.ModelSerializer):
     tags = TagSerializer(many = True,required=False)
     class Meta:
         model = Topic
-        fields = ['id','title','is_article','tags']   
+        fields = ['id','slug','title','is_article','tags']   
         
 class TopicSerializerLists(serializers.ModelSerializer):
     '''
@@ -94,7 +94,7 @@ class TopicSerializerLists(serializers.ModelSerializer):
 
     class Meta:
         model = Topic
-        fields = ['id','title','tags','scores']
+        fields = ['id','slug','title','tags','scores']
 
 class TopicSerializerMy(serializers.ModelSerializer):
     '''
@@ -103,4 +103,4 @@ class TopicSerializerMy(serializers.ModelSerializer):
     tags = TagSerializer(many = True, required = False)
     class Meta:
         model = Topic
-        fields = ['id','title','date_created','tags','is_article','is_private']    
+        fields = ['id','slug','title','date_created','tags','is_article','is_private']    

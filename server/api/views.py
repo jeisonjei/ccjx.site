@@ -143,7 +143,7 @@ class TopicPopularArticlesList(generics.ListAPIView):
             topics = Topic.objects.filter(is_private=False,is_article=True)
         topics = topics.annotate(scores=Sum('votes__score'))
         topics_ordered_by_scores=topics.exclude(scores=None).order_by('-scores')[:count]
-        topics_with_custom_field=topics_ordered_by_scores.values('id','title','scores')
+        topics_with_custom_field=topics_ordered_by_scores.values('id','slug','title','scores')
         queryset = topics_with_custom_field
         return queryset
 
