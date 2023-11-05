@@ -42,7 +42,7 @@ export class TopicComponent implements OnInit {
     private comms: CommentService,
     private auth: AuthenticationService,
     private dials: DialogService,
-    private tops: TopicService,
+    private topicService: TopicService,
     private router: Router,
     private validator: ValidatorService,
     private titleService:Title
@@ -52,7 +52,7 @@ export class TopicComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(() => {
       this.getQuestion();
     });
-    this.tops.listRecent(10).subscribe((v:any) => {
+    this.topicService.listRecent(10).subscribe((v:any) => {
       this.lastTopics = v;
     })
   }
@@ -73,7 +73,7 @@ export class TopicComponent implements OnInit {
   getQuestion() {
 
     const topicId = this.activatedRoute.snapshot.paramMap.get('topicId');
-    this.tops.retrieve(topicId??'error').subscribe((v:any) => {
+    this.topicService.retrieve(topicId??'error').subscribe((v:any) => {
       this.question = v;
       this.answers = v.answers;
       this.comments = v.comments;          
@@ -143,7 +143,7 @@ export class TopicComponent implements OnInit {
         title: value
       };
       const self = this;
-      this.tops.create(question).subscribe({
+      this.topicService.create(question).subscribe({
         next(value: { user: { id: any; }; id: any; }) {
           const url = `users/${value.user.id}/new-topic/${value.id}`;
           self.router.navigateByUrl(url);
