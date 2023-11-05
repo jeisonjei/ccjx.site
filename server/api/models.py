@@ -75,10 +75,17 @@ class Topic(models.Model):
         ]
     
 @receiver(post_save,sender=Topic)
-def generate_slug(sender, instance, **kwargs):
+def generate_slug(sender, instance, created, **kwargs):
     if not instance.slug:
         title_translit = translit(instance.title,'ru',reversed=True)
         instance.slug=f"{instance.id}-{slugify(title_translit)}"
+        instance.save(update_fields=['slug'])
+    else:
+        title_translit = translit(instance.title, 'ru', reversed=True)
+        new_slug = f"{instance.id}-{slugify(title_translit)}"
+        if instance.slug != new_slug:  # Only update if the slug has changed
+            instance.slug = new_slug
+            instance.save(update_fields=['slug'])
 
 class Answer(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
