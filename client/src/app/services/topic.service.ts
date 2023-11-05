@@ -80,6 +80,9 @@ export class TopicService {
     const url = this.urls.getUrlTopicDetail(id);
     return this.http.get(url);
   }
+  getIdentifier(topic: Topic) {
+    return topic.slug;
+  }
   update(id: string, topic: Topic) {
     const url = this.urls.getUrlTopicDetail(id ?? 'error');
     let params = new HttpParams();
