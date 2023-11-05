@@ -50,7 +50,7 @@ this.dateCreated = this.formatDate(this.question?.date_created);
 
   }
   editTopic() {
-    const url = `/users/${this.question?.user?.id}/edit-topic/${this.question?.id}`;
+    const url = `/users/${this.question?.user?.id}/edit-topic/${this.question?.slug}`;
     this.router.navigateByUrl(url);
   }
   deleteTopic() {}
