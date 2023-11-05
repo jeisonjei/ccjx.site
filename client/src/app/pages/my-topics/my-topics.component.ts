@@ -173,17 +173,17 @@ export class MyQuestionsComponent {
   
   }
   editTopic(record:Topic) {
-    const url = `/users/${this.auth.userValue?.id}/edit-topic/${record?.id}`;
+    const url = `/users/${this.auth.userValue?.id}/edit-topic/${record?.slug}`;
     this.router.navigateByUrl(url);
   }
 
   deleteRecord(record: Topic) {
-    const id = record.id ?? 'error';
-    this.topicService.retrieve(id).subscribe((v: any) => {
+    const slug = record.slug ?? 'error';
+    this.topicService.retrieve(slug).subscribe((v: any) => {
       if (v.answers.length==0 && v.comments.length==0) {
         this.dialogService.showDelConfDial('Удаление записи', 'Вы уверены, что хотите удалить запись?').subscribe((v) => {
           if (v) {
-            this.topicService.delete(id).subscribe(v => {
+            this.topicService.delete(slug).subscribe(v => {
               this.getMyQuestions();
               
             });
@@ -208,8 +208,8 @@ export class MyQuestionsComponent {
       };
       const self = this;
       this.topicService.create(question).subscribe({
-        next(value: { user: { id: any; }; id: any; }) {
-          const url = `users/${value.user.id}/new-topic/${value.id}`;
+        next(value: { user: { id: any; }; slug: any; }) {
+          const url = `users/${value.user.id}/new-topic/${value.slug}`;
           self.router.navigateByUrl(url);
         },
       });

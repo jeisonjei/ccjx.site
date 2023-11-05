@@ -24,8 +24,8 @@ export class UrlsService {
   getUrlTopicCreate(userId: string) {
     return `${this.baseUrl}/topics/`;
   }
-  getUrlTopicDetail(topicId: string) {
-    return `${this.baseUrl}/topics/${topicId}/`;
+  getUrlTopicDetail(topicSlug: string) {
+    return `${this.baseUrl}/topics/${topicSlug}/`;
   }
   getUrlTopicLast(amount: number) {
     return `${this.baseUrl}/topics/recent/${amount}/`;

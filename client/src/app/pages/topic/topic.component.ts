@@ -72,8 +72,8 @@ export class TopicComponent implements OnInit {
 
   getQuestion() {
 
-    const topicId = this.activatedRoute.snapshot.paramMap.get('topicId');
-    this.topicService.retrieve(topicId??'error').subscribe((v:any) => {
+    const topicSlug = this.activatedRoute.snapshot.paramMap.get('topicSlug');
+    this.topicService.retrieve(topicSlug??'error').subscribe((v:any) => {
       this.question = v;
       this.answers = v.answers;
       this.comments = v.comments;          
@@ -113,7 +113,6 @@ export class TopicComponent implements OnInit {
     }
   }
   editComment(comment?: Comment) {
-    console.log(`🔥 comment: ${JSON.stringify(comment)}`);
     if (!this.auth.userValue?.isLoggedIn) {
       this.dials.showMessDial('Информация', 'Чтобы добавить ответ или оставить комментарий, нужно зарегистрироваться');
     }
@@ -144,8 +143,8 @@ export class TopicComponent implements OnInit {
       };
       const self = this;
       this.topicService.create(question).subscribe({
-        next(value: { user: { id: any; }; id: any; }) {
-          const url = `users/${value.user.id}/new-topic/${value.id}`;
+        next(value: { user: { id: any; }; slug: any; }) {
+          const url = `users/${value.user.id}/new-topic/${value.slug}`;
           self.router.navigateByUrl(url);
         },
       });

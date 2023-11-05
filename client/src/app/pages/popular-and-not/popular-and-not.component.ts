@@ -65,8 +65,8 @@ export class PopularAndNotComponent implements OnInit{
       };
       const self = this;
       this.topicService.create(question).subscribe({
-        next(value: { user: { id: any; }; id: any; }) {
-          const url = `users/${value.user.id}/new-topic/${value.id}`;
+        next(value: { user: { id: any; }; slug: any; }) {
+          const url = `users/${value.user.id}/new-topic/${value.slug}`;
           self.router.navigateByUrl(url);
         },
       });

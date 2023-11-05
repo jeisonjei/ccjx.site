@@ -105,7 +105,7 @@ export class NewQuestionComponent implements OnInit {
       is_private:this.isPrivate
     };
     this.topicService.update(topicSlug ?? 'error', t).subscribe((v: any) => {
-      const url = `topics/${topicSlug}`;
+      const url = `topics/${v.slug}`;
       this.router.navigateByUrl(url);      
     });
   }

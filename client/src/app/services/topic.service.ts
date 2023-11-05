@@ -76,8 +76,12 @@ export class TopicService {
     const url=this.urls.getUrlTopicCreate(topic.user??'');
     return this.http.post(url, topic);
   }
-  retrieve(id: string) {
-    const url = this.urls.getUrlTopicDetail(id);
+  // retrieve(id: string) {
+  //   const url = this.urls.getUrlTopicDetail(id);
+  //   return this.http.get(url);
+  // }
+  retrieve(slug: string) {
+    const url = this.urls.getUrlTopicDetail(slug);
     return this.http.get(url);
   }
   getIdentifier(topic: Topic) {
