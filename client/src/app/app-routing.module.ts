@@ -28,9 +28,9 @@ const routes: Routes = [
   { path: 'account/new-pass/:token', component: NewPassComponent },
   { path: 'account/new-pass-email-sent', component: NewPassEmailSentComponent },
   { path: 'account/new-pass-success/:userEmail', component: NewPassSuccessComponent },
-  { path: 'users/:userId/new-topic/:topicId', component: NewQuestionComponent, canActivate: [protectedGuard] },
-  { path: 'users/:userId/edit-topic/:topicId', component: EditTopicComponent, canActivate: [protectedGuard]},
-  { path:'topics/:topicId',component:TopicComponent},
+  { path: 'users/:userId/new-topic/:topicSlug', component: NewQuestionComponent, canActivate: [protectedGuard] },
+  { path: 'users/:userId/edit-topic/:topicSlug', component: EditTopicComponent, canActivate: [protectedGuard]},
+  { path:'topics/:topicSlug',component:TopicComponent},
   { path: 'my-questions', component: MyQuestionsComponent, canActivate: [protectedGuard] },
   {path: '**', component:NotFoundComponent},
 ];
