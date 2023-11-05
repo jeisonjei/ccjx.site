@@ -35,12 +35,11 @@ export class MyQuestionsComponent {
     private activatedRoute: ActivatedRoute,
     private eh: ErrorHandlerService,
     private urls: UrlsService,
-    private topicService: TopicService,
+    public topicService: TopicService,
     private tagService: TagService,
     private dialogService: DialogService,
     private auth: AuthenticationService,
     private validator: ValidatorService,
-    private tops: TopicService,
     private dials: DialogService
   ) {
     this.getMyQuestions();
@@ -208,7 +207,7 @@ export class MyQuestionsComponent {
         title: value
       };
       const self = this;
-      this.tops.create(question).subscribe({
+      this.topicService.create(question).subscribe({
         next(value: { user: { id: any; }; id: any; }) {
           const url = `users/${value.user.id}/new-topic/${value.id}`;
           self.router.navigateByUrl(url);

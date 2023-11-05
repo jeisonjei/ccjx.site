@@ -23,7 +23,7 @@
                     </td>
                     <td>{{record.date_created}}</td>
                     <td><a ngClass="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                            routerLink="/topics/{{record.id}}">{{record.title}}</a></td>
+                            routerLink="/topics/{{this.topicService.getIdentifier(record)}}">{{record.title}}</a></td>
                     <td>
                         <mat-chip ngClass="small m-1" *ngFor="let tag of record.tags">
                             {{tag.name}}
