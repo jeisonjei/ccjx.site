@@ -37,7 +37,7 @@ class MyQuestionList(generics.ListAPIView):
         return queryset
 
 class TopicListCreate(generics.ListCreateAPIView):
-    lookup_field='id'
+    lookup_field='slug'
     serializer_class=TopicSerializer
     queryset=Topic.objects.filter(is_private=False)
     
@@ -54,14 +54,14 @@ class TopicDetail(generics.RetrieveUpdateDestroyAPIView):
     '''
     Класс используется для получения и отображения одного вопроса
     '''
-    lookup_field='id'    
+    lookup_field='slug'    
     serializer_class=TopicSerializer
     queryset=Topic.objects.all()
     def get(self, request, *args, **kwargs):
         user = request.user
-        topic_id = kwargs.get('id')
+        topic_slug = kwargs.get('slug')
         try:
-            topic = self.queryset.get(id=topic_id)
+            topic = self.queryset.get(slug=topic_slug)
         except Topic.DoesNotExist:
             return Response({'public_message':"Запись не найдена"}, status=status.HTTP_404_NOT_FOUND)
         if topic.is_private and not user==topic.user:
