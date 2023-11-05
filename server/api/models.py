@@ -1,8 +1,13 @@
+from django.dispatch import receiver
 from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
 from django.db.models import Sum
+from django.db.models.signals import pre_save, post_save
+from django.utils.text import slugify
+from nameof import nameof
+from transliterate import translit
 
 class UserManager(BaseUserManager):
     use_in_migrations=True
@@ -50,6 +55,7 @@ class NewPasswordToken(models.Model):
         db_table='api_reset_password_token'
         
 class Topic(models.Model):
+    slug=models.SlugField(max_length=255,blank=True,default='')
     user=models.ForeignKey(User, on_delete=models.CASCADE,null=True) 
     title=models.TextField(blank=True)
     text=models.TextField(blank=True)
@@ -58,7 +64,7 @@ class Topic(models.Model):
     is_private = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True,null=True)
     date_modified = models.DateTimeField(null = True)
-
+    
     def __str__(self) -> str:
         return self.title
     
@@ -68,6 +74,12 @@ class Topic(models.Model):
             models.Index(fields=['-date_created'])
         ]
     
+@receiver(post_save,sender=Topic)
+def generate_slug(sender, instance, **kwargs):
+    if not instance.slug:
+        title_translit = translit(instance.title,'ru',reversed=True)
+        instance.slug=f"{instance.id}-{slugify(title_translit)}"
+
 class Answer(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     topic=models.ForeignKey(Topic,related_name='answers',on_delete=models.CASCADE,null=True)
