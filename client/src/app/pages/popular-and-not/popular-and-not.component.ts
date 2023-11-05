@@ -7,6 +7,7 @@ import { DialogService } from '@app/services/dialog.service';
 import { TopicService } from '@app/services/topic.service';
 import { TagService } from '@app/services/tag.service';
 import { ValidatorService } from '@app/services/validator.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-popular-and-not',
@@ -19,12 +20,13 @@ export class PopularAndNotComponent implements OnInit{
   nonAnsweredQuestions: Topic[]=[];
   popularArticles: Topic[] = [];
   selectedTags:any[]=[];
-  constructor(private tagService: TagService, private topicService: TopicService, private auth:AuthenticationService,private dials:DialogService,private validator:ValidatorService,private tops:TopicService,private router:Router){}
+  constructor(private tagService: TagService, private topicService: TopicService, private auth:AuthenticationService,private dials:DialogService,private validator:ValidatorService,private tops:TopicService,private router:Router,private titleService:Title){}
   ngOnInit(): void {
     this.tagService.list().subscribe((v: any) => {
       this.tags = v.sort((a,b)=>a.name.localeCompare(b.name));
     });
     this.refreshData();
+    this.titleService.setTitle('ccjx Блокнот');
   }
   refreshData() {
     this.topicService.listRecent(10).subscribe((v: any) => {
