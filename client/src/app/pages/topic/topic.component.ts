@@ -70,29 +70,12 @@ export class TopicComponent implements OnInit {
 
   getQuestion() {
 
-    this.tops.count().subscribe((v: any) => {
-      let topicId;
-      if (!this.idForRandom) {
-        topicId = this.activatedRoute.snapshot.paramMap.get('topicId');
-        this.tops.retrieve(topicId).subscribe((v:any) => {
-          this.question = v;
-          this.answers = v.answers;
-          this.comments = v.comments;          
-        })
-      }
-      else {
-        const size = v.length;
-        const rand = Math.floor(Math.random() * (size - 1));
-        topicId = v[rand];
-        this.tops.retrieve(topicId).subscribe((v:any) => {
-          this.question = v;
-          this.answers = v.answers;
-          this.comments = v.comments;          
-        })
-      }
-    });
-
-
+    const topicId = this.activatedRoute.snapshot.paramMap.get('topicId');
+    this.tops.retrieve(topicId??'error').subscribe((v:any) => {
+      this.question = v;
+      this.answers = v.answers;
+      this.comments = v.comments;          
+    })
   }
   answer() {
     if (!this.auth.userValue?.isLoggedIn) {
