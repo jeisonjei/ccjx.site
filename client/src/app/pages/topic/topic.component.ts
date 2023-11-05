@@ -42,7 +42,7 @@ export class TopicComponent implements OnInit {
     private comms: CommentService,
     private auth: AuthenticationService,
     private dials: DialogService,
-    private topicService: TopicService,
+    public topicService: TopicService,
     private router: Router,
     private validator: ValidatorService,
     private titleService:Title

@@ -37,7 +37,7 @@
             <hr>
             <h3>Новые записи</h3>
             <div *ngFor="let topic of lastTopics" ngClass="my-2">
-                <a ngClass="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" routerLink="/topics/{{topic.id}}">{{topic.title}}</a>
+                <a ngClass="link-offset-2 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" routerLink="/topics/{{this.topicService.getIdentifier(topic)}}">{{topic.title}}</a>
             </div>
     </div>
 </div>
