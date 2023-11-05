@@ -56,7 +56,6 @@ class Topic(models.Model):
     type=models.CharField(default='question')
     is_article=models.BooleanField(default=False)
     is_private = models.BooleanField(default=False)
-    is_protected = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True,null=True)
     date_modified = models.DateTimeField(null = True)
 
