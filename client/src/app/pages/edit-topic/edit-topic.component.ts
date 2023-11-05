@@ -22,7 +22,7 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
   faTag = faTag;
   title = '';
   userId = '';
-  topicId = '';
+  topicSlug = '';
   content = '123';
   isArticle: boolean=false;
   isPrivate: boolean=false;
@@ -69,9 +69,9 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
   getTopic() {
     this.userId =
       this.activatedRoute.snapshot.paramMap.get('userId') ?? 'error';
-    this.topicId =
-      this.activatedRoute.snapshot.paramMap.get('topicId') ?? 'error';
-    this.topicService.retrieve(this.topicId).subscribe((v: any) => {
+    this.topicSlug =
+      this.activatedRoute.snapshot.paramMap.get('topicSlug') ?? 'error';
+    this.topicService.retrieve(this.topicSlug).subscribe((v: any) => {
       this.title = v.title;
       this.content = v.text;
       this.isArticle = v.is_article;
@@ -81,20 +81,20 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
   }
   edit(content: string) {
     const topic: Topic = {
-      id: this.topicId,
+      id: this.topicSlug,
       user: this.userId,
       title: this.title,
       text: content,
       is_article: this.isArticle,
       is_private: this.isPrivate
     }
-    this.topicService.update(this.topicId,topic).subscribe(() => {
-      const url = `/topics/${this.topicId}`;
+    this.topicService.update(this.topicSlug,topic).subscribe(() => {
+      const url = `/topics/${this.topicSlug}`;
       this.router.navigateByUrl(url);
     });
   }
   cancel() {
-    const url = `/topics/${this.topicId}`;
+    const url = `/topics/${this.topicSlug}`;
     this.router.navigateByUrl(url);
   }
   handleTopicChange(event: Event) {
@@ -120,7 +120,7 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
         name: tagName,
         is_private:false,
         user: this.auth.userValue?.id,
-        topics: [this.topicId]
+        topics: [this.topicSlug]
       }
       const self = this;
       this.tagService.create(tag).subscribe({
@@ -140,7 +140,7 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
     else {
       // получить id существующего тэга
       let tag = this.tags.filter(v => v.name === tagName)[0];
-      tag.topics.push(Number.parseInt(this.topicId));
+      tag.topics.push(Number.parseInt(this.topicSlug));
       this.tagsAdded.push(tag);
       this.tagService.updateMany(this.tagsAdded)
     }
@@ -154,7 +154,7 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
     this.tagCreate(v);
   }
   tagDelete(tag: Tag) {
-    const index = tag.topics.findIndex(v=>v==this.topicId);
+    const index = tag.topics.findIndex(v=>v==this.topicSlug);
     tag.topics.splice(index,1);
     this.tagService.deleteFromTopic(tag?.id??'error',{topics:tag.topics}).subscribe(v => {
       this.getTopic();
