@@ -12,6 +12,7 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
 import { DialogService } from 'src/app/services/dialog.service';
 import { TopicService } from '@app/services/topic.service';
 import { ValidatorService } from '@app/services/validator.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-topic',
@@ -43,7 +44,8 @@ export class TopicComponent implements OnInit {
     private dials: DialogService,
     private tops: TopicService,
     private router: Router,
-    private validator: ValidatorService
+    private validator: ValidatorService,
+    private titleService:Title
   ) { }
 
   ngOnInit(): void {
@@ -75,6 +77,7 @@ export class TopicComponent implements OnInit {
       this.question = v;
       this.answers = v.answers;
       this.comments = v.comments;          
+      this.titleService.setTitle(this.question?.title??'error');
     })
   }
   answer() {
