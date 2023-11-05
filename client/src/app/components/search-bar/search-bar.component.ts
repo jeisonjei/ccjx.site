@@ -7,29 +7,18 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { ErrorHandlerService } from '../../services/error-handler.service';
 import { Router } from '@angular/router';
 import {
-  MatAutocomplete,
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger,
 } from '@angular/material/autocomplete';
-import { AuthenticationService } from '../../services/authentication/authentication.service';
-import { MessDial, Topic } from '../../consts';
-import { HttpClient } from '@angular/common/http';
-import { UrlsService } from '../../services/urls.service';
-import { FormControl, NgForm } from '@angular/forms';
-import { Observable, filter, from, map, of, startWith, timestamp } from 'rxjs';
+import { Topic } from '../../consts';
+import { FormControl } from '@angular/forms';
+import { Observable, map, startWith } from 'rxjs';
 import { TopicService } from '../../services/topic.service';
-import { ValidatorService } from '../../services/validator.service';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { PleaseRegisterComponent } from 'src/app/shared/dialogs/please-register/please-register.component';
-import { DialogConfig } from '@angular/cdk/dialog';
-import { DialogService } from 'src/app/services/dialog.service';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { isUndefined } from 'util';
 import { ShortcutsService } from '@app/services/shortcut.service';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 const customBreakpoints = {
   small: '(max-width:599px)',
