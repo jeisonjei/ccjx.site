@@ -20,7 +20,8 @@ import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 })
 export class NewQuestionComponent implements OnInit {
   faTag = faTag;
-  title: string='';
+  title: string = '';
+  topicId: string = '';
   topicSlug: string='';
   userId: string = '';
   isArticle: boolean = false;
@@ -53,7 +54,7 @@ export class NewQuestionComponent implements OnInit {
   }
   @HostListener('window:unload',['$event'])
   onUnload(event: Event) {
-    fetch(this.urls.getQuestionDeleteUrl(this.topicSlug), { method: 'DELETE', keepalive: true }).then().catch(error => {
+    fetch(this.urls.getQuestionDeleteUrl(this.topicId), { method: 'DELETE', keepalive: true }).then().catch(error => {
       console.error(error);
     })
   }
@@ -89,6 +90,7 @@ export class NewQuestionComponent implements OnInit {
       next(value: any) {
         self.title = value.title != undefined ? value.title : 'Новая запись';
         self.tagsAdded = value.tags;
+        self.topicId = value.id;
       },
     });
   }
@@ -136,7 +138,7 @@ export class NewQuestionComponent implements OnInit {
         name: tagName,
         is_private:false, // по умолчанию все новые тэги создаются как публичные
         user: this.auth.userValue?.id,
-        topics: [this.topicSlug]
+        topics: [this.topicId]
       }
       const self = this;
       this.tagService.create(tag).subscribe({

@@ -22,6 +22,7 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
   faTag = faTag;
   title = '';
   userId = '';
+  topicId = '';
   topicSlug = '';
   content = '123';
   isArticle: boolean=false;
@@ -77,6 +78,7 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
       this.isArticle = v.is_article;
       this.isPrivate = v.is_private;
       this.tagsAdded = v.tags;
+      this.topicId = v.id;
     });
   }
   edit(content: string) {
@@ -120,7 +122,7 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
         name: tagName,
         is_private:false,
         user: this.auth.userValue?.id,
-        topics: [this.topicSlug]
+        topics: [this.topicId]
       }
       const self = this;
       this.tagService.create(tag).subscribe({
