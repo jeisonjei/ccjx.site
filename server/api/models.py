@@ -55,7 +55,7 @@ class NewPasswordToken(models.Model):
         db_table='api_reset_password_token'
         
 class Topic(models.Model):
-    slug=models.SlugField(max_length=255,unique=True,primary_key=True)
+    slug=models.SlugField(max_length=255,unique=True)
     user=models.ForeignKey(User, on_delete=models.CASCADE,null=True) 
     title=models.TextField(blank=True)
     text=models.TextField(blank=True)
