@@ -21,7 +21,7 @@ import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 export class NewQuestionComponent implements OnInit {
   faTag = faTag;
   title: string='';
-  topicId: string='';
+  topicSlug: string='';
   userId: string = '';
   isArticle: boolean = false;
   isPrivate: boolean = false;
@@ -53,7 +53,7 @@ export class NewQuestionComponent implements OnInit {
   }
   @HostListener('window:unload',['$event'])
   onUnload(event: Event) {
-    fetch(this.urls.getQuestionDeleteUrl(this.topicId), { method: 'DELETE', keepalive: true }).then().catch(error => {
+    fetch(this.urls.getQuestionDeleteUrl(this.topicSlug), { method: 'DELETE', keepalive: true }).then().catch(error => {
       console.error(error);
     })
   }
@@ -80,10 +80,10 @@ export class NewQuestionComponent implements OnInit {
   }
   getTopic() {
     const userId = this.activatedRoute.snapshot.paramMap.get('userId');
-    const topicId = this.activatedRoute.snapshot.paramMap.get('topicId');
+    const topicSlug = this.activatedRoute.snapshot.paramMap.get('topicSlug');
     this.userId = userId??'';
-    this.topicId = topicId??'';
-    const url = this.urls.getUrlTopicDetail(topicId??'Error');
+    this.topicSlug = topicSlug??'';
+    const url = this.urls.getUrlTopicDetail(topicSlug??'Error');
     const self = this;
     this.http.get(url).subscribe({
       next(value: any) {
@@ -110,7 +110,7 @@ export class NewQuestionComponent implements OnInit {
     });
   }
   cancel() {
-    this.topicService.delete(this.topicId??'').subscribe();
+    this.topicService.delete(this.topicSlug??'').subscribe();
     this.router.navigateByUrl('');
   }
   handleTopicChange(event: Event) {
@@ -136,7 +136,7 @@ export class NewQuestionComponent implements OnInit {
         name: tagName,
         is_private:false, // по умолчанию все новые тэги создаются как публичные
         user: this.auth.userValue?.id,
-        topics: [this.topicId]
+        topics: [this.topicSlug]
       }
       const self = this;
       this.tagService.create(tag).subscribe({
@@ -162,7 +162,7 @@ export class NewQuestionComponent implements OnInit {
     else {
       // получить id существующего тэга
       let tag = this.tags.filter(v => v.name === tagName)[0];
-      tag.topics.push(Number.parseInt(this.topicId));
+      tag.topics.push(Number.parseInt(this.topicSlug));
       this.tagsAdded.push(tag);
       this.tagService.updateMany(this.tagsAdded)
     }
@@ -176,7 +176,7 @@ export class NewQuestionComponent implements OnInit {
     this.tagCreate(v);
   }
   tagDelete(tag: Tag) {
-    const index = tag.topics.findIndex(v=>v==this.topicId);
+    const index = tag.topics.findIndex(v=>v==this.topicSlug);
     tag.topics.splice(index,1);
     this.tagService.deleteFromTopic(tag?.id??'error',{topics:tag.topics}).subscribe(v => {
       this.getTopic();
