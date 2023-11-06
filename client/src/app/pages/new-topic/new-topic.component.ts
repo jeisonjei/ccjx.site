@@ -152,11 +152,11 @@ export class NewQuestionComponent implements OnInit {
            * при создании, но если такой тэг уже есть среди this.tags, то выполняется блок 'else', то есть попытки
            * создания нового тэга не происходит, а берётся уже существующий.
            */
-          if (err.error.name[0].includes('уже существует')) {
+          if (err.error.public_message.includes('уже существует')) {
             self.autocomplete?.closePanel();
             self.autoInput?.nativeElement.blur();
             const random = Math.floor(Math.random() * 1000) + 1;
-            self.dialogService.showMessDial("Информация", `Извините, тэг "${tag.name}" уже кем-то занят. Попробуйте использовать другой тэг, например "${tag.name}-${random}"`);
+            self.dialogService.showMessDial("Информация", `Извините, тэг "${tag.name}" уже существует среди публичных тэгов. Если вы хотели использовать тэг с таким именем, то используйте публичный тэг. Также вы можете использовать никем незанятые публичные тэги в качестве личных. Для того, чтобы сделать тэг личным нажмите на него`);
             }
         },
       });

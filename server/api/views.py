@@ -232,10 +232,10 @@ class TagListCreate(generics.ListCreateAPIView):
         '''
         По умолчанию при нажатии Enter в поле тэгов создаются публичные тэги
         '''
-        name=kwargs.get('name')
+        tag_name=request.data.get('name')
         # Проверить, существует ли тэг с таким именем среди публичных тэгов
-        if Tag.objects.filter(name=name,is_private=False).exists():
-            return Response({'public_message':'Tag with this name already exists among public tags'},status=status.HTTP_400_BAD_REQUEST)
+        if Tag.objects.filter(name=tag_name,is_private=False).exists():
+            return Response({'public_message':f'Извините, тэг {tag_name} уже существует среди публичных тэгов'},status=status.HTTP_400_BAD_REQUEST)
         return super().create(request, *args, **kwargs)
     
 class TagMyList(generics.ListCreateAPIView):
