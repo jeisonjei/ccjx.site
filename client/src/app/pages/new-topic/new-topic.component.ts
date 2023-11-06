@@ -54,9 +54,16 @@ export class NewQuestionComponent implements OnInit {
   }
   @HostListener('window:unload',['$event'])
   onUnload(event: Event) {
-    fetch(this.urls.getQuestionDeleteUrl(this.topicId), { method: 'DELETE', keepalive: true }).then().catch(error => {
+    fetch(this.urls.getQuestionDeleteUrl(this.topicSlug), { method: 'DELETE', keepalive: true }).then().catch(error => {
       console.error(error);
     })
+  }
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event: Event) {
+    // Perform your delete operation here when the user goes back to the previous URL
+    fetch(this.urls.getQuestionDeleteUrl(this.topicSlug), { method: 'DELETE', keepalive: true }).then().catch(error => {
+      console.error(error);
+    });
   }
   ngOnInit(): void {
     this.getTopic();
