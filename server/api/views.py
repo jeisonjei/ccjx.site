@@ -60,7 +60,6 @@ class TopicDetail(generics.RetrieveUpdateDestroyAPIView):
     def get(self, request, *args, **kwargs):
         user = request.user
         topic_slug = kwargs.get('slug')
-        print(f'🔥 {nameof(topic_slug)}:{topic_slug}')
         try:
             topic = self.queryset.get(slug=topic_slug)
         except Topic.DoesNotExist:
