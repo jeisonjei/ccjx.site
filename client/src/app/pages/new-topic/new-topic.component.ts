@@ -134,7 +134,7 @@ export class NewQuestionComponent implements OnInit {
       // создать новый тэг
       const tag:Tag = {
         name: tagName,
-        is_private:false,
+        is_private:false, // по умолчанию все новые тэги создаются как публичные
         user: this.auth.userValue?.id,
         topics: [this.topicId]
       }
