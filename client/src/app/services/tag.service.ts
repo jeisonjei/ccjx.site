@@ -38,8 +38,13 @@ export class TagService {
       this.update(v.id, v).subscribe();
     });
   }
+  delete(id: string) {
+    const url = this.urls.getUrlTagDelete(id);
+    return this.http.delete(url);
+  }
   deleteFromTopic(id:string,tag: any) {
     const url = this.urls.getUrlTagUpdate(id);
     return this.http.patch(url,tag);
   }
+
 }
