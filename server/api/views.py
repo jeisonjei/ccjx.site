@@ -257,7 +257,8 @@ class TagMyPrivateList(generics.ListAPIView):
     def get_queryset(self):
         user=self.request.user
         tags = Tag.objects.filter(is_private=True,user=user)
-        return super().get_queryset()
+        queryset = tags
+        return queryset
     
 class TagDetail(generics.RetrieveUpdateDestroyAPIView):
     '''
