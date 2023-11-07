@@ -17,6 +17,7 @@ import { RandomTopicComponent } from './pages/random-topic/random-topic.componen
 import { PopularAndNotComponent } from './pages/popular-and-not/popular-and-not.component';
 import { NotFoundError } from 'rxjs';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { MyTagsComponent } from './pages/my-tags/my-tags.component';
 
 const routes: Routes = [
   {path:'',component:PopularAndNotComponent},
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'users/:userId/edit-topic/:topicSlug', component: EditTopicComponent, canActivate: [protectedGuard]},
   { path:'topics/:topicSlug',component:TopicComponent},
   { path: 'my-questions', component: MyQuestionsComponent, canActivate: [protectedGuard] },
+  { path: 'my-tags', component: MyTagsComponent, canActivate: [protectedGuard] },
   {path: '**', component:NotFoundComponent},
 ];
 
