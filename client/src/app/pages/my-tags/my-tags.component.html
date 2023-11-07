@@ -1,1 +1,22 @@
-<p>my-tags works!</p>
+<div ngClass="m-grid">
+    <div ngClass="feat"></div>
+    <div ngClass="content">
+        <mat-card ngClass="p-4">
+            <h1 ngClass="text-center">Мои тэги</h1>
+            <table matSort (matSortChange)="sortData($event)">
+                <thead>
+                    <th>Тэг</th>
+                    <th></th>
+                </thead>
+                <tr *ngFor="let tag of tags">
+                    <td>{{tag.name}}</td>
+                    <td>
+                        <div ngClass="d-flex">
+                            <button ngClass="mx-1" mat-icon-button color="warn" (click)="deleteTag(tag)"><mat-icon>delete</mat-icon></button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </mat-card>
+    </div>
+</div>

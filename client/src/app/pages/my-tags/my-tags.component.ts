@@ -9,14 +9,26 @@ import { TagService } from '@app/services/tag.service';
 })
 export class MyTagsComponent implements OnInit{
   tags: Tag[] = [];
+  sortedData: any;
   constructor(
     private tagService:TagService
   ) { }
   ngOnInit(): void {
+    this.refreshTags();
+  }
+  refreshTags() {
     this.tagService.listMyPrivate().subscribe((v: any) => {
       this.tags = v;
-      console.log(`🔥 tags: ${JSON.stringify(this.tags)}`);
     })
+  }
+  sortData(event: any) {
+    
+  }
+  deleteTag(tag: Tag) {
+    const id = tag.id;
+    this.tagService.delete(id ?? 'error').subscribe((v) => {
+      this.refreshTags();
+    });
   }
   
 }

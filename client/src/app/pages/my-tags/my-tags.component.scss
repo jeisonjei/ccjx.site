@@ -1,0 +1,45 @@
+th{
+    padding: 5px 15px 5px 15px;
+}
+td{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-bottom: 1px solid lightgray;
+}
+th {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+.m-grid {
+  display: grid;
+  grid-template-areas:
+  "recent"
+  "content"
+  "feat"
+  
+}
+.feat{
+ grid-area: feat;
+}
+.recent{
+  grid-area: recent;
+}
+.content{
+  grid-area: content;
+}
+
+@media (min-width: 600px) {
+  .m-grid {
+      grid-template-areas: 
+      "feat content recent";
+      grid-template-columns: 1fr 4fr 1fr;
+      column-gap: 20px;
+  }
+}
