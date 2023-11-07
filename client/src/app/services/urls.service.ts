@@ -66,6 +66,9 @@ export class UrlsService {
   getUrlTagMyList() {
     return `${this.baseUrl}/tags/my/`;
   }
+  getUrlTagMyPrivateList() {
+    return `${this.baseUrl}/tags/my/private/`;
+  }
   getUrlTagCreate() {
     return `${this.baseUrl}/tags/`;
   }
