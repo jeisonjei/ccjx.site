@@ -90,8 +90,8 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
       is_article: this.isArticle,
       is_private: this.isPrivate
     }
-    this.topicService.update(this.topicSlug,topic).subscribe(() => {
-      const url = `/topics/${this.topicSlug}`;
+    this.topicService.update(this.topicSlug,topic).subscribe((v:any) => {
+      const url = `/topics/${v.slug}`;
       this.router.navigateByUrl(url);
     });
   }
