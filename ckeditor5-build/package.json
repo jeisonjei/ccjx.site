@@ -33,7 +33,8 @@
     "@ckeditor/ckeditor5-source-editing": "^40.0.0",
     "@ckeditor/ckeditor5-special-characters": "^40.0.0",
     "@ckeditor/ckeditor5-table": "40.0.0",
-    "@ckeditor/ckeditor5-typing": "40.0.0"
+    "@ckeditor/ckeditor5-typing": "40.0.0",
+    "@pikulinpw/ckeditor5-fullscreen": "^1.0.1"
   },
   "devDependencies": {
     "@ckeditor/ckeditor5-dev-translations": "^32.1.2",

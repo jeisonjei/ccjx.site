@@ -28,17 +28,18 @@ import { RemoveFormat } from '@ckeditor/ckeditor5-remove-format';
 import { PasteFromOffice } from '@ckeditor/ckeditor5-paste-from-office';
 import { SpecialCharacters } from "@ckeditor/ckeditor5-special-characters";
 import { SpecialCharactersEssentials } from "@ckeditor/ckeditor5-special-characters";
-import {TodoList} from '@ckeditor/ckeditor5-list';
+import { TodoList } from '@ckeditor/ckeditor5-list';
+import FullScreen from '@pikulinpw/ckeditor5-fullscreen';
 
 // You can read more about extending the build with additional plugins in the "Installing plugins" guide.
 // See https://ckeditor.com/docs/ckeditor5/latest/installation/plugins/installing-plugins.html for details.
 
 class Editor extends ClassicEditor {
-	public static override builtinPlugins = [Base64UploadAdapter, Autoformat, Essentials, Paragraph, Font, Bold, Bold, Code, BlockQuote, Italic, Strikethrough, Subscript, Superscript, Underline, Math, AutoformatMath, Table, TableToolbar,TableColumnResize,TableProperties, Alignment, CodeBlock, Heading, Highlight, HorizontalLine, Image, ImageToolbar, ImageCaption, ImageStyle, ImageResize,ImageUpload,AutoImage,AutoLink,Link,SourceEditing, List,RemoveFormat,PasteFromOffice,SpecialCharacters,SpecialCharactersEssentials,TodoList];
+	public static override builtinPlugins = [Base64UploadAdapter, Autoformat, Essentials, Paragraph, Font, Bold, Bold, Code, BlockQuote, Italic, Strikethrough, Subscript, Superscript, Underline, Math, AutoformatMath, Table, TableToolbar,TableColumnResize,TableProperties, Alignment, CodeBlock, Heading, Highlight, HorizontalLine, Image, ImageToolbar, ImageCaption, ImageStyle, ImageResize,ImageUpload,AutoImage,AutoLink,Link,SourceEditing, List,RemoveFormat,PasteFromOffice,SpecialCharacters,SpecialCharactersEssentials,TodoList,FullScreen];
 
 	public static override defaultConfig = {
 		toolbar: {
-			items: ['heading','bulletedList', 'numberedList','todoList', '|', 'fontFamily', 'fontColor', 'highlight', '|', 'alignment', '|', 'bold', 'italic', 'underline', 'strikethrough', 'code', 'codeBlock', 'blockQuote', 'subscript', 'superscript', '|', 'math','specialCharacters', '|', 'insertTable', 'horizontalLine', 'imageUpload','link','|','removeFormat','|','sourceEditing'],
+			items: ['heading','bulletedList', 'numberedList','todoList', '|', 'fontFamily', 'fontColor', 'highlight', '|', 'alignment', '|', 'bold', 'italic', 'underline', 'strikethrough', 'code', 'codeBlock', 'blockQuote', 'subscript', 'superscript', '|', 'math','specialCharacters', '|', 'insertTable', 'horizontalLine', 'imageUpload','link','|','removeFormat','|','sourceEditing','fullScreen'],
 			shouldNotGroupWhenFull:true
 		},
 		
