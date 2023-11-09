@@ -24,7 +24,7 @@ export class NewQuestionComponent implements OnInit {
   topicId: string = '';
   topicSlug: string='';
   userId: string = '';
-  isArticle: boolean = false;
+  isArticle: boolean = true;
   isPrivate: boolean = false;
   myControl: FormControl=new FormControl('');
   tags: any[]=[];
