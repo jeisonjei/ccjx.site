@@ -8,6 +8,7 @@ from django.db.models.signals import pre_save, post_save
 from django.utils.text import slugify
 from nameof import nameof
 from transliterate import translit
+from django.urls import reverse
 
 class UserManager(BaseUserManager):
     use_in_migrations=True
@@ -41,6 +42,7 @@ class User(AbstractUser):
     country=models.CharField(blank=True,max_length=52)
     city=models.CharField(blank=True,max_length=52)
     objects=UserManager()
+    send_notifications=models.BooleanField(default=False)
     
 class EmailVerificationToken(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
