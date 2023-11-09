@@ -10,7 +10,7 @@ import { Bold, Code, Italic, Strikethrough, Subscript, Superscript, Underline } 
 import { Autoformat } from "@ckeditor/ckeditor5-autoformat";
 import Math from '@isaul32/ckeditor5-math/src/math';
 import AutoformatMath from '@isaul32/ckeditor5-math/src/autoformatmath';
-import { Table, TableToolbar, TableColumnResize,TableProperties } from "@ckeditor/ckeditor5-table";
+import { Table, TableToolbar, TableColumnResize,TableProperties,TableCaption } from "@ckeditor/ckeditor5-table";
 import { Alignment } from '@ckeditor/ckeditor5-alignment';
 import { BlockQuote } from '@ckeditor/ckeditor5-block-quote';
 import { CodeBlock } from "@ckeditor/ckeditor5-code-block";
@@ -35,7 +35,7 @@ import FullScreen from '@pikulinpw/ckeditor5-fullscreen';
 // See https://ckeditor.com/docs/ckeditor5/latest/installation/plugins/installing-plugins.html for details.
 
 class Editor extends ClassicEditor {
-	public static override builtinPlugins = [Base64UploadAdapter, Autoformat, Essentials, Paragraph, Font, Bold, Bold, Code, BlockQuote, Italic, Strikethrough, Subscript, Superscript, Underline, Math, AutoformatMath, Table, TableToolbar,TableColumnResize,TableProperties, Alignment, CodeBlock, Heading, Highlight, HorizontalLine, Image, ImageToolbar, ImageCaption, ImageStyle, ImageResize,ImageUpload,AutoImage,AutoLink,Link,SourceEditing, List,RemoveFormat,PasteFromOffice,SpecialCharacters,SpecialCharactersEssentials,TodoList,FullScreen];
+	public static override builtinPlugins = [Base64UploadAdapter, Autoformat, Essentials, Paragraph, Font, Bold, Bold, Code, BlockQuote, Italic, Strikethrough, Subscript, Superscript, Underline, Math, AutoformatMath, Table, TableToolbar,TableColumnResize,TableProperties, Alignment, CodeBlock, Heading, Highlight, HorizontalLine, Image, ImageToolbar, ImageCaption, ImageStyle, ImageResize,ImageUpload,AutoImage,AutoLink,Link,SourceEditing, List,RemoveFormat,PasteFromOffice,SpecialCharacters,SpecialCharactersEssentials,TodoList,FullScreen,TableCaption];
 
 	public static override defaultConfig = {
 		toolbar: {
@@ -58,7 +58,7 @@ class Editor extends ClassicEditor {
             ]
         },
 		table: {
-            contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells','tableProperties']
+            contentToolbar: ['toggleTableCaption','tableColumn', 'tableRow', 'mergeTableCells','tableProperties']
 		},
 		math: {
 			engine: 'katex', // or katex or function. E.g. (equation, element, display) => { ... }
