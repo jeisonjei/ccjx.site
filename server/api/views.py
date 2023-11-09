@@ -1,3 +1,4 @@
+from django.shortcuts import resolve_url
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -16,6 +17,10 @@ from django.core.paginator import Paginator
 import random
 import redis
 from django.conf import settings
+from urllib.parse import urljoin
+from django.core.mail import send_mail
+import threading
+
 
 redis_connection = redis.StrictRedis(host=settings.REDIS_HOST,
                                          port=settings.REDIS_PORT, db=0, decode_responses=True)
@@ -183,6 +188,16 @@ class AnswerDetail(generics.RetrieveUpdateDestroyAPIView):
     lookup_field='id'
     serializer_class=AnswerSerializer
     queryset=Answer.objects.all()
+    
+class EmailThread(threading.Thread):
+    def __init__(self, subject, message, recipient_list):
+        self.subject = subject
+        self.message = message
+        self.recipient_list = recipient_list
+        threading.Thread.__init__(self)
+
+    def run(self):
+        send_mail(self.subject, self.message, settings.DEFAULT_FROM_EMAIL, self.recipient_list)
 
 class CommentListCreate(generics.ListCreateAPIView):
     '''
@@ -191,6 +206,22 @@ class CommentListCreate(generics.ListCreateAPIView):
     lookup_field='id'        
     serializer_class=CommentSerializer
     queryset=Comment.objects.all()
+    def perform_create(self, serializer):
+        instance = serializer.save()
+        user = instance.topic.user
+        topic_slug = instance.topic.slug
+        href_origin = self.request.META.get('HTTP_REFERER')
+        topic_url = urljoin(href_origin,f'topics/{topic_slug}')
+        subject = f"Новый комментарий к вашей записи \"{instance.topic.title}\""
+        message = (f"Здравствуйте, к вашей записи \"{instance.topic.title}\" оставлен новый комментарий. " 
+                   f"Посмотреть свою запись можно по ссылке {topic_url}.")
+                   # TODO f"Чтобы больше не получать подобных уведомлений перейдите по ссылке.")
+                   # TODO f"Также вы можете настроить уведомления в своём профиле на сайте") TODO url профиля
+        if user.send_notifications:
+            EmailThread(subject,message,[user.email]).start()
+        return super().perform_create(serializer)
+
+    
     
 class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     '''
@@ -198,7 +229,7 @@ class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     '''
     lookup_field='id'
     serializer_class=CommentSerializer
-    queryset=Comment.objects.all()
+    queryset=Comment.objects.all()    
     
 class VoteListCreate(generics.ListCreateAPIView):
     lookup_field = 'id'
