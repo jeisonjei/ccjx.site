@@ -19,6 +19,9 @@ import { DialogService } from '@app/services/dialog.service';
 })
 
 export class EditTopicComponent implements OnInit, AfterViewInit {
+onNotifyMeChange(checked: boolean) {
+  this.notifyMe = checked;
+}
   faTag = faTag;
   title = '';
   userId = '';
@@ -33,6 +36,7 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
   tagsAdded: any[]=[];
   tagSelected: any = null;
   markdownSelected='';
+notifyMe: boolean=false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private topicService: TopicService,
@@ -79,6 +83,7 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
       this.isPrivate = v.is_private;
       this.tagsAdded = v.tags;
       this.topicId = v.id;
+      this.notifyMe = v.notify_me;
     });
   }
   edit(content: string) {
@@ -88,7 +93,8 @@ export class EditTopicComponent implements OnInit, AfterViewInit {
       title: this.title,
       text: content,
       is_article: this.isArticle,
-      is_private: this.isPrivate
+      is_private: this.isPrivate,
+      notify_me:this.notifyMe
     }
     this.topicService.update(this.topicSlug,topic).subscribe((v:any) => {
       const url = `/topics/${v.slug}`;

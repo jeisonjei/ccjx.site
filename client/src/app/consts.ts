@@ -22,7 +22,8 @@ export type Topic = /**модель Question */ {
   is_private?: boolean,
   date_created?: string,
   tags?: any,
-  scores?:any
+  scores?: any,
+  notify_me?:boolean
 }
 // входящий и исходящий типы отличаются, см. serializers.py
 export type Answer = /**модель Answer */ {

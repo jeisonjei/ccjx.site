@@ -31,6 +31,7 @@ export class NewQuestionComponent implements OnInit {
   tagsFiltered?: Observable<any[]>;
   tagsAdded: any[]=[];
   tagSelected:any =null;
+  notifyMe: boolean=false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -111,7 +112,8 @@ export class NewQuestionComponent implements OnInit {
       title: title,
       text: text,
       is_article: this.isArticle,
-      is_private:this.isPrivate
+      is_private: this.isPrivate,
+      notify_me: this.notifyMe
     };
     this.topicService.update(topicSlug ?? 'error', t).subscribe((v: any) => {
       const url = `topics/${v.slug}`;
@@ -132,6 +134,9 @@ export class NewQuestionComponent implements OnInit {
   }
   onIsPrivateChange(checked: boolean) {
     this.isPrivate = checked;
+  }
+  onNotifyMeChange(checked: boolean) {
+    this.notifyMe = checked;
   }
   tagList() {
     this.tagService.listMy().subscribe((v: any) => {

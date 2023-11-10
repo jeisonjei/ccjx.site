@@ -65,7 +65,7 @@ class TopicSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many = True, required = False)
     class Meta:
         model=Topic
-        fields=['id','slug','user','title','text','type','answers','comments','is_article','is_private','date_created','votes','tags']   
+        fields=['id','slug','user','title','text','type','answers','comments','is_article','is_private','date_created','votes','tags','notify_me']   
         depth=0    
     def to_representation(self, instance):
         representation=super(TopicSerializer,self).to_representation(instance)
