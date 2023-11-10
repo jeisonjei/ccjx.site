@@ -217,7 +217,7 @@ class CommentListCreate(generics.ListCreateAPIView):
                    f"Посмотреть свою запись можно по ссылке {topic_url}.")
                    # TODO f"Чтобы больше не получать подобных уведомлений перейдите по ссылке.")
                    # TODO f"Также вы можете настроить уведомления в своём профиле на сайте") TODO url профиля
-        if user.send_notifications:
+        if instance.topic.notify_me:
             EmailThread(subject,message,[user.email]).start()
         return super().perform_create(serializer)
 

@@ -42,7 +42,6 @@ class User(AbstractUser):
     country=models.CharField(blank=True,max_length=52)
     city=models.CharField(blank=True,max_length=52)
     objects=UserManager()
-    send_notifications=models.BooleanField(default=False)
     
 class EmailVerificationToken(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
@@ -66,6 +65,7 @@ class Topic(models.Model):
     is_private = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True,null=True)
     date_modified = models.DateTimeField(null = True)
+    notify_me = models.BooleanField(default=False)
     
     def __str__(self) -> str:
         return self.title
