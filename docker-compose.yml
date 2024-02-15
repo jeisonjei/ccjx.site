@@ -21,7 +21,7 @@ services:
     container_name: ccjxsite_server
     build: ./server
     env_file: ./server/.env
-    command: sh -c "python manage.py migrate && gunicorn --timeout 90 --bind 0.0.0.0:5000 server.wsgi:application"
+    command: sh -c "python manage.py migrate && gunicorn --timeout 90 --bind 0.0.0.0:5000 --certfile /certs/fullchain.pem --keyfile /certs/privkey.pem server.wsgi:application"
     environment:
       - DJANGO_SUPERUSER_PASSWORD=1234
     ports:
@@ -32,6 +32,8 @@ services:
       - db
     volumes:
       - ./server/uploads:/app/uploads
+      - ./certbot/conf/live/ccjx.site/fullchain.pem:/certs/fullchain.pem
+      - ./certbot/conf/live/ccjx.site/privkey.pem:/certs/privkey.pem
 
   redis:
     restart: always
