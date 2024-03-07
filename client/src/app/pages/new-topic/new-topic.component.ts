@@ -7,7 +7,7 @@ import { Tag, Topic as Topic } from '../../consts';
 import { TopicService } from '@app/services/topic.service';
 import { TagService } from '@app/services/tag.service';
 import { Observable, map, startWith } from 'rxjs';
-import { faTag  } from "@fortawesome/free-solid-svg-icons";
+import { faTag } from "@fortawesome/free-solid-svg-icons";
 import { AuthenticationService } from '@app/services/authentication/authentication.service';
 import { error } from 'console';
 import { DialogService } from '@app/services/dialog.service';
@@ -22,16 +22,16 @@ export class NewQuestionComponent implements OnInit {
   faTag = faTag;
   title: string = '';
   topicId: string = '';
-  topicSlug: string='';
+  topicSlug: string = '';
   userId: string = '';
   isArticle: boolean = true;
   isPrivate: boolean = false;
-  myControl: FormControl=new FormControl('');
-  tags: any[]=[];
+  myControl: FormControl = new FormControl('');
+  tags: any[] = [];
   tagsFiltered?: Observable<any[]>;
-  tagsAdded: any[]=[];
-  tagSelected:any =null;
-  notifyMe: boolean=false;
+  tagsAdded: any[] = [];
+  tagSelected: any = null;
+  notifyMe: boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -41,19 +41,19 @@ export class NewQuestionComponent implements OnInit {
     private tagService: TagService,
     private auth: AuthenticationService,
     private cdr: ChangeDetectorRef,
-  private dialogService: DialogService) {
+    private dialogService: DialogService) {
 
   }
   @ViewChild(MatAutocompleteTrigger)
   autocomplete?: MatAutocompleteTrigger;
   @ViewChild('autocompleteInput')
   autoInput?: ElementRef;
-  @HostListener('window:beforeunload',['$event'])
+  @HostListener('window:beforeunload', ['$event'])
   onBeforeUnload(event: Event) {
     event.preventDefault();
     event.returnValue = false;
   }
-  @HostListener('window:unload',['$event'])
+  @HostListener('window:unload', ['$event'])
   onUnload(event: Event) {
     fetch(this.urls.getQuestionDeleteUrl(this.topicSlug), { method: 'DELETE', keepalive: true }).then().catch(error => {
       console.error(error);
@@ -81,7 +81,7 @@ export class NewQuestionComponent implements OnInit {
       return;
     }
     const filterValue = v.toLowerCase();
-    return this.tags.filter(v=>v.name.toLowerCase().includes(filterValue));
+    return this.tags.filter(v => v.name.toLowerCase().includes(filterValue));
   }
   selectTitle() {
     const topic = document.getElementById('topic') as HTMLInputElement;
@@ -90,13 +90,15 @@ export class NewQuestionComponent implements OnInit {
   getTopic() {
     const userId = this.activatedRoute.snapshot.paramMap.get('userId');
     const topicSlug = this.activatedRoute.snapshot.paramMap.get('topicSlug');
-    this.userId = userId??'';
-    this.topicSlug = topicSlug??'';
-    const url = this.urls.getUrlTopicDetail(topicSlug??'Error');
+    this.userId = userId ?? '';
+    this.topicSlug = topicSlug ?? '';
+    const url = this.urls.getUrlTopicDetail(topicSlug ?? 'Error');
     const self = this;
+    const titleDefault = this.getTitleDefault();
     this.http.get(url).subscribe({
       next(value: any) {
-        self.title = value.title != undefined ? value.title : 'Новая запись';
+        // self.title = value.title != undefined ? value.title : titleDefault;
+        self.title = titleDefault;
         self.tagsAdded = value.tags;
         self.topicId = value.id;
       },
@@ -108,7 +110,7 @@ export class NewQuestionComponent implements OnInit {
     const topicSlug = this.activatedRoute.snapshot.paramMap.get('topicSlug');
     const userId = this.activatedRoute.snapshot.paramMap.get('userId');
     const t: Topic = {
-      user: userId??'Error',
+      user: userId ?? 'Error',
       title: title,
       text: text,
       is_article: this.isArticle,
@@ -117,11 +119,11 @@ export class NewQuestionComponent implements OnInit {
     };
     this.topicService.update(topicSlug ?? 'error', t).subscribe((v: any) => {
       const url = `topics/${v.slug}`;
-      this.router.navigateByUrl(url);      
+      this.router.navigateByUrl(url);
     });
   }
   cancel() {
-    this.topicService.delete(this.topicSlug??'').subscribe();
+    this.topicService.delete(this.topicSlug ?? '').subscribe();
     this.router.navigateByUrl('');
   }
   handleTopicChange(event: Event) {
@@ -144,11 +146,11 @@ export class NewQuestionComponent implements OnInit {
     })
   }
   tagCreate(tagName: string) {
-    if (!this.tags.map(v=>v.name).includes(tagName)) {
+    if (!this.tags.map(v => v.name).includes(tagName)) {
       // создать новый тэг
-      const tag:Tag = {
+      const tag: Tag = {
         name: tagName,
-        is_private:false, // по умолчанию все новые тэги создаются как публичные
+        is_private: false, // по умолчанию все новые тэги создаются как публичные
         user: this.auth.userValue?.id,
         topics: [this.topicId]
       }
@@ -169,7 +171,7 @@ export class NewQuestionComponent implements OnInit {
             self.autoInput?.nativeElement.blur();
             const random = Math.floor(Math.random() * 1000) + 1;
             self.dialogService.showMessDial("Информация", `Извините, тэг "${tag.name}" уже существует среди публичных тэгов. Если вы хотели использовать тэг с таким именем, то используйте публичный тэг. Также вы можете использовать никем незанятые публичные тэги в качестве личных. Для того, чтобы сделать тэг личным нажмите на него`);
-            }
+          }
         },
       });
     }
@@ -190,9 +192,9 @@ export class NewQuestionComponent implements OnInit {
     this.tagCreate(v);
   }
   tagDelete(tag: Tag) {
-    const index = tag.topics.findIndex(v=>v==this.topicId);
-    tag.topics.splice(index,1);
-    this.tagService.deleteFromTopic(tag?.id??'error',{topics:tag.topics}).subscribe(v => {
+    const index = tag.topics.findIndex(v => v == this.topicId);
+    tag.topics.splice(index, 1);
+    this.tagService.deleteFromTopic(tag?.id ?? 'error', { topics: tag.topics }).subscribe(v => {
       this.getTopic();
     })
   }
@@ -222,11 +224,11 @@ export class NewQuestionComponent implements OnInit {
           // и обновим снова для смены владельца
           self.tagService.update(obj.id ?? 'error', obj).subscribe((v: any) => {
             tag.is_private = value.is_private;
-           self.cdr.detectChanges();
+            self.cdr.detectChanges();
           });
         },
         error(err) {
-          self.dialogService.showMessDial("Информация",err.error.public_message);
+          self.dialogService.showMessDial("Информация", err.error.public_message);
           console.error(err.error.public_message);
           return;
         },
@@ -235,4 +237,15 @@ export class NewQuestionComponent implements OnInit {
 
   }
 
+  getTitleDefault() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+
+    const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}`;
+    return formattedDate;
+  }
 }
