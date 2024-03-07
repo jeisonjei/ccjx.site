@@ -25,7 +25,7 @@ export class NewQuestionComponent implements OnInit {
   topicSlug: string = '';
   userId: string = '';
   isArticle: boolean = true;
-  isPrivate: boolean = false;
+  isPrivate: boolean = true;
   myControl: FormControl = new FormControl('');
   tags: any[] = [];
   tagsFiltered?: Observable<any[]>;
