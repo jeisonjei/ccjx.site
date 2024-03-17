@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class UrlsService {
-  baseUrl: string = `https://${location.hostname}:5000/api`;
+  baseUrl: string = `http://${location.hostname}:5000/api`;
   DEFAULT_ERROR_MESSAGE = 'Извините, возникла ошибка';
   URL_TOKEN = `${this.baseUrl}/token/`;
   URL_TOKEN_REFRESH = `${this.baseUrl}/token/refresh/`;
