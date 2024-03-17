@@ -20,25 +20,25 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { MyTagsComponent } from './pages/my-tags/my-tags.component';
 
 const routes: Routes = [
-  {path:'',component:PopularAndNotComponent},
+  { path: '', component: PopularAndNotComponent },
   { path: 'account/register', component: RegisterComponent },
   { path: 'account/register/confm', component: RegisterConfmComponent },
   { path: 'account/register/success/:token', component: RegisterSuccessComponent },
   { path: 'account/login', component: LoginComponent },
-  { path:'account/new-pass-request',component:NewPassRequestComponent},
+  { path: 'account/new-pass-request', component: NewPassRequestComponent },
   { path: 'account/new-pass/:token', component: NewPassComponent },
   { path: 'account/new-pass-email-sent', component: NewPassEmailSentComponent },
   { path: 'account/new-pass-success/:userEmail', component: NewPassSuccessComponent },
   { path: 'users/:userId/new-topic/:topicSlug', component: NewQuestionComponent, canActivate: [protectedGuard] },
-  { path: 'users/:userId/edit-topic/:topicSlug', component: EditTopicComponent, canActivate: [protectedGuard]},
-  { path:'topics/:topicSlug',component:TopicComponent},
+  { path: 'users/:userId/edit-topic/:topicSlug', component: EditTopicComponent, canActivate: [protectedGuard] },
+  { path: 'topics/:topicSlug', component: TopicComponent },
   { path: 'my-questions', component: MyQuestionsComponent, canActivate: [protectedGuard] },
   { path: 'my-tags', component: MyTagsComponent, canActivate: [protectedGuard] },
-  {path: '**', component:NotFoundComponent},
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  imports: [RouterModule.forRoot(routes, { useHash: false })],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
