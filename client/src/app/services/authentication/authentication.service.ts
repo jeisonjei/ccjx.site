@@ -131,7 +131,6 @@ export class AuthenticationService implements AuthService {
   public logout(): void {
     this.tokenStorage.clear();
     this.loggedIn.next(null);
-    this.router.navigateByUrl("/");
   }
 
   private saveAccessData(tokens: any) {
