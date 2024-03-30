@@ -22,8 +22,8 @@ from django.core.mail import send_mail
 import threading
 
 
-# redis_connection = redis.StrictRedis(host=settings.REDIS_HOST,
-#                                          port=settings.REDIS_PORT, db=0, decode_responses=True)
+redis_connection = redis.StrictRedis(host=settings.REDIS_HOST,
+                                         port=settings.REDIS_PORT, db=0, decode_responses=True)
 
 class MyQuestionList(generics.ListAPIView):
     '''
