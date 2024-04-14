@@ -13,17 +13,17 @@
 .small{
     font-size: 12px;
 }
-@media (min-width:600px) {
+.votes{
+    grid-area: votes;
+}
+.content{
+    grid-area: content;
+}
+@media (min-width:992px) {
     .grid2{
         display: grid;
         grid-template-columns: 1fr 16fr;
         grid-template-areas: 
         "votes content";
     }
-}
-.votes{
-    grid-area: votes;
-}
-.content{
-    grid-area: content;
 }

@@ -11,14 +11,6 @@
         "content";
 }
 
-@media (min-width: 600px) {
-    .m-grid {
-        grid-template-areas: 
-        "feat content recent";
-        grid-template-columns: 1fr 4fr 1fr;
-        column-gap: 20px;
-    }
-}
 
 .feat {
     grid-area: feat;
@@ -30,4 +22,12 @@
 
 .recent {
     grid-area: recent;
+}
+@media (min-width: 992px) {
+    .m-grid {
+        grid-template-areas: 
+        "feat content recent";
+        grid-template-columns: 1fr 4fr 1fr;
+        column-gap: 20px;
+    }
 }
