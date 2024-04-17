@@ -1,7 +1,14 @@
-<app-logged-in-header *ngIf="userValue?.isLoggedIn;else isLoggedOut"></app-logged-in-header>
-<ng-template #isLoggedOut>
+@if(userValue?.isLoggedIn){
+  <app-logged-in-header></app-logged-in-header>
+}
+@else {
   <app-logged-out-header></app-logged-out-header>
-</ng-template>
+}
+<div class="loading-strip">
+  @if(loading) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+</div>
 <div style="min-height: 100%;">
   <main ngClass="container-fluid pt-3 px-lg-5">
     <router-outlet></router-outlet>

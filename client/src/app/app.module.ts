@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -64,6 +64,7 @@ import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
 import { MatRadioModule } from "@angular/material/radio";
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { MyTagsComponent } from './pages/my-tags/my-tags.component';
+import { LoadingInterceptor } from './services/interceptors/loading.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -136,7 +137,8 @@ import { MyTagsComponent } from './pages/my-tags/my-tags.component';
   ],
   providers: [
   
-    provideClientHydration()
+    provideClientHydration(),
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
