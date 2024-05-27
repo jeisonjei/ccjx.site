@@ -1,92 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
-<svg
-   width="107.74464mm"
-   height="30.635242mm"
-   viewBox="0 0 107.74466 30.635242"
-   version="1.1"
-   id="svg5"
-   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
-   sodipodi:docname="ccjx.logo.svg"
-   inkscape:export-filename="favicon.ico"
-   inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <sodipodi:namedview
-     id="namedview7"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     inkscape:document-units="mm"
-     showgrid="false"
-     inkscape:zoom="1.0733976"
-     inkscape:cx="465.81061"
-     inkscape:cy="476.52426"
-     inkscape:window-width="1920"
-     inkscape:window-height="1013"
-     inkscape:window-x="-9"
-     inkscape:window-y="-9"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
-  <defs
-     id="defs2" />
-  <g
-     inkscape:label="Слой 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(-41.468557,-64.458102)">
-    <text
-       xml:space="preserve"
-       style="font-size:19.7957px;line-height:0.8;font-family:Candara;-inkscape-font-specification:'Candara, Normal';text-align:center;text-anchor:middle;fill:#3f51b5;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round"
-       x="79.798561"
-       y="78.435066"
-       id="text186"><tspan
-         sodipodi:role="line"
-         id="tspan184"
-         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:19.7957px;font-family:Candara;-inkscape-font-specification:'Candara, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#3f51b5;fill-opacity:1;stroke:none;stroke-width:1"
-         x="79.798561"
-         y="78.435066">CCJX.site</tspan><tspan
-         sodipodi:role="line"
-         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:19.7957px;font-family:Candara;-inkscape-font-specification:'Candara, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#3f51b5;fill-opacity:1;stroke:none;stroke-width:1"
-         x="79.798561"
-         y="94.271629"
-         id="tspan188">Блокнот</tspan></text>
-    <g
-       id="g1471"
-       transform="matrix(0.75606418,0,0,0.75606418,22.166334,19.460158)"
-       style="fill:none">
-      <rect
-         style="fill:none;stroke:#3f51b5;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-         id="rect1239"
-         width="30.15317"
-         height="38.519367"
-         x="136.88397"
-         y="60.516037"
-         ry="3.4859154" />
-      <path
-         style="fill:none;stroke:#3f51b5;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-         d="m 142.81002,66.759284 h 18.30106"
-         id="path1241" />
-      <path
-         style="fill:none;stroke:#3f51b5;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-         d="m 142.81002,74.154027 h 18.30106"
-         id="path1243" />
-      <path
-         style="fill:none;stroke:#3f51b5;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-         d="m 142.81002,81.548774 h 18.30106"
-         id="path1245" />
-      <path
-         style="fill:none;stroke:#3f51b5;stroke-width:1.00378;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-         d="m 166.95618,89.002773 -11.45957,9.972448"
-         id="path1318" />
+<svg width="109.7mm" height="30.59mm" version="1.1" viewBox="0 0 109.7 30.59" xmlns="http://www.w3.org/2000/svg">
+   <g transform="translate(-39.54 -64.46)" stroke-linecap="round" stroke-linejoin="round">
+    <text x="80.327728" y="78.435066" fill="#3f51b5" font-family="Arial, sans-serif" font-size="18px" font-style="italic" font-weight="bold" text-align="center" text-anchor="middle" style="line-height:0.8" xml:space="preserve"><tspan x="80.327728" y="78.435066" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal">CCJX.site</tspan><tspan x="80.327728" y="93.755676" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal">Блокнот</tspan></text>
+    <g transform="matrix(.7561 0 0 .7561 22.17 19.46)" fill="none" stroke="#3f51b5">
+     <g stroke-width="2">
+      <rect x="136.9" y="60.52" width="30.15" height="38.52" ry="3.486"/>
+      <path d="m142.8 66.76h18.3"/>
+      <path d="m142.8 74.15h18.3"/>
+      <path d="m142.8 81.55h18.3"/>
+     </g>
+     <path d="m167 89-11.46 9.972" stroke-width="1.004"/>
     </g>
-  </g>
-</svg>
+   </g>
+  </svg>
+  
