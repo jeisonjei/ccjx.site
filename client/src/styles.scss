@@ -39,6 +39,10 @@ body {
   margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
 
+:root{
+  --white:#ffffff;
+}
+
 .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: white;
 }
@@ -108,3 +112,4 @@ div.mat-mdc-autocomplete-panel {
   background: white;
   color: rgba(0, 0, 0, 0.87);
 }
+

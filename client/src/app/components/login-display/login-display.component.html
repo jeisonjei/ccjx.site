@@ -10,10 +10,10 @@
     </mat-menu>
   </span>
   <ng-template #isLoggedOut>
-    <span style="color: white;">
-      <button mat-button routerLink="/account/register">Регистрация</button>
-      <button mat-button routerLink="/account/login">Вход</button>
-    </span>
+    <div>
+      <button mat-button routerLink="/account/register" ngClass="white">Регистрация</button>
+      <button mat-button routerLink="/account/login" ngClass="white">Вход</button>
+    </div>
   </ng-template>
 </div>
 <div ngClass="d-lg-none">
