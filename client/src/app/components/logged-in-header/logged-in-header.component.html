@@ -1,16 +1,23 @@
 <header>
-    <mat-toolbar ngClass="px-lg-5 py-1">
-      <mat-toolbar-row ngClass="grid">
-        <div ngClass="logo"><a style="text-decoration: none;color:black" routerLink="">
-          <img ngClass="img-fluid" src="../../../assets/imgs/logo.svg" style="width: 40px;" alt="">
+  <mat-toolbar ngClass="px-lg-5 py-1">
+    <mat-toolbar-row ngClass="grid">
+      <div ngClass="logo">
+        <a style="text-decoration: none;" routerLink="">
+          <div ngClass="flex flex-row aic">
+            <span>
+              <div ngClass="logo-title">CCJX <br>Блокнот</div>
+              
+            </span>
+            <img ngClass="img-fluid" src="../../../assets/imgs/logo.svg" style="width: 36px;" alt="">
+          </div>
         </a>
-        </div>
-        <div ngClass="search">
-          <app-search-bar></app-search-bar>
-        </div>
-        <div ngClass="menu">
-          <app-login-display></app-login-display>
-        </div>
-      </mat-toolbar-row>
-    </mat-toolbar>
-  </header>
+      </div>
+      <div ngClass="search">
+        <app-search-bar></app-search-bar>
+      </div>
+      <div ngClass="menu">
+        <app-login-display></app-login-display>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</header>

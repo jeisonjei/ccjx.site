@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800&display=swap');
+
 .grid{
     display: grid;
     grid-template-columns: 4fr 1fr;
@@ -13,6 +15,25 @@
 .logo{
     grid-area: logo;
     display: none;
+}
+.logo-title{
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-size: 1.4em;
+    margin-right: .5em;
+    line-height: 1.15em;
+}
+.flex{
+    display: flex;
+}
+.flex-row{
+    
+    flex-direction: row;
+}
+.flex-column{
+    flex-direction: column;
+}
+.aic{
+    align-items: center;
 }
 @media (min-width:600px) {
     .grid{
