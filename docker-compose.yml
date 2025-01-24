@@ -1,12 +1,14 @@
+# текущая директория для этого файла otester, а текущая директория для контейнера - директория / в системе linux.
+# то есть внутри контейнера адрес директории uploads будет /app/uploads (app - это рабочая директорая, указанная в Dockerfile командой WORKDIR)
 networks:
   net:
-
 
 services:
   client:
     restart: always
     container_name: ccjxsite_client
     build: ./client
+    # command: bash -c "ng serve --host 0.0.0.0"
     depends_on:
       - server
     ports:
@@ -19,9 +21,10 @@ services:
   server:
     restart: always
     container_name: ccjxsite_server
+    # местонахождение Dockerfile
     build: ./server
     env_file: ./server/.env
-    command: sh -c "python manage.py migrate && gunicorn --timeout 90 --bind 0.0.0.0:5000 server.wsgi:application"
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:5000"
     environment:
       - DJANGO_SUPERUSER_PASSWORD=1234
     ports:
@@ -32,16 +35,12 @@ services:
       - db
     volumes:
       - ./server/uploads:/app/uploads
-      - ./certbot/conf/live/ccjx.site/fullchain.pem:/certs/fullchain.pem
-      - ./certbot/conf/live/ccjx.site/privkey.pem:/certs/privkey.pem
-
   redis:
     restart: always
     container_name: ccjxsite_redis
     image: redis:7.0.7
     networks:
       - net
-
   db:
     restart: always
     container_name: ccjxsite_db
@@ -54,28 +53,6 @@ services:
       - net
     volumes:
       - pg_data:/var/lib/postgresql/data
-
-  nginx:
-    restart: always
-    container_name: ccjxsite_nginx
-    image: nginx
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - ./nginx/conf/:/etc/nginx/conf.d/
-      - ./certbot/www:/var/www/certbot/
-      - ./certbot/conf/:/etc/nginx/ssl/
-      - ./client/dist/client/browser/:/etc/nginx/html/
-    depends_on:
-      - client
-      - server
-
-  certbot:
-    image: certbot/certbot:latest
-    volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/:rw
 
 volumes:
   pg_data:
