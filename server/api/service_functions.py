@@ -56,8 +56,8 @@ def join_url(parts: list):
 
 def link_adaptto_client(link):
     if 'posix' in os.name:
-        link=link.replace(':5000','')
+        link=link.replace(':5050','')
     elif 'nt' in os.name:
-        link=link.replace('5000','4200')
+        link=link.replace('5050','4200')
     link=link.replace('/api','')
     return link
